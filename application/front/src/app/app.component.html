@@ -1,4 +1,14 @@
-<ng-header
+<header [ngSwitch]="status">
+  <pm-admin-header
+    *ngSwitchCase="'admin'"
+    pageTitle="ocean">
+  </pm-admin-header>
+  <pm-header
+    *ngSwitchDefault
+    pageTitle="ocean">
+  </pm-header>
+</header>
+
 <div class="container">
   <router-outlet></router-outlet>
 </div>

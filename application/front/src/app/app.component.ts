@@ -6,5 +6,6 @@ import { Component } from "@angular/core";
 })
 export class AppComponent {
   pageTitle: string = "Acme Product Mample";
-  title:string = "test 1"
+  title:string = "test 1";
+  status:string = "none";
 }

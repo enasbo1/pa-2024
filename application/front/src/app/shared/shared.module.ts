@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {FormsModule} from "@angular/forms";
 import {StarComponent} from "./star.component";
 import {convertToSpacesPipe} from "./convertToSpace.pipe";
-import { AdminHeaderComponent } from './systematics/admin-header/admin-header.component';
+import { ImageComponent } from './image/image.component';
 
 
 
@@ -11,7 +11,7 @@ import { AdminHeaderComponent } from './systematics/admin-header/admin-header.co
   declarations: [
     StarComponent,
     convertToSpacesPipe,
-    AdminHeaderComponent,
+    ImageComponent,
   ],
   imports: [
     CommonModule,
@@ -19,9 +19,9 @@ import { AdminHeaderComponent } from './systematics/admin-header/admin-header.co
   exports: [
     convertToSpacesPipe,
     StarComponent,
+    ImageComponent,
     CommonModule,
     FormsModule,
-    AdminHeaderComponent
   ]
 })
 export class SharedModule { }

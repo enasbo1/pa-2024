@@ -26,9 +26,11 @@
           <div class = 'col-md-8'>{{product.price|currency:'USD':'symbol'}}</div>
         </div>
       </div>
-      <div class = 'col-md-4 image' [title]="product.productName"
+      <!--<div class = 'col-md-4 image' [title]="product.productName"
            style = "background-image: url('{{product.imageUrl}}')">
-    </div>
+      </div>-->
+      <pm-image class = "col-md-4" [title]="product.productName" [imageUrl]="product.imageUrl"></pm-image>
+
     </div>
   </div>
   <div class = 'card-footer'>

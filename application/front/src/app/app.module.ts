@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './home/welcome.component';
 import { RouterModule } from '@angular/router';
 import { ProductModule } from './products/product.module';
+import {SystematicsModule} from "./systematics/systematics.module";
 
 @NgModule({
   declarations: [ // witch component you need from this module
@@ -16,6 +17,7 @@ import { ProductModule } from './products/product.module';
   imports: [ // witch others modules you need
     BrowserModule,
     HttpClientModule,
+    SystematicsModule,
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent},
       { path: '', redirectTo: 'welcome', pathMatch: 'full'},

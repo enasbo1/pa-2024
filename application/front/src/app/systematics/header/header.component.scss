@@ -1,0 +1,22 @@
+.navbar{
+  align-items: flex-start;
+  div{
+    display:flex;
+    justify-content: space-around;
+
+    :only-child{
+      width : 100%;
+      display:flex;
+      justify-content: space-around;
+
+    }
+    .logo{
+      height : 6vw
+    }
+  }
+}
+
+
+.nav{
+
+}
