@@ -11,11 +11,15 @@ export class HeaderComponent implements OnInit {
   navLinks : NavLink[] = [
     {
       name : "Home",
-      link : "welcome"
+      link : "/welcome"
     },
     {
       name : "Product",
-      link : "products"
+      link : "/products"
+    },
+    {
+      name : "Generic",
+      link : "/generic"
     },
   ];
 

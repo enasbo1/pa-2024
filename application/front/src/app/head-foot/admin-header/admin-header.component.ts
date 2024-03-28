@@ -15,7 +15,7 @@ export class AdminHeaderComponent extends HeaderComponent{
   override ngOnInit() {
     super.ngOnInit();
     this.navLinks.push({
-      name:"admin",
+      name:"Admin",
       link:"admin"
     })
   }
