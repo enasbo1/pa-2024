@@ -2,6 +2,9 @@
 @import 'bootstrap/dist/css/bootstrap.min.css';
 @import 'font-awesome/css/font-awesome.min.css';
 
+*{
+  box-sizing: border-box;
+}
 
 div.card-header {
  font-size: large;

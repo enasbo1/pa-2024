@@ -1,0 +1,28 @@
+.navbar{
+  align-items: flex-start;
+  div{
+    display:flex;
+    justify-content: space-around;
+
+    :only-child.nav{
+      display:flex;
+      justify-content: space-between;
+
+    }
+    .logo{
+      width: 100%;
+      height : 6vw
+    }
+  }
+  div:first-child{
+    justify-content: flex-start;
+  }
+
+  div:last-child{
+    justify-content: flex-end;
+  }
+}
+
+.nav{
+
+}

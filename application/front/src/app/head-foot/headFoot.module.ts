@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import {AdminHeaderComponent} from "./admin-header/admin-header.component";
 import {RouterLinkWithHref} from "@angular/router";
 import { HeaderComponent } from './header/header.component';
-import {SharedModule} from "../shared/shared.module";
+import { SharedModule } from "../shared/shared.module";
 
 
 
@@ -22,4 +22,4 @@ import {SharedModule} from "../shared/shared.module";
     HeaderComponent
   ]
 })
-export class SystematicsModule { }
+export class HeadFootModule { }

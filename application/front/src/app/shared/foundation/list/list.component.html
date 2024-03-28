@@ -1,0 +1,19 @@
+<section>
+  <ul class="container">
+    <li *ngFor="let item of items" class="{{elements_size()}} col-12">
+      <button class="list-element bubble {{item.link?'linked':''}}" [routerLink]=item.link>
+        <h6>{{translatorService.echo(item?.title)}}</h6>
+        <div class="container">
+          <div *ngFor="let pannel of element(item)" [class]="pannel.side">
+            <div>
+              <div *ngFor="let content of pannel.content" [style]="content?.style">
+                {{translatorService.echo(content?.text)}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </button>
+    </li>
+  </ul>
+</section>
+
