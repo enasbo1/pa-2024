@@ -1,0 +1,12 @@
+<header>
+<nav class="bande">
+  <ul>
+    <li *ngFor="let nav of nav_content">
+      <a  [routerLink]="nav.link">
+        {{nav.value}}
+      </a>
+    </li>
+  </ul>
+</nav>
+</header>
+

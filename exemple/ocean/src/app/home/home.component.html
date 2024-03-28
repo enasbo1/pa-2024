@@ -1,0 +1,11 @@
+<main>
+  <section class = "oco-center-content">
+    <div class = "row w-100">
+      <div *ngFor="let content of nav_content" [class]=divide_space(nav_content.length)>
+        <a [routerLink]="content.link">
+          <button class="oco-card-service" >{{content.value}}</button>
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

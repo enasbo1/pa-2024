@@ -1,0 +1,16 @@
+services:
+  database:
+    image: postgres
+    volumes:
+      - db-data:/var/lib/postgresql/data/
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=pa_unnamed
+      - POSTGRES_USER=unknown
+
+volumes:
+  pgadmin-data:
+  db-data:
