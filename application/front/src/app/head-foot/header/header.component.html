@@ -1,0 +1,13 @@
+<nav class='navbar navbar-expand p-3 bg-light'>
+  <div class = "col-3" [routerLink]="''">
+    <pm-image class = "logo" [title]="'logo'" [imageUrl]="logoUrl"></pm-image>
+  </div>
+  <div class = "col-6">
+    <ul class="nav nav-pills">
+      <li *ngFor="let navli of navLinks"><a class = "nav-link" [routerLink]=navli.link>{{navli.name}}</a></li>
+    </ul>
+  </div>
+  <div class = "col-3">
+    <h1 class="navbar-brand" [routerLink]="''">{{pageTitle}}</h1>
+  </div>
+</nav>
