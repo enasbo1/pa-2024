@@ -5,8 +5,8 @@ import { Injectable } from '@angular/core';
 })
 export class TranslatorService {
   constructor() { }
-  echo(value:string|undefined):string{
-    return value ? value: "";
+  echo(value:string|undefined , default_value:string = ""):string{
+    return value ? value: default_value;
   }
 
 }

@@ -6,7 +6,32 @@
 
 .bubble {
   border-radius: 2rem 0 2rem 2rem;
+
+  &.bubble-right{
+    padding-left : 0.25rem;
+    border-radius: 0 0 2rem 0;
+  }
+
+  &.bubble-left{
+    border-radius: 2rem 0 0 2rem;
+    border-right: 0;
+  }
+  &.bubble-up{
+    border-radius: 2rem 0 0 0;
+  }
+  &.bubble-down{
+    border-radius: 0 0 2rem 2rem;
+  }
+}
+
+.bubble,.bubble_padding{
   padding : 0.25rem 1.5rem  0.25rem 1.5rem;
+}
+
+.flex{
+  display: flex;
+  justify-content: space-around;
+  align-items: stretch;
 }
 
 .hided {
@@ -15,4 +40,33 @@
 
 .italic{
   font-style: italic;
+}
+
+.hover-1{
+  background-color: styles.$color-blanc-gris-colored;
+}
+
+.hover-1:hover{
+  background-color: styles.$color-blanc-gris-1;
+}
+
+.hover-0:hover, input{
+  background-color: styles.$color-blanc-gris-0;
+}
+
+.hover-w:hover, input:hover{
+  background-color: styles.$color-blanc;
+}
+
+.hover-0,.hover-1,.hover-w,input{
+  transition: background-color;
+  transition-duration: 250ms;
+}
+
+.oneline{
+  white-space : nowrap;
+}
+
+button{
+  min-height: 2rem;
 }

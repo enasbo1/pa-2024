@@ -1,0 +1,14 @@
+@use "../../palette.scss" as styles;
+@import '../../../app.component.scss';
+
+ul{
+  padding: 0 !important;
+
+  li{
+    border: 1px #000000;
+    display: block;
+  }
+  :last-child{
+    border-radius: 0 0 2rem 2rem;
+  }
+}

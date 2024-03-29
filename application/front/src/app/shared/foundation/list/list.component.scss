@@ -2,14 +2,19 @@
 @import '../../../app.component.scss';
 
 section{
-  display: flex;
-  justify-content: space-around;
   margin: 2vw;
+  width: 100%;
+
+  div.flex{
+    width: 100%;
+  }
 
   ul{
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    overflow : overlay;
+    max-height: 75vh;
 
     li{
       display: block;
@@ -17,8 +22,21 @@ section{
 
       .list-element:hover{
         background-color: styles.$color-blanc-gris-1;
+
         &.linked{
           background-color: styles.$color-blanc-gris-0;
+        }
+
+        .mid {
+          display: flex !important;
+        }
+
+        .left {
+          display: flex !important;
+        }
+
+        .img-pannel{
+          width: 0;
         }
       }
 
@@ -28,29 +46,59 @@ section{
         background-color: styles.$color-blanc-gris-colored;
         transition: all;
         transition-duration: 200ms;
+        display: flex;
+        align-items: stretch;
+        padding: 0;
 
-        >div{
-          padding : 0.5rem;
-          display: flex;
+        >.content {
+          width: 100%;
 
-          >.right{
+          > div.container {
+            padding: 0.5rem;
             display: flex;
-            justify-content: start;
+
+            > .right {
+              display: flex;
+              white-space : nowrap;
+              justify-content: start;
+            }
+
+            > .mid {
+              display: none;
+              white-space : nowrap;
+              justify-content: space-around;
+            }
+
+            > .left {
+              display: none;
+              white-space : nowrap;
+              justify-content: end;
+            }
+
+            .el-content{
+              min-height: 33%;
+            }
           }
+        }
 
-          >.mid{
-            display: flex;
-            justify-content: space-around;
-          }
+        .img-pannel{
+          width: 150%;
+          transition: all;
+          transition-duration: 200ms;
 
-          >.left{
-            display: flex;
-            justify-content: end;
+
+          :only-child{
+            width: 100%;
+            height: 100%;
           }
         }
       }
     }
   }
+}
+
+a{
+  color: styles.$color-noir;
 }
 
 

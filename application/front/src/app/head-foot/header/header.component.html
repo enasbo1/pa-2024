@@ -1,5 +1,5 @@
 <nav class='navbar navbar-expand p-3 bg-light'>
-  <div class = "col-3">
+  <div class = "col-3" [routerLink]="''">
     <pm-image class = "logo" [title]="'logo'" [imageUrl]="logoUrl"></pm-image>
   </div>
   <div class = "col-6">
@@ -8,6 +8,6 @@
     </ul>
   </div>
   <div class = "col-3">
-    <h1 class="navbar-brand">{{pageTitle}}</h1>
+    <h1 class="navbar-brand" [routerLink]="''">{{pageTitle}}</h1>
   </div>
 </nav>

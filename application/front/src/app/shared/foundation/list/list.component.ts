@@ -6,12 +6,12 @@ import {TextStyle} from "../../base-shared/textStyle";
 @Component({
   selector: 'pm-list',
   templateUrl: './list.component.html',
-  styleUrls: [
-    './list.component.scss']
+  styleUrls: ['./list.component.scss']
 })
 export class ListComponent implements OnInit {
   @Input() items:ListObject[]=[];
   @Input() line_size:number = 2;
+  search_crit:string="title";
   translatorService: TranslatorService= new TranslatorService();
 
   constructor() {}
@@ -39,7 +39,6 @@ export class ListComponent implements OnInit {
       retenue+=1
     }else if (retenue==1){
       /* dans le cas où il n'y a pas de right, on met le mid à droite et on aggrandit le mid */
-
       mid = 'right'
       retenue_mid = retenue;
       retenue = 0;
@@ -103,4 +102,7 @@ export class ListComponent implements OnInit {
     return true;
   }
 
+  dropdown(){
+    this.search_crit = "dropdown"
+  }
 }

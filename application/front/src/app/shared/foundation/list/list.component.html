@@ -1,19 +1,35 @@
+
+
+
 <section>
-  <ul class="container">
-    <li *ngFor="let item of items" class="{{elements_size()}} col-12">
-      <button class="list-element bubble {{item.link?'linked':''}}" [routerLink]=item.link>
-        <h6>{{translatorService.echo(item?.title)}}</h6>
-        <div class="container">
-          <div *ngFor="let pannel of element(item)" [class]="pannel.side">
-            <div>
-              <div *ngFor="let content of pannel.content" [style]="content?.style">
-                {{translatorService.echo(content?.text)}}
+  <div class="flex">
+    <div class = 'col-6'>
+      <button (click)="dropdown()" class="bubble bubble-left col-3 hover-1 oneline">{{search_crit}} ⌄</button>
+      <input type="text" placeholder="search - WIP" class="bubble bubble-right col-9 hover-w">
+    </div>
+  </div>
+  <div class="flex">
+    <ul class="container">
+      <li *ngFor="let item of items" class="{{elements_size()}} col-12">
+        <button class="list-element bubble {{item.link?'linked':''}}" [routerLink]=item.link>
+          <div class="content bubble_padding">
+            <h6>{{translatorService.echo(item?.title)}}</h6>
+            <div class="container">
+              <div *ngFor="let pannel of element(item)" [class]="pannel.side">
+                <div>
+                  <div class = "el-content" *ngFor="let content of pannel.content" [style]="content?.style">
+                    {{translatorService.echo(content?.text, "")}}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </button>
-    </li>
-  </ul>
+          <div class = "img-pannel">
+            <pm-image [style]="'cover fond angled-rb'" [imageUrl]="translatorService.echo(item?.image)"></pm-image>
+          </div>
+        </button>
+      </li>
+    </ul>
+  </div>
 </section>
 

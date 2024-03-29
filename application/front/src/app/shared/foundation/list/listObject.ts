@@ -19,4 +19,10 @@ export interface ListObject {
     TextStyle|null,
     TextStyle|null,
   ]|undefined;
+  propriete : ListObjectPropriety[]|undefined;
+}
+
+export interface ListObjectPropriety {
+  name:string;
+  value:string|number|boolean;
 }

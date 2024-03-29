@@ -5,7 +5,7 @@ import { Component } from "@angular/core";
   templateUrl:'./app.component.html',
 })
 export class AppComponent {
-  pageTitle: string = "Acme Product Mample";
-  title:string = "test 1";
+  pageTitle: string = "wanderPlace";
+  title:string = "title 1";
   status:string = "none";
 }
