@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TranslatorService} from "../../base-shared/translator.service";
 import {ListObject} from "./listObject";
 import {TextStyle} from "../../base-shared/textStyle";
+import * as events from "events";
 
 @Component({
   selector: 'pm-list',
@@ -11,12 +12,37 @@ import {TextStyle} from "../../base-shared/textStyle";
 export class ListComponent implements OnInit {
   @Input() items:ListObject[]=[];
   @Input() line_size:number = 2;
-  search_crit:string="title";
+  @Input() critera:string[]|undefined;
+  search_crit:string="Title";
   translatorService: TranslatorService= new TranslatorService();
-
+  search_value:string="";
   constructor() {}
 
   ngOnInit(): void {
+    if (this.critera){
+      let _n = this.critera.reverse()
+      _n.push("Title")
+      this.critera = _n.reverse()
+    }
+  }
+
+  filter_item():ListObject[]{
+    let filtered_list:ListObject[] = [];
+    if (this.search_crit === "Title"){
+      filtered_list = this.items.filter(
+        item =>
+          item.title?.toLowerCase().includes(this.search_value.toLowerCase())
+      );
+    }else{
+      filtered_list = this.items.filter(
+        item =>
+          item.propriete
+            ?.find(value =>
+              (value.name?.toLowerCase() === this.search_crit.toLowerCase()))
+            ?.value?.toString().toLowerCase().includes(this.search_value.toLowerCase())
+      );
+    }
+    return filtered_list;
   }
 
   element(item:ListObject):{side:string, content:(TextStyle|null)[]|undefined}[]{
@@ -101,8 +127,8 @@ export class ListComponent implements OnInit {
     }
     return true;
   }
-
-  dropdown(){
-    this.search_crit = "dropdown"
+  switch_rubric(value:string){
+    this.search_crit = value;
   }
+  protected readonly events = events;
 }

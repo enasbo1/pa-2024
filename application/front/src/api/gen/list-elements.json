@@ -16,6 +16,10 @@
       {"text": "up-right", "style": ""},
       {"text": "mid-right", "style": ""},
       {"text": "bot-right", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"scss"},
+      {"name":"fundamental", "value":"work"}
     ]
   },
   {
@@ -35,6 +39,10 @@
       {"text": "up-right", "style": ""},
       {"text": "mid-right", "style": ""},
       {"text": "bot-right", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"bootstrap"},
+      {"name":"fundamental", "value":"game"}
     ]
   },
   {
@@ -53,6 +61,10 @@
       {"text": "up-right", "style": ""},
       {"text": "mid-right", "style": ""},
       {"text": "bot-right", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"bootstrap"},
+      {"name":"fundamental", "value":"work"}
     ]
   },
   {
@@ -68,6 +80,10 @@
       {"text": "mid-up", "style": ""},
       {"text": "mid-mid lorem ipsum bdiam diam", "style": ""},
       {"text": "mid down", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"bootstrap"},
+      {"name":"fundamental", "value":"work"}
     ]
   },
   {
@@ -83,6 +99,10 @@
       {"text": "mid-up", "style": ""},
       {"text": "mid-mid lorem ipsum bdiam diam", "style": ""},
       {"text": "mid down", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"bootstrap"},
+      {"name":"fundamental", "value":"work"}
     ]
   },
   {
@@ -98,6 +118,10 @@
       {"text": "mid-up", "style": ""},
       {"text": "mid-mid lorem ipsum bdiam diam", "style": ""},
       {"text": "mid down", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"bootstrap"},
+      {"name":"fundamental", "value":"work"}
     ]
   },
   {
@@ -113,6 +137,10 @@
       {"text": "mid-up", "style": ""},
       {"text": "mid-mid lorem ipsum bdiam diam", "style": ""},
       {"text": "mid down", "style": ""}
+    ],
+    "propriete": [
+      {"name":"base", "value":"bootstrap"},
+      {"name":"fundamental", "value":"work"}
     ]
   }
 ]
