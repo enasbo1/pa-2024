@@ -11,6 +11,7 @@ import {TextStyle} from "../../base-shared/textStyle";
 export class ListComponent implements OnInit {
   @Input() items:ListObject[]=[];
   @Input() line_size:number = 2;
+  @Input() rubric:string[]|undefined;
   search_crit:string="title";
   translatorService: TranslatorService= new TranslatorService();
 
@@ -102,7 +103,7 @@ export class ListComponent implements OnInit {
     return true;
   }
 
-  dropdown(){
-    this.search_crit = "dropdown"
+  switch_rubric(value:string){
+    this.search_crit = value;
   }
 }

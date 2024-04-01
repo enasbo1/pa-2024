@@ -32,6 +32,10 @@
   display: flex;
   justify-content: space-around;
   align-items: stretch;
+
+  &.aling-start{
+    align-items: start;
+  }
 }
 
 .hided {

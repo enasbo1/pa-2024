@@ -8,6 +8,10 @@ import {GenListService} from "./genList.service";
 })
 export class GenListComponent implements OnInit {
   items:ListObject[] = []
+  rubric:string[] = [
+    'rubric 1',
+    'rubric 2'
+  ]
   constructor(private genListService:GenListService) { }
 
   ngOnInit(): void {

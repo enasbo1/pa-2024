@@ -1,11 +1,14 @@
-
-
-
 <section>
   <div class="flex">
-    <div class = 'col-6'>
-      <button (click)="dropdown()" class="bubble bubble-left col-3 hover-1 oneline">{{search_crit}} ⌄</button>
-      <input type="text" placeholder="search - WIP" class="bubble bubble-right col-9 hover-w">
+    <div class = 'flex aling-start w-50' [style]="'height : 3rem'">
+      <div class="col-3" *ngIf="rubric">
+        <pm-dropdown
+          [styles]="'bubble-left'"
+          [choices]="rubric"
+          (value_up)="switch_rubric($event)"
+        ></pm-dropdown>
+      </div>
+      <input type="text" placeholder="search - WIP" class="bubble {{rubric?'bubble-right col-9':'col-12'}} hover-w">
     </div>
   </div>
   <div class="flex">
@@ -18,7 +21,7 @@
               <div *ngFor="let pannel of element(item)" [class]="pannel.side">
                 <div>
                   <div class = "el-content" *ngFor="let content of pannel.content" [style]="content?.style">
-                    {{translatorService.echo(content?.text, "")}}
+                    {{translatorService.echo(content?.text)}}
                   </div>
                 </div>
               </div>
