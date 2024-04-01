@@ -8,9 +8,9 @@ import {GenListService} from "./genList.service";
 })
 export class GenListComponent implements OnInit {
   items:ListObject[] = []
-  rubric:string[] = [
-    'rubric 1',
-    'rubric 2'
+  critera:string[] = [
+    'base',
+    'fundamental'
   ]
   constructor(private genListService:GenListService) { }
 
