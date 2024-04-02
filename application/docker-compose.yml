@@ -1,4 +1,12 @@
 services:
+
+
+  api:
+    build: .
+    ports:
+      - 8081:80
+    volumes:
+      - ./api:/var/www/html/     
   database:
     image: postgres
     volumes:
