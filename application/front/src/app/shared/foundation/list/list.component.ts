@@ -1,8 +1,9 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {TranslatorService} from "../../base-shared/translator.service";
-import {ListObject} from "./listObject";
+import {ListObject, ListObjectPropriety} from "./listObject";
 import {TextStyle} from "../../base-shared/textStyle";
 import * as events from "events";
+import {_FilterObject, FilterObject} from "./filterObject";
 
 @Component({
   selector: 'pm-list',
@@ -13,6 +14,8 @@ export class ListComponent implements OnInit {
   @Input() items:ListObject[]=[];
   @Input() line_size:number = 2;
   @Input() critera:string[]|undefined;
+  @Input() filters:FilterObject[]|undefined;
+  _filters:_FilterObject[]|undefined;
   search_crit:string="Title";
   translatorService: TranslatorService= new TranslatorService();
   search_value:string="";
@@ -20,29 +23,89 @@ export class ListComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.critera){
-      let _n = this.critera.reverse()
-      _n.push("Title")
-      this.critera = _n.reverse()
+      this.critera.splice(0,0,"Title");
+    }
+    if (this.filters){
+      this._filters = [];
+      this.filters?.forEach(filter => {
+        filter.choices.splice(0,0,"all");
+        this._filters?.push({
+          name:filter.name,
+          type:filter.type,
+          choices:filter.choices,
+          value:undefined,
+        });
+      });
     }
   }
 
+  refresh_filter(){
+    this._filters?.forEach(filter => {
+      if (filter.type === "auto") { // @ts-ignore
+        filter.choices =
+          this.items.map(
+            item =>
+              this.findFlilter(item, filter.name)
+          ).filter(
+            (item, i, ar) =>
+              // enlèves les doublons
+              (item) &&
+              (ar.findIndex(
+                it =>
+                  it?.value == item.value
+              ) === i)
+          ).map(
+            //extrait la valeur de la propriété
+            pro => pro?.value
+          ).map(
+            val => val?.toString()
+          );
+        filter.choices.splice(0,0,"all");
+      }
+    })
+  }
+
   filter_item():ListObject[]{
-    let filtered_list:ListObject[] = [];
+    let filtered_list:ListObject[] = this.items;
+
+    for(let filter of this._filters?this._filters:[]){
+      if (filter.value && (filter.value!='all')){
+        filtered_list = filtered_list.filter(
+          item =>
+            this.findFlilter(item, filter.name)
+              // @ts-ignore
+              ?.value?.toString().toLowerCase().includes(filter.value.toString().toLowerCase())
+        );
+      }
+    }
+
     if (this.search_crit === "Title"){
-      filtered_list = this.items.filter(
+      filtered_list = filtered_list.filter(
         item =>
           item.title?.toLowerCase().includes(this.search_value.toLowerCase())
-      );
+      ).sort((a,b)=>
+        (a.title?a.title:'').localeCompare(b.title?b.title:''));
     }else{
-      filtered_list = this.items.filter(
+      filtered_list = filtered_list.filter(
         item =>
-          item.propriete
-            ?.find(value =>
-              (value.name?.toLowerCase() === this.search_crit.toLowerCase()))
+          this.findFlilter(item, this.search_crit)
             ?.value?.toString().toLowerCase().includes(this.search_value.toLowerCase())
+      ).sort((a,b)=>
+        this.translatorService.echo(
+          this.findFlilter(a,this.search_crit)?.name
+        ).localeCompare(
+            this.translatorService.echo(this.findFlilter(b,this.search_crit)?.name)
+        )
       );
     }
     return filtered_list;
+  }
+
+  findFlilter(item:ListObject, name:string){
+    return item.propriete?.find(
+      value =>
+        value.name?.toLowerCase() === name.toLowerCase()
+    )
   }
 
   element(item:ListObject):{side:string, content:(TextStyle|null)[]|undefined}[]{
@@ -130,5 +193,14 @@ export class ListComponent implements OnInit {
   switch_rubric(value:string){
     this.search_crit = value;
   }
+
+  filter_update(filter:_FilterObject, value:string){
+    if (filter.type==='bool'){
+      filter.value = (value === filter.choices[0]);
+    }else{
+      filter.value = value;
+    }
+  }
+
   protected readonly events = events;
 }

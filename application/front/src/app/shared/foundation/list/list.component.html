@@ -1,6 +1,6 @@
 <section>
   <div class="flex">
-    <div class = 'flex aling-start w-50' [style]="'height : 3rem'">
+    <div class = 'flex aling-start w-50 line'>
       <div class="col-3" *ngIf="critera">
         <pm-dropdown
           [styles]="'bubble-left'"
@@ -9,6 +9,17 @@
         ></pm-dropdown>
       </div>
       <input type="text" [(ngModel)]="search_value" placeholder="search - WIP" class="bubble {{critera?'bubble-right col-9':'col-12'}} hover-w">
+    </div>
+  </div>
+  <div class="flex short-line">
+    <div *ngFor="let filt of _filters" class = 'line flex w-100'>
+      <pm-dropdown
+        [choices]="filt.choices"
+        [default]="'all'"
+        [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
+        (click)="refresh_filter()"
+        (value_up)="filter_update(filt, $event)"
+      ></pm-dropdown>
     </div>
   </div>
   <div class="flex">
