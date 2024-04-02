@@ -24,7 +24,7 @@ import { ModaleComponent } from './modale/modale.component';
     convertToSpacesPipe,
     ImageComponent,
     DropdownComponent,
-    ModaleComponent,
+    ModaleComponent
   ]
 })
 export class BaseSharedModule { }
