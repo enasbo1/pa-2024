@@ -16,7 +16,7 @@ class UsersRepository {
     }
 
     public function getAll() {
-        $query = "SELECT usr_id, usr_firstname, usr_lastname, usr_email, usr_role FROM utilisateur";
+        $query = "SELECT id, prenom, nom, mail, role FROM UTILISATEUR";
         $result = pg_query($this->connection, $query);
 
         if (!$result) {
@@ -33,7 +33,7 @@ class UsersRepository {
     }
 
     public function findById($id) {
-        $query = "SELECT usr_id, usr_firstname, usr_lastname, usr_email, usr_role FROM utilisateur WHERE usr_id = $id";
+        $query = "SELECT id, prenom, nom, mail, role FROM UTILISATEUR WHERE id = $id";
         $result = pg_query($this->connection, $query);
 
         if (!$result) {
@@ -48,18 +48,18 @@ class UsersRepository {
         $check = new UsersService();
         $params = $check->prepareSave($params);
 
-        $query = "INSERT INTO utilisateur (usr_firstname, usr_lastname, usr_email, usr_password, usr_address, usr_country, usr_city, usr_postal_code, usr_phone_number, usr_role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
+        $query = "INSERT INTO UTILISATEUR (prenom, nom, mail, mdp, adresse, pays, ville, code_postal, numero, role) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10)";
         pg_prepare($this->connection, "", $query);
         $result = pg_execute($this->connection, "", array(
-            $params->firstname,
-            $params->lastname,
-            $params->email,
-            $params->password,
-            $params->address,
-            $params->country,
-            $params->city,
-            $params->postal_code,
-            $params->phone_number,
+            $params->prenom,
+            $params->nom,
+            $params->mail,
+            $params->mdp,
+            $params->adresse,
+            $params->pays,
+            $params->ville,
+            $params->code_postal,
+            $params->numero,
             $params->role
         ));
 
@@ -72,18 +72,18 @@ class UsersRepository {
         $check = new UsersService();
         $params = $check->prepareUpdate($params);
 
-        $query = "UPDATE utilisateur SET usr_firstname = $1, usr_lastname = $2, usr_email = $3, usr_password = $4, usr_address = $5, usr_country = $6, usr_city = $7, usr_postal_code = $8, usr_phone_number = $9, usr_role = $10 WHERE usr_id = $11";
+        $query = "UPDATE UTILISATEUR SET prenom = $1, nom = $2, mail = $3, mdp = $4, adresse = $5, pays = $6, ville = $7, code_postal = $8, numero = $9, role = $10 WHERE id = $11";
         pg_prepare($this->connection, "", $query);
         $result = pg_execute($this->connection, "", array(
-            $params->firstname,
-            $params->lastname,
-            $params->email,
-            $params->password,
-            $params->address,
-            $params->country,
-            $params->city,
-            $params->postal_code,
-            $params->phone_number,
+            $params->prenom,
+            $params->nom,
+            $params->mail,
+            $params->mdp,
+            $params->adresse,
+            $params->pays,
+            $params->ville,
+            $params->code_postal,
+            $params->numero,
             $params->role,
             $params->id
         ));
@@ -94,7 +94,7 @@ class UsersRepository {
     }
 
     public function delete($id) {
-        $query = "DELETE FROM utilisateur WHERE usr_id = $id";
+        $query = "DELETE FROM UTILISATEUR WHERE id = $id";
         $result = pg_query($this->connection, $query);
 
         if (!$result) {
