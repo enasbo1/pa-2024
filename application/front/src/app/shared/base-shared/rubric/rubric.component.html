@@ -1,0 +1,11 @@
+<div *ngIf="content">
+  <h4 *ngIf="content.title">{{translatorService.echo(content.title)}}</h4>
+  <div class="container flex">
+    <ul class="col-6">
+      <li *ngFor="let item of content.content">{{translatorService.echo(item.name)}}</li>
+    </ul>
+    <ul class="col-6">
+      <li *ngFor="let item of content.content">{{translatorService.echo(item.text)}}</li>
+    </ul>
+  </div>
+</div>

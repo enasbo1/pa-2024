@@ -68,8 +68,9 @@
     ]
   },
   {
-    "title": "list-element",
+    "title": "rubric",
     "image": "assets/images/xbox-controller.png",
+    "link" : "/generic/rubric",
     "left": [
       null,
       null,

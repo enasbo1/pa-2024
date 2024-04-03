@@ -5,6 +5,7 @@ import {StarComponent} from "./star/star.component";
 import {ImageComponent} from "./image/image.component";
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { ModaleComponent } from './modale/modale.component';
+import { RubricComponent } from './rubric/rubric.component';
 
 
 
@@ -15,6 +16,7 @@ import { ModaleComponent } from './modale/modale.component';
     ImageComponent,
     DropdownComponent,
     ModaleComponent,
+    RubricComponent,
   ],
   imports: [
     CommonModule
@@ -24,7 +26,8 @@ import { ModaleComponent } from './modale/modale.component';
     convertToSpacesPipe,
     ImageComponent,
     DropdownComponent,
-    ModaleComponent
+    ModaleComponent,
+    RubricComponent
   ]
 })
 export class BaseSharedModule { }

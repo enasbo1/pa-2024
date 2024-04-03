@@ -1,0 +1,12 @@
+@use "../../palette.scss" as styles;
+@import '../../../app.component.scss';
+
+h4{
+  text-align: center;
+}
+ul{
+  li{
+    text-align: center;
+    display: block;
+  }
+}
