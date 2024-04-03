@@ -5,6 +5,7 @@ import {BaseSharedModule} from "../base-shared/base-shared.module";
 import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import { InfoBandComponent } from './info-band/info-band.component';
 import {FormsModule} from "@angular/forms";
+import { RubricListComponent } from './rubric-list/rubric-list.component';
 
 
 
@@ -12,6 +13,7 @@ import {FormsModule} from "@angular/forms";
   declarations: [
     ListComponent,
     InfoBandComponent,
+    RubricListComponent,
   ],
     imports: [
         BaseSharedModule,
@@ -20,9 +22,10 @@ import {FormsModule} from "@angular/forms";
         RouterLink,
         FormsModule
     ],
-    exports: [
-        ListComponent,
-        InfoBandComponent
-    ]
+  exports: [
+    ListComponent,
+    InfoBandComponent,
+    RubricListComponent
+  ]
 })
 export class FoundationModule { }
