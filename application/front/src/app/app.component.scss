@@ -32,6 +32,15 @@
   display: flex;
   justify-content: space-around;
   align-items: stretch;
+
+  &.aling-start{
+    align-items: start;
+  }
+
+  &.short-line{
+    padding-left: 10%;
+    padding-right: 10%;
+  }
 }
 
 .hided {

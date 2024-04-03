@@ -1,16 +1,30 @@
-
-
-
 <section>
   <div class="flex">
-    <div class = 'col-6'>
-      <button (click)="dropdown()" class="bubble bubble-left col-3 hover-1 oneline">{{search_crit}} ⌄</button>
-      <input type="text" placeholder="search - WIP" class="bubble bubble-right col-9 hover-w">
+    <div class = 'flex aling-start w-50 line'>
+      <div class="col-3" *ngIf="critera">
+        <pm-dropdown
+          [styles]="'bubble-left'"
+          [choices]="critera"
+          (value_up)="switch_rubric($event)"
+        ></pm-dropdown>
+      </div>
+      <input type="text" [(ngModel)]="search_value" placeholder="search - WIP" class="bubble {{critera?'bubble-right col-9':'col-12'}} hover-w">
+    </div>
+  </div>
+  <div class="flex short-line">
+    <div *ngFor="let filt of _filters" class = 'line flex w-100'>
+      <pm-dropdown
+        [choices]="filt.choices"
+        [default]="'all'"
+        [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
+        (click)="refresh_filter()"
+        (value_up)="filter_update(filt, $event)"
+      ></pm-dropdown>
     </div>
   </div>
   <div class="flex">
     <ul class="container">
-      <li *ngFor="let item of items" class="{{elements_size()}} col-12">
+      <li *ngFor="let item of filter_item()" class="{{elements_size()}} col-12">
         <button class="list-element bubble {{item.link?'linked':''}}" [routerLink]=item.link>
           <div class="content bubble_padding">
             <h6>{{translatorService.echo(item?.title)}}</h6>
@@ -18,7 +32,7 @@
               <div *ngFor="let pannel of element(item)" [class]="pannel.side">
                 <div>
                   <div class = "el-content" *ngFor="let content of pannel.content" [style]="content?.style">
-                    {{translatorService.echo(content?.text, "")}}
+                    {{translatorService.echo(content?.text)}}
                   </div>
                 </div>
               </div>
