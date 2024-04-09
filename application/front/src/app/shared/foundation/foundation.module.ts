@@ -6,6 +6,7 @@ import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import { InfoBandComponent } from './info-band/info-band.component';
 import {FormsModule} from "@angular/forms";
 import { RubricListComponent } from './rubric-list/rubric-list.component';
+import { ChatComponent } from './chat/chat.component';
 
 
 
@@ -14,18 +15,20 @@ import { RubricListComponent } from './rubric-list/rubric-list.component';
     ListComponent,
     InfoBandComponent,
     RubricListComponent,
+    ChatComponent,
   ],
-    imports: [
-        BaseSharedModule,
-        CommonModule,
-        RouterLinkWithHref,
-        RouterLink,
-        FormsModule
-    ],
+  imports: [
+    BaseSharedModule,
+    CommonModule,
+    RouterLinkWithHref,
+    RouterLink,
+    FormsModule
+  ],
   exports: [
     ListComponent,
     InfoBandComponent,
-    RubricListComponent
+    RubricListComponent,
+    ChatComponent
   ]
 })
 export class FoundationModule { }

@@ -2,6 +2,7 @@
   {
     "title": "Chat",
     "image": "assets/images/xbox-controller.png",
+    "link":"/generic/chat",
     "left": [
       null,
       null,

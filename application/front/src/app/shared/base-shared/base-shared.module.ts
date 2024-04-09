@@ -6,6 +6,7 @@ import {ImageComponent} from "./image/image.component";
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { ModaleComponent } from './modale/modale.component';
 import { RubricComponent } from './rubric/rubric.component';
+import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component';
 
 
 
@@ -17,6 +18,7 @@ import { RubricComponent } from './rubric/rubric.component';
     DropdownComponent,
     ModaleComponent,
     RubricComponent,
+    ChatBubbleComponent,
   ],
   imports: [
     CommonModule
