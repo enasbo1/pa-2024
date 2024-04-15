@@ -51,7 +51,7 @@ class ApartmentRepository {
         $check = new ApartmentService();
         $params = $check->prepareSave($params);
 
-        $query = "INSERT INTO APARTMENT (ville, code_postal, prix_fixe_nuit, type_gestion, duree, type_de_bien, logement_entier, nb_chambre, nb_occupant_max, surface, horaire_contact, id_UTILISATEUR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
+        $query = "INSERT INTO APPARTEMENT (ville, code_postal, prix_fixe_nuit, type_gestion, duree, type_de_bien, logement_entier, nb_chambre, nb_occupant_max, surface, horaire_contact, id_UTILISATEUR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
         pg_prepare($this->connection, "", $query);
         $result = pg_execute($this->connection, "", array(
             $params->ville,

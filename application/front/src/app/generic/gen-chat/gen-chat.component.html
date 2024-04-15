@@ -1,2 +1,9 @@
 <p>gen-chat works!</p>
-<pm-chat [items]="items"></pm-chat>
+
+<div class="message-container" #messageContainer>
+    <div class="message" *ngFor="let message of messages">
+      <div *ngIf="message.user === 'receiver'" class="message-right">{{ message.content }}</div>
+      <div *ngIf="message.user === 'sender'" class="message-left">{{ message.content }}</div>
+    </div>
+  </div>
+  
