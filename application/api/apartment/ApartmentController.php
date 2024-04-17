@@ -29,6 +29,8 @@ class ApartmentController {
                 
                 try {
                     $request->save($params);
+                    http_response_code(201);
+                    echo("appartement créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();

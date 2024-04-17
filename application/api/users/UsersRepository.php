@@ -1,22 +1,12 @@
 <?php
+use shared\Repository;
+
 require_once 'UsersService.php';
-
-class UsersRepository {
-    private $connection = null;
-
-    public function __construct() {
-        try {
-            $this->connection = pg_connect("host=database port=5432 dbname=pa_unnamed user=unknown password=password");
-            if ($this->connection === false) {
-                throw new Exception("Could not connect to database.");
-            }
-        } catch (Exception $e) {
-            throw new Exception("Database connection failed: " . $e->getMessage());
-        }
-    }
+include_once './shared/Repository.php';
+class UsersRepository extends \shared\Repository {
 
     public function getAll() {
-        $query = "SELECT id, prenom, nom, mail, role FROM UTILISATEUR";
+        $query = "SELECT * FROM UTILISATEUR";
         $result = pg_query($this->connection, $query);
 
         if (!$result) {

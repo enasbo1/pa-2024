@@ -1,8 +1,8 @@
 <?php
 
-require_once 'Apartment/ApartmentController.php';
+require_once 'apartment/ApartmentController.php';
 require_once 'Reservation/ReservationController.php';
-require_once 'Users/UsersController.php';
+require_once 'users/UsersController.php';
 // require_once 'Adress/AdressController.php';
 
 header("Content-Type: application/json; charset=utf8");

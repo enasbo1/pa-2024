@@ -1,22 +1,11 @@
 <?php
 
+use shared\Repository;
+
 require_once 'ApartmentService.php';
+include_once './shared/Repository.php';
 
-class ApartmentRepository {
-    private $connection = null;
-
-    public function __construct() {
-        try {
-            // Connexion à la base de données PostgreSQL
-            $connectionString = "host=database port=5432 dbname=pa_unnamed user=unknown password=password";
-            $this->connection = pg_connect($connectionString);
-            if ($this->connection == null) {
-                throw new Exception("Impossible de se connecter à la base de données.");
-            }
-        } catch (Exception $e) {
-            throw new Exception("La connexion à la base de données a échoué : " . $e->getMessage());
-        }
-    }
+class ApartmentRepository extends Repository {
     public function getAll() {
         $query = "SELECT * FROM APPARTEMENT";
         $result = pg_query($this->connection, $query);
@@ -51,7 +40,7 @@ class ApartmentRepository {
         $check = new ApartmentService();
         $params = $check->prepareSave($params);
 
-        $query = "INSERT INTO APARTMENT (ville, code_postal, prix_fixe_nuit, type_gestion, duree, type_de_bien, logement_entier, nb_chambre, nb_occupant_max, surface, horaire_contact, id_UTILISATEUR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
+        $query = "INSERT INTO APPARTEMENT (ville, code_postal, prix_fixe_nuit, type_gestion, duree, type_de_bien, logement_entier, nb_chambre, nb_occupant_max, surface, horaire_contact, id_UTILISATEUR) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)";
         pg_prepare($this->connection, "", $query);
         $result = pg_execute($this->connection, "", array(
             $params->ville,

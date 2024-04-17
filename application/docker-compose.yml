@@ -16,7 +16,7 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=pa_unnamed
+      - POSTGRES_DB=wanderPlace
       - POSTGRES_USER=unknown
 
 volumes:
