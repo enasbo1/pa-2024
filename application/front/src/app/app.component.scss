@@ -6,6 +6,9 @@
 
 .bubble {
   border-radius: 2rem 0 2rem 2rem;
+  &.reversed-bubble{
+    border-radius: 0 2rem 2rem 2rem;
+  }
 
   &.bubble-right{
     padding-left : 0.25rem;
