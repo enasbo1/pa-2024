@@ -25,15 +25,6 @@ export class GenChatComponent implements OnInit {
   @ViewChild('messageContainer', { static: false }) messageContainer: ElementRef | undefined;
 
   constructor() { }
-
   ngOnInit(): void {
-    this.sortMessages(); //fonction de trie utilisée
-  }
-
-  sortMessages(): void {
-    // Trie les messages par date du plus ancien au plus récent
-    this.sortedMessages = this.messages.sort((a, b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    });
   }
 }

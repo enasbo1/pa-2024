@@ -1,2 +1,9 @@
-<p>info chat work</p>
-<p *ngFor="let item of items">{{translator.echo(item.content)}}</p>
+<p>gen-chat works!</p>
+
+<div class="message-container" #messageContainer>
+    <div class="message" *ngFor="let message of sortedMessages">
+      <div *ngIf="message.user === 'receiver'" class="message-right"> {{ translator.echo(message.content) }}</div>
+      <div *ngIf="message.user === 'sender'" class="message-left">{{ translator.echo(message.content) }}</div>
+    </div>
+  </div>
+  
