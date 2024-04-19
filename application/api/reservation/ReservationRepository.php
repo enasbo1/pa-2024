@@ -1,19 +1,11 @@
 <?php
+use shared\Repository;
+
 require_once 'ReservationService.php';
+include_once './shared/Repository.php';
 
-class ReservationRepository {
-    private $connection = null;
-
-    public function __construct() {
-        try {
-            $this->connection = pg_connect("host=database port=5432 dbname=pa_unnamed user=unknown password=password"); // Modification des informations de connexion
-            if ($this->connection === false) {
-                throw new Exception("Could not connect to database.");
-            }
-        } catch (Exception $e) {
-            throw new Exception("Database connection failed: " . $e->getMessage());
-        }
-    }
+class ReservationRepository extends Repository
+{
 
     public function getAll() {
         $query = "SELECT * FROM reservation"; // Modification du nom de la table
