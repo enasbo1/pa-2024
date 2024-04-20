@@ -1,9 +1,12 @@
 <?php
 
+use apartment\ApartmentController;
+use reservation\ReservationController;
+use users\UsersController;
+
 require_once 'apartment/ApartmentController.php';
 require_once 'Reservation/ReservationController.php';
 require_once 'users/UsersController.php';
-// require_once 'Adress/AdressController.php';
 
 header("Content-Type: application/json; charset=utf8");
 header("Access-Control-Allow-Origin: *");
@@ -37,14 +40,6 @@ switch ($uri[2]) {
         }
         $userController->routes($id);
         break;
-        case 'adress':
-            $AdressController = new AdressController();
-            $id = null;
-            if (isset($uri[4])) {
-                $id = $uri[4];
-            }
-            $AdressController->routes($id);
-            break;
     default:
         // Page non trouvée
         http_response_code(404);

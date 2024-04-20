@@ -1,10 +1,13 @@
 <?php
+namespace users;
+use Exception;
 
 require_once 'UsersRepository.php';
 
 class UsersController {
     
-    public function routes($id = null) {
+    public function routes($id = null): void
+    {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
                 if ($id === null) {
@@ -34,8 +37,6 @@ class UsersController {
 
                 try {
                     $repository->save($params);
-                    http_response_code(201);
-                    echo "User created successfully.";
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -73,4 +74,3 @@ class UsersController {
         }
     }
 }
-?>
