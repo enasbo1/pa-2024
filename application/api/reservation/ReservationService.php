@@ -1,25 +1,29 @@
 <?php
+namespace reservation;
+use Exception;
+use shared\ModelType;
 
-class ReservationService {
+class ReservationService implements ModelType {
 
     /**
      * @throws Exception
      */
-    public function prepareSave($params) {
-        return $this->isReservation($params);
+    public function prepareSave(object $params):object {
+        return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate($params) {
-        return $this->isReservation($params);
+    public function prepareUpdate(object $params):object {
+        return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function isReservation($params){
+    public function isValidType(object $params): object
+    {
         if (
             !isset($params->id) ||
             !isset($params->startDate) ||
@@ -34,7 +38,17 @@ class ReservationService {
             throw new Exception("Bad Request", 400);
         }
 
-        return $params;
+        return $params;    }
+
+    public function toArray(object $params): array
+    {
+        return [
+            "startDate" => $params->startDate,
+            "endDate"   => $params->endDate,
+            "id_utilisateur" => $params->client,
+            "id_appartement" => $params->apartment,
+            "total_location" => $params->total_location
+        ];
     }
 }
-?>
+

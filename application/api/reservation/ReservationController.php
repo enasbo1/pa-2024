@@ -1,10 +1,13 @@
 <?php
+namespace reservation;
+use Exception;
 
 require_once 'ReservationRepository.php';
 
 class ReservationController {
     
-    public function routes($id = null) {
+    public function routes($id = null): void
+    {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
                 if ($id === null) {
@@ -73,4 +76,3 @@ class ReservationController {
         }
     }
 }
-?>

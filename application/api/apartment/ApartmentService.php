@@ -1,25 +1,33 @@
 <?php
+namespace apartment;
+use Exception;
+use shared\ModelType;
 
-class ApartmentService {
+include_once "./shared/ModelType.php";
+
+class ApartmentService implements ModelType {
 
     /**
      * @throws Exception
      */
-    public function prepareSave($params) {
-        return $this->isApartment($params);
+    public function prepareSave(object $params): object {
+        return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate($params) {
-        return $this->isApartment($params);
+    public function prepareUpdate(object $params):object {
+        return $this->isValidType($params);
 
     }
 
-    public function isApartment($params){
+    /**
+     * @throws Exception
+     */
+    public function isValidType(object $params): object
+    {
         if (
-            !isset($params->id) ||
             !isset($params->ville) ||
             !isset($params->code_postal) ||
             !isset($params->prix_fixe_nuit) ||
@@ -37,5 +45,27 @@ class ApartmentService {
         }
 
         return $params;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function toArray(object $params): array
+    {
+        $params = $this->isValidType($params);
+        return[
+            "ville"         => $params->ville,
+            "code_postal"   => $params->code_postal,
+            "prix_fixe_nuit" => $params->prix_fixe_nuit,
+            "type_gestion"  => $params->type_gestion,
+            "duree"         => $params->duree,
+            "type_de_bien"  => $params->type_de_bien,
+            "logement_entier" => $params->logement_entier,
+            "nb_chambre"    => $params->nb_chambre,
+            "nb_occupant_max" => $params->nb_occupant_max,
+            "surface"       => $params->surface,
+            "horaire_contact" => $params->horaire_contact,
+            "id_utilisateur" => $params->id_UTILISATEUR
+        ];
     }
 }

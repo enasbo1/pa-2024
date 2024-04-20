@@ -1,18 +1,22 @@
 <?php
-
+namespace apartment;
+use Exception;
 require_once 'ApartmentRepository.php';
 
 class ApartmentController {
-    
-    public function routes($id = null) {
+
+    /**
+     * @throws Exception
+     */
+    public function routes($id = null): void
+    {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
+                $request = new ApartmentRepository();
                 if ($id == null) {
-                    $request = new ApartmentRepository();
                     $apartments = $request->getAll();
                     echo json_encode($apartments);
                 } else {
-                    $request = new ApartmentRepository();
                     try {
                         $apartment = $request->findById($id);
                         echo json_encode($apartment);
@@ -50,7 +54,7 @@ class ApartmentController {
                 break;
             case "DELETE":
                 $request = new ApartmentRepository();
-                $apartment = $request->delete($id);
+                $request->delete($id);
             break;
         }
     }
