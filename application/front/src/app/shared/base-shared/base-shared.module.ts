@@ -7,6 +7,8 @@ import { DropdownComponent } from './dropdown/dropdown.component';
 import { ModaleComponent } from './modale/modale.component';
 import { RubricComponent } from './rubric/rubric.component';
 import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component';
+import { FormStepComponent } from './form-step/form-step.component';
+import { FormFieldComponent } from './form-field/form-field.component';
 
 
 
@@ -19,6 +21,8 @@ import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component';
     ModaleComponent,
     RubricComponent,
     ChatBubbleComponent,
+    FormStepComponent,
+    FormFieldComponent,
   ],
   imports: [
     CommonModule
@@ -29,7 +33,8 @@ import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component';
     ImageComponent,
     DropdownComponent,
     ModaleComponent,
-    RubricComponent
+    RubricComponent,
+    FormStepComponent
   ]
 })
 export class BaseSharedModule { }

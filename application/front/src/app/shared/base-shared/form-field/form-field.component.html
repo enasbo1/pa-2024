@@ -1,0 +1,35 @@
+<ng-container *ngIf="field" [ngSwitch]="field?.type">
+  <ng-container *ngSwitchCase="'dropdown'" >
+    <pm-dropdown
+      [default]="field.default"
+      [choices] = "(field.choices)?field.choices:[]"
+      [class]="field.sclass"
+      (value_up)="onSubmit($event)"
+    ></pm-dropdown>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'place'">
+    <p> place field to be implemented here</p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'date'">
+    <p> date field to be implemented here </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'period'">
+    <p> period field to be implemented here </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'url'">
+    <p> url field to be implemented here </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'file'">
+    <p> file field to be implemented here </p>
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'regex'">
+    <p> regex submitted field to be implemented here </p>
+  </ng-container>
+
+</ng-container>

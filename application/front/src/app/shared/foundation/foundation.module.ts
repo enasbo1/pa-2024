@@ -7,6 +7,7 @@ import { InfoBandComponent } from './info-band/info-band.component';
 import {FormsModule} from "@angular/forms";
 import { RubricListComponent } from './rubric-list/rubric-list.component';
 import { ChatComponent } from './chat/chat.component';
+import { FormComponent } from './form/form.component';
 
 
 
@@ -16,6 +17,7 @@ import { ChatComponent } from './chat/chat.component';
     InfoBandComponent,
     RubricListComponent,
     ChatComponent,
+    FormComponent,
   ],
   imports: [
     BaseSharedModule,
@@ -28,7 +30,8 @@ import { ChatComponent } from './chat/chat.component';
     ListComponent,
     InfoBandComponent,
     RubricListComponent,
-    ChatComponent
+    ChatComponent,
+    FormComponent
   ]
 })
 export class FoundationModule { }

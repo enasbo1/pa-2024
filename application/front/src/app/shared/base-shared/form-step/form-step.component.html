@@ -1,0 +1,7 @@
+<ng-container *ngIf="items">
+  <h3 *ngIf="items.title">{{translator.echo(items.title)}}</h3>
+  <ng-container *ngFor="let rubric of items.content">
+    <h4 *ngIf="rubric.title">{{translator.echo(rubric.title)}}</h4>
+    <pm-form-field *ngFor="let item of rubric.content" [field]="item"></pm-form-field>
+  </ng-container>
+</ng-container>
