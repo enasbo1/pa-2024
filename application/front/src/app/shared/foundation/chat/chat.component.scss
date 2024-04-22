@@ -10,18 +10,18 @@
     border-radius: 8px; /* Arrondissez les coins */
     overflow-y: auto; /* permet de generer la barre de scroll */
   }
-  
+
   .message {
     margin-bottom: 10px;
     padding: 8px; /* Ajoutez un padding pour les messages */
     border-radius: 8px; /* Arrondissez les coins */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajoutez une légère ombre */
   }
-  
+
   .message-right {
-    text-align: right; 
+    text-align: right;
   }
-  
+
   .message-left {
     text-align: left;
   }

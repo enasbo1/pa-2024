@@ -9,6 +9,7 @@ import {TranslatorService} from "../translator.service";
 })
 export class FormStepComponent implements OnInit {
   @Input() items?:FormStepObject;
+  @Input() justify:"right"|"center"|""="";
   constructor(public translator:TranslatorService) { }
 
   ngOnInit(): void {

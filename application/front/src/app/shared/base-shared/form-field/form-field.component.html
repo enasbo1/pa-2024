@@ -1,35 +1,82 @@
-<ng-container *ngIf="field" [ngSwitch]="field?.type">
+<ng-container *ngIf="field" [ngSwitch]="field.type">
+  <h6 *ngIf="field.title">{{translator.echo(field.title)}}</h6>
   <ng-container *ngSwitchCase="'dropdown'" >
     <pm-dropdown
       [default]="field.default"
+      [title]="field.instruction"
       [choices] = "(field.choices)?field.choices:[]"
       [class]="field.sclass"
       (value_up)="onSubmit($event)"
     ></pm-dropdown>
   </ng-container>
 
+  <ng-container *ngSwitchCase="'text'">
+    <input type="text" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >
+  </ng-container>
+
   <ng-container *ngSwitchCase="'place'">
-    <p> place field to be implemented here</p>
+    <p> unimplemented field : place </p>
   </ng-container>
 
   <ng-container *ngSwitchCase="'date'">
-    <p> date field to be implemented here </p>
+    <input [type]="date" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [min]="field.min | dateForHtml : field.time"
+           [max]="field.max | dateForHtml : field.time"
+           [(ngModel)]="field._value"
+    >
   </ng-container>
 
-  <ng-container *ngSwitchCase="'period'">
-    <p> period field to be implemented here </p>
+  <ng-container *ngSwitchCase="'period'" >
+    <div class = "flex" *ngIf="field._values">
+      <input [type]="date" class="bubble bubble-left hover-w col-6 {{field.sclass}}"
+             [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+             [placeholder]="translator.echo(field.placeholder)"
+             [min]="field.min | dateForHtml : field.time"
+             [max]="field._values[1] | dateForHtml  : field.time"
+             [(ngModel)]="field._values[0]"
+      >
+
+      <input [type]="date" class="bubble bubble-right hover-w col-6 {{field.sclass}}"
+             [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+             [placeholder]="translator.echo(field.placeholder)"
+             [min]="field._values[0] | dateForHtml : field.time"
+             [max]="field.max | dateForHtml  : field.time"
+             (change)="onChange()"
+             [(ngModel)]="field._values[1]"
+      >
+    </div>
   </ng-container>
 
   <ng-container *ngSwitchCase="'url'">
-    <p> url field to be implemented here </p>
+    <input type="url" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >
   </ng-container>
 
   <ng-container *ngSwitchCase="'file'">
-    <p> file field to be implemented here </p>
-  </ng-container>
+    <div  class="bubble hover-w w-100 bordered">
+      <input type="file" class = "w-100 hover-w {{field.sclass}}"
+             [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+             [value]="translator.echo(field.default)"
+             [placeholder]="translator.echo(field.placeholder)"
+             [(ngModel)]="field._value"
+      >
+    </div>
+ </ng-container>
 
   <ng-container *ngSwitchCase="'regex'">
-    <p> regex submitted field to be implemented here </p>
+    <input type="text" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >
   </ng-container>
-
 </ng-container>

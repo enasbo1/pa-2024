@@ -1,11 +1,17 @@
 export interface FormFieldObject{
   name : string;
-  sclass : string;
-  type : "dropdown"|"place"|"date"|"period"|"url"|"file"|"regex";
+  title?:string;
+  sclass? : string;
+  type : "dropdown"|"text"|"place"|"date"|"period"|"url"|"file"|"regex";
   placeholder? : string;
+  time?:boolean;
   regex? : string;
   default? : string;
   instruction? : string;
   reg_error?: {regex:string; message:string}[]
-  choices? : string[]
+  choices? : string[],
+  _value?:string|Date,
+  _values?:Date[]
+  max?:Date,
+  min?:Date
 }
