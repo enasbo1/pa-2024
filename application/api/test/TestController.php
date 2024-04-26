@@ -1,9 +1,9 @@
 <?php
-namespace users;
+namespace test;
 use Exception;
-require_once 'UsersRepository.php';
+require_once 'TestRepository.php';
 
-class UsersController {
+class TestController {
 
     /**
      * @throws Exception
@@ -12,14 +12,14 @@ class UsersController {
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
-                $request = new UsersRepository();
+                $request = new TestRepository();
                 if ($id == null) {
-                    $users = $request->getAll();
-                    echo json_encode($users);
+                    $test = $request->getAll();
+                    echo json_encode($test);
                 } else {
                     try {
-                        $users = $request->findById($id);
-                        echo json_encode($users);
+                        $test = $request->findById($id);
+                        echo json_encode($test);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();
@@ -29,12 +29,12 @@ class UsersController {
             case "POST":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new UsersRepository();
+                $request = new TestRepository();
 
                 try {
                     $request->save($params);
                     http_response_code(201);
-                    echo("users créé avec succès");
+                    echo("test créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -43,7 +43,7 @@ class UsersController {
             case "PATCH":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new UsersRepository();
+                $request = new TestRepository();
 
                 try {
                     $request->update($params);
@@ -53,7 +53,7 @@ class UsersController {
                 }
                 break;
             case "DELETE":
-                $request = new UsersRepository();
+                $request = new TestRepository();
                 $request->delete($id);
                 break;
         }

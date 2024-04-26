@@ -1,7 +1,9 @@
 <?php
 namespace apartment;
+
 use Exception;
 use shared\ModelType;
+use shared\Verif;
 
 include_once "./shared/ModelType.php";
 
@@ -27,21 +29,25 @@ class ApartmentService implements ModelType {
      */
     public function isValidType(object $params): object
     {
+        $valid = Verif::verification($this->toArray($params),[
+			"id" => "!int",
+			"ville" => "r :M,50",
+			"code_postal" => "r !int",
+			"prix_fixe_nuit" => "r !int",
+			"type_gestion" => "r :M,100",
+			"duree" => "r !int",
+			"type_de_bien" => "r :M,100",
+			"logement_entier" => "r !int",
+			"nb_chambre" => "r !int",
+			"nb_occupant_max" => "r !int",
+			"surface" => "r !int",
+			"horaire_contact" => "r !int",
+			"id_UTILISATEUR" => "r !int"
+        ]);
         if (
-            !isset($params->ville) ||
-            !isset($params->code_postal) ||
-            !isset($params->prix_fixe_nuit) ||
-            !isset($params->type_gestion) ||
-            !isset($params->duree) ||
-            !isset($params->type_de_bien) ||
-            !isset($params->logement_entier) ||
-            !isset($params->nb_chambre) ||
-            !isset($params->nb_occupant_max) ||
-            !isset($params->surface) ||
-            !isset($params->horaire_contact) ||
-            !isset($params->id_UTILISATEUR)
+            $valid == "validated"
         ) {
-            throw new Exception("Bad Request", 400);
+            throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
         return $params;
@@ -54,18 +60,20 @@ class ApartmentService implements ModelType {
     {
         $params = $this->isValidType($params);
         return[
-            "ville"         => $params->ville,
-            "code_postal"   => $params->code_postal,
-            "prix_fixe_nuit" => $params->prix_fixe_nuit,
-            "type_gestion"  => $params->type_gestion,
-            "duree"         => $params->duree,
-            "type_de_bien"  => $params->type_de_bien,
-            "logement_entier" => $params->logement_entier,
-            "nb_chambre"    => $params->nb_chambre,
-            "nb_occupant_max" => $params->nb_occupant_max,
-            "surface"       => $params->surface,
-            "horaire_contact" => $params->horaire_contact,
-            "id_utilisateur" => $params->id_UTILISATEUR
+			"id" => $params->id,
+			"ville" => $params->ville,
+			"code_postal" => $params->code_postal,
+			"prix_fixe_nuit" => $params->prix_fixe_nuit,
+			"type_gestion" => $params->type_gestion,
+			"duree" => $params->duree,
+			"type_de_bien" => $params->type_de_bien,
+			"logement_entier" => $params->logement_entier,
+			"nb_chambre" => $params->nb_chambre,
+			"nb_occupant_max" => $params->nb_occupant_max,
+			"surface" => $params->surface,
+			"horaire_contact" => $params->horaire_contact,
+			"id_UTILISATEUR" => $params->id_UTILISATEUR
         ];
     }
 }
+

@@ -1,0 +1,15 @@
+id-|-!int
+prenom-|-r :M,30
+nom-|-r :M,100
+mail-|-r :M,100
+mdp-|-r :M,255
+adresse-|-r :M,255
+pays-|-r :M,50
+ville-|-r :M,50
+code_postal-|-r !int
+numero-|-r !int
+date_inscription-|-!int
+date_modification-|-!int
+role-|-r !int
+rang-|-!int
+token-|-:M,255

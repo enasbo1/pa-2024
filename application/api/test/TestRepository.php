@@ -1,16 +1,16 @@
 <?php
-namespace users;
+namespace test;
 
 use Exception;
 use shared\Repository;
 
-require_once 'UsersService.php';
+require_once 'TestService.php';
 include_once './shared/Repository.php';
 
-class UsersRepository extends Repository {
+class TestRepository extends Repository {
     public function __construct()
     {
-        parent::__construct("UTILISATEUR", new UsersService());
+        parent::__construct("test", new TestService());
     }
 
     /**
@@ -18,14 +18,14 @@ class UsersRepository extends Repository {
      */
     public function getAll(): array
     {
-        $users = [];
-        $result = $this->readAll("unable to find any users");
+        $test = [];
+        $result = $this->readAll("unable to find any test");
 
         foreach($result as $row) {
-            $users[] = $row;
+            $test[] = $row;
         }
 
-        return $users;
+        return $test;
     }
 
     /**
@@ -33,7 +33,7 @@ class UsersRepository extends Repository {
      */
     public function findById(int $id): array
     {
-        return $this->read($id, "users not found");
+        return $this->read($id, "test not found");
     }
 
     /**
@@ -41,10 +41,10 @@ class UsersRepository extends Repository {
      */
     public function save($params): void
     {
-        $this->create($params, "unable to create users");
+        $this->create($params, "unable to create test");
     }
 
-    public function update($params, string $error = "unexciting users could not be updated"): Exception|bool
+    public function update($params, string $error = "unexciting test could not be updated"): Exception|bool
     {
         return parent::update($params, $error);
     }

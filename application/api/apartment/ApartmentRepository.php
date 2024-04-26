@@ -3,6 +3,7 @@ namespace apartment;
 
 use Exception;
 use shared\Repository;
+
 require_once 'ApartmentService.php';
 include_once './shared/Repository.php';
 
@@ -17,14 +18,14 @@ class ApartmentRepository extends Repository {
      */
     public function getAll(): array
     {
-        $users = [];
+        $apartment = [];
         $result = $this->readAll("unable to find any apartment");
 
         foreach($result as $row) {
-            $users[] = $row;
+            $apartment[] = $row;
         }
 
-        return $users;
+        return $apartment;
     }
 
     /**
@@ -48,7 +49,7 @@ class ApartmentRepository extends Repository {
         return parent::update($params, $error);
     }
 
-    public function delete(int $id, string $error = "unexciting apartment cold not be deleted"): void
+    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
     {
         parent::delete($id, $error);
     }

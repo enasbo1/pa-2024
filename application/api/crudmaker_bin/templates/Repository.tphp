@@ -1,16 +1,16 @@
 <?php
-namespace users;
+namespace {|{name}|};
 
 use Exception;
 use shared\Repository;
 
-require_once 'UsersService.php';
+require_once '{|{Name}|}Service.php';
 include_once './shared/Repository.php';
 
-class UsersRepository extends Repository {
+class {|{Name}|}Repository extends Repository {
     public function __construct()
     {
-        parent::__construct("UTILISATEUR", new UsersService());
+        parent::__construct("{|{TABLE}|}", new {|{Name}|}Service());
     }
 
     /**
@@ -18,14 +18,14 @@ class UsersRepository extends Repository {
      */
     public function getAll(): array
     {
-        $users = [];
-        $result = $this->readAll("unable to find any users");
+        ${|{name}|} = [];
+        $result = $this->readAll("unable to find any {|{name}|}");
 
         foreach($result as $row) {
-            $users[] = $row;
+            ${|{name}|}[] = $row;
         }
 
-        return $users;
+        return ${|{name}|};
     }
 
     /**
@@ -33,7 +33,7 @@ class UsersRepository extends Repository {
      */
     public function findById(int $id): array
     {
-        return $this->read($id, "users not found");
+        return $this->read($id, "{|{name}|} not found");
     }
 
     /**
@@ -41,10 +41,10 @@ class UsersRepository extends Repository {
      */
     public function save($params): void
     {
-        $this->create($params, "unable to create users");
+        $this->create($params, "unable to create {|{name}|}");
     }
 
-    public function update($params, string $error = "unexciting users could not be updated"): Exception|bool
+    public function update($params, string $error = "unexciting {|{name}|} could not be updated"): Exception|bool
     {
         return parent::update($params, $error);
     }

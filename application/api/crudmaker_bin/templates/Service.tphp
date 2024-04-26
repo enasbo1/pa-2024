@@ -1,5 +1,5 @@
 <?php
-namespace reservation;
+namespace {|{name}|};
 
 use Exception;
 use shared\ModelType;
@@ -7,7 +7,7 @@ use shared\Verif;
 
 include_once "./shared/ModelType.php";
 
-class ReservationService implements ModelType {
+class {|{Name}|}Service implements ModelType {
 
     /**
      * @throws Exception
@@ -30,12 +30,7 @@ class ReservationService implements ModelType {
     public function isValidType(object $params): object
     {
         $valid = Verif::verification($this->toArray($params),[
-			"id" => "!int",
-			"total_location" => "r !int",
-			"total_abonnement" => "!int",
-			"total_frais" => "!int",
-			"id_APPARTEMENT" => "r !int",
-			"id_UTILISATEUR" => "r !int"
+{|{list_colomn_verif}|}
         ]);
         if (
             $valid == "validated"
@@ -53,12 +48,7 @@ class ReservationService implements ModelType {
     {
         $params = $this->isValidType($params);
         return[
-			"id" => $params->id,
-			"total_location" => $params->total_location,
-			"total_abonnement" => $params->total_abonnement,
-			"total_frais" => $params->total_frais,
-			"id_APPARTEMENT" => $params->id_APPARTEMENT,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
+{|{list_colomn_array}|}
         ];
     }
 }
