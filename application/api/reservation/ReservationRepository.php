@@ -1,13 +1,13 @@
 <?php
 namespace reservation;
+
 use Exception;
 use shared\Repository;
 
 require_once 'ReservationService.php';
 include_once './shared/Repository.php';
 
-class ReservationRepository extends Repository
-{
+class ReservationRepository extends Repository {
     public function __construct()
     {
         parent::__construct("RESERVATION", new ReservationService());
@@ -18,19 +18,17 @@ class ReservationRepository extends Repository
      */
     public function getAll(): array
     {
-        $users = [];
+        $reservation = [];
         $result = $this->readAll("unable to find any reservation");
 
         foreach($result as $row) {
-            $users[] = $row;
+            $reservation[] = $row;
         }
 
-        return $users;
+        return $reservation;
     }
 
     /**
-     * @param int $id
-     * @return array
      * @throws Exception
      */
     public function findById(int $id): array
@@ -39,10 +37,9 @@ class ReservationRepository extends Repository
     }
 
     /**
-     * @param object $params
      * @throws Exception
      */
-    public function save(object $params): void
+    public function save($params): void
     {
         $this->create($params, "unable to create reservation");
     }
@@ -52,7 +49,7 @@ class ReservationRepository extends Repository
         return parent::update($params, $error);
     }
 
-    public function delete(int $id, string $error = "unexciting reservation cold not be deleted"): void
+    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
     {
         parent::delete($id, $error);
     }

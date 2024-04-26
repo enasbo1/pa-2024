@@ -1,0 +1,6 @@
+id-|-!int
+total_location-|-r !int
+total_abonnement-|-!int
+total_frais-|-!int
+id_APPARTEMENT-|-r !int
+id_UTILISATEUR-|-r !int

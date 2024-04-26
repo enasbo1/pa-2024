@@ -14,8 +14,8 @@ class ApartmentController {
             case "GET":
                 $request = new ApartmentRepository();
                 if ($id == null) {
-                    $apartments = $request->getAll();
-                    echo json_encode($apartments);
+                    $apartment = $request->getAll();
+                    echo json_encode($apartment);
                 } else {
                     try {
                         $apartment = $request->findById($id);
@@ -30,11 +30,11 @@ class ApartmentController {
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
                 $request = new ApartmentRepository();
-                
+
                 try {
                     $request->save($params);
                     http_response_code(201);
-                    echo("appartement créé avec succès");
+                    echo("apartment créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -46,7 +46,7 @@ class ApartmentController {
                 $request = new ApartmentRepository();
 
                 try {
-                    $request->update($params); 
+                    $request->update($params);
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -55,7 +55,7 @@ class ApartmentController {
             case "DELETE":
                 $request = new ApartmentRepository();
                 $request->delete($id);
-            break;
+                break;
         }
     }
 }

@@ -3,43 +3,54 @@ namespace users;
 
 use Exception;
 use shared\ModelType;
+use shared\Verif;
+
+include_once "./shared/ModelType.php";
 
 class UsersService implements ModelType {
+
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object
-    {
+    public function prepareSave(object $params): object {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params): object {
+    public function prepareUpdate(object $params):object {
         return $this->isValidType($params);
+
     }
 
     /**
      * @throws Exception
      */
-    public function isValidType(object $params):object
+    public function isValidType(object $params): object
     {
+        $valid = Verif::verification($this->toArray($params),[
+			"id" => "!int",
+			"prenom" => "r :M,30",
+			"nom" => "r :M,100",
+			"mail" => "r :M,100",
+			"mdp" => "r :M,255",
+			"adresse" => "r :M,255",
+			"pays" => "r :M,50",
+			"ville" => "r :M,50",
+			"code_postal" => "r !int",
+			"numero" => "r !int",
+			"date_inscription" => "!int",
+			"date_modification" => "!int",
+			"role" => "r !int",
+			"rang" => "!int",
+			"token" => ":M,255"
+        ]);
         if (
-            !isset($params->prenom) ||
-            !isset($params->nom) ||
-            !isset($params->mail) ||
-            !isset($params->mdp) ||
-            !isset($params->adresse) ||
-            !isset($params->pays) ||
-            !isset($params->ville) ||
-            !isset($params->code_postal) ||
-            !isset($params->numero) ||
-            !isset($params->role)
+            $valid == "validated"
         ) {
-            throw new Exception("Bad Request", 400);
+            throw new Exception("Bad Request : ". $valid["message"], 400);
         }
-        $params->mdp = password_hash($params->mdp, PASSWORD_BCRYPT);
 
         return $params;
     }
@@ -50,17 +61,23 @@ class UsersService implements ModelType {
     public function toArray(object $params): array
     {
         $params = $this->isValidType($params);
-        return [
-            "prenom"=> $params->prenom,
-            "nom"   => $params->nom,
-            "mail"  =>$params->mail,
-            "mdp"   =>$params->mdp,
-            "adresse" => $params->adresse,
-            "pays"  => $params->pays,
-            "ville" =>$params->ville,
-            "code_postal" => $params->code_postal,
-            "numero"=> $params->numero,
-            "role" => $params->role
+        return[
+			"id" => $params->id,
+			"prenom" => $params->prenom,
+			"nom" => $params->nom,
+			"mail" => $params->mail,
+			"mdp" => $params->mdp,
+			"adresse" => $params->adresse,
+			"pays" => $params->pays,
+			"ville" => $params->ville,
+			"code_postal" => $params->code_postal,
+			"numero" => $params->numero,
+			"date_inscription" => $params->date_inscription,
+			"date_modification" => $params->date_modification,
+			"role" => $params->role,
+			"rang" => $params->rang,
+			"token" => $params->token
         ];
     }
 }
+

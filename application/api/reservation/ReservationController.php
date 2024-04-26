@@ -1,28 +1,24 @@
 <?php
 namespace reservation;
 use Exception;
-
 require_once 'ReservationRepository.php';
 
 class ReservationController {
-    
+
+    /**
+     * @throws Exception
+     */
     public function routes($id = null): void
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
-                if ($id === null) {
-                    try {
-                        $repository = new ReservationRepository();
-                        $reservations = $repository->getAll();
-                        echo json_encode($reservations);
-                    } catch (Exception $e) {
-                        http_response_code(500);
-                        echo $e->getMessage();
-                    }
+                $request = new ReservationRepository();
+                if ($id == null) {
+                    $reservation = $request->getAll();
+                    echo json_encode($reservation);
                 } else {
                     try {
-                        $repository = new ReservationRepository();
-                        $reservation = $repository->findById($id);
+                        $reservation = $request->findById($id);
                         echo json_encode($reservation);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
@@ -33,12 +29,12 @@ class ReservationController {
             case "POST":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $repository = new ReservationRepository();
+                $request = new ReservationRepository();
 
                 try {
-                    $repository->save($params);
+                    $request->save($params);
                     http_response_code(201);
-                    echo "Reservation created successfully.";
+                    echo("reservation créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -47,32 +43,19 @@ class ReservationController {
             case "PATCH":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $repository = new ReservationRepository();
-                
+                $request = new ReservationRepository();
+
                 try {
-                    $repository->update($params);
-                    http_response_code(200);
-                    echo "Reservation updated successfully.";
+                    $request->update($params);
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
                 }
                 break;
             case "DELETE":
-                $repository = new ReservationRepository();
-
-                try {
-                    $repository->delete($id);
-                    http_response_code(200);
-                    echo "Reservation deleted successfully.";
-                } catch (Exception $e) {
-                    http_response_code($e->getCode());
-                    echo $e->getMessage();
-                }
+                $request = new ReservationRepository();
+                $request->delete($id);
                 break;
-            default:
-                http_response_code(405);
-                echo "Method Not Allowed";
         }
     }
 }
