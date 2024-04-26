@@ -1,14 +1,12 @@
 <div *ngIf="content">
+  <pm-line [short]="true"></pm-line>
   <h4 *ngIf="content.title">{{translatorService.echo(content.title)}}</h4>
   <div class="container flex">
-    <ul class="col-6">
-      <li *ngFor="let item of content.content">{{translatorService.echo(item.name)}}</li>
-    </ul>
     <ul class="col-6">
       <ng-container *ngFor="let item of content.content" [ngSwitch]="item.type">
         <li *ngSwitchCase="'text'">{{translatorService.echo(item.text)}}</li>
         <li *ngSwitchCase="'file'"><a [href]="item.value" target="_blank">{{translatorService.echo(item.text)}}</a></li>
-        <li *ngSwitchCase="'pannel'" (click)="open_pannel(item.value)">{{translatorService.echo(item.text)}}</li>
+        <li *ngSwitchCase="'panel'" (click)="open_pannel(item.value)">{{translatorService.echo(item.text)}}</li>
         <li *ngSwitchCase="'image'" (click)="open_image(item.value)">{{translatorService.echo(item.text)}}</li>
       </ng-container>
     </ul>

@@ -46,6 +46,13 @@
   }
 }
 
+.bordered {
+  border-width: 2px;
+  border-style: inset;
+  border-color: rgb(118, 118, 118) rgb(133, 133, 133);
+  border-image: initial;
+}
+
 .hided {
   display: none;
 }
