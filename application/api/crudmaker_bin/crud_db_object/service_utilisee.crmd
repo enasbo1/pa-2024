@@ -1,0 +1,7 @@
+id-|-!int
+date_modif-|-!int
+date_debut-|-!int
+lieu-|-r :M,60
+id_RESERVATION-|-r !int
+id_SERVICE-|-r !int
+id_UTILISATEUR-|-r !int
