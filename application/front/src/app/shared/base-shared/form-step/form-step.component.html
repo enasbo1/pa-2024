@@ -1,0 +1,11 @@
+<ng-container *ngIf="items">
+  <h3 *ngIf="items.title" [class]="justify">{{translator.echo(items.title)}}</h3>
+  <ng-container *ngFor="let rubric of items.content">
+    <pm-line [short]="true"></pm-line>
+
+    <h4 *ngIf="rubric.title">{{translator.echo(rubric.title)}}</h4>
+    <div *ngFor="let item of rubric.content" class="form-element">
+      <pm-form-field [field]="item"></pm-form-field>
+    </div>
+  </ng-container>
+</ng-container>

@@ -9,8 +9,8 @@ CREATE TABLE UTILISATEUR(
    ville VARCHAR(50),
    code_postal INT,
    numero INT,
-   date_inscription DATE,
-   date_modification DATE,
+   date_inscription TIMESTAMP,
+   date_modification TIMESTAMP,
    role INT, -- voyageur, client bailleur, prestataire, admin
    rang INT, -- VIP
    token VARCHAR(255) -- Jeton d'authentification de l'utilisateur
@@ -21,8 +21,8 @@ CREATE TABLE SERVICE(
    type VARCHAR(150),
    description VARCHAR(255),
    tarif INT,
-   date_debut DATE,
-   date_fin DATE,
+   date_debut TIMESTAMP,
+   date_fin TIMESTAMP,
    note INT,
    fiche TEXT,
    coef INT -- variable pour le tarif quand il est variable
@@ -86,7 +86,7 @@ CREATE TABLE SERVICE_APPARTEMENT(
    FOREIGN KEY(id_APPARTEMENT) REFERENCES APPARTEMENT(id)
 );
 
-CREATE TABLE SERVICE_ENTREPISE(
+CREATE TABLE SERVICE_ENTREPRISE(
    id SERIAL,
    id_SERVICE INT NOT NULL,
    id_ENTREPRISE INT NOT NULL,
@@ -142,7 +142,7 @@ CREATE TABLE TICKET(
 
 CREATE TABLE MESSAGE(
    id SERIAL,
-   date_envoie date,
+   date_envoie TIMESTAMP,
    texte TEXT,
    id_SERVICE_UTILISEE INT,
    id_RESERVATION INT,

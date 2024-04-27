@@ -1,40 +1,65 @@
 <?php
+namespace reservation;
 
-class ReservationService {
+use Exception;
+use shared\ModelType;
+use shared\Verif;
 
-    public function prepareSave($params) {
+include_once "./shared/ModelType.php";
+
+class ReservationService implements ModelType {
+
+    /**
+     * @throws Exception
+     */
+    public function prepareSave(object $params): object {
+        return $this->isValidType($params);
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function prepareUpdate(object $params):object {
+        return $this->isValidType($params);
+
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function isValidType(object $params): object
+    {
+        $valid = Verif::verification($this->toArray($params),[
+			"id" => "!int",
+			"total_location" => "r !int",
+			"total_abonnement" => "!int",
+			"total_frais" => "!int",
+			"id_APPARTEMENT" => "r !int",
+			"id_UTILISATEUR" => "r !int"
+        ]);
         if (
-            !isset($params->startDate) ||
-            !isset($params->endDate) ||
-            !isset($params->client) ||
-            !isset($params->apartment) ||
-            !isset($params->price) ||
-            !isset($params->total_location) || // Ajout du champ total_location
-            !isset($params->total_abonnement) || // Ajout du champ total_abonnement
-            !isset($params->total_frais) // Ajout du champ total_frais
+            $valid == "validated"
         ) {
-            throw new Exception("Bad Request", 400);
+            throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
         return $params;
     }
 
-    public function prepareUpdate($params) {
-        if (
-            !isset($params->id) ||
-            !isset($params->startDate) ||
-            !isset($params->endDate) ||
-            !isset($params->client) ||
-            !isset($params->apartment) ||
-            !isset($params->price) ||
-            !isset($params->total_location) || // Ajout du champ total_location
-            !isset($params->total_abonnement) || // Ajout du champ total_abonnement
-            !isset($params->total_frais) // Ajout du champ total_frais
-        ) {
-            throw new Exception("Bad Request", 400);
-        }
-
-        return $params;
+    /**
+     * @throws Exception
+     */
+    public function toArray(object $params): array
+    {
+        $params = $this->isValidType($params);
+        return[
+			"id" => $params->id,
+			"total_location" => $params->total_location,
+			"total_abonnement" => $params->total_abonnement,
+			"total_frais" => $params->total_frais,
+			"id_APPARTEMENT" => $params->id_APPARTEMENT,
+			"id_UTILISATEUR" => $params->id_UTILISATEUR
+        ];
     }
 }
-?>
+

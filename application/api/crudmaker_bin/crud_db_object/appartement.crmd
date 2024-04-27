@@ -1,0 +1,13 @@
+id-|-!int
+ville-|-r :M,50
+code_postal-|-r !int
+prix_fixe_nuit-|-r !int
+type_gestion-|-r :M,100
+duree-|-r !int
+type_de_bien-|-r :M,100
+logement_entier-|-r !int
+nb_chambre-|-r !int
+nb_occupant_max-|-r !int
+surface-|-r !int
+horaire_contact-|-r !int
+id_UTILISATEUR-|-r !int

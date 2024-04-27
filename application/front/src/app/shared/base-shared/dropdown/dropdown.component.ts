@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {TranslatorService} from "../translator.service";
 
 @Component({
   selector: 'pm-dropdown',

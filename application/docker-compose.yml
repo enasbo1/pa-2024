@@ -1,12 +1,12 @@
 services:
 
-
   api:
     build: .
     ports:
       - 8081:80
     volumes:
-      - ./api:/var/www/html/     
+      - ./api:/var/www/html/
+
   database:
     image: postgres
     volumes:
@@ -16,7 +16,7 @@ services:
       - 5432:5432
     environment:
       - POSTGRES_PASSWORD=password
-      - POSTGRES_DB=pa_unnamed
+      - POSTGRES_DB=wanderPlace
       - POSTGRES_USER=unknown
 
 volumes:

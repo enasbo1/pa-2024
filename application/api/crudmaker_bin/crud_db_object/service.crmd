@@ -1,0 +1,9 @@
+   id-|-!int
+   type-|-r :M,150
+   description-|-r :M,255
+   tarif-|-r !int
+   date_debut-|-r !int
+   date_fin-|-r !int
+   note-|-r !int
+   fiche-|-r :M,65535
+   coef-|-r !int

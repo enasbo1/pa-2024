@@ -1,21 +1,25 @@
 <?php
+namespace ticket;
+use Exception;
+require_once 'TicketRepository.php';
 
-require_once 'ApartmentRepository.php';
+class TicketController {
 
-class ApartmentController {
-    
-    public function routes($id = null) {
+    /**
+     * @throws Exception
+     */
+    public function routes($id = null): void
+    {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
+                $request = new TicketRepository();
                 if ($id == null) {
-                    $request = new ApartmentRepository();
-                    $apartments = $request->getAll();
-                    echo json_encode($apartments);
+                    $ticket = $request->getAll();
+                    echo json_encode($ticket);
                 } else {
-                    $request = new ApartmentRepository();
                     try {
-                        $apartment = $request->findById($id);
-                        echo json_encode($apartment);
+                        $ticket = $request->findById($id);
+                        echo json_encode($ticket);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();
@@ -25,10 +29,12 @@ class ApartmentController {
             case "POST":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new ApartmentRepository();
-                
+                $request = new TicketRepository();
+
                 try {
                     $request->save($params);
+                    http_response_code(201);
+                    echo("ticket créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -37,19 +43,19 @@ class ApartmentController {
             case "PATCH":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new ApartmentRepository();
+                $request = new TicketRepository();
 
                 try {
-                    $request->update($params); 
+                    $request->update($params);
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
                 }
                 break;
             case "DELETE":
-                $request = new ApartmentRepository();
-                $apartment = $request->delete($id);
-            break;
+                $request = new TicketRepository();
+                $request->delete($id);
+                break;
         }
     }
 }

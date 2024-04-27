@@ -1,82 +1,56 @@
 <?php
+namespace reservation;
+
+use Exception;
+use shared\Repository;
+
 require_once 'ReservationService.php';
+include_once './shared/Repository.php';
 
-class ReservationRepository {
-    private $connection = null;
-
-    public function __construct() {
-        try {
-            $this->connection = pg_connect("host=database port=5432 dbname=pa_unnamed user=unknown password=password"); // Modification des informations de connexion
-            if ($this->connection === false) {
-                throw new Exception("Could not connect to database.");
-            }
-        } catch (Exception $e) {
-            throw new Exception("Database connection failed: " . $e->getMessage());
-        }
+class ReservationRepository extends Repository {
+    public function __construct()
+    {
+        parent::__construct("RESERVATION", new ReservationService());
     }
 
-    public function getAll() {
-        $query = "SELECT * FROM reservation"; // Modification du nom de la table
-        $result = pg_query($this->connection, $query);
+    /**
+     * @throws Exception
+     */
+    public function getAll(): array
+    {
+        $reservation = [];
+        $result = $this->readAll("unable to find any reservation");
 
-        if (!$result) {
-            throw new Exception(pg_last_error($this->connection));
+        foreach($result as $row) {
+            $reservation[] = $row;
         }
 
-        $reservations = array();
-
-        while ($row = pg_fetch_assoc($result)) {
-            $reservations[] = $row;
-        }
-
-        return $reservations;
-    }
-
-    public function findById($id) {
-        $query = "SELECT * FROM reservation WHERE id = $id"; // Modification du nom de la table et de la colonne
-        $result = pg_query($this->connection, $query);
-
-        if (!$result) {
-            throw new Exception("Not Found", 404);
-        }
-
-        $reservation = pg_fetch_assoc($result);
         return $reservation;
     }
 
-    public function save($params) {
-        $check = new ReservationService();
-        $params = $check->prepareSave($params);
-
-        $query = "INSERT INTO reservation (start_date, end_date, client, id_appartement, total_location) VALUES ($1, $2, $3, $4, $5)"; // Modification du nom de la table et des colonnes
-        pg_prepare($this->connection, "", $query);
-        $result = pg_execute($this->connection, "", array($params->startDate, $params->endDate, $params->client, $params->apartment, $params->total_location));
-
-        if (!$result) {
-            throw new Exception(pg_last_error($this->connection));
-        }
+    /**
+     * @throws Exception
+     */
+    public function findById(int $id): array
+    {
+        return $this->read($id, "reservation not found");
     }
 
-    public function update($reservation) {
-        $check = new ReservationService();
-        $reservation = $check->prepareUpdate($reservation);
-
-        $query = "UPDATE reservation SET start_date = $1, end_date = $2, client = $3, id_appartement = $4, total_location = $5 WHERE id = $6"; // Modification du nom de la table et des colonnes
-        pg_prepare($this->connection, "", $query);
-        $result = pg_execute($this->connection, "", array($reservation->startDate, $reservation->endDate, $reservation->client, $reservation->apartment, $reservation->total_location, $reservation->id));
-
-        if (!$result) {
-            throw new Exception(pg_last_error($this->connection));
-        }
+    /**
+     * @throws Exception
+     */
+    public function save($params): void
+    {
+        $this->create($params, "unable to create reservation");
     }
 
-    public function delete($id) {
-        $query = "DELETE FROM reservation WHERE id = $id"; // Modification du nom de la table et de la colonne
-        $result = pg_query($this->connection, $query);
+    public function update($params, string $error = "unexciting reservation could not be updated"): Exception|bool
+    {
+        return parent::update($params, $error);
+    }
 
-        if (!$result) {
-            throw new Exception(pg_last_error($this->connection));
-        }
+    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
+    {
+        parent::delete($id, $error);
     }
 }
-?>

@@ -8,6 +8,7 @@ import { GenModaleComponent } from './gen-modale/gen-modale.component';
 import { GenInfoBandComponent } from './gen-info-band/gen-info-band.component';
 import { GenRubricComponent } from './gen-rubric/gen-rubric.component';
 import { GenChatComponent } from './gen-chat/gen-chat.component';
+import { GenFormComponent } from './gen-form/gen-form.component';
 
 
 
@@ -18,12 +19,14 @@ import { GenChatComponent } from './gen-chat/gen-chat.component';
     GenModaleComponent,
     GenInfoBandComponent,
     GenRubricComponent,
-    GenChatComponent
+    GenChatComponent,
+    GenFormComponent
   ],
   imports: [
     CommonModule,
     SharedModule,
     RouterModule.forChild([
+      { path: 'generic/form', component: GenFormComponent},
       { path: 'generic/chat', component: GenChatComponent},
       { path: 'generic/rubric', component: GenRubricComponent},
       { path: 'generic/accueil', component: GenInfoBandComponent},

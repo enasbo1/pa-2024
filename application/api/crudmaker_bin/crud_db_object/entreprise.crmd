@@ -1,0 +1,4 @@
+id-|-!int
+nom-|-r :M,200
+description-|-r :M,1048576
+id_UTILISATEUR-|-r !int

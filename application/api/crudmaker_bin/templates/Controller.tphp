@@ -1,0 +1,61 @@
+<?php
+namespace {|{name}|};
+use Exception;
+require_once '{|{Name}|}Repository.php';
+
+class {|{Name}|}Controller {
+
+    /**
+     * @throws Exception
+     */
+    public function routes($id = null): void
+    {
+        switch ($_SERVER['REQUEST_METHOD']) {
+            case "GET":
+                $request = new {|{Name}|}Repository();
+                if ($id == null) {
+                    ${|{name}|} = $request->getAll();
+                    echo json_encode(${|{name}|});
+                } else {
+                    try {
+                        ${|{name}|} = $request->findById($id);
+                        echo json_encode(${|{name}|});
+                    } catch (Exception $e) {
+                        http_response_code($e->getCode());
+                        echo $e->getMessage();
+                    }
+                }
+                break;
+            case "POST":
+                $body = file_get_contents("php://input");
+                $params = json_decode($body);
+                $request = new {|{Name}|}Repository();
+
+                try {
+                    $request->save($params);
+                    http_response_code(201);
+                    echo("{|{name}|} créé avec succès");
+                } catch (Exception $e) {
+                    http_response_code($e->getCode());
+                    echo $e->getMessage();
+                }
+                break;
+            case "PATCH":
+                $body = file_get_contents("php://input");
+                $params = json_decode($body);
+                $request = new {|{Name}|}Repository();
+
+                try {
+                    $request->update($params);
+                } catch (Exception $e) {
+                    http_response_code($e->getCode());
+                    echo $e->getMessage();
+                }
+                break;
+            case "DELETE":
+                $request = new {|{Name}|}Repository();
+                $request->delete($id);
+                break;
+        }
+    }
+}

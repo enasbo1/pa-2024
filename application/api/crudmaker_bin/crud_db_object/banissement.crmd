@@ -1,0 +1,7 @@
+id-|-!int
+sujet-|-r :M,80
+description-|-r :M,1048576
+date_debut-|-r !int
+date_fin-|-r !int
+specification-|-r :M,200
+id_UTILISATEUR-|-r !int
