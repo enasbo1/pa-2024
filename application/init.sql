@@ -26,6 +26,7 @@ CREATE TABLE SERVICE(
    note INT,
    fiche TEXT,
    coef INT -- variable pour le tarif quand il est variable
+   url_json_formulaire VARCHAR(255)
 );
 
 CREATE TABLE DOCUMENT(
@@ -101,6 +102,8 @@ CREATE TABLE RESERVATION(
    total_frais INT, -- total
    id_APPARTEMENT INT NOT NULL,
    id_UTILISATEUR INT NOT NULL,
+   date_debut TIMESTAMP NOT NULL,
+   date_fin TIMESTAMP NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_APPARTEMENT) REFERENCES APPARTEMENT(id),
    FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
