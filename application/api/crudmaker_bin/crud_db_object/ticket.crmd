@@ -1,0 +1,10 @@
+id-|-!int
+sujet-|-r :M,80
+description-|-r :M,1048576
+date_creation-|-r !int
+date_modif-|-r !int
+id_traitant-|-!int
+id_RESERVATION-|-!int
+id_SERVICE-|-!int
+id_MESSAGE-|-!int
+id_UTILISATEUR-|-r !int

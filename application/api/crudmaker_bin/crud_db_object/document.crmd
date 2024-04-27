@@ -1,0 +1,5 @@
+id-|-!int
+url_ci-|-r !url :M,255
+url_habilitation-|-r !url :M,255
+tarif-|-r !int
+id_UTILISATEUR-|-r :!int
