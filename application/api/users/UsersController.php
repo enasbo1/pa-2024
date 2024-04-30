@@ -56,6 +56,8 @@ class UsersController {
                 $request = new UsersRepository();
                 $request->delete($id);
                 break;
+            default:
+                http_response_code(404);
         }
     }
 }

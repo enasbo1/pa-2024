@@ -5,7 +5,6 @@ use Exception;
 use shared\Repository;
 
 require_once 'Service_apartmentService.php';
-include_once './shared/Repository.php';
 
 class Service_apartmentRepository extends Repository {
     public function __construct()
@@ -49,7 +48,7 @@ class Service_apartmentRepository extends Repository {
         return parent::update($params, $error);
     }
 
-    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
+    public function delete(int $id, string $error = "unexciting service_apartment cold not be deleted"): void
     {
         parent::delete($id, $error);
     }

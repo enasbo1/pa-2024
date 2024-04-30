@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class ApartmentService implements ModelType {
 
@@ -45,7 +44,7 @@ class ApartmentService implements ModelType {
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
@@ -58,22 +57,21 @@ class ApartmentService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"ville" => $params->ville,
-			"code_postal" => $params->code_postal,
-			"prix_fixe_nuit" => $params->prix_fixe_nuit,
-			"type_gestion" => $params->type_gestion,
-			"duree" => $params->duree,
-			"type_de_bien" => $params->type_de_bien,
-			"logement_entier" => $params->logement_entier,
-			"nb_chambre" => $params->nb_chambre,
-			"nb_occupant_max" => $params->nb_occupant_max,
-			"surface" => $params->surface,
-			"horaire_contact" => $params->horaire_contact,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"ville" => isset($params->ville)?$params->ville:null,
+			"code_postal" => isset($params->code_postal)?$params->code_postal:null,
+			"prix_fixe_nuit" => isset($params->prix_fixe_nuit)?$params->prix_fixe_nuit:null,
+			"type_gestion" => isset($params->type_gestion)?$params->type_gestion:null,
+			"duree" => isset($params->duree)?$params->duree:null,
+			"type_de_bien" => isset($params->type_de_bien)?$params->type_de_bien:null,
+			"logement_entier" => isset($params->logement_entier)?$params->logement_entier:null,
+			"nb_chambre" => isset($params->nb_chambre)?$params->nb_chambre:null,
+			"nb_occupant_max" => isset($params->nb_occupant_max)?$params->nb_occupant_max:null,
+			"surface" => isset($params->surface)?$params->surface:null,
+			"horaire_contact" => isset($params->horaire_contact)?$params->horaire_contact:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 

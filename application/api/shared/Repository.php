@@ -95,9 +95,9 @@ class Repository
     public function delete_abs(String $table, string $attribute, string $value, string $error = ""): void
     {
         try{
-            $q = 'DELETE FROM ' . strtoupper($table) . " WHERE  $1 = $2";
+            $q = 'DELETE FROM ' . strtoupper($table) . " WHERE  \"".$attribute."\" = $1";
             pg_prepare($this->connection, "", $q);
-            pg_execute($this->connection, "", array($attribute, $value));
+            pg_execute($this->connection, "", array($value));
         } catch (Exception $e) {
             $error = ($error == "") ? "$this->modelName instance delete failed: " : $error;
             throw new Exception($error . $e->getMessage(), 400);
@@ -199,7 +199,7 @@ class Repository
                 } else {
                     $q .= " AND ";
                 }
-                $q .= $key . ' = $' . $i. "'";
+                $q .= $key . ' = $' . $i;
                 $i += 1;
             }
             pg_prepare($this->connection,"", $q);

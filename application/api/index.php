@@ -1,4 +1,5 @@
 <?php
+namespace App\Controller;
 
 use apartment\ApartmentController;
 use document\DocumentController;
@@ -10,10 +11,25 @@ use service_apartment\Service_apartmentController;
 use service_used\Service_usedController;
 use ticket\TicketController;
 use users\UsersController;
+use shared\Verif;
+//use App\Controller\identify\Tocken_api;
 
+require_once 'shared/ModelType.php';
+require_once 'shared/Repository.php';
+include_once 'shared/Verif.php';
 require_once 'apartment/ApartmentController.php';
-require_once 'Reservation/ReservationController.php';
+require_once 'reservation/ReservationController.php';
 require_once 'users/UsersController.php';
+require_once 'service/ServiceController.php';
+require_once 'service_apartment/Service_apartmentController.php';
+require_once 'service_used/Service_usedController.php';
+require_once 'ticket/TicketController.php';
+require_once 'message/MessageController.php';
+require_once 'entreprise/EntrepriseController.php';
+require_once 'document/DocumentController.php';
+
+// require_once 'identify/tocken.php';
+
 
 header("Content-Type: application/json; charset=utf8");
 header("Access-Control-Allow-Origin: *");
@@ -23,7 +39,6 @@ $uri = explode( '/', $uri );
 
 
 switch ($uri[2]) {
-
     case 'apartments':
         $apartmentController = new ApartmentController();
         $id = null;
@@ -118,6 +133,5 @@ switch ($uri[2]) {
         // Page non trouvée
         http_response_code(404);
         echo "Page not found";
-        echo $uri;
         break;
 }

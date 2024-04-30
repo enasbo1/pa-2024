@@ -1,9 +1,9 @@
 <?php
-namespace entrepise;
+namespace entreprise;
 use Exception;
-require_once 'EntrepiseRepository.php';
+require_once 'EntrepriseRepository.php';
 
-class EntrepiseController {
+class EntrepriseController {
 
     /**
      * @throws Exception
@@ -12,14 +12,14 @@ class EntrepiseController {
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
-                $request = new EntrepiseRepository();
+                $request = new EntrepriseRepository();
                 if ($id == null) {
-                    $entrepise = $request->getAll();
-                    echo json_encode($entrepise);
+                    $entreprise = $request->getAll();
+                    echo json_encode($entreprise);
                 } else {
                     try {
-                        $entrepise = $request->findById($id);
-                        echo json_encode($entrepise);
+                        $entreprise = $request->findById($id);
+                        echo json_encode($entreprise);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();
@@ -29,12 +29,12 @@ class EntrepiseController {
             case "POST":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new EntrepiseRepository();
+                $request = new EntrepriseRepository();
 
                 try {
                     $request->save($params);
                     http_response_code(201);
-                    echo("entrepise créé avec succès");
+                    echo("entreprise créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();
@@ -43,7 +43,7 @@ class EntrepiseController {
             case "PATCH":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new EntrepiseRepository();
+                $request = new EntrepriseRepository();
 
                 try {
                     $request->update($params);
@@ -53,9 +53,11 @@ class EntrepiseController {
                 }
                 break;
             case "DELETE":
-                $request = new EntrepiseRepository();
+                $request = new EntrepriseRepository();
                 $request->delete($id);
                 break;
+            default:
+                http_response_code(404);
         }
     }
 }
