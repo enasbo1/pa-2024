@@ -5,7 +5,6 @@ use Exception;
 use shared\Repository;
 
 require_once 'TicketService.php';
-include_once './shared/Repository.php';
 
 class TicketRepository extends Repository {
     public function __construct()
@@ -49,7 +48,7 @@ class TicketRepository extends Repository {
         return parent::update($params, $error);
     }
 
-    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
+    public function delete(int $id, string $error = "unexciting ticket cold not be deleted"): void
     {
         parent::delete($id, $error);
     }

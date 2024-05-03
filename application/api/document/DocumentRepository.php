@@ -5,7 +5,6 @@ use Exception;
 use shared\Repository;
 
 require_once 'DocumentService.php';
-include_once './shared/Repository.php';
 
 class DocumentRepository extends Repository {
     public function __construct()
@@ -49,7 +48,7 @@ class DocumentRepository extends Repository {
         return parent::update($params, $error);
     }
 
-    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
+    public function delete(int $id, string $error = "unexciting document cold not be deleted"): void
     {
         parent::delete($id, $error);
     }

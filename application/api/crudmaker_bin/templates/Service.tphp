@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class {|{Name}|}Service implements ModelType {
 
@@ -33,7 +32,7 @@ class {|{Name}|}Service implements ModelType {
 {|{list_colomn_verif}|}
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
@@ -46,10 +45,9 @@ class {|{Name}|}Service implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
+        return array_filter([
 {|{list_colomn_array}|}
-        ];
+        ]);
     }
 }
 

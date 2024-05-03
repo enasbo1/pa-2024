@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class UsersService implements ModelType {
 
@@ -47,7 +46,7 @@ class UsersService implements ModelType {
 			"token" => ":M,255"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
@@ -60,24 +59,23 @@ class UsersService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"prenom" => $params->prenom,
-			"nom" => $params->nom,
-			"mail" => $params->mail,
-			"mdp" => $params->mdp,
-			"adresse" => $params->adresse,
-			"pays" => $params->pays,
-			"ville" => $params->ville,
-			"code_postal" => $params->code_postal,
-			"numero" => $params->numero,
-			"date_inscription" => $params->date_inscription,
-			"date_modification" => $params->date_modification,
-			"role" => $params->role,
-			"rang" => $params->rang,
-			"token" => $params->token
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"prenom" => isset($params->prenom)?$params->prenom:null,
+			"nom" => isset($params->nom)?$params->nom:null,
+			"mail" => isset($params->mail)?$params->mail:null,
+			"mdp" => isset($params->mdp)?$params->mdp:null,
+			"adresse" => isset($params->adresse)?$params->adresse:null,
+			"pays" => isset($params->pays)?$params->pays:null,
+			"ville" => isset($params->ville)?$params->ville:null,
+			"code_postal" => isset($params->code_postal)?$params->code_postal:null,
+			"numero" => isset($params->numero)?$params->numero:null,
+			"date_inscription" => isset($params->date_inscription)?$params->date_inscription:null,
+			"date_modification" => isset($params->date_modification)?$params->date_modification:null,
+			"role" => isset($params->role)?$params->role:null,
+			"rang" => isset($params->rang)?$params->rang:null,
+			"token" => isset($params->token)?$params->token:null
+        ]);
     }
 }
 

@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class MessageService implements ModelType {
 
@@ -39,7 +38,7 @@ class MessageService implements ModelType {
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
@@ -52,16 +51,15 @@ class MessageService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"date_envoie" => $params->date_envoie,
-			"texte" => $params->texte,
-			"id_SERVICE_UTILISEE" => $params->id_SERVICE_UTILISEE,
-			"id_RESERVATION" => $params->id_RESERVATION,
-			"id_TICKET" => $params->id_TICKET,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"date_envoie" => isset($params->date_envoie)?$params->date_envoie:null,
+			"texte" => isset($params->texte)?$params->texte:null,
+			"id_SERVICE_UTILISEE" => isset($params->id_SERVICE_UTILISEE)?$params->id_SERVICE_UTILISEE:null,
+			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
+			"id_TICKET" => isset($params->id_TICKET)?$params->id_TICKET:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 

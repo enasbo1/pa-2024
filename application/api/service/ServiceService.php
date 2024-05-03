@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class ServiceService implements ModelType {
 
@@ -41,7 +40,7 @@ class ServiceService implements ModelType {
 			"   coef" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
@@ -54,18 +53,17 @@ class ServiceService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"   id" => $params->   id,
-			"   type" => $params->   type,
-			"   description" => $params->   description,
-			"   tarif" => $params->   tarif,
-			"   date_debut" => $params->   date_debut,
-			"   date_fin" => $params->   date_fin,
-			"   note" => $params->   note,
-			"   fiche" => $params->   fiche,
-			"   coef" => $params->   coef
-        ];
+        return array_filter([
+			"   id" => isset($params->   id)?$params->   id:null,
+			"   type" => isset($params->   type)?$params->   type:null,
+			"   description" => isset($params->   description)?$params->   description:null,
+			"   tarif" => isset($params->   tarif)?$params->   tarif:null,
+			"   date_debut" => isset($params->   date_debut)?$params->   date_debut:null,
+			"   date_fin" => isset($params->   date_fin)?$params->   date_fin:null,
+			"   note" => isset($params->   note)?$params->   note:null,
+			"   fiche" => isset($params->   fiche)?$params->   fiche:null,
+			"   coef" => isset($params->   coef)?$params->   coef:null
+        ]);
     }
 }
 

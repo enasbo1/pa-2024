@@ -1,13 +1,12 @@
 <?php
-namespace entrepise;
+namespace entreprise;
 
 use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
-class EntrepiseService implements ModelType {
+class EntrepriseService implements ModelType {
 
     /**
      * @throws Exception
@@ -36,7 +35,7 @@ class EntrepiseService implements ModelType {
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
@@ -49,13 +48,12 @@ class EntrepiseService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"nom" => $params->nom,
-			"description" => $params->description,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"nom" => isset($params->nom)?$params->nom:null,
+			"description" => isset($params->description)?$params->description:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 
