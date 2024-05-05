@@ -42,7 +42,7 @@ class Repository
      */
     public function create(object $params, string $error = ""): void
     {
-        $toquery = $this->modelType->toArray($params);
+        $toquery = $this->modelType->isValidType($params);
         $this->post($this->modelName, $toquery);
     }
 

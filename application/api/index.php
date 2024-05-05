@@ -3,7 +3,7 @@ namespace App\Controller;
 
 use apartment\ApartmentController;
 use document\DocumentController;
-use entrepise\EntrepiseController;
+use entreprise\EntrepriseController;
 use message\MessageController;
 use reservation\ReservationController;
 use service\ServiceController;
@@ -12,7 +12,6 @@ use service_used\Service_usedController;
 use ticket\TicketController;
 use users\UsersController;
 use shared\Verif;
-//use App\Controller\identify\Tocken_api;
 
 require_once 'shared/ModelType.php';
 require_once 'shared/Repository.php';
@@ -28,7 +27,7 @@ require_once 'message/MessageController.php';
 require_once 'entreprise/EntrepriseController.php';
 require_once 'document/DocumentController.php';
 
-// require_once 'identify/tocken.php';
+require_once 'identify/tocken.php';
 
 
 header("Content-Type: application/json; charset=utf8");
@@ -76,7 +75,7 @@ switch ($uri[2]) {
         break;
 
     case 'entreprise':
-        $controller = new EntrepiseController();
+        $controller = new EntrepriseController();
         $id = null;
         if (isset($uri[3])) {
             $id = $uri[3];

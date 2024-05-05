@@ -26,9 +26,10 @@ class DocumentService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"url_ci" => "r !url :M,255",
 			"url_habilitation" => "r !url :M,255",
@@ -41,7 +42,7 @@ class DocumentService implements ModelType {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**

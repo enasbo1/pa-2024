@@ -26,9 +26,10 @@ class Service_apartmentService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"id_SERVICE" => "r !int",
 			"id_APPARTEMENT" => "r !int"
@@ -39,7 +40,7 @@ class Service_apartmentService implements ModelType {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
