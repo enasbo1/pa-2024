@@ -14,7 +14,7 @@ class ConnectionController {
     public function routes($id = null): void
     {
         switch ($_SERVER['REQUEST_METHOD']) {
-            case "GET":
+            case "POST":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
                 $service = new ConnectionService();
@@ -22,7 +22,7 @@ class ConnectionController {
                 try {
                     $token = $service->connect($params);
                     http_response_code(200);
-                    echo($token);
+                    echo(json_encode(['token'=>$token]));
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();

@@ -21,6 +21,10 @@ export class HeaderComponent implements OnInit {
       name : "Generic",
       link : "/generic"
     },
+    {
+      name : "Connect",
+      link : "/connection"
+    },
   ];
 
   logoUrl:string = "assets/images/hammer.png";

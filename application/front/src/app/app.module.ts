@@ -8,6 +8,7 @@ import { ProductModule } from './products/product.module';
 import {HeadFootModule} from "./head-foot/headFoot.module";
 import {GenericModule} from "./generic/generic.module";
 import {SharedModule} from "./shared/shared.module";
+import {ViewModule} from "./view/view.module";
 
 @NgModule({
   declarations: [ // witch component you need from this module
@@ -19,6 +20,7 @@ import {SharedModule} from "./shared/shared.module";
     HttpClientModule,
     GenericModule,
     SharedModule,
+    ViewModule,
     HeadFootModule,
     RouterModule.forRoot([
       { path: 'welcome', component: WelcomeComponent},

@@ -31,11 +31,20 @@ export class FormComponent implements OnInit {
   }
 
   public next_step(){
+    if (this.get_current()?.validator){
+      // @ts-ignore
+      this.get_current()?.validator(()=>this._next_step(),this.step);
+    }else{
+      this._next_step()
+    }
+  }
+
+  private _next_step(){
     ++this.step
   }
 
   public onSumbit(){
-    ++this.step
+    this.next_step();
     if (this.items){
       const value:FormFieldObject[] = [];
       this.items.forEach(

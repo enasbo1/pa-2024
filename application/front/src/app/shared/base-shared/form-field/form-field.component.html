@@ -18,6 +18,22 @@
     >
   </ng-container>
 
+  <ng-container *ngSwitchCase="'email'">
+    <input type="email" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >
+  </ng-container>
+
+  <ng-container *ngSwitchCase="'password'">
+    <input type="password" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >
+  </ng-container>
+
   <ng-container *ngSwitchCase="'place'">
     <p> unimplemented field : place </p>
   </ng-container>

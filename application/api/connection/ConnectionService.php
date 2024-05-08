@@ -28,7 +28,7 @@ class ConnectionService implements ModelType {
                 $value["role"]
             );
         }
-        return "";
+        throw new Exception("bad identifiants", 401);
     }
 
     public function get_connection(object $params, bool $required = false) : array{
