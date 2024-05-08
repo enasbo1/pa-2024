@@ -11,14 +11,14 @@ class {|{Name}|}Service implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }

@@ -30,6 +30,14 @@ class UsersRepository extends Repository {
     /**
      * @throws Exception
      */
+    public function connect(string $email, string $password): array
+    {
+        return $this->get($this->modelName, ["id", "prenom", "nom", "role"], ["mail" => $email, "mdp"=>$password], "users not found");
+    }
+
+    /**
+     * @throws Exception
+     */
     public function findById(int $id): array
     {
         return $this->read($id, "users not found");

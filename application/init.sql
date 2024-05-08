@@ -2,7 +2,7 @@ CREATE TABLE UTILISATEUR(
    id SERIAL PRIMARY KEY,
    prenom VARCHAR(30), 
    nom VARCHAR(100),
-   mail VARCHAR(100),
+   mail VARCHAR(100) unique,
    mdp VARCHAR(255),
    adresse VARCHAR(255),
    pays VARCHAR(50),
@@ -25,7 +25,7 @@ CREATE TABLE SERVICE(
    date_fin TIMESTAMP,
    note INT,
    fiche TEXT,
-   coef INT -- variable pour le tarif quand il est variable
+   coef INT, -- variable pour le tarif quand il est variable
    url_json_formulaire VARCHAR(255)
 );
 

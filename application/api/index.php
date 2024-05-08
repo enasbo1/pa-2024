@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use apartment\ApartmentController;
+use connection\ConnectionController;
 use document\DocumentController;
 use entreprise\EntrepriseController;
 use message\MessageController;
@@ -12,6 +13,7 @@ use service_used\Service_usedController;
 use ticket\TicketController;
 use users\UsersController;
 use shared\Verif;
+use token\Token;
 
 require_once 'shared/ModelType.php';
 require_once 'shared/Repository.php';
@@ -26,8 +28,9 @@ require_once 'ticket/TicketController.php';
 require_once 'message/MessageController.php';
 require_once 'entreprise/EntrepriseController.php';
 require_once 'document/DocumentController.php';
+require_once 'connection/ConnectionController.php';
 
-//require_once 'identify/tocken.php';
+require_once 'token/token.php';
 
 
 header("Content-Type: application/json; charset=utf8");
@@ -38,6 +41,10 @@ $uri = explode( '/', $uri );
 
 
 switch ($uri[2]) {
+    case 'connection':
+        $controller = new ConnectionController();
+        $controller->routes();
+        break;
     case 'apartments':
         $apartmentController = new ApartmentController();
         $id = null;
@@ -55,7 +62,6 @@ switch ($uri[2]) {
         }
         $reservationController->routes($id);
         break;
-
     case 'users':
         $userController = new UsersController();
         $id = null;

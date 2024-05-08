@@ -75,17 +75,19 @@ class Verif{
         ];
         $type = explode(' ', $type);
         foreach ($type as $co) {
-            if ($co[0] == '!') {
-                if (!filter_var($value, $validate[$co])) {
-                    $msg = '"' . $name . '"' . $message[$co];
-                    return(["message"=>$msg, "id"=>$name]);
+            if (strlen($co)<0){
+                if ($co[0] == '!') {
+                    if (!filter_var($value, $validate[$co])) {
+                        $msg = '"' . $name . '"' . $message[$co];
+                        return(["message"=>$msg, "id"=>$name]);
+                    }
                 }
-            }
-            if ($co[0] == ':') {
-                $i = explode(',', $co);
-                if (!Verif::compare($value, $i[0], $i[1])) {
-                    $msg = '"' . $name . '"' . Verif::message($i[0], $i[1]);
-                    return(["message"=>$msg, "id"=>$name]);
+                if ($co[0] == ':') {
+                    $i = explode(',', $co);
+                    if (!Verif::compare($value, $i[0], $i[1])) {
+                        $msg = '"' . $name . '"' . Verif::message($i[0], $i[1]);
+                        return(["message"=>$msg, "id"=>$name]);
+                    }
                 }
             }
         }

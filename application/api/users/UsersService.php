@@ -7,20 +7,10 @@ use shared\Verif;
 
 
 class UsersService implements ModelType {
-
-    /**
-     * @throws Exception
-     */
-    public function prepareSave(object $params): object {
-        return $this->isValidType($params);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function prepareUpdate(object $params):object {
-        return $this->isValidType($params);
-
+    private const SECRET = "d5aatda&-dsgveskfe354/*-+44&";
+    
+    public static function hash_password(string $password){
+        return hash_hmac('sha256',$password, UsersService::SECRET);
     }
 
     /**
@@ -65,7 +55,7 @@ class UsersService implements ModelType {
 			"prenom" => isset($params->prenom)?$params->prenom:null,
 			"nom" => isset($params->nom)?$params->nom:null,
 			"mail" => isset($params->mail)?$params->mail:null,
-			"mdp" => isset($params->mdp)?$params->mdp:null,
+			"mdp" => isset($params->mdp)?$this->hash_password($params->mdp):null,
 			"adresse" => isset($params->adresse)?$params->adresse:null,
 			"pays" => isset($params->pays)?$params->pays:null,
 			"ville" => isset($params->ville)?$params->ville:null,
