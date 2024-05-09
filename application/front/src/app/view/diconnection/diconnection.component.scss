@@ -1,7 +1,7 @@
 @use "../../shared/palette.scss" as styles;
 @import "../../app.component.scss";
 
-.error{
-  color: styles.$color-error;
+.title{
+  color: styles.$color-colored-gris;
   text-align : center !important;
 }

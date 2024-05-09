@@ -3,6 +3,7 @@ import {FormFieldObject} from "../../shared/base-shared/form-field/formFieldObje
 import { FormStepObject } from "../../shared/base-shared/form-step/formStepObject";
 import {ConnectionService} from "../../connection/connection.service";
 import {TranslatorService} from "../../shared/base-shared/translator.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'pm-connection',
@@ -11,6 +12,8 @@ import {TranslatorService} from "../../shared/base-shared/translator.service";
 })
 export class ConnectionComponent implements OnInit {
   error?:string;
+  private nextstep:()=>void = ()=>0;
+
   items:FormStepObject[]=[
     {
       title:"connection",
@@ -29,23 +32,37 @@ export class ConnectionComponent implements OnInit {
   values?:FormFieldObject[]
   constructor(
     private connectionService:ConnectionService,
-    public translator:TranslatorService
+    public translator:TranslatorService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
   }
 
-  fail():void{
-    this.error = "invalid values";
+  fail(message:string|undefined):void{
+    this.error = message?message:"email or password invalid";
+  }
+
+  connection_error():void{
+    this.error = "connection api failed"
   }
 
   verify(nextstep:()=>void, step:number):void{
+    this.error = "...";
+    this.nextstep = nextstep;
     this.connectionService.connect(
       this.items[step].content[0].content,
-      (yes:boolean)=>yes?nextstep():this.fail());
+      (yes:boolean, error:string|undefined)=>yes?this.validated():this.fail(error),
+      ()=>this.connection_error())
   }
-
   submit(values:FormFieldObject[]) : void {
     this.values = values;
+    this.router.navigate([""],{queryParams:{message:"utilisateur connecté"}});
+
+  }
+
+  private validated(){
+    this.nextstep();
+    this.error = undefined
   }
 }

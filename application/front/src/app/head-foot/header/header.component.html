@@ -5,6 +5,7 @@
   <div class = "col-6">
     <ul class="nav nav-pills">
       <li *ngFor="let navli of navLinks"><a class = "nav-link" [routerLink]=navli.link>{{navli.name}}</a></li>
+      <li><a class = "nav-link" [routerLink]="GlobalService.token?'/disconnection':'/connection'">{{translator.echo(GlobalService.token?'Logout':'Login')}}</a></li>
     </ul>
   </div>
   <div class = "col-3">

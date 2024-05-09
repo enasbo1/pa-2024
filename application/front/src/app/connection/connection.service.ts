@@ -5,14 +5,19 @@ import {catchError, Observable} from "rxjs";
 import {GlobalService} from "../shared/global.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
+type WPTokenRequestType = {token?:string, message?:string, id?:string}
+
 @Injectable({
   providedIn: 'root'
 })
 export class ConnectionService extends RequestService{
-  public success?:(success:boolean)=>void;
+  public success?:(success:boolean, error?:string)=>void;
+  public error?:()=>void;
 
-  connect(connectionForm:FormFieldObject[], success:(success:boolean)=>void){
+
+  connect(connectionForm:FormFieldObject[], success:(success:boolean, message?:string)=>void, error:()=>void){
     this.success = success;
+    this.error = error
     let connectionvalues = {
       password:connectionForm.find((x)=>x.name=="password")?._value,
       mail:connectionForm.find((x)=>x.name=="mail")?._value
@@ -20,13 +25,12 @@ export class ConnectionService extends RequestService{
     this.post(connectionvalues, "connection")
       .pipe(catchError((errorMessage:HttpErrorResponse)=>this.handelError(errorMessage)))
       .subscribe(
-      (res:object)=>
-        // @ts-ignore
+      (res:WPTokenRequestType)=>
         this._success(res.token)
     )
   }
 
-  private _success(token:string):void{
+  private _success(token:string|undefined):void{
     GlobalService.token = token;
     if (this.success){
       this.success(true);
@@ -34,14 +38,20 @@ export class ConnectionService extends RequestService{
   }
 
   override handelError(errorMessage: HttpErrorResponse): Observable<never> {
-    if (this.success){
-      switch (errorMessage.status){
-        case 400:
-        case 401:
-          this.success(false);
-          break;
-      }
+    switch (errorMessage.status){
+      case 400:
+      case 401:
+        if (this.success){
+          this.success(false, errorMessage.error.message)
+        }
+        break;
+      default:
+        if (this.error){
+          this.error()
+        }
+        break;
     }
     return super.handelError(errorMessage);
   }
+
 }

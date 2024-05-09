@@ -62,7 +62,7 @@ class ConnectionService implements ModelType {
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid), 400);
         }
 
         return $arr_params;

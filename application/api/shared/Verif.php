@@ -75,7 +75,7 @@ class Verif{
         ];
         $type = explode(' ', $type);
         foreach ($type as $co) {
-            if (strlen($co)<0){
+            if (strlen($co)>0){
                 if ($co[0] == '!') {
                     if (!filter_var($value, $validate[$co])) {
                         $msg = '"' . $name . '"' . $message[$co];
@@ -97,7 +97,7 @@ class Verif{
     static function verification(array $values, array $form)
     {
         foreach ($form as $key => $type) {
-            if (empty($values[$key]) || !isset($values[$key])) {
+            if (!isset($values[$key]) || empty($values[$key])) {
                 if ($type[0] == "r") {
                     $msg = 'le champ "' . $key . '" doit être remplit';
                     return(["message"=>$msg, "id"=>$key]);
@@ -106,7 +106,11 @@ class Verif{
                     $values[$key] = "";
                 }
             }
-            return (Verif::dechiffre($values[$key], $type, $key));
+            $passed = Verif::dechiffre($values[$key], $type, $key);
+            if ($passed !="validated"){
+                return $passed ;
+            }
         }
+        return "validated";
     }
 }
