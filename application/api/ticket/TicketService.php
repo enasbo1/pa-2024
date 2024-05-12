@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class TicketService implements ModelType {
 
@@ -27,9 +26,10 @@ class TicketService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"sujet" => "r :M,80",
 			"description" => "r :M,1048576",
@@ -42,12 +42,12 @@ class TicketService implements ModelType {
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -55,19 +55,18 @@ class TicketService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"sujet" => $params->sujet,
-			"description" => $params->description,
-			"date_creation" => $params->date_creation,
-			"date_modif" => $params->date_modif,
-			"id_traitant" => $params->id_traitant,
-			"id_RESERVATION" => $params->id_RESERVATION,
-			"id_SERVICE" => $params->id_SERVICE,
-			"id_MESSAGE" => $params->id_MESSAGE,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"sujet" => isset($params->sujet)?$params->sujet:null,
+			"description" => isset($params->description)?$params->description:null,
+			"date_creation" => isset($params->date_creation)?$params->date_creation:null,
+			"date_modif" => isset($params->date_modif)?$params->date_modif:null,
+			"id_traitant" => isset($params->id_traitant)?$params->id_traitant:null,
+			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
+			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
+			"id_MESSAGE" => isset($params->id_MESSAGE)?$params->id_MESSAGE:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 

@@ -5,31 +5,21 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class UsersService implements ModelType {
-
-    /**
-     * @throws Exception
-     */
-    public function prepareSave(object $params): object {
-        return $this->isValidType($params);
+    private const SECRET = "d5aatda&-dsgveskfe354/*-+44&";
+    
+    public static function hash_password(string $password){
+        return hash_hmac('sha256',$password, UsersService::SECRET);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
-        return $this->isValidType($params);
-
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"prenom" => "r :M,30",
 			"nom" => "r :M,100",
@@ -47,12 +37,12 @@ class UsersService implements ModelType {
 			"token" => ":M,255"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -60,24 +50,23 @@ class UsersService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"prenom" => $params->prenom,
-			"nom" => $params->nom,
-			"mail" => $params->mail,
-			"mdp" => $params->mdp,
-			"adresse" => $params->adresse,
-			"pays" => $params->pays,
-			"ville" => $params->ville,
-			"code_postal" => $params->code_postal,
-			"numero" => $params->numero,
-			"date_inscription" => $params->date_inscription,
-			"date_modification" => $params->date_modification,
-			"role" => $params->role,
-			"rang" => $params->rang,
-			"token" => $params->token
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"prenom" => isset($params->prenom)?$params->prenom:null,
+			"nom" => isset($params->nom)?$params->nom:null,
+			"mail" => isset($params->mail)?$params->mail:null,
+			"mdp" => isset($params->mdp)?$this->hash_password($params->mdp):null,
+			"adresse" => isset($params->adresse)?$params->adresse:null,
+			"pays" => isset($params->pays)?$params->pays:null,
+			"ville" => isset($params->ville)?$params->ville:null,
+			"code_postal" => isset($params->code_postal)?$params->code_postal:null,
+			"numero" => isset($params->numero)?$params->numero:null,
+			"date_inscription" => isset($params->date_inscription)?$params->date_inscription:null,
+			"date_modification" => isset($params->date_modification)?$params->date_modification:null,
+			"role" => isset($params->role)?$params->role:null,
+			"rang" => isset($params->rang)?$params->rang:null,
+			"token" => isset($params->token)?$params->token:null
+        ]);
     }
 }
 

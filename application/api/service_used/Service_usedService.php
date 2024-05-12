@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class Service_usedService implements ModelType {
 
@@ -27,9 +26,10 @@ class Service_usedService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"date_modif" => "!int",
 			"date_debut" => "!int",
@@ -39,12 +39,12 @@ class Service_usedService implements ModelType {
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -52,16 +52,15 @@ class Service_usedService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"date_modif" => $params->date_modif,
-			"date_debut" => $params->date_debut,
-			"lieu" => $params->lieu,
-			"id_RESERVATION" => $params->id_RESERVATION,
-			"id_SERVICE" => $params->id_SERVICE,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"date_modif" => isset($params->date_modif)?$params->date_modif:null,
+			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
+			"lieu" => isset($params->lieu)?$params->lieu:null,
+			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
+			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 

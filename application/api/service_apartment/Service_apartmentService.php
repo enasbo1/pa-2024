@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class Service_apartmentService implements ModelType {
 
@@ -27,20 +26,21 @@ class Service_apartmentService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"id_SERVICE" => "r !int",
 			"id_APPARTEMENT" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -48,12 +48,11 @@ class Service_apartmentService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"id_SERVICE" => $params->id_SERVICE,
-			"id_APPARTEMENT" => $params->id_APPARTEMENT
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
+			"id_APPARTEMENT" => isset($params->id_APPARTEMENT)?$params->id_APPARTEMENT:null
+        ]);
     }
 }
 

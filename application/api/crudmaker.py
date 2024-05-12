@@ -3,7 +3,8 @@ import os
 def to_array_string(col:list)->str:
     ret = "";
     for i,j in enumerate(col):
-        ret += '\t\t\t"'+j[0]+'" => $params->'+j[0]
+        t = '$params->'+j[0];
+        ret += '\t\t\t"'+j[0]+f'" => isset({t})?{t}:null'
         if (i+1)<len(col):
                 ret+= ',\n'
     return ret;
@@ -20,12 +21,12 @@ def to_verif_string(col:list)->str:
 def main():
     name:str  = input("model_name:\n >> ")
     table:str = input("table_name:\n >> ")
-    data_files = os.listdir("crudmaker_bin/crud_db_object");
+    data_files = os.listdir("crudmaker_bin/crmd");
     valide = False;
     if table.lower()+".crmd" in data_files:
         valide = (input(f'table-model file "{table}.crmd" detected, do you want to use it ? (y/n, default "y"): ') or "y")=="y"
     if valide:
-        with open(f'crudmaker_bin/crud_db_object/{table}.crmd', 'r', encoding='UTF-8') as text:
+        with open(f'crudmaker_bin/crmd/{table}.crmd', 'r', encoding='UTF-8') as text:
             _file = text.read()
             col = [i.split("-|-") for i in _file.split("\n")]
     else:

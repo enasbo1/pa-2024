@@ -13,7 +13,6 @@ export class GenListService {
   constructor(private http:HttpClient) {};
   getProduct(): Observable<ListObject[]>{
     return this.http.get<ListObject[]>(this.productUrl).pipe(
-      tap(data=>console.log('All: ', JSON.stringify(data))),
       catchError(this.handelError)
     );
   }

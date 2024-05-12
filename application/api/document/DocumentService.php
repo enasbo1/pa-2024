@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class DocumentService implements ModelType {
 
@@ -27,9 +26,10 @@ class DocumentService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"url_ci" => "r !url :M,255",
 			"url_habilitation" => "r !url :M,255",
@@ -37,12 +37,12 @@ class DocumentService implements ModelType {
 			"id_UTILISATEUR" => "r :!int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -50,14 +50,13 @@ class DocumentService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"url_ci" => $params->url_ci,
-			"url_habilitation" => $params->url_habilitation,
-			"tarif" => $params->tarif,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"url_ci" => isset($params->url_ci)?$params->url_ci:null,
+			"url_habilitation" => isset($params->url_habilitation)?$params->url_habilitation:null,
+			"tarif" => isset($params->tarif)?$params->tarif:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 

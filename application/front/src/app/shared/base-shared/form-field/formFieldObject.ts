@@ -2,7 +2,7 @@ export interface FormFieldObject{
   name : string;
   title?:string;
   sclass? : string;
-  type : "dropdown"|"text"|"place"|"date"|"period"|"url"|"file"|"regex";
+  type : "dropdown"|"text"|"email"|"password"|"place"|"date"|"period"|"url"|"file"|"regex";
   placeholder? : string;
   time?:boolean;
   regex? : string;

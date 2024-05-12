@@ -5,7 +5,6 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class ReservationService implements ModelType {
 
@@ -27,9 +26,10 @@ class ReservationService implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"total_location" => "r !int",
 			"total_abonnement" => "!int",
@@ -38,12 +38,12 @@ class ReservationService implements ModelType {
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
             throw new Exception("Bad Request : ". $valid["message"], 400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -51,15 +51,14 @@ class ReservationService implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
-			"id" => $params->id,
-			"total_location" => $params->total_location,
-			"total_abonnement" => $params->total_abonnement,
-			"total_frais" => $params->total_frais,
-			"id_APPARTEMENT" => $params->id_APPARTEMENT,
-			"id_UTILISATEUR" => $params->id_UTILISATEUR
-        ];
+        return array_filter([
+			"id" => isset($params->id)?$params->id:null,
+			"total_location" => isset($params->total_location)?$params->total_location:null,
+			"total_abonnement" => isset($params->total_abonnement)?$params->total_abonnement:null,
+			"total_frais" => isset($params->total_frais)?$params->total_frais:null,
+			"id_APPARTEMENT" => isset($params->id_APPARTEMENT)?$params->id_APPARTEMENT:null,
+			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+        ]);
     }
 }
 

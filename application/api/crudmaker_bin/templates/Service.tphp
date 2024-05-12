@@ -5,21 +5,20 @@ use Exception;
 use shared\ModelType;
 use shared\Verif;
 
-include_once "./shared/ModelType.php";
 
 class {|{Name}|}Service implements ModelType {
 
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -27,18 +26,19 @@ class {|{Name}|}Service implements ModelType {
     /**
      * @throws Exception
      */
-    public function isValidType(object $params): object
+    public function isValidType(object $params): array
     {
-        $valid = Verif::verification($this->toArray($params),[
+        $arr_params = $this->toArray($params);
+        $valid = Verif::verification($arr_params,[
 {|{list_colomn_verif}|}
         ]);
         if (
-            $valid == "validated"
+            $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
-        return $params;
+        return $arr_params;
     }
 
     /**
@@ -46,10 +46,9 @@ class {|{Name}|}Service implements ModelType {
      */
     public function toArray(object $params): array
     {
-        $params = $this->isValidType($params);
-        return[
+        return array_filter([
 {|{list_colomn_array}|}
-        ];
+        ]);
     }
 }
 

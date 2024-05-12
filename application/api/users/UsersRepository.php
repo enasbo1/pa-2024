@@ -5,7 +5,6 @@ use Exception;
 use shared\Repository;
 
 require_once 'UsersService.php';
-include_once './shared/Repository.php';
 
 class UsersRepository extends Repository {
     public function __construct()
@@ -31,6 +30,14 @@ class UsersRepository extends Repository {
     /**
      * @throws Exception
      */
+    public function connect(string $email, string $password): array
+    {
+        return $this->get($this->modelName, ["id", "prenom", "nom", "role"], ["mail" => $email, "mdp"=>$password], "users not found");
+    }
+
+    /**
+     * @throws Exception
+     */
     public function findById(int $id): array
     {
         return $this->read($id, "users not found");
@@ -49,7 +56,7 @@ class UsersRepository extends Repository {
         return parent::update($params, $error);
     }
 
-    public function delete(int $id, string $error = "unexciting {{name}} cold not be deleted"): void
+    public function delete(int $id, string $error = "unexciting users cold not be deleted"): void
     {
         parent::delete($id, $error);
     }

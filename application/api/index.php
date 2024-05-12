@@ -1,8 +1,10 @@
 <?php
+namespace App\Controller;
 
 use apartment\ApartmentController;
+use connection\ConnectionController;
 use document\DocumentController;
-use entrepise\EntrepiseController;
+use entreprise\EntrepriseController;
 use message\MessageController;
 use reservation\ReservationController;
 use service\ServiceController;
@@ -10,10 +12,26 @@ use service_apartment\Service_apartmentController;
 use service_used\Service_usedController;
 use ticket\TicketController;
 use users\UsersController;
+use shared\Verif;
+use token\Token;
 
+require_once 'shared/ModelType.php';
+require_once 'shared/Repository.php';
+include_once 'shared/Verif.php';
 require_once 'apartment/ApartmentController.php';
-require_once 'Reservation/ReservationController.php';
+require_once 'reservation/ReservationController.php';
 require_once 'users/UsersController.php';
+require_once 'service/ServiceController.php';
+require_once 'service_apartment/Service_apartmentController.php';
+require_once 'service_used/Service_usedController.php';
+require_once 'ticket/TicketController.php';
+require_once 'message/MessageController.php';
+require_once 'entreprise/EntrepriseController.php';
+require_once 'document/DocumentController.php';
+require_once 'connection/ConnectionController.php';
+
+require_once 'token/token.php';
+
 
 header("Content-Type: application/json; charset=utf8");
 header("Access-Control-Allow-Origin: *");
@@ -21,9 +39,11 @@ header("Access-Control-Allow-Origin: *");
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
 
-
 switch ($uri[2]) {
-
+    case 'connection':
+        $controller = new ConnectionController();
+        $controller->routes();
+        break;
     case 'apartments':
         $apartmentController = new ApartmentController();
         $id = null;
@@ -41,7 +61,6 @@ switch ($uri[2]) {
         }
         $reservationController->routes($id);
         break;
-
     case 'users':
         $userController = new UsersController();
         $id = null;
@@ -61,7 +80,7 @@ switch ($uri[2]) {
         break;
 
     case 'entreprise':
-        $controller = new EntrepiseController();
+        $controller = new EntrepriseController();
         $id = null;
         if (isset($uri[3])) {
             $id = $uri[3];
@@ -118,6 +137,5 @@ switch ($uri[2]) {
         // Page non trouvée
         http_response_code(404);
         echo "Page not found";
-        echo $uri;
         break;
 }

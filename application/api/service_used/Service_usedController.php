@@ -56,6 +56,8 @@ class Service_usedController {
                 $request = new Service_usedRepository();
                 $request->delete($id);
                 break;
+            default:
+                http_response_code(404);
         }
     }
 }

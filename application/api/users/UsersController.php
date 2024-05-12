@@ -22,7 +22,7 @@ class UsersController {
                         echo json_encode($users);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
-                        echo $e->getMessage();
+                        echo json_encode(["error" => $e->getMessage()]);
                     }
                 }
                 break;
@@ -37,7 +37,7 @@ class UsersController {
                     echo("users créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
-                    echo $e->getMessage();
+                    echo json_encode(["error" => $e->getMessage()]);
                 }
                 break;
             case "PATCH":
@@ -49,13 +49,20 @@ class UsersController {
                     $request->update($params);
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
-                    echo $e->getMessage();
+                    echo json_encode(["error" => $e->getMessage()]);
                 }
                 break;
             case "DELETE":
                 $request = new UsersRepository();
-                $request->delete($id);
+                try{
+                    $request->delete($id);
+                } catch (Exception $e) {
+                    http_response_code($e->getCode());
+                    echo json_encode(["error" => $e->getMessage()]);
+                }
                 break;
+            default:
+                http_response_code(404);
         }
     }
 }

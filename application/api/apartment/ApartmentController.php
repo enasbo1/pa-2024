@@ -56,6 +56,8 @@ class ApartmentController {
                 $request = new ApartmentRepository();
                 $request->delete($id);
                 break;
+            default:
+                http_response_code(404);
         }
     }
 }
