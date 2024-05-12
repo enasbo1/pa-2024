@@ -1,9 +1,9 @@
 <p>gen-chat works!</p>
 
 <div class="message-container" #messageContainer>
-    <div class="message" *ngFor="let message of sortedMessages">
-      <div *ngIf="message.user === 'receiver'" class="message-right"> {{ translator.echo(message.content) }}</div>
-      <div *ngIf="message.user === 'sender'" class="message-left">{{ translator.echo(message.content) }}</div>
-    </div>
+    <ng-container  *ngFor="let message of sortedMessages">
+      <div *ngIf="message.user === 'receiver'" class="bubble message-right  message"> {{ translator.echo(message.content) }}</div>
+      <div *ngIf="message.user === 'sender'" class="bubble reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
+</ng-container>
   </div>
 

@@ -14,8 +14,9 @@
   .message {
     margin-bottom: 10px;
     padding: 8px; /* Ajoutez un padding pour les messages */
-    border-radius: 8px; /* Arrondissez les coins */
+    // border-radius: 8px; /* Arrondissez les coins */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Ajoutez une légère ombre */
+    background-color: #cfd9e6;
   }
 
   .message-right {
@@ -25,3 +26,15 @@
   .message-left {
     text-align: left;
   }
+
+  .avatar-circle {
+    width: 30px;
+    height: 30px;
+    background-color: #6478D3;
+    border-radius: 50%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 12px;
+}
