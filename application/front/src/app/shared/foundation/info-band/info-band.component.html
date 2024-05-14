@@ -1,8 +1,6 @@
-<p>info-band works!</p>
-
-<div class="banner" [class.high-priority]="bannerData.priority > 3">
+<div class="banner" *ngIf="bannerData" [class.high-priority]="bannerData.priority > 3">
     <h1 *ngIf="bannerData.title">{{ bannerData.title }}</h1>
     <p *ngIf="bannerData.description">{{ bannerData.description }}</p>
     <a *ngIf="bannerData.link" [href]="bannerData.link">Plus d'infos</a>
   </div>
-  
+
