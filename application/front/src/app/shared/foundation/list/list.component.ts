@@ -12,7 +12,7 @@ import {_FilterObject, FilterObject} from "./filterObject";
 })
 export class ListComponent implements OnInit {
   @Input() items:ListObject[]=[];
-  @Input() line_size:number = 2;
+  @Input() line_size:3|2|1 = 2;
   @Input() critera:string[]|undefined;
   @Input() filters:FilterObject[]|undefined;
   _filters:_FilterObject[]|undefined;
