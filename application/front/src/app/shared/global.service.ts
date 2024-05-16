@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import {ModalObject} from "./foundation/modale/modalObject";
 
 type cookiesType = {token?:string}
 
@@ -29,7 +30,11 @@ export class GlobalService {
     GlobalService.cookie = n;
   }
 
-  public static get globalVar():string{
-    return (window as any).globalVar;
+  public static get modalCurrent():ModalObject{
+    return (window as any).modalCurrent;
+  }
+
+  public static set modalCurrent(modal:ModalObject){
+    (window as any).modalCurrent = modal
   }
 }
