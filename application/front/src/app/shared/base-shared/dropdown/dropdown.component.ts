@@ -25,7 +25,7 @@ export class DropdownComponent implements OnInit {
     }
   }
 
-  toggle(){
+  toggle():void{
     this.open = !this.open;
   }
 

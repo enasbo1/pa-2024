@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {NavLink} from "../navLink";
 import {GlobalService} from "../../shared/global.service";
 import {TranslatorService} from "../../shared/base-shared/translator.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'pm-header',
@@ -26,10 +27,31 @@ export class HeaderComponent implements OnInit {
 
   ];
 
+  parts : Record<string, string> = {
+    'partie-admin': '/admin',
+    'partie-prestataire': '/prestate',
+    'partie-bailleur': '/bail',
+    'partie-voyageur': '/voyageur'
+  }
+
+  keys : string[]=[
+    'partie-admin',
+    'partie-prestataire',
+    'partie-bailleur',
+    'partie-voyageur'
+  ]
+
   logoUrl:string = "assets/images/hammer.png";
-  constructor(protected readonly translator:TranslatorService) { }
+  constructor(
+    protected readonly translator:TranslatorService,
+    private router:Router
+  ) { }
 
   ngOnInit(): void {
+  }
+
+  change_part(value:string):void{
+    this.router.navigateByUrl(this.parts[value]);
   }
 
   protected readonly GlobalService = GlobalService;

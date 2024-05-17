@@ -9,6 +9,7 @@ import { RubricListComponent } from './rubric-list/rubric-list.component';
 import { ChatComponent } from './chat/chat.component';
 import { FormComponent } from './form/form.component';
 import { ModaleComponent } from "./modale/modale.component";
+import { ToBeImplementedComponent } from './to-be-implemented/to-be-implemented.component';
 
 
 
@@ -19,7 +20,8 @@ import { ModaleComponent } from "./modale/modale.component";
     RubricListComponent,
     ChatComponent,
     FormComponent,
-    ModaleComponent
+    ModaleComponent,
+    ToBeImplementedComponent
   ],
   imports: [
       BaseSharedModule,

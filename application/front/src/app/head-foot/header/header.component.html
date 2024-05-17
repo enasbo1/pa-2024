@@ -1,11 +1,23 @@
 <nav class='navbar navbar-expand p-3 bg-light'>
-  <div class = "col-3" [routerLink]="''">
-    <pm-image class = "logo" [title]="'logo'" [imageUrl]="logoUrl"></pm-image>
+  <div class = "col-3" >
+    <pm-image class = "logo" [title]="'logo'" [imageUrl]="logoUrl" [routerLink]="''"></pm-image>
+    <div id="nav-parts" style="height: 0; margin-top:1rem">
+      <pm-dropdown
+        *ngIf="true || GlobalService.token"
+        [styles]="'col-6 reversed-bubble transition'"
+        [choices]="keys"
+        (value_up)="change_part($event)"
+      ></pm-dropdown>
+    </div>
   </div>
   <div class = "col-6">
     <ul class="nav nav-pills">
       <li *ngFor="let navli of navLinks"><a class = "nav-link" [routerLink]=navli.link>{{navli.name}}</a></li>
-      <li><a class = "nav-link" [routerLink]="GlobalService.token?'/disconnection':'/connection'">{{translator.echo(GlobalService.token?'Logout':'Login')}}</a></li>
+      <li>
+        <a class = "nav-link" [routerLink]="GlobalService.token?'/disconnection':'/connection'">
+          {{translator.echo(GlobalService.token?'Logout':'Login')}}
+        </a>
+      </li>
     </ul>
   </div>
   <div class = "col-3">

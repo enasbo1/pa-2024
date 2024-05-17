@@ -7,9 +7,15 @@ import {Component, OnInit} from "@angular/core";
 export class AppComponent implements OnInit{
   pageTitle: string = "wanderPlace";
   title:string = "title 1";
-  status:string = "none";
   ngOnInit(): void {
     (window as any).globalVar = "coucou";
+  }
+
+  get status():string{
+    if (document.documentURI.split('/').length>3){
+      return document.documentURI.split('/')[3]
+    }
+    return ''
   }
 
 }

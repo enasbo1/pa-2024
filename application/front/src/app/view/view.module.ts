@@ -4,6 +4,8 @@ import { ConnectionComponent } from './connection/connection.component';
 import { RouterModule } from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
 import { DiconnectionComponent } from './diconnection/diconnection.component';
+import {WelcomeComponent} from "../home/welcome.component";
+import {AdminModule} from "./admin/admin.module";
 
 
 
@@ -15,6 +17,7 @@ import { DiconnectionComponent } from './diconnection/diconnection.component';
   imports: [
     CommonModule,
     SharedModule,
+    AdminModule,
     RouterModule.forChild([
       { path: 'connection', component: ConnectionComponent},
       { path: 'disconnection', component: DiconnectionComponent},

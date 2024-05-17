@@ -11,12 +11,31 @@ import {HeaderComponent} from "../header/header.component";
   ]
 })
 export class AdminHeaderComponent extends HeaderComponent{
+  override navLinks : NavLink[] = [
+    {
+      name : "Home",
+      link : "/admin/welcome"
+    },
+    {
+      name : "Utilisateurs",
+      link : "admin/users"
+    },
+    {
+      name : "Locations",
+      link : "/admin/location"
+    },
+    {
+      name : "Services",
+      link : "/admin/services"
+    },
+    {
+      name : "Chatbot",
+      link : "/admin/chatbot"
+    },
+    {
+      name : "Tickets",
+      link : "/admin/tickets"
+    },
 
-  override ngOnInit() {
-    super.ngOnInit();
-    this.navLinks.push({
-      name:"Admin",
-      link:"admin"
-    })
-  }
+  ];
 }
