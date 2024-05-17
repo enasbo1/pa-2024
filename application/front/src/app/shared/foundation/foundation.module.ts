@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {CommonModule, NgOptimizedImage} from '@angular/common';
 import {ListComponent} from "./list/list.component";
 import {BaseSharedModule} from "../base-shared/base-shared.module";
 import {RouterLink, RouterLinkWithHref} from "@angular/router";
@@ -8,6 +8,7 @@ import {FormsModule} from "@angular/forms";
 import { RubricListComponent } from './rubric-list/rubric-list.component';
 import { ChatComponent } from './chat/chat.component';
 import { FormComponent } from './form/form.component';
+import { ModaleComponent } from "./modale/modale.component";
 
 
 
@@ -18,20 +19,23 @@ import { FormComponent } from './form/form.component';
     RubricListComponent,
     ChatComponent,
     FormComponent,
+    ModaleComponent
   ],
-  imports: [
-    BaseSharedModule,
-    CommonModule,
-    RouterLinkWithHref,
-    RouterLink,
-    FormsModule
-  ],
+    imports: [
+        BaseSharedModule,
+        CommonModule,
+        RouterLinkWithHref,
+        RouterLink,
+        FormsModule,
+        NgOptimizedImage
+    ],
   exports: [
     ListComponent,
     InfoBandComponent,
     RubricListComponent,
     ChatComponent,
-    FormComponent
+    FormComponent,
+    ModaleComponent
   ]
 })
 export class FoundationModule { }

@@ -4,7 +4,6 @@ import {convertToSpacesPipe} from "./convertToSpace.pipe";
 import {StarComponent} from "./star/star.component";
 import {ImageComponent} from "./image/image.component";
 import { DropdownComponent } from './dropdown/dropdown.component';
-import { ModaleComponent } from './modale/modale.component';
 import { RubricComponent } from './rubric/rubric.component';
 import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component';
 import { FormStepComponent } from './form-step/form-step.component';
@@ -21,7 +20,6 @@ import { LineComponent } from './line/line.component';
     convertToSpacesPipe,
     ImageComponent,
     DropdownComponent,
-    ModaleComponent,
     RubricComponent,
     ChatBubbleComponent,
     FormStepComponent,
@@ -30,8 +28,8 @@ import { LineComponent } from './line/line.component';
     LineComponent
   ],
   imports: [
-      CommonModule,
-      FormsModule
+    CommonModule,
+    FormsModule
   ],
   exports: [
     StarComponent,
@@ -39,7 +37,6 @@ import { LineComponent } from './line/line.component';
     DateForHtmlPipe,
     ImageComponent,
     DropdownComponent,
-    ModaleComponent,
     RubricComponent,
     FormStepComponent,
     FormFieldComponent
