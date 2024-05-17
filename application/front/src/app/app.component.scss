@@ -51,17 +51,31 @@
     align-items: end;
   }
 
+  &.align-center{
+    align-items: center;
+  }
+
   &.short-line{
     padding-left: 10%;
     padding-right: 10%;
   }
 }
 
-.bordered {
+.bordered, .hover-bordered:hover {
   border-width: 2px;
   border-style: inset;
   border-color: rgb(118, 118, 118) rgb(133, 133, 133);
   border-image: initial;
+}
+
+.hover-bordered{
+  transition: all;
+  transition-duration: 350ms;
+}
+
+.disabled{
+  color : styles.$color-blanc-gris-1;
+  cursor: auto;
 }
 
 .hided {
@@ -94,6 +108,11 @@
 
 .hover-0,.hover-1,.hover-w,input{
   transition: background-color;
+  transition-duration: 250ms;
+}
+
+.transition{
+  transition: all;
   transition-duration: 250ms;
 }
 

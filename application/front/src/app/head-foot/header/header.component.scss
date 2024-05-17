@@ -1,3 +1,6 @@
+@use "../../shared/palette.scss" as styles;
+@import "../../app.component.scss";
+
 .navbar{
   align-items: flex-start;
   div{
@@ -24,5 +27,7 @@
 }
 
 .nav{
-
+  a{
+    color : styles.$color-colored-gris;
+  }
 }

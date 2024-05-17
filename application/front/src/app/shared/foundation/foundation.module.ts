@@ -21,14 +21,14 @@ import { ModaleComponent } from "./modale/modale.component";
     FormComponent,
     ModaleComponent
   ],
-    imports: [
-        BaseSharedModule,
-        CommonModule,
-        RouterLinkWithHref,
-        RouterLink,
-        FormsModule,
-        NgOptimizedImage
-    ],
+  imports: [
+      BaseSharedModule,
+      CommonModule,
+      RouterLinkWithHref,
+      RouterLink,
+      FormsModule,
+      NgOptimizedImage
+  ],
   exports: [
     ListComponent,
     InfoBandComponent,
