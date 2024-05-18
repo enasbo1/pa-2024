@@ -8,8 +8,8 @@ pays-|-r :M,50
 ville-|-r :M,50
 code_postal-|-r !int
 numero-|-r !int
-date_inscription-|-!int
-date_modification-|-!int
+date_inscription-|-:d,DMY
+date_modification-|-:d,DMY
 role-|-r !int
 rang-|-!int
 token-|-:M,255

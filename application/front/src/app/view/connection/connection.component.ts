@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormFieldObject} from "../../shared/base-shared/form-field/formFieldObject";
 import { FormStepObject } from "../../shared/base-shared/form-step/formStepObject";
-import {ConnectionService} from "../../connection/connection.service";
+import {ConnectionService} from "../../http/shared/connection.service";
 import {TranslatorService} from "../../shared/base-shared/translator.service";
 import {Router} from "@angular/router";
 

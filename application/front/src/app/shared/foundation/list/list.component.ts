@@ -13,7 +13,7 @@ import {_FilterObject, FilterObject} from "./filterObject";
 export class ListComponent implements OnInit {
   @Input() items:ListObject[]=[];
   @Input() line_size:3|2|1 = 2;
-  @Input() critera:string[]|undefined;
+  @Input() critera?:string[];
   @Input() filters:FilterObject[]|undefined;
   _filters:_FilterObject[]|undefined;
   search_crit:string="Title";
@@ -28,12 +28,11 @@ export class ListComponent implements OnInit {
     if (this.filters){
       this._filters = [];
       this.filters?.forEach(filter => {
-        filter.choices.splice(0,0,"all");
+        filter.choices?.splice(0,0,"all");
         this._filters?.push({
           name:filter.name,
           type:filter.type,
-          choices:filter.choices,
-          value:undefined,
+          choices:filter.choices?filter.choices:[],
         });
       });
     }

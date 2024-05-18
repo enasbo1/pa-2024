@@ -1,28 +1,28 @@
 import {TextStyle} from "../../base-shared/textStyle";
 
 export interface ListObject {
-  link : string|undefined;
-  title: string|undefined;
-  image: string|undefined;
-  right: [
+  link ?: string;
+  title?: string;
+  image?: string;
+  right?: [
     TextStyle|null,
     TextStyle|null,
     TextStyle|null,
-  ]|undefined
-  mid: [
+  ]
+  mid?: [
     TextStyle|null,
     TextStyle|null,
     TextStyle|null,
-  ]|undefined;
-  left: [
+  ];
+  left?: [
     TextStyle|null,
     TextStyle|null,
     TextStyle|null,
-  ]|undefined;
-  propriete : ListObjectPropriety[]|undefined;
+  ];
+  propriete ?: ListObjectPropriety[];
 }
 
 export interface ListObjectPropriety {
   name:string;
-  value:string|number|boolean;
+  value:string|number|bigint|boolean;
 }

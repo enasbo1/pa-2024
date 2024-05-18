@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {RequestService} from "./request.service";
-import {FormFieldObject} from "../shared/base-shared/form-field/formFieldObject";
+import {FormFieldObject} from "../../shared/base-shared/form-field/formFieldObject";
 import {catchError, Observable} from "rxjs";
-import {GlobalService} from "../shared/global.service";
+import {GlobalService} from "../../shared/global.service";
 import {HttpErrorResponse} from "@angular/common/http";
 
 type WPTokenRequestType = {token?:string, message?:string, id?:string}
