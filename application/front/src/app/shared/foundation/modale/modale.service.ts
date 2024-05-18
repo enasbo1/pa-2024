@@ -53,7 +53,7 @@ export class ModaleService {
     return event;
   }
 
-  static createRubricModal(rubric:RubricObject):EventEmitter<void> {
+  static createRubricModal(rubric: RubricObject):EventEmitter<void> {
     let event:EventEmitter<void> = new EventEmitter<void>();
     ModaleService.openModal({
       visible:true,

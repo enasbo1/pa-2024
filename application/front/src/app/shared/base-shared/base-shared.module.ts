@@ -31,15 +31,16 @@ import { LineComponent } from './line/line.component';
     CommonModule,
     FormsModule
   ],
-  exports: [
-    StarComponent,
-    convertToSpacesPipe,
-    DateForHtmlPipe,
-    ImageComponent,
-    DropdownComponent,
-    RubricComponent,
-    FormStepComponent,
-    FormFieldComponent
-  ]
+    exports: [
+        StarComponent,
+        convertToSpacesPipe,
+        DateForHtmlPipe,
+        ImageComponent,
+        DropdownComponent,
+        RubricComponent,
+        FormStepComponent,
+        FormFieldComponent,
+        LineComponent
+    ]
 })
 export class BaseSharedModule { }

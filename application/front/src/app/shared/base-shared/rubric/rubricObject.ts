@@ -5,7 +5,7 @@ export interface RubricObject{
 
 export interface RubricElement{
   name : string
-  type : "text"|"file"|"panel"|"modal"|"image"
-  text : string
-  value? : string|RubricObject[]
+  type : "text"|"file"|"panel"|"modal"|"image"|"stars"
+  text ?: string
+  value? : string|RubricObject|number
 }

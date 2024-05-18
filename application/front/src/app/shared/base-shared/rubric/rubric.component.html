@@ -1,19 +1,20 @@
 <div *ngIf="content">
   <pm-line [short]="true"></pm-line>
   <h4 *ngIf="content.title">{{translatorService.echo(content.title)}}</h4>
-  <div class="container flex">
-    <ul class="col-6">
-      <ng-container *ngFor="let item of content.content">
-        <li>{{translatorService.echo(item.name, "...")}}</li>
-      </ng-container>
-    </ul>
-    <ul class="col-6">
-      <ng-container *ngFor="let item of content.content" [ngSwitch]="item.type">
-        <li *ngSwitchCase="'text'">{{translatorService.echo(item.text, '...')}}</li>
-        <li *ngSwitchCase="'file'"><a [href]="item.value" target="_blank">{{translatorService.echo(item.text, '...')}}</a></li>
-        <li *ngSwitchCase="'panel'" (click)="open_pannel(item.value)">{{translatorService.echo(item.text, '...')}}</li>
-        <li *ngSwitchCase="'image'" (click)="open_image(item.value)">{{translatorService.echo(item.text, '...')}}</li>
-      </ng-container>
-    </ul>
-  </div>
+  <table>
+    <tbody>
+      <tr *ngFor="let item of content.content">
+        <td>
+          {{translatorService.echo(item.name, "...")}}
+        </td>
+        <ng-container [ngSwitch]="item.type">
+          <td *ngSwitchCase="'text'">{{translatorService.echo(item.text, '...')}}</td>
+          <td *ngSwitchCase="'file'"><a [href]="item.value" target="_blank">{{translatorService.echo(item.text, '...')}}</a></td>
+          <td *ngSwitchCase="'panel'" (click)="open_pannel(item.value)">{{translatorService.echo(item.text, '...')}}</td>
+          <td *ngSwitchCase="'image'" (click)="open_image(item.value)">{{translatorService.echo(item.text, '...')}}</td>
+          <td *ngSwitchCase="'stars'"><pm-star [rating]="rate(item.value)"></pm-star></td>
+        </ng-container>
+      </tr>
+    </tbody>
+  </table>
 </div>

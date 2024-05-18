@@ -22,13 +22,16 @@ export class GestionServicesComponent implements OnInit {
     'number'
   ];
 
+  private detailPage:string = "/admin/services";
+
   constructor(private serviceModelService : ServiceModelService) { }
 
   ngOnInit(): void {
     this.serviceModelService.get_service().subscribe((
       services)=>
       this.setServices(
-        services.map((service)=>this.serviceModelService.service_to_list(service))
+        services.map((service)=>
+          this.serviceModelService.service_to_list(service, this.detailPage))
       )
     )
   }

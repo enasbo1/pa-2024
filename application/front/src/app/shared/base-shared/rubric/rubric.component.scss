@@ -4,9 +4,11 @@
 h4{
   text-align: center;
 }
-ul{
-  li{
-    text-align: center;
-    display: block;
+table{
+  td{
+    padding: 0 1rem 0 1rem;
+    &:first-child{
+      text-align: center;
+    }
   }
 }

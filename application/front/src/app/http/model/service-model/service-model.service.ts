@@ -9,9 +9,10 @@ import {ListObject} from "../../../shared/foundation/list/listObject";
 })
 export class ServiceModelService extends RequestService{
 
-  service_to_list(service:ServiceObject):ListObject{
+  service_to_list(service:ServiceObject, detailPage:string):ListObject{
     return {
       title:service.type,
+      link:detailPage+"/"+service.id,
       right:[
         {text : "note : "+ service.note},
         {text : "tarif : "+ service.tarif + '€'},
@@ -20,7 +21,7 @@ export class ServiceModelService extends RequestService{
       mid:[
         {text : "description : "+ service.description},
         {text : "date debut : "+ service.date_debut + " date fin : "+ service.date_fin},
-        null,
+        {text : detailPage+"/"+service.id},
       ],
       propriete:[
         {name : 'note' , value: service.note},
@@ -34,7 +35,14 @@ export class ServiceModelService extends RequestService{
     }
   }
 
+
+
   get_service():Observable<ServiceObject[]>{
     return (this.get('service') as Observable<ServiceObject[]>);
+  }
+
+  get_one_service(number:bigint):Observable<ServiceObject[]>{
+    return (this.get_one('service',number) as Observable<ServiceObject[]>);
+
   }
 }
