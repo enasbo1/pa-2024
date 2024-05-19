@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {RequestService} from "../../shared/request.service";
 import { Observable} from "rxjs";
-import {ServiceObject} from "./ServiceObject";
+import {ServiceObject} from "./serviceObject";
 import {ListObject} from "../../../shared/foundation/list/listObject";
 
 @Injectable({
@@ -21,7 +21,7 @@ export class ServiceModelService extends RequestService{
       mid:[
         {text : "description : "+ service.description},
         {text : "date debut : "+ service.date_debut + " date fin : "+ service.date_fin},
-        {text : detailPage+"/"+service.id},
+        null,
       ],
       propriete:[
         {name : 'note' , value: service.note},

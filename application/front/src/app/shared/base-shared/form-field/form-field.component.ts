@@ -51,4 +51,8 @@ export class FormFieldComponent implements OnInit {
       this.field._value = value;
     this.submit.emit(value);
   }
+
+  number_limit_pipe(value:number|undefined):number|null{
+    return (value!=undefined)?value:null
+  }
 }

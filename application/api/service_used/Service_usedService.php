@@ -11,14 +11,14 @@ class Service_usedService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -31,17 +31,17 @@ class Service_usedService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
-			"date_modif" => "!int",
-			"date_debut" => "!int",
+			"date_modif" => ":d,DMY",
+			"date_debut" => ":d,DMY",
 			"lieu" => "r :M,60",
 			"id_RESERVATION" => "r !int",
-			"id_SERVICE" => "r !int",
+			"id_SERVICE_ENTREPRISE" => "r !int",
 			"id_UTILISATEUR" => "r !int"
         ]);
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
         return $arr_params;
@@ -58,7 +58,7 @@ class Service_usedService implements ModelType {
 			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
 			"lieu" => isset($params->lieu)?$params->lieu:null,
 			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
-			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
+			"id_SERVICE_ENTREPRISE" => isset($params->id_SERVICE_ENTREPRISE)?$params->id_SERVICE_ENTREPRISE:null,
 			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
         ]);
     }

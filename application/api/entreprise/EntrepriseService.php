@@ -11,14 +11,14 @@ class EntrepriseService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -33,12 +33,12 @@ class EntrepriseService implements ModelType {
 			"id" => "!int",
 			"nom" => "r :M,200",
 			"description" => "r :M,1048576",
-			"id_UTILISATEUR" => "r !int"
+			"logo" => ":M,255"
         ]);
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
         return $arr_params;
@@ -53,7 +53,7 @@ class EntrepriseService implements ModelType {
 			"id" => isset($params->id)?$params->id:null,
 			"nom" => isset($params->nom)?$params->nom:null,
 			"description" => isset($params->description)?$params->description:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"logo" => isset($params->logo)?$params->logo:null
         ]);
     }
 }

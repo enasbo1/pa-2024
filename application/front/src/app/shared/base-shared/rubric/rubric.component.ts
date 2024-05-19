@@ -20,7 +20,11 @@ export class RubricComponent implements OnInit {
     ModaleService.createImageModal(<string> src)
   }
 
-  open_pannel(src?:string|RubricObject|number):void {
+  open_panel(src?:string|RubricObject|number):void {
+    ModaleService.createRubricModal(<RubricObject> src)
+  }
+
+  open_modal(src?:string|RubricObject|number):void {
     ModaleService.createRubricModal(<RubricObject> src)
   }
 

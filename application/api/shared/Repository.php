@@ -211,4 +211,15 @@ class Repository
         }
 
     }
+
+    public function query(string $query, array $values, string $error=""){
+    try{
+        pg_prepare($this->connection,"", $query);
+        $elements = pg_execute($this->connection,"", $values);
+        return pg_fetch_all($elements);
+    }catch (Exception $e){
+        $error = ($error=="")?"$this->modelName instance get failed: ":$error;
+        throw new Exception($error . $e->getMessage(), 400);
+    }
+    }
 }

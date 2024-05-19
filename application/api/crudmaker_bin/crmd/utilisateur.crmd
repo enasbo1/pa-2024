@@ -13,3 +13,4 @@ date_modification-|-:d,DMY
 role-|-r !int
 rang-|-!int
 token-|-:M,255
+id_ENTREPRISE-|-!int

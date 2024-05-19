@@ -17,6 +17,23 @@
            [(ngModel)]="field._value"
     >
   </ng-container>
+  <ng-container *ngSwitchCase="'longtext'">
+    <textarea type="text" class="bubble hover-w w-100 {{field.sclass}}"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >{{field.default}}</textarea>
+  </ng-container>
+  <ng-container *ngSwitchCase="'num'">
+    <input type="number" class="bubble hover-w w-100 {{field.sclass}}"
+           [step]="field.step"
+           [max]="number_limit_pipe(field.number_limit?.max)"
+           [min]="number_limit_pipe(field.number_limit?.min)"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
+    >
+  </ng-container>
 
   <ng-container *ngSwitchCase="'email'">
     <input type="email" class="bubble hover-w w-100 {{field.sclass}}"

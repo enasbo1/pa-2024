@@ -9,6 +9,7 @@ use message\MessageController;
 use reservation\ReservationController;
 use service\ServiceController;
 use service_apartment\Service_apartmentController;
+use service_entreprise\Service_entrepriseController;
 use service_used\Service_usedController;
 use ticket\TicketController;
 use users\UsersController;
@@ -23,12 +24,14 @@ require_once 'reservation/ReservationController.php';
 require_once 'users/UsersController.php';
 require_once 'service/ServiceController.php';
 require_once 'service_apartment/Service_apartmentController.php';
+require_once 'service_entreprise/Service_entrepriseController.php';
 require_once 'service_used/Service_usedController.php';
 require_once 'ticket/TicketController.php';
 require_once 'message/MessageController.php';
 require_once 'entreprise/EntrepriseController.php';
 require_once 'document/DocumentController.php';
 require_once 'connection/ConnectionController.php';
+
 
 require_once 'token/token.php';
 
@@ -133,6 +136,15 @@ switch ($uri[2]) {
         $controller->routes($id);
         break;
 
+        case 'service_entreprise':
+            $controller = new Service_entrepriseController();
+            $id = null;
+            if (isset($uri[3])) {
+                $id = $uri[3];
+            }
+            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            break;
+    
     default:
         // Page non trouvée
         http_response_code(404);

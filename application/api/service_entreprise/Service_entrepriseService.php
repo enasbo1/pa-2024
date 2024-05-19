@@ -1,12 +1,12 @@
 <?php
-namespace service;
+namespace service_entreprise;
 
 use Exception;
 use shared\ModelType;
 use shared\Verif;
 
 
-class ServiceService implements ModelType {
+class Service_entrepriseService implements ModelType {
 
     /**
      * @throws Exception
@@ -31,14 +31,8 @@ class ServiceService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
-			"type" => "r :M,150",
-			"description" => "r :M,255",
-			"tarif" => "r !int",
-			"date_debut" => "r :d,DMY",
-			"date_fin" => "r :d,DMY",
-			"note" => "r !int",
-			"fiche" => "r :M,65535",
-			"coef" => "r !int"
+			"id_SERVICE" => "r !int",
+			"id_ENTREPRISE" => "r !int"
         ]);
         if (
             $valid != "validated"
@@ -56,14 +50,8 @@ class ServiceService implements ModelType {
     {
         return array_filter([
 			"id" => isset($params->id)?$params->id:null,
-			"type" => isset($params->type)?$params->type:null,
-			"description" => isset($params->description)?$params->description:null,
-			"tarif" => isset($params->tarif)?$params->tarif:null,
-			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
-			"date_fin" => isset($params->date_fin)?$params->date_fin:null,
-			"note" => isset($params->note)?$params->note:null,
-			"fiche" => isset($params->fiche)?$params->fiche:null,
-			"coef" => isset($params->coef)?$params->coef:null
+			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
+			"id_ENTREPRISE" => isset($params->id_ENTREPRISE)?$params->id_ENTREPRISE:null
         ]);
     }
 }

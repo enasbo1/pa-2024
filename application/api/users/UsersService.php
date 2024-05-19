@@ -34,7 +34,8 @@ class UsersService implements ModelType {
 			"date_modification" => "!int",
 			"role" => "r !int",
 			"rang" => "!int",
-			"token" => ":M,255"
+			"token" => ":M,255",
+			"id_ENTREPRISE" => "!int"
         ]);
         if (
             $valid != "validated"
@@ -65,7 +66,8 @@ class UsersService implements ModelType {
 			"date_modification" => isset($params->date_modification)?$params->date_modification:null,
 			"role" => isset($params->role)?$params->role:null,
 			"rang" => isset($params->rang)?$params->rang:null,
-			"token" => isset($params->token)?$params->token:null
+			"token" => isset($params->token)?$params->token:null,
+			"id_ENTREPRISE" =>isset($params->id_ENTREPRISE)?$params->id_ENTREPRISE:null
         ]);
     }
 }

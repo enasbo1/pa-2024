@@ -1,158 +1,179 @@
-CREATE TABLE UTILISATEUR(
-   id SERIAL PRIMARY KEY,
-   prenom VARCHAR(30), 
-   nom VARCHAR(100),
-   mail VARCHAR(100) unique,
-   mdp VARCHAR(255),
-   adresse VARCHAR(255),
-   pays VARCHAR(50),
-   ville VARCHAR(50),
-   code_postal INT,
-   numero INT,
-   date_inscription TIMESTAMP,
-   date_modification TIMESTAMP,
-   role INT, -- voyageur, client bailleur, prestataire, admin
-   rang INT, -- VIP
-   token VARCHAR(255) -- Jeton d'authentification de l'utilisateur
+create table service
+(
+    id                  serial
+        primary key,
+    type                varchar(150),
+    description         varchar(255),
+    tarif               integer,
+    date_debut          timestamp,
+    date_fin            timestamp,
+    note                integer,
+    fiche               text,
+    coef                integer,
+    url_json_formulaire varchar(255)
 );
 
-CREATE TABLE SERVICE(
-   id serial PRIMARY KEY,
-   type VARCHAR(150),
-   description VARCHAR(255),
-   tarif INT,
-   date_debut TIMESTAMP,
-   date_fin TIMESTAMP,
-   note INT,
-   fiche TEXT,
-   coef INT, -- variable pour le tarif quand il est variable
-   url_json_formulaire VARCHAR(255)
+create table entreprise
+(
+    id          serial
+        primary key,
+    nom         varchar(200),
+    description text,
+    logo        varchar(255)
 );
 
-CREATE TABLE DOCUMENT(
-   id SERIAL PRIMARY KEY,
-   url_ci VARCHAR(255),  -- url vers la carte d'identité
-   url_habilitation VARCHAR(255), -- url vers d'autre doccument
-   tarif INT,
-   id_UTILISATEUR INT NOT NULL,
-   CONSTRAINT id_UTILISATEUR FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table utilisateur
+(
+    id                serial
+        primary key,
+    prenom            varchar(30),
+    nom               varchar(100),
+    mail              varchar(100)
+        unique,
+    mdp               varchar(255),
+    adresse           varchar(255),
+    pays              varchar(50),
+    ville             varchar(50),
+    code_postal       integer,
+    numero            integer,
+    date_inscription  timestamp,
+    date_modification timestamp,
+    role              integer,
+    rang              integer,
+    token             varchar(255),
+    id_entreprise     integer
+        references entreprise
 );
 
-CREATE TABLE APPARTEMENT(
-   id SERIAL,
-   ville VARCHAR(50),
-   code_postal INT,
-   prix_fixe_nuit INT,
-   type_gestion VARCHAR(100), -- le type de gestion
-   duree INT,  -- la duree en jour
-   type_de_bien VARCHAR(100), -- appartement ou maison
-   logement_entier INT, -- logement complet ou chambre seulement
-   nb_chambre INT,
-   nb_occupant_max INT,
-   surface INT, -- en mêtres carré
-   horaire_contact INT,
-   id_UTILISATEUR INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table document
+(
+    id               serial
+        primary key,
+    url_ci           varchar(255),
+    url_habilitation varchar(255),
+    tarif            integer,
+    id_utilisateur   integer not null
+        constraint id_utilisateur
+            references utilisateur
 );
 
-CREATE TABLE BANISSEMENT(
-   id SERIAL,
-   sujet VARCHAR(80),
-   description TEXT,
-   date_debut TIMESTAMP,
-   date_fin TIMESTAMP,
-   specification VARCHAR(200),  -- info suplémentaire pour admin
-   id_UTILISATEUR INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table appartement
+(
+    id              serial
+        primary key,
+    ville           varchar(50),
+    code_postal     integer,
+    prix_fixe_nuit  integer,
+    type_gestion    varchar(100),
+    duree           integer,
+    type_de_bien    varchar(100),
+    logement_entier integer,
+    nb_chambre      integer,
+    nb_occupant_max integer,
+    surface         integer,
+    horaire_contact integer,
+    id_utilisateur  integer not null
+        references utilisateur
 );
 
-CREATE TABLE ENTREPRISE(
-   id SERIAL,
-   nom VARCHAR(200),
-   description TEXT,
-   id_UTILISATEUR INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table banissement
+(
+    id             serial
+        primary key,
+    sujet          varchar(80),
+    description    text,
+    date_debut     timestamp,
+    date_fin       timestamp,
+    specification  varchar(200),
+    id_utilisateur integer not null
+        references utilisateur
 );
 
-CREATE TABLE SERVICE_APPARTEMENT(
-   id SERIAL,
-   id_SERVICE INT NOT NULL,
-   id_APPARTEMENT INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_SERVICE) REFERENCES SERVICE(id),
-   FOREIGN KEY(id_APPARTEMENT) REFERENCES APPARTEMENT(id)
+create table service_entreprise
+(
+    id            serial
+        primary key,
+    id_service    integer not null
+        references service,
+    id_entreprise integer not null
+        references entreprise
 );
 
-CREATE TABLE SERVICE_ENTREPRISE(
-   id SERIAL,
-   id_SERVICE INT NOT NULL,
-   id_ENTREPRISE INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_SERVICE) REFERENCES SERVICE(id),
-   FOREIGN KEY(id_ENTREPRISE) REFERENCES ENTREPRISE(id)
+create table service_appartement
+(
+    id                    serial
+        primary key,
+    id_appartement        integer           not null
+        references appartement,
+    id_service_entreprise integer default 1 not null
+        references service_entreprise
 );
 
-CREATE TABLE RESERVATION(
-   id SERIAL,
-   total_location INT,  -- prix de la location seulement appartement compris
-   total_abonnement INT, -- prix total des abonnements
-   total_frais INT, -- total
-   id_APPARTEMENT INT NOT NULL,
-   id_UTILISATEUR INT NOT NULL,
-   date_debut TIMESTAMP NOT NULL,
-   date_fin TIMESTAMP NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_APPARTEMENT) REFERENCES APPARTEMENT(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table reservation
+(
+    id               serial
+        primary key,
+    total_location   integer,
+    total_abonnement integer,
+    total_frais      integer,
+    id_appartement   integer   not null
+        references appartement,
+    id_utilisateur   integer   not null
+        references utilisateur,
+    date_debut       timestamp not null,
+    date_fin         timestamp not null
 );
 
-CREATE TABLE SERVICE_UTILISEE(
-   id SERIAL,
-   date_modif TIMESTAMP,
-   date_debut TIMESTAMP,
-   lieu VARCHAR(60),  -- zone
-   id_RESERVATION INT NOT NULL,
-   id_SERVICE INT NOT NULL,
-   id_UTILISATEUR INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_RESERVATION) REFERENCES RESERVATION(id),
-   FOREIGN KEY(id_SERVICE) REFERENCES SERVICE(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
-);
-CREATE TABLE TICKET(
-   id SERIAL,
-   sujet VARCHAR(80),
-   description TEXT,
-   date_creation TIMESTAMP,
-   date_modif TIMESTAMP,
-   id_traitant INT,
-   id_RESERVATION INT,
-   id_SERVICE INT,
-   id_MESSAGE INT,
-   id_UTILISATEUR INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_traitant) REFERENCES UTILISATEUR(id),
-   FOREIGN KEY(id_RESERVATION) REFERENCES RESERVATION(id),
-   FOREIGN KEY(id_SERVICE) REFERENCES SERVICE_UTILISEE(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table service_utilisee
+(
+    id                    serial
+        primary key,
+    date_modif            timestamp,
+    date_debut            timestamp,
+    lieu                  varchar(60),
+    id_reservation        integer           not null
+        references reservation,
+    id_utilisateur        integer           not null
+        references utilisateur,
+    id_service_entreprise integer default 1 not null
+        references service_entreprise
 );
 
-CREATE TABLE MESSAGE(
-   id SERIAL,
-   date_envoie TIMESTAMP,
-   texte TEXT,
-   id_SERVICE_UTILISEE INT,
-   id_RESERVATION INT,
-   id_TICKET INT,
-   id_UTILISATEUR INT NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_SERVICE_UTILISEE) REFERENCES SERVICE_UTILISEE(id),
-   FOREIGN KEY(id_RESERVATION) REFERENCES RESERVATION(id),
-   FOREIGN KEY(id_TICKET) REFERENCES TICKET(id),
-   FOREIGN KEY(id_UTILISATEUR) REFERENCES UTILISATEUR(id)
+create table ticket
+(
+    id             serial
+        primary key,
+    sujet          varchar(80),
+    description    text,
+    date_creation  timestamp,
+    date_modif     timestamp,
+    id_traitant    integer
+        references utilisateur,
+    id_reservation integer
+        references reservation,
+    id_service     integer
+        references service_utilisee,
+    id_message     integer,
+    id_utilisateur integer not null
+        references utilisateur
 );
 
-ALTER TABLE TICKET ADD CONSTRAINT id_MESSAGE FOREIGN KEY(id_MESSAGE) REFERENCES MESSAGE(id);
+create table message
+(
+    id                  serial
+        primary key,
+    date_envoie         timestamp,
+    texte               text,
+    id_service_utilisee integer
+        references service_utilisee,
+    id_reservation      integer
+        references reservation,
+    id_ticket           integer
+        references ticket,
+    id_utilisateur      integer not null
+        references utilisateur
+);
+
+alter table ticket
+    add constraint id_message
+        foreign key (id_message) references message;

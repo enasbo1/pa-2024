@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ListObject} from "../../../../shared/foundation/list/listObject";
-import {FilterObject} from "../../../../shared/foundation/list/filterObject";
 import {ServiceModelService} from "../../../../http/model/service-model/service-model.service";
-import {RubricObject} from "../../../../shared/base-shared/rubric/rubricObject";
+import {RubricElement, RubricObject} from "../../../../shared/base-shared/rubric/rubricObject";
 import {ActivatedRoute} from "@angular/router";
-import {ServiceObject} from "../../../../http/model/service-model/ServiceObject";
+import {ServiceObject} from "../../../../http/model/service-model/serviceObject";
+import {EnterpriseModelService} from "../../../../http/model/enterprise-model/enterprise-model.service";
+import {EnterpriseObject} from "../../../../http/model/enterprise-model/enterpriseObject";
+import {ModaleService} from "../../../../shared/foundation/modale/modale.service";
+
 
 @Component({
   selector: 'pm-detail-service',
@@ -12,18 +14,11 @@ import {ServiceObject} from "../../../../http/model/service-model/ServiceObject"
   styleUrls: ['./detail-service.component.scss']
 })
 export class DetailServiceComponent implements OnInit {
-  enterprise:ListObject[] = []
-  filters:FilterObject[] = [
-    {name : 'note' , type:'auto'},
-    {name : 'date_debut' , type:'auto'},
-    {name : 'date_fin' , type:'auto'},
-    {name : 'type', type:'auto'},
-    {name : 'tarif', type:'auto'},
-  ]
-  critera : string[] = [
-    'description',
-    'number'
-  ];
+
+  private enterprise:RubricElement =
+    {name:'entreprise', text:'none', type:'text'};
+
+  service_object?:ServiceObject;
 
   service?:RubricObject= {
     title : 'waiting for the serv to answer',
@@ -31,6 +26,7 @@ export class DetailServiceComponent implements OnInit {
   }
 
   constructor(private serviceModelService : ServiceModelService,
+              private enterpriseService: EnterpriseModelService,
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
@@ -38,11 +34,16 @@ export class DetailServiceComponent implements OnInit {
       this.serviceModelService.get_one_service(params['id']).subscribe(
         (service:ServiceObject[])=>
         this.set_services(service[0]?service[0]:undefined)
+      );
+      this.enterpriseService.get_enterprise_from_service_id(params['id']).subscribe(
+        (entreprise)=>
+          this.set_entreprise(entreprise)
       )
     });
   }
 
   private set_services(service?:ServiceObject):void{
+    this.service_object = service;
     this.service = {
       title : service?.type,
       content : [
@@ -55,8 +56,108 @@ export class DetailServiceComponent implements OnInit {
         {name : 'date_fin', type:'text', text:service?.date_fin},
         {name : 'fiche', type:'text', text:service?.fiche},
         {name : 'coef', type:'text', text:service?.coef.toString()},
+        this.enterprise
       ]
     }
   }
 
+  private set_entreprise(entreprise?:EnterpriseObject[]):void{
+    this.enterprise.value = <RubricObject>{
+      title:"entreprises",
+      content:entreprise?.map(
+        this.enterprise_to_rubric_Element
+      )
+    }
+    this.enterprise.type = (entreprise?.length?entreprise.length>0:false)?'modal':'text';
+    this.enterprise.text = entreprise?.length+ ' - entreprises'
+  }
+
+  private enterprise_to_rubric_Element(enterprise:EnterpriseObject):RubricElement{
+    return {
+      name : enterprise.nom,
+      type : 'link',
+      text : 'voir plus',
+      value : 'admin/enterprise/'+enterprise.id
+    }
+  }
+
+  public openEditModal():void{
+    if (this.service_object){
+      ModaleService.createFormModal({
+        title:'modifier le service',
+        content:[
+          {
+            title : 'details',
+            content:[
+              {
+                name:'type',
+                type:'text',
+                title:'type : ' + this.service_object.type,
+                placeholder:this.service_object.type,
+                default:this.service_object.type,
+              },
+              {
+                name:'description',
+                type:'longtext',
+                title:'description',
+                placeholder:this.service_object.description,
+                default:this.service_object.description,
+              },
+            ]
+          },
+          {
+            title:'dates',
+            content:[
+              {
+                name :'date',
+                type :'period',
+              },
+            ]
+          },
+          {
+            title:'divers',
+            content:[
+              {
+                title: 'note : '+ this.service_object.note,
+                name :'note',
+                type :'num',
+                step:0.1,
+                number_limit:{
+                  max:5,
+                  min:0
+                },
+                default: this.service_object.note,
+                placeholder: this.service_object.note
+              },
+              {
+                title: 'coef : '+ this.service_object.coef,
+                name :'note',
+                type :'num',
+                step:0.1,
+                number_limit:{
+                  min:0.01
+                },
+                default: this.service_object.coef,
+                placeholder: this.service_object.coef
+              },
+              {
+                title: 'fiche : '+ this.service_object.fiche,
+                name :'fiche',
+                type :'file',
+                default: this.service_object.fiche,
+                placeholder: this.service_object.fiche
+              },
+            ]
+          }
+
+        ]
+      })
+    }
+  }
+
+  public openDeleteModal():void{
+    if (this.service_object){
+      ModaleService.createTextModal('To be Implemented')
+    }
+  }
 }

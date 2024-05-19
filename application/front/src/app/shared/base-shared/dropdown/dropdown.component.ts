@@ -9,7 +9,7 @@ import {TranslatorService} from "../translator.service";
 export class DropdownComponent implements OnInit {
   value:string = "empty";
   open:boolean=false
-  @Input() default:string|undefined;
+  @Input() default:string|number|undefined;
   @Input() prefix:string = "";
   @Input() styles:string = "";
   @Input() choices:string[] = [];
@@ -18,7 +18,7 @@ export class DropdownComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.default){
-      this.value = this.default;
+      this.value = this.default.toString();
     }
     else if (this.choices!==[]){
       this.value = this.choices[0]
