@@ -14,7 +14,7 @@ export class ChatComponent implements OnInit {
   constructor(public translator: TranslatorService) {}
 
   ngOnInit(): void {
-    this.sortMessages(); //fonction de trie utilisée
+    this.sortMessages(); // Fonction de tri utilisée
   }
 
   sortMessages(): void {
@@ -24,6 +24,6 @@ export class ChatComponent implements OnInit {
   }
 
   getInitials(userName: string): string {
-    return userName.split(' ').map(n => n[0]).join('');
+    return userName.charAt(0).toUpperCase();
   }
 }
