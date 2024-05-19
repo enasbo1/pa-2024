@@ -34,8 +34,8 @@ class ServiceService implements ModelType {
 			"type" => "r :M,150",
 			"description" => "r :M,255",
 			"tarif" => "r !int",
-			"date_debut" => "r :d,DMY",
-			"date_fin" => "r :d,DMY",
+			"date_debut" => "r",
+			"date_fin" => "r",
 			"note" => "r !int",
 			"fiche" => "r :M,65535",
 			"coef" => "r !int"
