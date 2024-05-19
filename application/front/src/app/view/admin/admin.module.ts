@@ -7,12 +7,15 @@ import {ConnectionComponent} from '../connection/connection.component';
 import {DiconnectionComponent} from '../diconnection/diconnection.component';
 import {ToBeImplementedComponent} from "../../shared/foundation/to-be-implemented/to-be-implemented.component";
 import {ServiceModule} from "./service/service.module";
+import { LocationModule } from './location/location.module';
+
 
 
 
 @NgModule({
   declarations: [],
   imports: [
+    LocationModule,
     CommonModule,
     ServiceModule,
     SharedModule,
@@ -21,7 +24,6 @@ import {ServiceModule} from "./service/service.module";
         { path: 'admin/connection', component: ConnectionComponent},
         { path: 'admin/disconnection', component: DiconnectionComponent},
         { path: 'admin/users', component: ToBeImplementedComponent},
-        { path: 'admin/location', component: ToBeImplementedComponent},
         { path: 'admin/chatbot', component: ToBeImplementedComponent},
         { path: 'admin/tickets', component: ToBeImplementedComponent},
         { path: 'admin', redirectTo: 'admin/welcome', pathMatch: 'full'},
