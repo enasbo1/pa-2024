@@ -1,5 +1,3 @@
-<p>gen-chat works!</p>
-
 <div class="message-container" #messageContainer>
   <div *ngFor="let message of sortedMessages" class="flex {{message.user === 'receiver' ? 'justify-end' : 'justify-start'}}">
     <div *ngIf="message.user === 'sender'" class="avatar-circle">
