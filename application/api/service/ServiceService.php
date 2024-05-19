@@ -63,7 +63,8 @@ class ServiceService implements ModelType {
 			"date_fin" => isset($params->date_fin)?$params->date_fin:null,
 			"note" => isset($params->note)?$params->note:null,
 			"fiche" => isset($params->fiche)?$params->fiche:null,
-			"coef" => isset($params->coef)?$params->coef:null
+			"coef" => isset($params->coef)?$params->coef:null,
+            "actif" => isset($params->actif)?$params->actif:true
         ]);
     }
 }

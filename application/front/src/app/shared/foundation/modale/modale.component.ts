@@ -29,11 +29,11 @@ export class ModaleComponent implements OnInit {
     if (option.end){
       this.modalObject.visible = false;
     }
-    option.action?.emit();
+    option.action?.emit(option.name);
   }
 
   submit_form(values:FormFieldObject[]):void{
-    this.modalObject.content.form?.submit.emit(values);
     this.modalObject.visible = false;
+    this.modalObject.content.form?.submit.emit(values);
   }
 }

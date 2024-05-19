@@ -35,7 +35,7 @@ require_once 'connection/ConnectionController.php';
 
 require_once 'token/token.php';
 
-
+header('Access-Control-Allow-Methods: GET, POST,  PATCH, PUT, DELETE, OPTIONS');
 header("Content-Type: application/json; charset=utf8");
 header("Access-Control-Allow-Origin: *");
 
@@ -136,14 +136,14 @@ switch ($uri[2]) {
         $controller->routes($id);
         break;
 
-        case 'service_entreprise':
-            $controller = new Service_entrepriseController();
-            $id = null;
-            if (isset($uri[3])) {
-                $id = $uri[3];
-            }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
-            break;
+    case 'service_entreprise':
+        $controller = new Service_entrepriseController();
+        $id = null;
+        if (isset($uri[3])) {
+            $id = $uri[3];
+        }
+        $controller->routes($id, isset($uri[4])?$uri[4]:null);
+        break;
     
     default:
         // Page non trouvée

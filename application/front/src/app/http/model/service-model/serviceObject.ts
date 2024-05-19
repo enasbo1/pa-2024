@@ -1,8 +1,8 @@
 export interface ServiceObject{
-  id : bigint
+  id : number
   type : string
   description : string
-  tarif : bigint
+  tarif : number
   date_debut : string
   date_fin : string
   note : number

@@ -3,6 +3,7 @@ import {RequestService} from "../../shared/request.service";
 import { Observable} from "rxjs";
 import {ServiceObject} from "./serviceObject";
 import {ListObject} from "../../../shared/foundation/list/listObject";
+import * as url from "node:url";
 
 @Injectable({
   providedIn: 'root'
@@ -35,7 +36,13 @@ export class ServiceModelService extends RequestService{
     }
   }
 
+  delete_service(number: bigint): Observable<object> {
+    return this.delete('service', number);
+  }
 
+  edit_service(service:ServiceObject):Observable<object>{
+    return this.edit(service,'service');
+  }
 
   get_service():Observable<ServiceObject[]>{
     return (this.get('service') as Observable<ServiceObject[]>);
@@ -43,6 +50,5 @@ export class ServiceModelService extends RequestService{
 
   get_one_service(number:bigint):Observable<ServiceObject[]>{
     return (this.get_one('service',number) as Observable<ServiceObject[]>);
-
   }
 }

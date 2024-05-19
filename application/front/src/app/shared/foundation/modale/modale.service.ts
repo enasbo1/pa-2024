@@ -17,9 +17,32 @@ export class ModaleService {
     modal.visible = true;
     GlobalService.modalCurrent = modal;
   }
-
-  static createTextModal(text:string):EventEmitter<void> {
-    let event:EventEmitter<void> = new EventEmitter<void>();
+  static createValidationModal(text:string):EventEmitter<'Oui'|'Non'> {
+    let event:EventEmitter<string> = new EventEmitter<string>();
+    ModaleService.openModal({
+      visible:true,
+      options: [
+        {
+          name: "Non",
+          end : true,
+          action:event
+        },
+        {
+          name: "Oui",
+          sclass:'hover-0 colored-red',
+          end : true,
+          action:event
+        }
+      ],
+      content: {
+        type:"text",
+        text:text,
+      }
+    })
+    return <EventEmitter<'Oui'|'Non'>>event;
+  }
+  static createTextModal(text:string):EventEmitter<string> {
+    let event:EventEmitter<string> = new EventEmitter<string>();
     ModaleService.openModal({
       visible:true,
       options: [
@@ -53,8 +76,8 @@ export class ModaleService {
     return event;
   }
 
-  static createRubricModal(rubric: RubricObject):EventEmitter<void> {
-    let event:EventEmitter<void> = new EventEmitter<void>();
+  static createRubricModal(rubric: RubricObject):EventEmitter<string> {
+    let event:EventEmitter<string> = new EventEmitter<string>();
     ModaleService.openModal({
       visible:true,
       options: [
@@ -72,8 +95,8 @@ export class ModaleService {
     return event;
   }
 
-  static createImageModal(image:string):EventEmitter<void> {
-    let event:EventEmitter<void> = new EventEmitter<void>();
+  static createImageModal(image:string):EventEmitter<string> {
+    let event:EventEmitter<string> = new EventEmitter<string>();
     ModaleService.openModal({
       visible:true,
       options: [

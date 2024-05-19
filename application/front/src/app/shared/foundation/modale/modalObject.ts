@@ -11,7 +11,8 @@ export interface ModalObject {
 
 export interface ModalOption{
   name: string;
-  action ?: EventEmitter<any>;
+  sclass?:string;
+  action ?: EventEmitter<string>;
   end ?: boolean;
 }
 

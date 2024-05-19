@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import {ServiceModelService} from "../../../../http/model/service-model/service-model.service";
 import {RubricElement, RubricObject} from "../../../../shared/base-shared/rubric/rubricObject";
-import {ActivatedRoute} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {ServiceObject} from "../../../../http/model/service-model/serviceObject";
 import {EnterpriseModelService} from "../../../../http/model/enterprise-model/enterprise-model.service";
 import {EnterpriseObject} from "../../../../http/model/enterprise-model/enterpriseObject";
 import {ModaleService} from "../../../../shared/foundation/modale/modale.service";
+import {FormFieldObject} from "../../../../shared/base-shared/form-field/formFieldObject";
+import {DateService} from "../../../../http/shared/date.service";
+import {FormService} from "../../../../shared/foundation/form/form.service";
 
 
 @Component({
@@ -27,7 +30,9 @@ export class DetailServiceComponent implements OnInit {
 
   constructor(private serviceModelService : ServiceModelService,
               private enterpriseService: EnterpriseModelService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router:Router
+  ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -52,8 +57,8 @@ export class DetailServiceComponent implements OnInit {
         {name : 'id', type:'text', text:service?.id.toString()},
         {name : 'type', type:'text', text:service?.type},
         {name : 'description', type:'text', text:service?.description},
-        {name : 'date_debut', type:'text', text:service?.date_debut},
-        {name : 'date_fin', type:'text', text:service?.date_fin},
+        {name : 'date_debut', type:'text', text:DateService.to_front(service?.date_debut)},
+        {name : 'date_fin', type:'text', text:DateService.to_front(service?.date_fin)},
         {name : 'fiche', type:'text', text:service?.fiche},
         {name : 'coef', type:'text', text:service?.coef.toString()},
         this.enterprise
@@ -131,7 +136,7 @@ export class DetailServiceComponent implements OnInit {
               },
               {
                 title: 'coef : '+ this.service_object.coef,
-                name :'note',
+                name :'coef',
                 type :'num',
                 step:0.1,
                 number_limit:{
@@ -149,15 +154,77 @@ export class DetailServiceComponent implements OnInit {
               },
             ]
           }
-
         ]
-      })
+      }).subscribe(
+        (editValues:FormFieldObject[])=>{
+          this.to_edit(editValues);
+        }
+      )
     }
   }
 
   public openDeleteModal():void{
     if (this.service_object){
-      ModaleService.createTextModal('To be Implemented')
+      ModaleService.createValidationModal('voulez-vous vraiment supprimer ce service ?').subscribe(
+        (value)=>
+          (value==="Oui")?this.delete():0
+      )
+    }
+  }
+
+  private to_edit(editValues:FormFieldObject[]):void{
+    ModaleService.createValidationModal('voulez-vous vraiment modifier ce service ?').subscribe(
+      (value)=>
+        (value==="Oui")?this.edit(editValues):0
+    );
+  }
+
+  private edit(values:FormFieldObject[]):void{
+    if (this.service_object){
+      let dates = this.getDate(values.find((x)=>x.name==="date")?._values)
+      let service:ServiceObject = {
+        id:this.service_object.id as number,
+        type:FormService.get_value(values, 'type', this.service_object.type) as string,
+        description:FormService.get_value(values, 'description', this.service_object.description) as string,
+        tarif:FormService.get_value(values, 'tarif', this.service_object.tarif) as number,
+        date_debut:dates.start,
+        date_fin:dates.end,
+        note:FormService.get_value(values, 'note', this.service_object.note) as  number,
+        fiche:FormService.get_value(values, 'fiche', this.service_object.fiche) as string,
+        coef:FormService.get_value(values, 'coef', this.service_object.coef) as number
+      }
+
+      this.serviceModelService.edit_service(service).subscribe(
+        ()=>{
+          ModaleService.createTextModal("service mis à jour avec succès");
+          this.ngOnInit()
+        }
+      );
+    }
+  }
+
+  private getDate(dates?:Date[]):{start:string, end:string}{
+    if (dates){
+      return {
+        start:DateService.to_api(dates[0]),
+        end :DateService.to_api(dates[1])
+      }
+    }else{
+      return {
+        start:DateService.to_api(),
+        end :DateService.to_api()
+      }
+    }
+  }
+
+  private delete():void{
+    if (this.service_object){
+      this.serviceModelService.delete_service(BigInt(this.service_object.id)).subscribe(
+        ()=>{
+          ModaleService.createTextModal("service supprimé avec succès");
+          this.router.navigateByUrl("/admin/services")
+        }
+      )
     }
   }
 }

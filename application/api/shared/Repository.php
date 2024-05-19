@@ -62,6 +62,9 @@ class Repository
     public function readAll(string $error = ""):array{
         return $this->get($this->modelName, [], [], $error);
     }
+    public function readActif(string $error = ""):array{
+        return $this->get($this->modelName, [], ["actif"=>true], $error);
+    }
 
     /**
      * @throws Exception
@@ -70,7 +73,8 @@ class Repository
     {
         if ($this->read($params->id)!=[]){
             $toquery = $this->modelType->toArray($params);
-            return $this->update_abs($this->modelName, $toquery, ["id"=>$params->id], $error);
+            $this->update_abs($this->modelName, $toquery, ["id"=>$params->id], $error);
+            return true;
         }
         else{
             $error = ($error == "") ? "$this->modelName instance not found: " : $error;
@@ -113,25 +117,26 @@ class Repository
             $q = "UPDATE $table SET ";
             $i = 1;
             foreach ($updates as $col => $value) {
-                $q .= $col . " = '" . $value . "'";
+                $q .= $col . " = $" . $i;
                 if ($i < count($updates)) {
                     $q = $q . ",";
                 }
                 $i += 1;
             }
 
-            $i = 1;
+            $j = 1;
             foreach ($restrict as $key => $val) {
-                if ($i == 1) {
+                if ($j == 1) {
                     $q .= " WHERE ";
                 } else {
                     $q .= " AND ";
                 }
-                $q .= $key . ' = $' . $i;
+                $q .= $key . ' = $' . $j;
                 $i+=1;
+                $j+=1;
             }
             pg_prepare($this->connection,"", $q);
-            return pg_execute($this->connection,"", $restrict);
+            return pg_execute($this->connection,"",$updates+$restrict);
         } catch (Exception $e) {
             $error = ($error == "") ? "$this->modelName instance update failed: " : $error;
             throw new Exception($error . $e->getMessage(), 400);

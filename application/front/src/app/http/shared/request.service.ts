@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
-import {Observable, throwError} from "rxjs";
+import {from, Observable, throwError} from "rxjs";
 import {ConstancesService} from "./constances.service";
-import {GlobalService} from "../../shared/global.service";
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +15,15 @@ export class RequestService{
   post(content:object, url:string):Observable<object>{
     return(this.httpClient.post(ConstancesService.api_url + "/" +url,
       JSON.stringify(content)));
+  }
+
+  edit(content:object, url:string):Observable<object>{
+    return this.httpClient.patch(ConstancesService.api_url + "/" +url,
+      JSON.stringify(content));
+  }
+
+  delete(url:string, number:bigint):Observable<object>{
+    return(this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ number))
   }
 
   get(url:string):Observable<object>{
