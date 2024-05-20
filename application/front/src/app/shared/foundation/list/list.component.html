@@ -15,7 +15,8 @@
     <div *ngFor="let filt of _filters" class = 'line flex w-100'>
       <pm-dropdown
         [choices]="filt.choices"
-        [default]="'all'"
+        [default]="filt.default?filt.default:'all'"
+        [set]="filt.set"
         [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
         (click)="refresh_filter()"
         (value_up)="filter_update(filt, $event)"

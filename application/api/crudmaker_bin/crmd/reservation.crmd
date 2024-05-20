@@ -1,6 +1,8 @@
 id-|-!int
 total_location-|-r !int
 total_abonnement-|-!int
+date_fin-|-r :d,MDY
+date_debut-|-r :d,MDY
 total_frais-|-!int
 id_APPARTEMENT-|-r !int
 id_UTILISATEUR-|-r !int

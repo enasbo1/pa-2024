@@ -11,16 +11,17 @@ class Service_usedService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): array {
-        return $this->isValidType($params);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function prepareUpdate(object $params): array {
-        return $this->isValidType($params);
-
+    public function prepareGet(array $values):array{
+        $val = [];
+        foreach($values as $col=>$value){
+            $i = explode("__",$col);
+            if(count($i)==1){
+                $val[$i[0]] = $value;
+            }else{
+                $val[$i[0]][$i[1]] = $value;
+            }
+        }
+        return $val;
     }
 
     /**
@@ -31,9 +32,8 @@ class Service_usedService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
-			"date_modif" => ":d,DMY",
-			"date_debut" => ":d,DMY",
-			"lieu" => "r :M,60",
+			"date_modif" => ":d,MDY",
+			"date_debut" => "r :d,MDY",
 			"id_RESERVATION" => "r !int",
 			"id_SERVICE_ENTREPRISE" => "r !int",
 			"id_UTILISATEUR" => "r !int"
@@ -56,11 +56,9 @@ class Service_usedService implements ModelType {
 			"id" => isset($params->id)?$params->id:null,
 			"date_modif" => isset($params->date_modif)?$params->date_modif:null,
 			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
-			"lieu" => isset($params->lieu)?$params->lieu:null,
 			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
 			"id_SERVICE_ENTREPRISE" => isset($params->id_SERVICE_ENTREPRISE)?$params->id_SERVICE_ENTREPRISE:null,
 			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
         ]);
     }
 }
-

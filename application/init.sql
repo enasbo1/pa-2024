@@ -10,7 +10,8 @@ create table service
     note                integer,
     fiche               text,
     coef                integer,
-    url_json_formulaire varchar(255)
+    url_json_formulaire varchar(255),
+    actif               boolean
 );
 
 create table entreprise
@@ -130,7 +131,6 @@ create table service_utilisee
         primary key,
     date_modif            timestamp,
     date_debut            timestamp,
-    lieu                  varchar(60),
     id_reservation        integer           not null
         references reservation,
     id_utilisateur        integer           not null

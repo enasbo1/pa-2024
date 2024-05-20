@@ -13,7 +13,6 @@ import { LocationModule } from './location/location.module';
 
 
 @NgModule({
-  declarations: [],
   imports: [
     LocationModule,
     CommonModule,

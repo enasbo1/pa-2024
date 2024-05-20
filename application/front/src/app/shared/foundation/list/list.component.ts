@@ -33,6 +33,8 @@ export class ListComponent implements OnInit {
           name:filter.name,
           type:filter.type,
           choices:filter.choices?filter.choices:[],
+          set:filter.set,
+          default:filter.default
         });
       });
     }
@@ -40,9 +42,11 @@ export class ListComponent implements OnInit {
 
   refresh_filter(){
     this._filters?.forEach(filter => {
-      if (filter.type === "auto") { // @ts-ignore
+      if (filter.type === "auto") {
+        const value = filter.value;
+        filter.value = "all";
         filter.choices =
-          this.items.map(
+          this.filter_item().map(
             item =>
               this.findFlilter(item, filter.name)
           ).filter(
@@ -58,8 +62,9 @@ export class ListComponent implements OnInit {
             pro => pro?.value
           ).map(
             val => val?.toString()
-          );
+          ) as string[];
         filter.choices.splice(0,0,"all");
+        filter.value = value;
       }
     })
   }

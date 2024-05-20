@@ -10,6 +10,7 @@ export class DropdownComponent implements OnInit {
   value:string = "empty";
   open:boolean=false
   @Input() default:string|number|undefined;
+  @Input() set?:boolean;
   @Input() prefix:string = "";
   @Input() styles:string = "";
   @Input() choices:string[] = [];
@@ -19,6 +20,9 @@ export class DropdownComponent implements OnInit {
   ngOnInit(): void {
     if (this.default){
       this.value = this.default.toString();
+      if (this.choices.includes(this.value) || this.set){
+        this.selectValue(this.value)
+      }
     }
     else if (this.choices!==[]){
       this.value = this.choices[0]

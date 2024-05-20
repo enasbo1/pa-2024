@@ -1,9 +1,10 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {RequestService} from "../../shared/request.service";
 import { Observable} from "rxjs";
 import {ServiceObject} from "./serviceObject";
 import {ListObject} from "../../../shared/foundation/list/listObject";
 import * as url from "node:url";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
@@ -36,12 +37,12 @@ export class ServiceModelService extends RequestService{
     }
   }
 
-  delete_service(number: bigint): Observable<object> {
-    return this.delete('service', number);
+  delete_service(number: bigint, errorCatch?:EventEmitter<HttpErrorResponse>): Observable<object> {
+    return this.delete('service', number, errorCatch);
   }
 
-  edit_service(service:ServiceObject):Observable<object>{
-    return this.edit(service,'service');
+  edit_service(service:ServiceObject, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    return this.edit(service,'service', errorCatch);
   }
 
   get_service():Observable<ServiceObject[]>{

@@ -8,7 +8,7 @@ class Service_usedController {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2=null): void
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
@@ -17,9 +17,18 @@ class Service_usedController {
                     $service_used = $request->getAll();
                     echo json_encode($service_used);
                 } else {
-                    try {
-                        $service_used = $request->findById($id);
-                        echo json_encode($service_used);
+                    try {                    
+                        if ($id =="service"){
+                            $entreprise = $request->findByService($id2);
+                            echo json_encode($entreprise);
+                        }else if($id =="location"){
+                            $service = $request->findByLocation($id2);
+                            echo json_encode($service);
+                        }else  {
+                            $service_used = $request->findById($id);
+                            echo json_encode($service_used);
+                        }
+
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();

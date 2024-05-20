@@ -1,5 +1,5 @@
 <div>
-  <button (click)="toggle()" class="bubble col-12 hover-1 oneline {{open?'bubble-up':''}} {{styles}}">{{prefix + value}} ⌄</button>
+  <button (click)="toggle()" class="bubble col-12 {{value==='all'?'hover-w':'hover-1'}} oneline {{open?'bubble-up':''}} {{styles}}">{{prefix + value}} ⌄</button>
   <ul class='out col-12' *ngIf="open">
     <button  *ngFor="let ch of choices" (click)="selectValue(ch)" class = "bubble_padding oneline hover-1"><li>{{ch}}</li></button>
   </ul>

@@ -4,6 +4,7 @@
     <div id="nav-parts" style="height: 0; margin-top:1rem">
       <pm-dropdown
         *ngIf="true || GlobalService.token"
+        [default]="'dev-enviro'"
         [styles]="'col-6 reversed-bubble transition'"
         [choices]="keys"
         (value_up)="change_part($event)"

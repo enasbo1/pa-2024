@@ -1,8 +1,8 @@
 id-|-!int
 sujet-|-r :M,80
 description-|-r :M,1048576
-date_creation-|-r :d,DMY
-date_modif-|-r :d,DMY
+date_creation-|-r :d,MDY
+date_modif-|-r :d,MDY
 id_traitant-|-!int
 id_RESERVATION-|-!int
 id_SERVICE-|-!int

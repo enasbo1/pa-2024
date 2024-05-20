@@ -1,5 +1,5 @@
 id-|-!int
-date_envoie-|-:d,DMY
+date_envoie-|-:d,MDY
 texte-|-r !int
 id_SERVICE_UTILISEE-|-!int
 id_RESERVATION-|-!int

@@ -10,13 +10,15 @@ import {FormFieldObject} from "../../../../shared/base-shared/form-field/formFie
 import {DateService} from "../../../../http/shared/date.service";
 import {FormService} from "../../../../shared/foundation/form/form.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ServiceUsedModelService} from "../../../../http/model/service-used-model/service-used-model.service";
+import {ServiceUsedObject} from "../../../../http/model/service-used-model/serviceUsedObject";
 
 
 @Component({
-  templateUrl: './detail-service.component.html',
-  styleUrls: ['./detail-service.component.scss']
+  templateUrl: './detail-service-rendu.component.html',
+  styleUrls: ['./detail-service-rendu.component.scss']
 })
-export class DetailServiceComponent implements OnInit {
+export class DetailServiceRenduComponent implements OnInit {
   service_rendu:string  = '/admin/service_rendu';
   query_params?:Params;
 
@@ -30,27 +32,22 @@ export class DetailServiceComponent implements OnInit {
     content:[]
   }
 
-  constructor(private serviceModelService : ServiceModelService,
-              private enterpriseService: EnterpriseModelService,
+  constructor(private serviceUsedModelService : ServiceUsedModelService,
               private route: ActivatedRoute,
               private router:Router
   ) { }
 
   ngOnInit(): void {
     this.route.params.subscribe((params:Params) => {
-      this.query_params = {fromService:params["id"]};
-      this.serviceModelService.get_one_service(params['id']).subscribe(
-        (service:ServiceObject[])=>
-        this.set_services(service[0]?service[0]:undefined)
+      this.serviceUsedModelService.get_one_serviceUsed(params['id']).subscribe(
+        (service:ServiceUsedObject[])=>
+          this.set_services(service[0]?service[0]:undefined)
       );
-      this.enterpriseService.get_enterprise_from_service_id(params['id']).subscribe(
-        (entreprise)=>
-          this.set_entreprise(entreprise)
-      )
     });
   }
 
-  private set_services(service?:ServiceObject):void{
+  private set_services(service?:ServiceUsedObject):void{
+    /*
     this.service_object = service;
     this.service = {
       title : service?.type,
@@ -66,7 +63,8 @@ export class DetailServiceComponent implements OnInit {
         {name : 'coef', type:'text', text:service?.coef.toString()},
         this.enterprise
       ]
-    }
+      }
+     */
   }
 
   private set_entreprise(entreprise?:EnterpriseObject[]):void{
@@ -183,6 +181,7 @@ export class DetailServiceComponent implements OnInit {
   }
 
   private edit(values:FormFieldObject[]):void{
+    /*
     if (this.service_object){
       let dates = this.getDate(values.find((x)=>x.name==="date")?._values)
       let service:ServiceObject = {
@@ -201,13 +200,14 @@ export class DetailServiceComponent implements OnInit {
         ()=>
           ModaleService.createTextModal("erreur lors de la modification du service")
       )
-      this.serviceModelService.edit_service(service, error).subscribe(
+      this.serviceUsedModelService.edit_service(service, error).subscribe(
         ()=>{
           ModaleService.createTextModal("service mis à jour avec succès");
           this.ngOnInit()
         }
       );
     }
+     */
   }
 
   private getDate(dates?:Date[]):{start:string, end:string}{
@@ -225,18 +225,20 @@ export class DetailServiceComponent implements OnInit {
   }
 
   private delete():void{
+    /*
     if (this.service_object){
       let error:EventEmitter<HttpErrorResponse>=new EventEmitter<HttpErrorResponse>();
       error.subscribe(
         ()=>
           ModaleService.createTextModal("erreur lors de la suppression du service")
       )
-      this.serviceModelService.delete_service(BigInt(this.service_object.id), error).subscribe(
+      this.serviceUsedModelService.delete_service(BigInt(this.service_object.id), error).subscribe(
         ()=>{
           ModaleService.createTextModal("service supprimé avec succès");
           this.router.navigateByUrl("/admin/services")
         }
       )
     }
+    */
   }
 }

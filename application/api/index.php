@@ -47,7 +47,7 @@ switch ($uri[2]) {
         $controller = new ConnectionController();
         $controller->routes();
         break;
-    case 'apartments':
+    case 'apartment':
         $apartmentController = new ApartmentController();
         $id = null;
         if (isset($uri[3])) {
@@ -124,7 +124,7 @@ switch ($uri[2]) {
         if (isset($uri[3])) {
             $id = $uri[3];
         }
-        $controller->routes($id);
+        $controller->routes($id, isset($uri[4])?$uri[4]:null);
         break;
 
     case 'service_apartment':

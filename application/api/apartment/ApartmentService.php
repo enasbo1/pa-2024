@@ -18,7 +18,7 @@ class ApartmentService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):array {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -47,7 +47,7 @@ class ApartmentService implements ModelType {
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
         return $arr_params;
