@@ -3,7 +3,6 @@ import {RequestService} from "../../shared/request.service";
 import { Observable} from "rxjs";
 import {ServiceObject} from "./serviceObject";
 import {ListObject} from "../../../shared/foundation/list/listObject";
-import * as url from "node:url";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({

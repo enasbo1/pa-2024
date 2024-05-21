@@ -4,7 +4,6 @@ import { ConnectionComponent } from './connection/connection.component';
 import { RouterModule } from "@angular/router";
 import {SharedModule} from "../shared/shared.module";
 import { DiconnectionComponent } from './diconnection/diconnection.component';
-import {WelcomeComponent} from "../home/welcome.component";
 import {AdminModule} from "./admin/admin.module";
 
 
@@ -16,6 +15,7 @@ import {AdminModule} from "./admin/admin.module";
   ],
   imports: [
     CommonModule,
+    SharedModule,
     SharedModule,
     AdminModule,
     RouterModule.forChild([

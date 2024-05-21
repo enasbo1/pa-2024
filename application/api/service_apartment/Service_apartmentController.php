@@ -56,6 +56,8 @@ class Service_apartmentController {
                 $request = new Service_apartmentRepository();
                 $request->delete($id);
                 break;
+            case "OPTIONS":
+                break;
             default:
                 http_response_code(404);
         }

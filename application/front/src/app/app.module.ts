@@ -23,9 +23,9 @@ import {ViewModule} from "./view/view.module";
     ViewModule,
     HeadFootModule,
     RouterModule.forRoot([
-      { path: 'welcome', component: WelcomeComponent},
-      { path: '', redirectTo: 'welcome', pathMatch: 'full'},
-      { path: '**', redirectTo: 'welcome', pathMatch: 'full'}
+      { path: 'home', component: WelcomeComponent},
+      { path: '', redirectTo: 'home', pathMatch: 'full'},
+      { path: '**', redirectTo: 'home', pathMatch: 'full'}
     ]),
     ProductModule
   ],

@@ -4,8 +4,6 @@ import {RouterModule} from "@angular/router";
 import { GestionServicesComponent } from './gestion-services/gestion-services.component';
 import {SharedModule} from "../../../shared/shared.module";
 import { DetailServiceComponent } from './detail-service/detail-service.component';
-import {ToBeImplementedComponent} from "../../../shared/foundation/to-be-implemented/to-be-implemented.component";
-import { ServiceRenduComponent } from './service-rendu/service-rendu.component';
 import { ServiceRenduListComponent } from './service-rendu-list/service-rendu-list.component';
 import { DetailServiceRenduComponent } from './detail-service-rendu/detail-service-rendu.component';
 
@@ -15,7 +13,6 @@ import { DetailServiceRenduComponent } from './detail-service-rendu/detail-servi
   declarations: [
     GestionServicesComponent,
     DetailServiceComponent,
-    ServiceRenduComponent,
     ServiceRenduListComponent,
     DetailServiceRenduComponent
   ],

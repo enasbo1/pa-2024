@@ -1,8 +1,9 @@
 import {ServiceObject} from "../service-model/serviceObject";
+import {EnterpriseObject} from "../enterprise-model/enterpriseObject";
 
 export interface ServiceUsedObject{
   id : number
-  date_modif : string
+  date_modif ?: string
   date_debut : string
 
   reservation : {
@@ -10,11 +11,7 @@ export interface ServiceUsedObject{
     id_appartement : number
     ville:string
   }
-  entreprise : {
-    nom:string
-    id:number
-    logo?:string
-  }
+  entreprise : EnterpriseObject
 
   utilisateur : {
     id:number

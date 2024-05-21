@@ -1,11 +1,9 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {ServiceObject} from "../service-model/serviceObject";
 import {ListObject} from "../../../shared/foundation/list/listObject";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ServiceUsedObject} from "./serviceUsedObject";
 import {RequestService} from "../../shared/request.service";
-import {EnterpriseObject} from "../enterprise-model/enterpriseObject";
 
 @Injectable({
   providedIn: 'root'

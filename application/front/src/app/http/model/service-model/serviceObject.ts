@@ -8,4 +8,5 @@ export interface ServiceObject{
   note : number
   fiche : string
   coef : number
+  url_json_formulaire ?:string
 }

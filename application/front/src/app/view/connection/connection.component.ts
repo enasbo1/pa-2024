@@ -52,9 +52,10 @@ export class ConnectionComponent implements OnInit {
     this.nextstep = nextstep;
     this.connectionService.connect(
       this.items[step].content[0].content,
-      (yes:boolean, error:string|undefined)=>yes?this.validated():this.fail(error),
+      (yes:boolean, error:string|undefined):void=>yes?this.validated():this.fail(error),
       ()=>this.connection_error())
   }
+
   submit(values:FormFieldObject[]) : void {
     this.values = values;
     this.router.navigate([""],{queryParams:{message:"utilisateur connecté"}});

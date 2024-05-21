@@ -25,7 +25,7 @@ export class DetailServiceRenduComponent implements OnInit {
   private enterprise:RubricElement =
     {name:'entreprise', text:'none', type:'text'};
 
-  service_object?:ServiceObject;
+  service_object?:ServiceUsedObject;
 
   service?:RubricObject= {
     title : 'waiting for the serv to answer',
@@ -46,28 +46,41 @@ export class DetailServiceRenduComponent implements OnInit {
     });
   }
 
-  private set_services(service?:ServiceUsedObject):void{
-    /*
-    this.service_object = service;
+  private set_services(serviceUsed?:ServiceUsedObject):void{
+    this.service_object = serviceUsed;
+    if (serviceUsed?.entreprise){
+      this.set_enterprise([serviceUsed?.entreprise])
+    }
     this.service = {
-      title : service?.type,
+      title : "service rendu : " + serviceUsed?.service?.type,
       content : [
-        {name : 'note', type:'stars', text:"", value:service?.note},
-        {name : 'tarif', type:'text', text:service?.tarif+'€'},
-        {name : 'id', type:'text', text:service?.id.toString()},
-        {name : 'type', type:'text', text:service?.type},
-        {name : 'description', type:'text', text:service?.description},
-        {name : 'date_debut', type:'text', text:DateService.to_front(service?.date_debut)},
-        {name : 'date_fin', type:'text', text:DateService.to_front(service?.date_fin)},
-        {name : 'fiche', type:'text', text:service?.fiche},
-        {name : 'coef', type:'text', text:service?.coef.toString()},
+        {name : 'id', type:'text', text: serviceUsed?.id.toString()},
+        {name : 'modif', type:'text', text : DateService.to_front(serviceUsed?.date_debut)},
+        {name : 'date', type:'text', text: DateService.to_front(serviceUsed?.date_debut)},
+        {name : 'lieu', type:'text', text: serviceUsed?.reservation?.ville},
+
+        {name : 'reservation', type:'link',
+          text:serviceUsed?.reservation?.id_reservation.toString(),
+          value:'admin/reservation/'+serviceUsed?.id
+        },
+
+        {name : 'entreprise', type:'link',
+          text:serviceUsed?.entreprise?.nom,
+          value:'admin/enterprise/'+serviceUsed?.entreprise.id
+        },
+
+        {name : 'utilisateur', type:'link',
+          text:serviceUsed?.entreprise?.nom,
+          value:'admin/enterprise/'+serviceUsed?.entreprise.id
+        },
+        {name : 'fiche', type:'text', text:serviceUsed?.service?.fiche},
+        {name : 'coef', type:'text', text:serviceUsed?.service?.coef.toString()},
         this.enterprise
       ]
-      }
-     */
+    }
   }
 
-  private set_entreprise(entreprise?:EnterpriseObject[]):void{
+  private set_enterprise(entreprise?:EnterpriseObject[]):void{
     this.enterprise.value = <RubricObject>{
       title:"entreprises",
       content:entreprise?.map(
@@ -88,6 +101,7 @@ export class DetailServiceRenduComponent implements OnInit {
   }
 
   public openEditModal():void{
+    /*
     if (this.service_object){
       ModaleService.createFormModal({
         title:'modifier le service',
@@ -161,7 +175,7 @@ export class DetailServiceRenduComponent implements OnInit {
           this.to_edit(editValues);
         }
       )
-    }
+    }*/
   }
 
   public openDeleteModal():void{

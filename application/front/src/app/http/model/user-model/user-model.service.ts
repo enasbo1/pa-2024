@@ -8,12 +8,15 @@ import {ListObject} from "../../../shared/foundation/list/listObject";
   providedIn: 'root'
 })
 export class UserModelService extends RequestService{
+  public static get_U_Name(user:UserObject):string{
+    let i:string = user.prenom;
+    i = i?i[0].toUpperCase():'';
+    return i+". " +user.nom
+  }
 
   user_to_list(user:UserObject, detailPage:string):ListObject{
-    let i:string = user.prenom
-    i = i?i[0].toUpperCase():''
     return {
-      title:i+". " + user.nom,
+      title:UserModelService.get_U_Name(user),
       link:detailPage+"/"+user.id,
       right:[
         {text : "Mail : "+ user.mail},

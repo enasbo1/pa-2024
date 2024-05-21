@@ -56,6 +56,8 @@ class EntrepriseController {
                 $request = new EntrepriseRepository();
                 $request->delete($id);
                 break;
+            case "OPTIONS":
+                break;
             default:
                 http_response_code(404);
         }

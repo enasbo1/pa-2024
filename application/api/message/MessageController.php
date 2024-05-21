@@ -56,6 +56,8 @@ class MessageController {
                 $request = new MessageRepository();
                 $request->delete($id);
                 break;
+            case "OPTIONS":
+                break;
             default:
                 http_response_code(404);
         }

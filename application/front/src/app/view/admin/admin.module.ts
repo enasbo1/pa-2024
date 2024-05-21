@@ -22,15 +22,15 @@ import {UserModule} from "./user/user.module";
     SharedModule,
     UserModule,
     RouterModule.forChild([
-        { path: 'admin/welcome', component: WelcomeComponent},
+        { path: 'admin/home', component: WelcomeComponent},
         { path: 'admin/connection', component: ConnectionComponent},
         { path: 'admin/disconnection', component: DiconnectionComponent},
         { path: 'admin/users', component: ToBeImplementedComponent},
         { path: 'admin/location', component: ToBeImplementedComponent},
         { path: 'admin/chatbot', component: ToBeImplementedComponent},
         { path: 'admin/tickets', component: ToBeImplementedComponent},
-        { path: 'admin', redirectTo: 'admin/welcome', pathMatch: 'full'},
-        { path: 'admin/', redirectTo: 'admin/welcome', pathMatch: 'full'}
+        { path: 'admin', redirectTo: 'admin/home', pathMatch: 'full'},
+        { path: 'admin/', redirectTo: 'admin/home', pathMatch: 'full'}
       ]
     )
   ]

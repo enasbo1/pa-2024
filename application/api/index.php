@@ -5,6 +5,7 @@ use apartment\ApartmentController;
 use connection\ConnectionController;
 use document\DocumentController;
 use entreprise\EntrepriseController;
+use Exception;
 use message\MessageController;
 use reservation\ReservationController;
 use service\ServiceController;
@@ -32,15 +33,32 @@ require_once 'entreprise/EntrepriseController.php';
 require_once 'document/DocumentController.php';
 require_once 'connection/ConnectionController.php';
 
-
 require_once 'token/token.php';
 
 header('Access-Control-Allow-Methods: GET, POST,  PATCH, PUT, DELETE, OPTIONS');
 header("Content-Type: application/json; charset=utf8");
 header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Headers: token");
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
+
+if (isset($_SERVER["HTTP_TOKEN"]) && (strlen($_SERVER["HTTP_TOKEN"])>20)){
+    try{
+        $_TOKEN = Token::decodeToken($_SERVER["HTTP_TOKEN"])['payload'];
+    }catch (Exception $e){
+        http_response_code($e->getCode());
+        echo $e->getMessage();
+        exit;
+    }
+}else{
+    $_TOKEN = [
+        'user_id' => 0,
+        'user_firstname' => '',
+        'user_lastname' => '',
+        'user_role' => 0
+    ];
+};
 
 switch ($uri[2]) {
     case 'connection':
