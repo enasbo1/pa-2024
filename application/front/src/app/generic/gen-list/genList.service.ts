@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpErrorResponse} from "@angular/common/http";
 import {catchError, Observable, tap, throwError} from "rxjs";
-import {IProduct} from "../../products/product";
+import {IProduct} from "../../view/exemple/products/product";
 import {ListObject} from "../../shared/foundation/list/listObject";
 
 @Injectable({

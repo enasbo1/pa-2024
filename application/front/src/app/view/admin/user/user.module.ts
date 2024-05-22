@@ -4,6 +4,8 @@ import {RouterModule} from "@angular/router";
 import {UserGestionComponent} from './user-gestion/user-gestion.component';
 import {SharedModule} from "../../../shared/shared.module";
 import { UserDetailComponent } from './user-detail/user-detail.component';
+import {WpPath} from "../../../shared/routes";
+import {ToBeImplementedComponent} from "../../../shared/foundation/to-be-implemented/to-be-implemented.component";
 
 
 
@@ -16,8 +18,9 @@ import { UserDetailComponent } from './user-detail/user-detail.component';
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      {path: 'admin/users', component: UserGestionComponent},
-      {path: 'admin/users/:id', component: UserDetailComponent}
+      {path: WpPath.admin.users.new, component: ToBeImplementedComponent},
+      {path: WpPath.admin.users.detail, component: UserDetailComponent},
+      {path: WpPath.admin.users.root, component: UserGestionComponent}
     ]),
   ]
 })

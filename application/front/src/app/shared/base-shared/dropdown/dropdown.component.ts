@@ -7,8 +7,8 @@ import {TranslatorService} from "../translator.service";
   styleUrls: ['./dropdown.component.scss']
 })
 export class DropdownComponent implements OnInit {
-  value:string = "empty";
   open:boolean=false
+  protected value:string = "empty";
   @Input() default:string|number|undefined;
   @Input() set?:boolean;
   @Input() prefix:string = "";
@@ -16,6 +16,10 @@ export class DropdownComponent implements OnInit {
   @Input() choices:string[] = [];
   @Output() value_up:EventEmitter<string> = new EventEmitter<string>();
   constructor() { }
+  @Input()
+  set set_value(val:string|undefined) {
+    this.value = val?val:"all";
+  }
 
   ngOnInit(): void {
     if (this.default){

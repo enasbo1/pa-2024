@@ -1,14 +1,22 @@
-import {Component, OnInit} from "@angular/core";
+import {Component, EventEmitter, OnChanges, OnInit, SimpleChanges} from "@angular/core";
+import {GlobalService} from "./shared/global.service";
 
 @Component({
   selector:"pm-root",
   templateUrl:'./app.component.html',
+  styleUrls:[
+    'app.component.scss'
+  ]
 })
-export class AppComponent implements OnInit{
+export class AppComponent implements OnInit, OnChanges{
   pageTitle: string = "wanderPlace";
   title:string = "title 1";
+
   ngOnInit(): void {
-    (window as any).globalVar = "coucou";
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    this.pageTitle = GlobalService.pageName
   }
 
   get status():string{
@@ -18,4 +26,5 @@ export class AppComponent implements OnInit{
     return ''
   }
 
+  protected readonly GlobalService = GlobalService;
 }

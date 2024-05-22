@@ -1,5 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ModalObject} from "./foundation/modale/modalObject";
+import {WP_global} from "./sharedGlobal";
 
 type cookiesType = {token?:string}
 
@@ -30,11 +31,18 @@ export class GlobalService {
     GlobalService.cookie = n;
   }
 
-  public static get modalCurrent():ModalObject{
-    return (window as any).modalCurrent;
+  public static get modalCurrent():ModalObject|undefined{
+    return WP_global.modalCurrent;
   }
 
-  public static set modalCurrent(modal:ModalObject){
-    (window as any).modalCurrent = modal
+  public static set modalCurrent(modal:ModalObject|undefined){
+    WP_global.modalCurrent = modal
+  }
+
+  public static get pageName():string{
+    return WP_global.pageTitle;
+  }
+  public static set pageName(name:string){
+    WP_global.pageTitle = name;
   }
 }

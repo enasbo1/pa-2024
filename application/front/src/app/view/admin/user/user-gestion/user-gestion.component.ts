@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {FilterObject} from "../../../../shared/foundation/list/filterObject";
 import {ListObject} from "../../../../shared/foundation/list/listObject";
 import {UserModelService} from "../../../../http/model/user-model/user-model.service";
+import {UserMapperService} from "../../../../mapper/user-mapper.service";
+import {WpPath} from "../../../../shared/routes";
+import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
   selector: 'pm-user-gestion',
@@ -20,17 +23,18 @@ export class UserGestionComponent implements OnInit {
     'nom'
   ];
 
-  private detailPage:string = "/admin/users";
+  private detailPage:string = WpPath.admin.users.root;
   constructor(private userModelService : UserModelService) { }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Utilisateur";
     this.userModelService.get_user().subscribe((
       users)=>
       this.setUser(
         users.map((user)=>
-          this.userModelService.user_to_list(user, this.detailPage))
+          UserMapperService.model_to_list(user)
       )
-    )
+    ))
   }
 
   private setUser(user:ListObject[]):void{

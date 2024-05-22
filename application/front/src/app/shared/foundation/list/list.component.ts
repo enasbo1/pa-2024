@@ -34,13 +34,14 @@ export class ListComponent implements OnInit {
           type:filter.type,
           choices:filter.choices?filter.choices:[],
           set:filter.set,
-          default:filter.default
+          default:filter.default,
+          value:filter.default,
         });
       });
     }
   }
 
-  refresh_filter(){
+  refresh_filter():void{
     this._filters?.forEach(filter => {
       if (filter.type === "auto") {
         const value = filter.value;
@@ -105,7 +106,7 @@ export class ListComponent implements OnInit {
     return filtered_list;
   }
 
-  findFlilter(item:ListObject, name:string){
+  findFlilter(item:ListObject, name:string):ListObjectPropriety|undefined{
     return item.propriete?.find(
       value =>
         value.name?.toLowerCase() === name.toLowerCase()
@@ -194,15 +195,21 @@ export class ListComponent implements OnInit {
     }
     return true;
   }
-  switch_rubric(value:string){
+  switch_rubric(value:string):void{
     this.search_crit = value;
   }
 
-  filter_update(filter:_FilterObject, value:string){
+  filter_update(filter:_FilterObject, value:string):void{
     if (filter.type==='bool'){
       filter.value = (value === filter.choices[0]);
     }else{
       filter.value = value;
+    }
+  }
+
+  reset_filter():void{
+    for(let filt of this._filters?this._filters:[]){
+      filt.value = "all"
     }
   }
 

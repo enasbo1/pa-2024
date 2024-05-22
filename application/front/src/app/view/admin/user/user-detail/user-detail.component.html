@@ -1,1 +1,13 @@
-<p>user-detail To be Implemented</p>
+<section class = 'flex'>
+  <div>
+    <div *ngIf="user_rubric" class="rubric-container">
+      <pm-rubric [content]="user_rubric"></pm-rubric>
+    </div>
+    <br>
+    <div class="flex">
+      <button class="bubble {{user?'colored hover-0':'disabled'}}"><b>Modifier</b></button>
+      <button class="bubble {{user?'colored-red hover-0':'disabled'}}"><b>Suprimer</b></button>
+    </div>
+    <br>
+  </div>
+</section>

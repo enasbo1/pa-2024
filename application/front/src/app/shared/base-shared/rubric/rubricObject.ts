@@ -8,4 +8,5 @@ export interface RubricElement{
   type : "text"|"file"|"panel"|"modal"|"image"|"stars"|'link'
   text ?: string
   value? : string|RubricObject|number
+  _open?:boolean
 }

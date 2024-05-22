@@ -11,9 +11,9 @@
           <td *ngSwitchCase="'text'">{{translatorService.echo(item.text, '...')}}</td>
           <td *ngSwitchCase="'link'"><a [href]="item.value">{{translatorService.echo(item.text, '...')}}</a></td>
           <td *ngSwitchCase="'file'"><a [href]="item.value" target="_blank">{{translatorService.echo(item.text, '...')}}</a></td>
-          <td *ngSwitchCase="'panel'" class="clickable" (click)="open_panel(item.value)">{{translatorService.echo(item.text, '...')}}</td>
-          <td *ngSwitchCase="'modal'" class="clickable" (click)="open_modal(item.value)">{{translatorService.echo(item.text, '...')}}</td>
-          <td *ngSwitchCase="'image'" class="clickable" (click)="open_image(item.value)">{{translatorService.echo(item.text, '...')}}</td>
+          <td *ngSwitchCase="'panel'" class="clickable" (click)="open_panel(item)">{{translatorService.echo(item.text, '...')}}<b> {{item._open?'<':'>'}}</b></td>
+          <td *ngSwitchCase="'modal'" class="clickable" (click)="open_modal(item)">{{translatorService.echo(item.text, '...')}}<b> {{item._open?'x':'o'}}</b></td>
+          <td *ngSwitchCase="'image'" class="clickable" (click)="open_image(item)">{{translatorService.echo(item.text, '...')}}</td>
           <td *ngSwitchCase="'stars'" class="clickable"><pm-star [rating]="rate(item.value)"></pm-star></td>
         </ng-container>
       </tr>

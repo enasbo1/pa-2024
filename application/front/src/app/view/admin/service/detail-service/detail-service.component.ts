@@ -10,6 +10,8 @@ import {FormFieldObject} from "../../../../shared/base-shared/form-field/formFie
 import {DateService} from "../../../../http/shared/date.service";
 import {FormService} from "../../../../shared/foundation/form/form.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {ServiceMapperService} from "../../../../mapper/service-mapper.service";
+import {GlobalService} from "../../../../shared/global.service";
 
 
 @Component({
@@ -37,6 +39,7 @@ export class DetailServiceComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Service";
     this.route.params.subscribe((params:Params) => {
       this.query_params = {fromService:params["id"]};
       this.serviceModelService.get_one_service(params['id']).subscribe(
@@ -52,20 +55,9 @@ export class DetailServiceComponent implements OnInit {
 
   private set_services(service?:ServiceObject):void{
     this.service_object = service;
-    this.service = {
-      title : service?.type,
-      content : [
-        {name : 'note', type:'stars', text:"", value:service?.note},
-        {name : 'tarif', type:'text', text:service?.tarif+'€'},
-        {name : 'id', type:'text', text:service?.id.toString()},
-        {name : 'type', type:'text', text:service?.type},
-        {name : 'description', type:'text', text:service?.description},
-        {name : 'date_debut', type:'text', text:DateService.to_front(service?.date_debut)},
-        {name : 'date_fin', type:'text', text:DateService.to_front(service?.date_fin)},
-        {name : 'fiche', type:'text', text:service?.fiche},
-        {name : 'coef', type:'text', text:service?.coef.toString()},
-        this.enterprise
-      ]
+    if (service) {
+      this.service = ServiceMapperService.model_to_rubric(service);
+      this.service.content.push(this.enterprise)
     }
   }
 

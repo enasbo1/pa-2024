@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
   selector: 'pm-gestion-location',
@@ -10,6 +11,7 @@ export class GestionLocationComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Location";
   }
 
 }

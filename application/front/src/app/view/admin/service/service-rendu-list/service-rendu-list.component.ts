@@ -4,6 +4,8 @@ import {ListObject} from "../../../../shared/foundation/list/listObject";
 import {FilterObject} from "../../../../shared/foundation/list/filterObject";
 import {ServiceUsedModelService} from "../../../../http/model/service-used-model/service-used-model.service";
 import {ServiceUsedObject} from "../../../../http/model/service-used-model/serviceUsedObject";
+import {PrestaMapperService} from "../../../../mapper/presta-mapper.service";
+import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
   selector: 'pm-service-rendu-list',
@@ -35,6 +37,7 @@ export class ServiceRenduListComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Prestation";
     this.route.queryParams.subscribe((query:Params)=>{
       this.filters[0].default = query["fromService"];
       this.serviceUsedModelService.get_serviceUsed()
@@ -43,7 +46,7 @@ export class ServiceRenduListComponent implements OnInit {
         this.setService(
           serviceUsed.map(
             (sObject:ServiceUsedObject)=>
-              this.serviceUsedModelService.serviceUsed_to_list(sObject,this.detailPage)
+              PrestaMapperService.model_to_list(sObject,this.detailPage)
           )
         )
       )

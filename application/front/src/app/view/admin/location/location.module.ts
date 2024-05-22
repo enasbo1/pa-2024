@@ -4,6 +4,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { RouterModule } from '@angular/router';
 import { ToBeImplementedComponent } from 'src/app/shared/foundation/to-be-implemented/to-be-implemented.component';
 import { GestionLocationComponent } from './gestion-location/gestion-location.component';
+import {WpPath} from "../../../shared/routes";
 
 
 
@@ -15,8 +16,8 @@ import { GestionLocationComponent } from './gestion-location/gestion-location.co
     CommonModule,
     SharedModule,
     RouterModule.forChild([
-      {path: 'admin/location/:id', component: ToBeImplementedComponent},
-      {path: 'admin/location', component: GestionLocationComponent}
+      {path: WpPath.admin.location.detail, component: ToBeImplementedComponent},
+      {path: WpPath.admin.location.root, component: GestionLocationComponent}
     ])
 
   ]

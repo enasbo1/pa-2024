@@ -3,6 +3,9 @@ import {FilterObject} from "../../../../shared/foundation/list/filterObject";
 import {ListObject} from "../../../../shared/foundation/list/listObject";
 import {ServiceModelService} from "../../../../http/model/service-model/service-model.service";
 import {ServiceObject} from "../../../../http/model/service-model/serviceObject";
+import {WpPath} from "../../../../shared/routes";
+import {ServiceMapperService} from "../../../../mapper/service-mapper.service";
+import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
   selector: 'pm-gestion-services',
@@ -24,17 +27,16 @@ export class GestionServicesComponent implements OnInit {
     'number'
   ];
 
-  private detailPage:string = "/admin/services";
-
   constructor(private serviceModelService : ServiceModelService) { }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Services";
     this.serviceModelService.get_service().subscribe(
       (services:ServiceObject[])=>
       this.setServices(
         services.map(
           (service)=>
-            this.serviceModelService.service_to_list(service, this.detailPage))
+            ServiceMapperService.model_to_list(service))
       )
     )
   }

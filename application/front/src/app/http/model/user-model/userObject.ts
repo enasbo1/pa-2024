@@ -9,5 +9,6 @@ export interface UserObject{
   ville: string,
   code_postal: number,
   numero: number,
-  role: string
+  role: string,
+  id_entreprise:number,
 }

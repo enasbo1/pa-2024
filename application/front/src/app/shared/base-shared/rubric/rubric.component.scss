@@ -20,5 +20,8 @@ table{
     &:first-child{
       text-align: center;
     }
+    &:last-child{
+      text-align: left;
+    }
   }
 }
