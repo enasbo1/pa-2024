@@ -3,6 +3,7 @@ import {UserObject} from "../http/model/user-model/userObject";
 import {ListObject} from "../shared/foundation/list/listObject";
 import {RubricObject} from "../shared/base-shared/rubric/rubricObject";
 import {UserModelService} from "../http/model/user-model/user-model.service";
+import {FormStepObject} from "../shared/base-shared/form-step/formStepObject";
 
 @Injectable({
   providedIn: 'root'
@@ -60,5 +61,102 @@ export class UserMapperService {
           value:'entreprise/'+user?.id_entreprise},
       ]
     }
+  }
+
+  static model_to_form(user?:UserObject, title?:string):FormStepObject[]{
+    return [
+      {
+        title:title,
+        content :[
+          {title : 'identite',
+            content:[
+              {
+                name:"prenom",
+                title:"prenom *",
+                type : "text",
+                placeholder:"Timéo",
+                default:user?.prenom,
+              },
+              {
+                name:"nom",
+                title:"nom *",
+                type : "text",
+                placeholder:"Dupond",
+                default:user?.nom,
+              },
+              {
+                name:"mail",
+                title:"Email *",
+                type : "text",
+                placeholder:"timeo.dupond@mail.com",
+                default:user?.mail,
+              },
+            ]
+          },
+        ]
+      },
+      {
+        content:[
+          {
+            title:"Adresse",
+            content:[
+              {
+                name:"adresse",
+                title:"Adresse *",
+                type : "text",
+                placeholder:"2 allée de la nuit blance",
+                default:user?.adresse,
+              },
+              {
+                name:"code_postal",
+                title:"Code Postal *",
+                type : "num",
+                placeholder:"01015",
+                default:user?.code_postal,
+              },
+              {
+                name:"ville",
+                title: "Ville *",
+                type: "text",
+                placeholder: "Utopia",
+                default: user?.ville
+              },
+              {
+                name:"pays",
+                title:"Pays *",
+                type : "text",
+                placeholder:"FRANCE",
+                default:user?.pays,
+              }
+            ]
+          },
+        ]
+      },
+      {
+        content:[
+          {
+            title:"Coordonnées",
+            content:[
+              {
+                name:"numero",
+                title:"telephone",
+                type: "num",
+                placeholder: "0786791542",
+              }
+            ]
+          },
+          {
+            title:"Mot de passe",
+            content:[
+              {
+                name:"mdp",
+                type:"password",
+                placeholder: "******"
+              },
+            ]
+          }
+        ]
+      }
+    ]
   }
 }

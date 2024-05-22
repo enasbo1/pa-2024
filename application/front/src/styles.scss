@@ -113,10 +113,12 @@ div.card {
 }
 
 .colored{
+  font-weight: bold;
   background-color: styles.$color-colored-gris;
 }
 
 .colored-red{
+  font-weight: bold;
   background-color: styles.$color-error;
 }
 

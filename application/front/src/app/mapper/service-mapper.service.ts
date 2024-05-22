@@ -27,6 +27,7 @@ export class ServiceMapperService {
         {name : 'date_debut' , value: service?.date_debut},
         {name : 'date_fin' , value: service?.date_fin},
         {name : 'type', value: service?.type},
+        {name : 'fiche', value: service?.fiche},
         {name : 'tarif', value: service?.tarif},
         {name : 'description', value: service?.description},
         {name : 'number', value: service?.id},
