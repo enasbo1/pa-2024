@@ -8,11 +8,11 @@ delete from service;
 
 insert into utilisateur (id, prenom, nom, mail, mdp, adresse, pays, ville, code_postal, numero, role)
 values(1,'John','Doe','john.does@example.com',
-       '588a7d81d976810dfb57392769ed7e3a3e1f594e01739458dbb74e3548ba8635',
+       '5d2217b2d33df736cdc3258b1d3b7120958504f7da6437d18cd12c321376df28',
        '123 Main Street','France','Paris',75001,123456789, 2);
 insert into utilisateur (id, prenom, nom, mail, mdp, adresse, pays, ville, code_postal, numero, role)
 values(2,'admin','tech','admin@mail.com',
-       '588a7d81d976810dfb57392769ed7e3a3e1f594e01739458dbb74e3548ba8635',
+       '5d2217b2d33df736cdc3258b1d3b7120958504f7da6437d18cd12c321376df28',
        '123 Main Street','France','Paris',75001,123456789, 4);
 
 insert into appartement(id, ville, code_postal, prix_fixe_nuit, type_gestion, duree, type_de_bien, logement_entier, nb_chambre, nb_occupant_max, surface, horaire_contact, id_utilisateur)
