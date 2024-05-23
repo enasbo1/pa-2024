@@ -11,7 +11,7 @@
 
   <header [ngSwitch]="status">
     <pm-admin-header *ngSwitchCase="'admin'" [pageTitle]="pageTitle"></pm-admin-header>
-    <pm-admin-header *ngSwitchCase="'voyageur'" [pageTitle]="pageTitle">></pm-admin-header>
+    <pm-voyageur-header *ngSwitchCase="'voyageurs'" [pageTitle]="pageTitle"></pm-voyageur-header>
     <pm-header *ngSwitchDefault [pageTitle]="pageTitle"></pm-header>
   </header>
 </div>

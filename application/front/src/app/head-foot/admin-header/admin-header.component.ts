@@ -11,6 +11,7 @@ import {WpPath} from "../../shared/routes";
     '../header/header.component.scss'
   ]
 })
+
 export class AdminHeaderComponent extends HeaderComponent{
   override navLinks : NavLink[] = [
     {

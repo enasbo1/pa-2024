@@ -3,6 +3,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {ServiceUsedObject} from "./serviceUsedObject";
 import {RequestService} from "../../shared/request.service";
+import {ServiceObject} from "../service-model/serviceObject";
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,9 @@ export class ServiceUsedModelService extends RequestService{
 
   get_one_serviceUsed(number:bigint):Observable<ServiceUsedObject[]>{
     return (this.get_one('service_used',number) as Observable<ServiceUsedObject[]>);
+  }
+
+  get_service_from_user():Observable<ServiceUsedObject[]>{
+    return this.get('service_used/currentUser') as Observable<ServiceUsedObject[]>;
   }
 }

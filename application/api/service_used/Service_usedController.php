@@ -25,9 +25,10 @@ class Service_usedController {
                         }else if($id =="location"){
                             $service = $request->findByLocation($id2);
                             echo json_encode($service);
-                        }else if($id =="users"){
-                            var_dump($_TOKEN);
-                        }else  {
+                        }else if($id =="currentUser"){
+                            $service_used = $request->findByUser($_TOKEN->user_id);
+                            echo json_encode($service_used);
+                        }else{
                             $service_used = $request->findById($id);
                             echo json_encode($service_used);
                         }

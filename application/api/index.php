@@ -52,12 +52,12 @@ if (isset($_SERVER["HTTP_TOKEN"]) && (strlen($_SERVER["HTTP_TOKEN"])>20)){
         exit;
     }
 }else{
-    $_TOKEN = [
+    $_TOKEN = json_decode(json_encode([
         'user_id' => 0,
         'user_firstname' => '',
         'user_lastname' => '',
         'user_role' => 0
-    ];
+    ]));
 };
 if ($_SERVER['REQUEST_METHOD']=="OPTIONS"){
     echo('{"options":"coucou"}');

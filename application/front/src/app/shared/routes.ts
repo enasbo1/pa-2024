@@ -28,5 +28,13 @@ export const  WpPath={
 
     root: 'admin',
     root2: 'admin/',
+  },
+
+  voyageur:{
+    home: 'voyageurs/home',
+    myservices: 'voyageurs/myservices',
+    root:'voyageurs'
   }
+
 }
+

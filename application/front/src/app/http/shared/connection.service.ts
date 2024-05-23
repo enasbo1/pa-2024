@@ -35,8 +35,8 @@ export class ConnectionService extends RequestService{
   }
 
   private _success(token:string|undefined):void{
-    console.log(token);
     GlobalService.token = token;
+    console.log(GlobalService.token);
     if (this.success){
       this.success(true);
     }

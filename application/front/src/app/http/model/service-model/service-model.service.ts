@@ -25,4 +25,6 @@ export class ServiceModelService extends RequestService{
   get_one_service(number:bigint):Observable<ServiceObject[]>{
     return (this.get_one('service',number) as Observable<ServiceObject[]>);
   }
+
+
 }
