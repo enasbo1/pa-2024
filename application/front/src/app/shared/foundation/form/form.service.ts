@@ -8,6 +8,14 @@ export class FormService {
 
   constructor() { }
 
+  static require_values(formFields:FormFieldObject[], names:string[]):string|void{
+    for (const name of names) {
+      if (!FormService.get_value(formFields, name)){
+        return name
+      }
+    }
+  }
+
   static get_value(formFields:FormFieldObject[],name:string, defaut?:FormFieldValue):FormFieldValue{
     const v:FormFieldValue = formFields.find((form:FormFieldObject):boolean=>form.name===name)?._value
     return v?v:defaut;

@@ -10,8 +10,8 @@
   </main>
 
   <header [ngSwitch]="status">
-    <pm-admin-header *ngSwitchCase="'admin'" [pageTitle]="pageTitle" [pageName]="GlobalService.pageName"></pm-admin-header>
-    <pm-admin-header *ngSwitchCase="'voyageur'" [pageTitle]="pageTitle"></pm-admin-header>
+    <pm-admin-header *ngSwitchCase="'admin'" [pageTitle]="pageTitle"></pm-admin-header>
+    <pm-admin-header *ngSwitchCase="'voyageur'" [pageTitle]="pageTitle">></pm-admin-header>
     <pm-header *ngSwitchDefault [pageTitle]="pageTitle"></pm-header>
   </header>
 </div>

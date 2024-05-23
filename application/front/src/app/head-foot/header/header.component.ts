@@ -12,7 +12,6 @@ import {WpPath} from "../../shared/routes";
 })
 export class HeaderComponent implements OnInit {
   @Input() pageTitle?: string;
-  @Input() pageName?: string;
 
   navLinks : NavLink[] = [
     {

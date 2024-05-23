@@ -9,6 +9,10 @@ import {ListObject} from "../../../shared/foundation/list/listObject";
 })
 export class UserModelService extends RequestService{
 
+  post_user(content:UserObject):Observable<object>{
+    return (this.post(content, 'users'));
+  }
+
   get_user():Observable<UserObject[]>{
     return (this.get('users') as Observable<UserObject[]>);
   }

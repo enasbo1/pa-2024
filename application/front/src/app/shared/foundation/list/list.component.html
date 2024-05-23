@@ -14,7 +14,7 @@
   <div class="flex short-line">
     <div *ngFor="let filt of _filters" class = 'line flex w-100'>
       <pm-dropdown
-        [set_value]="filt.value?.toString()"
+        [set_value]="filt.set_value"
         [choices]="filt.choices"
         [default]="filt.default?filt.default:'all'"
         [set]="filt.set"

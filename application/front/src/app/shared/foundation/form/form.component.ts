@@ -30,10 +30,27 @@ export class FormComponent implements OnInit {
     --this.step;
   }
 
-  public next_step(){
+  public next_step():EventEmitter<boolean>|void{
     if (this.get_current()?.validator){
       // @ts-ignore
-      this.get_current()?.validator(()=>this._next_step(),this.step);
+      const verified:boolean|EventEmitter<boolean> = this.get_current()?.validator(
+        // @ts-ignore
+        this.get_current(),
+      );
+      if (verified === true){
+        console.log("verified = true");
+        this._next_step()
+      } else if (verified === false){
+        console.log("verified = false")
+      } else{
+        console.log("verified = Event")
+        verified.subscribe(
+          (val:boolean):void  =>
+            val?this._next_step():undefined
+        )
+        return verified;
+      }
+
     }else{
       this._next_step()
     }
@@ -44,7 +61,18 @@ export class FormComponent implements OnInit {
   }
 
   public onSumbit(){
-    this.next_step();
+    let verif:void|EventEmitter<boolean>= this.next_step();
+    if (verif){
+      verif.subscribe(
+        (val:boolean):void=>
+          val?this._submit():undefined
+      )
+    }else{
+      this._submit()
+    }
+  }
+
+  private _submit():void{
     if (this.items){
       const value:FormFieldObject[] = [];
       this.items.forEach(
@@ -61,5 +89,6 @@ export class FormComponent implements OnInit {
         value
       )
     }
+
   }
 }

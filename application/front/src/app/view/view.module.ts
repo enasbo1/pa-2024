@@ -6,18 +6,20 @@ import {SharedModule} from "../shared/shared.module";
 import { DiconnectionComponent } from './diconnection/diconnection.component';
 import {AdminModule} from "./admin/admin.module";
 import {WpPath} from "../shared/routes";
+import {ErrorModule} from "./error/error.module";
 
 
 
 @NgModule({
   declarations: [
     ConnectionComponent,
-    DiconnectionComponent
+    DiconnectionComponent,
   ],
   imports: [
     CommonModule,
     SharedModule,
     AdminModule,
+    ErrorModule,
     RouterModule.forChild([
       { path: WpPath.login, component: ConnectionComponent},
       { path: WpPath.logout, component: DiconnectionComponent},

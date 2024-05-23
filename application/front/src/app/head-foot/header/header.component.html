@@ -5,7 +5,7 @@
       <pm-dropdown
         *ngIf="true || GlobalService.token"
         [default]="'dev-enviro'"
-        [styles]="'col-6 reversed-bubble transition'"
+        [styles]="'col-6 circle-bubble transition bg-light hover-0 un-bordered'"
         [choices]="keys"
         (value_up)="change_part($event)"
       ></pm-dropdown>
@@ -23,7 +23,7 @@
         </ul>
       </div>
       <h2>
-        {{translator.echo(pageName)}}
+        {{translator.echo(GlobalService.pageName)}}
       </h2>
   </div>
   <div class = "col-3 flex">

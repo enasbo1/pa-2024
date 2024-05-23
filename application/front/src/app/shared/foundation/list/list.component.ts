@@ -209,6 +209,7 @@ export class ListComponent implements OnInit {
 
   reset_filter():void{
     for(let filt of this._filters?this._filters:[]){
+      filt.set_value = "all"
       filt.value = "all"
     }
   }

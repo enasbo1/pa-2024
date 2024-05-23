@@ -13,5 +13,6 @@ export interface _FilterObject extends FilterObject{
   type:"bool"|"choice"|"search"|"auto";
   choices:string[];
   value?:string|boolean;
+  set_value?:string;
   default?:string
 }

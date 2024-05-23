@@ -10,6 +10,7 @@ import {GenericModule} from "./generic/generic.module";
 import {SharedModule} from "./shared/shared.module";
 import {ViewModule} from "./view/view.module";
 import {WpPath} from "./shared/routes";
+import {Error404Component} from "./view/error/error404/error404.component";
 
 @NgModule({
   declarations: [ // witch component you need from this module
@@ -26,7 +27,7 @@ import {WpPath} from "./shared/routes";
     RouterModule.forRoot([
       { path: WpPath.home, component: WelcomeComponent},
       { path: '', redirectTo: 'home', pathMatch: 'full'},
-      { path: '**', redirectTo: 'home', pathMatch: 'full'}
+      { path: '**', component: Error404Component}
     ]),
     ProductModule
   ],

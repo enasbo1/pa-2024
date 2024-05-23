@@ -26,8 +26,13 @@ div.card {
 
 .bubble {
   border-radius: 1rem 0 1rem 1rem;
+
   &.reversed-bubble{
     border-radius: 0 1rem 1rem 1rem;
+  }
+
+  &.circle-bubble{
+    border-radius: 1rem;
   }
 
   &.bubble-right{
@@ -94,6 +99,10 @@ div.card {
   border-image: initial;
 }
 
+.un-bordered{
+  border-width: 0;
+}
+
 .hover-bordered{
   transition: all;
   transition-duration: 350ms;
@@ -131,7 +140,7 @@ div.card {
 }
 
 .hover-0:hover, input{
-  background-color: styles.$color-blanc-gris-0;
+  background-color: styles.$color-blanc-gris-0 !important;
 }
 
 .hover-w:hover, input:hover{
@@ -170,4 +179,8 @@ mainTitle{
 
 .clickable, .text-hover{
   cursor: pointer;
+}
+
+h1,h2,h3,h4,h5{
+  text-align: center;
 }

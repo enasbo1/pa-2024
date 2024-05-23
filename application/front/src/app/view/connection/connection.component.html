@@ -1,6 +1,6 @@
 <h5 class="mainTitle error" *ngIf="error">{{translator.echo(error)}}</h5>
 <section  class = "flex" style="padding-top: 5vh">
-  <div>
+  <div id="form-container">
     <pm-form
       [items]="items"
       (submit)="submit($event)"

@@ -1,5 +1,5 @@
 export interface UserObject{
-  id : bigint,
+  id ?: bigint,
   prenom: string,
   nom: string,
   mail: string,
@@ -10,5 +10,5 @@ export interface UserObject{
   code_postal: number,
   numero: number,
   role: string,
-  id_entreprise:number,
+  id_entreprise?:number,
 }
