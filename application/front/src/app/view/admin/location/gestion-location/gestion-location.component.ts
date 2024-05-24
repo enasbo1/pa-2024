@@ -3,6 +3,7 @@ import { FilterObject } from "../../../../shared/foundation/list/filterObject";
 import { ListObject } from "../../../../shared/foundation/list/listObject";
 import { ReservationService } from "../../../../http/shared/reservation-service.service";
 import { ApartmentService } from "../../../../http/shared/apartment-service.service";
+import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
   selector: 'pm-gestion-location',
@@ -30,6 +31,8 @@ export class GestionLocationComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Location";
+
     this.reservationService.get_reservations().subscribe((reservations) =>
       this.setReservations(
         reservations.map((reservation) =>

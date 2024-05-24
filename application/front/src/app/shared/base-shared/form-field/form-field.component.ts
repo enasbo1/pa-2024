@@ -10,7 +10,7 @@ import moment from "moment";
 })
 export class FormFieldComponent implements OnInit {
   @Input() field?:FormFieldObject;
-  @Output() submit:EventEmitter<string|Date|Date[]> = new EventEmitter<string|Date|Date[]>();
+  @Output() submit:EventEmitter<string|number|Date|Date[]> = new EventEmitter<string|number|Date|Date[]>();
 
   date:string = "date";
   start_date?:Date;

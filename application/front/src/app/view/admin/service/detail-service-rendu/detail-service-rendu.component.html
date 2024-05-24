@@ -1,0 +1,12 @@
+<section class = 'flex'>
+  <div>
+    <div *ngIf="service" class="rubric-container">
+      <pm-rubric [content]="service"></pm-rubric>
+    </div>
+    <br>
+    <div class="flex">
+      <button class="bubble {{service_object?'colored-red hover-0':'disabled'}}" (click)="openDeleteModal()"><b>Suprimer</b></button>
+    </div>
+    <br>
+  </div>
+</section>

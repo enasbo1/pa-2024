@@ -1,6 +1,7 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {NavLink} from "../navLink";
 import {HeaderComponent} from "../header/header.component";
+import {WpPath} from "../../shared/routes";
 
 @Component({
   selector: 'pm-admin-header',
@@ -14,27 +15,27 @@ export class AdminHeaderComponent extends HeaderComponent{
   override navLinks : NavLink[] = [
     {
       name : "Home",
-      link : "/admin/welcome"
+      link : WpPath.admin.home
     },
     {
       name : "Utilisateurs",
-      link : "admin/users"
+      link : WpPath.admin.users.root
     },
     {
       name : "Locations",
-      link : "/admin/location"
+      link : WpPath.admin.location.root
     },
     {
       name : "Services",
-      link : "/admin/services"
+      link : WpPath.admin.services.root
     },
     {
       name : "Chatbot",
-      link : "/admin/chatbot"
+      link : WpPath.admin.chatbot
     },
     {
       name : "Tickets",
-      link : "/admin/tickets"
+      link : WpPath.admin.tickets
     },
 
   ];

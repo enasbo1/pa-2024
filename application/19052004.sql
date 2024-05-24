@@ -22,4 +22,8 @@ alter table service_utilisee add FOREIGN KEY(id_SERVICE_ENTREPRISE) REFERENCES s
 alter table utilisateur  add column id_ENTREPRISE INT;
 alter table utilisateur add FOREIGN KEY(id_ENTREPRISE) REFERENCES entreprise(id);
 
-alter table entreprise add column logo varchar(255)
+alter table entreprise add column logo varchar(255);
+alter table service add column actif boolean default true;
+alter table service_utilisee drop column lieu;
+
+update service set actif=true where actif is null;

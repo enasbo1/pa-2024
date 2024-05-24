@@ -98,7 +98,6 @@
     <div  class="bubble hover-w w-100 bordered">
       <input type="file" class = "w-100 hover-w {{field.sclass}}"
              [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
-             [value]="translator.echo(field.default)"
              [placeholder]="translator.echo(field.placeholder)"
              [(ngModel)]="field._value"
       >

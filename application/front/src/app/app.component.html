@@ -1,10 +1,19 @@
-<header [ngSwitch]="status">
-  <pm-admin-header *ngSwitchCase="'admin'" [pageTitle]="pageTitle"></pm-admin-header>
-  <pm-header *ngSwitchDefault [pageTitle]="pageTitle"></pm-header>
-</header>
+<div class = "flex" style="flex-direction: column-reverse">
+  <main>
+    <div></div>
+    <section>
+      <div>
+        <router-outlet></router-outlet>
+      </div>
+      <pm-line></pm-line>
+    </section>
+  </main>
 
-<section class="container">
-  <router-outlet></router-outlet>
-</section>
+  <header [ngSwitch]="status">
+    <pm-admin-header *ngSwitchCase="'admin'" [pageTitle]="pageTitle"></pm-admin-header>
+    <pm-admin-header *ngSwitchCase="'voyageur'" [pageTitle]="pageTitle">></pm-admin-header>
+    <pm-header *ngSwitchDefault [pageTitle]="pageTitle"></pm-header>
+  </header>
+</div>
 
 <pm-modale></pm-modale>

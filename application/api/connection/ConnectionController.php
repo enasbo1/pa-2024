@@ -28,6 +28,8 @@ class ConnectionController {
                     echo $e->getMessage();
                 }
                 break;
+            case "OPTIONS":
+                break;
         }
     }
 }

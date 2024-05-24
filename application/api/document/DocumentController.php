@@ -56,6 +56,8 @@ class DocumentController {
                 $request = new DocumentRepository();
                 $request->delete($id);
                 break;
+            case "OPTIONS":
+                break;
             default:
                 http_response_code(404);
         }

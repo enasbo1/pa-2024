@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {RubricObject} from "./rubricObject";
+import {RubricElement, RubricObject} from "./rubricObject";
 import {TranslatorService} from "../translator.service";
 import {ModaleService} from "../../foundation/modale/modale.service";
 
@@ -11,21 +11,38 @@ import {ModaleService} from "../../foundation/modale/modale.service";
 export class RubricComponent implements OnInit {
   @Input() content?:RubricObject;
 
-  constructor(public translatorService:TranslatorService,
-              ) { }
+  constructor(
+    public translatorService:TranslatorService,
+  ) { }
   ngOnInit(): void {
+
   }
 
-  open_image(src?:string|RubricObject|number):void{
-    ModaleService.createImageModal(<string> src)
+  open_image(src?:RubricElement):void{
+    if (src){
+        src._open = true;
+        ModaleService.createImageModal(<string> src.value).subscribe(()=>
+        src._open=false
+      )
+    }
   }
 
-  open_panel(src?:string|RubricObject|number):void {
-    ModaleService.createRubricModal(<RubricObject> src)
+  open_panel(src?:RubricElement):void {
+    if (src){
+      src._open = true;
+      ModaleService.createRubricModal(<RubricObject> src.value).subscribe(()=>
+        src._open=false
+      )
+    }
   }
 
-  open_modal(src?:string|RubricObject|number):void {
-    ModaleService.createRubricModal(<RubricObject> src)
+  open_modal(src?:RubricElement):void {
+    if (src){
+      src._open = true;
+      ModaleService.createRubricModal(<RubricObject> src.value).subscribe(()=>
+        src._open = false
+      )
+    }
   }
 
   rate(value?:string|RubricObject|number):number{

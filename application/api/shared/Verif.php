@@ -37,6 +37,8 @@ class Verif{
                 return Verif::post_int_inf($value, $arg);
             case ":e":
                 return Verif::post_str_equa($value, $arg);
+            case ":d":
+                return True;
             default:
                 return False;
         }
@@ -54,6 +56,8 @@ class Verif{
             case ":>":
                 return ' doit être plus grand que ' . $arg;
             case ":e":
+                return ' doit faire exatement ' . $arg . ' caractères';
+            case ":d":
                 return ' doit faire exatement ' . $arg . ' caractères';
             default:
                 return '';

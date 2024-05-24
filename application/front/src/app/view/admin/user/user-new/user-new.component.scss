@@ -1,0 +1,10 @@
+@use "../../../../shared/palette.scss" as styles;
+
+.error{
+  color: styles.$color-error;
+  text-align : center !important;
+}
+
+#form-container{
+  width: 24rem;
+}

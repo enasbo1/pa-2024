@@ -16,6 +16,11 @@ section{
     overflow : overlay;
     max-height: 55vh;
 
+    h4.empty-list{
+      padding: 4vw;
+      text-align: center;
+    }
+
     li{
       display: block;
       padding : 1rem;

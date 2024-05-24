@@ -18,7 +18,7 @@ class ServiceRepository extends Repository {
     public function getAll(): array
     {
         $service = [];
-        $result = $this->readAll("unable to find any service");
+        $result = $this->readActif("unable to find any service");
 
         foreach($result as $row) {
             $service[] = $row;
@@ -50,6 +50,18 @@ class ServiceRepository extends Repository {
 
     public function delete(int $id, string $error = "unexciting service cold not be deleted"): void
     {
-        parent::delete($id, $error);
+        if (count($this->get(
+            "SERVICE_ENTREPRISE",
+            ["id"],
+            ["id_SERVICE"=>$id]
+        ))>0){
+            $this->update(json_decode(json_encode([
+                "id"=>$id,
+                "actif"=>"f"
+            ])));
+        }else{
+            parent::delete($id, $error);
+        };
+
     }
 }

@@ -1,6 +1,6 @@
 <ng-container *ngIf="get_current && (step)!=(items?.length)">
   <pm-form-step [items]="get_current()" [justify]="justify"></pm-form-step>
-  <div class="flex" *ngIf="items">
+  <div class="flex w-100" *ngIf="items">
     <button
       *ngIf="step!==0"
       (click)="previus_step()"
@@ -14,7 +14,7 @@
     <button
       *ngIf="(step+1)==(items.length)"
       (click)="onSumbit()"
-      class="bubble hover-w"
+      class="bubble colored hover-0"
     >{{translator.echo("valider")}}</button>
   </div>
 </ng-container>

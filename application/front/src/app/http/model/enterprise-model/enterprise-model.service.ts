@@ -15,7 +15,7 @@ export class EnterpriseModelService extends RequestService{
       link:detailPage+"/"+enterprise.id,
       image:enterprise.logo,
       right:[
-        {text : enterprise.description},
+        {text : this.translator.echo(enterprise.description)},
         null,
         null,
       ],

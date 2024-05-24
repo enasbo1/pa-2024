@@ -3,25 +3,31 @@
 
 .navbar{
   align-items: flex-start;
-  div{
-    display:flex;
-    justify-content: space-around;
+  box-shadow: 0.5rem 0.5rem 0.5rem styles.$color-colored-gris ;
+  position: fixed;
+  top:0;
+  width: 100%;
 
+  div{
     :only-child.nav{
       display:flex;
+      flex-wrap: nowrap;
       justify-content: space-between;
-
     }
     .logo{
       width: 100%;
       height : 6vw
     }
+    h2{
+      margin: 0.5rem 0 0;
+      text-align: center;
+    }
   }
-  div:first-child{
+  >div:first-child{
     justify-content: flex-start;
   }
 
-  div:last-child{
+  >div:last-child{
     justify-content: flex-end;
   }
 }
@@ -34,8 +40,13 @@
   a{
     color : black;
     text-decoration:none;
+    cursor: pointer;
 
-    &:hover{
+    &.actif{
+      font-weight: bold;
+    }
+
+    &.actif:hover{
       color: styles.$color-colored-gris;
     }
   }

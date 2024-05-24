@@ -11,14 +11,14 @@ class ReservationService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -33,6 +33,8 @@ class ReservationService implements ModelType {
 			"id" => "!int",
 			"total_location" => "r !int",
 			"total_abonnement" => "!int",
+			"date_fin" => "r :d,MDY",
+			"date_debut" => "r :d,MDY",
 			"total_frais" => "!int",
 			"id_APPARTEMENT" => "r !int",
 			"id_UTILISATEUR" => "r !int"
@@ -40,7 +42,7 @@ class ReservationService implements ModelType {
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
         return $arr_params;
@@ -55,6 +57,8 @@ class ReservationService implements ModelType {
 			"id" => isset($params->id)?$params->id:null,
 			"total_location" => isset($params->total_location)?$params->total_location:null,
 			"total_abonnement" => isset($params->total_abonnement)?$params->total_abonnement:null,
+			"date_fin" => isset($params->date_fin)?$params->date_fin:null,
+			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
 			"total_frais" => isset($params->total_frais)?$params->total_frais:null,
 			"id_APPARTEMENT" => isset($params->id_APPARTEMENT)?$params->id_APPARTEMENT:null,
 			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null

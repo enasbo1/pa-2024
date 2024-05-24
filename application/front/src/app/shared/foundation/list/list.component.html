@@ -14,8 +14,10 @@
   <div class="flex short-line">
     <div *ngFor="let filt of _filters" class = 'line flex w-100'>
       <pm-dropdown
+        [set_value]="filt.set_value"
         [choices]="filt.choices"
-        [default]="'all'"
+        [default]="filt.default?filt.default:'all'"
+        [set]="filt.set"
         [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
         (click)="refresh_filter()"
         (value_up)="filter_update(filt, $event)"
@@ -25,6 +27,9 @@
   <pm-line [short]="true"></pm-line>
   <div class="flex">
     <ul class="container">
+      <h4 class="empty-list" *ngIf="(filter_item().length==0)">
+        aucune donnée à afficher <b class="text-hover" (click)="reset_filter()">vider les filtres</b>
+      </h4>
       <li *ngFor="let item of filter_item()" class="{{elements_size()}} col-12">
         <button class="list-element bubble {{item.link?'linked':''}}" [routerLink]=item.link>
           <div class="content bubble_padding">

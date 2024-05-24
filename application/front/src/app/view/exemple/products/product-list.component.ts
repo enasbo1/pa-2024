@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit} from "@angular/core";
 import { IProduct } from "./product";
 import { ProductService } from "./product.service";
 import { Subscription } from "rxjs";
+import {GlobalService} from "../../../shared/global.service";
 
 
 @Component({
@@ -28,6 +29,7 @@ export class ProductListComponent implements OnInit, OnDestroy{
   }
 
   ngOnInit(): void {
+    GlobalService.pageName = "Product"
     this.sub = this.productService.getProduct().subscribe({
       next: products => {
         this.products = products;

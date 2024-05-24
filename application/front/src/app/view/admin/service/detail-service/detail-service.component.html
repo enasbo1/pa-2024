@@ -8,5 +8,9 @@
       <button class="bubble {{service_object?'colored hover-0':'disabled'}}" (click)="openEditModal()"><b>Modifier</b></button>
       <button class="bubble {{service_object?'colored-red hover-0':'disabled'}}" (click)="openDeleteModal()"><b>Suprimer</b></button>
     </div>
+    <br>
+    <div class="flex">
+      <button class="bubble {{query_params?'hover-1':'disabled'}}" [routerLink]="service_rendu" [queryParams]="query_params"><b>prestation</b></button>
+    </div>
   </div>
 </section>

@@ -1,0 +1,7 @@
+@use "../../../../shared/palette.scss" as styles;
+@import '../../../../app.component.scss';
+
+#new-user{
+  width: 100%;
+  max-width: 55rem;
+}

@@ -29,7 +29,7 @@ class UsersService implements ModelType {
 			"pays" => "r :M,50",
 			"ville" => "r :M,50",
 			"code_postal" => "r !int",
-			"numero" => "r !int",
+			"numero" => "r :e,10",
 			"date_inscription" => "!int",
 			"date_modification" => "!int",
 			"role" => "r !int",

@@ -2,6 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import {FilterObject} from "../../../../shared/foundation/list/filterObject";
 import {ListObject} from "../../../../shared/foundation/list/listObject";
 import {ServiceModelService} from "../../../../http/model/service-model/service-model.service";
+import {ServiceObject} from "../../../../http/model/service-model/serviceObject";
+import {WpPath} from "../../../../shared/routes";
+import {ServiceMapperService} from "../../../../mapper/service-mapper.service";
+import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
   selector: 'pm-gestion-services',
@@ -9,7 +13,8 @@ import {ServiceModelService} from "../../../../http/model/service-model/service-
   styleUrls: ['./gestion-services.component.scss']
 })
 export class GestionServicesComponent implements OnInit {
-  services:ListObject[] = []
+  services:ListObject[] = [];
+
   filters:FilterObject[] = [
     {name : 'note' , type:'auto'},
     {name : 'date_debut' , type:'auto'},
@@ -22,16 +27,16 @@ export class GestionServicesComponent implements OnInit {
     'number'
   ];
 
-  private detailPage:string = "/admin/services";
-
   constructor(private serviceModelService : ServiceModelService) { }
 
   ngOnInit(): void {
-    this.serviceModelService.get_service().subscribe((
-      services)=>
+    GlobalService.pageName = "Services";
+    this.serviceModelService.get_service().subscribe(
+      (services:ServiceObject[])=>
       this.setServices(
-        services.map((service)=>
-          this.serviceModelService.service_to_list(service, this.detailPage))
+        services.map(
+          (service)=>
+            ServiceMapperService.model_to_list(service))
       )
     )
   }

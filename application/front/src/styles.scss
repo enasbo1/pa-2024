@@ -25,31 +25,36 @@ div.card {
 }
 
 .bubble {
-  border-radius: 2rem 0 2rem 2rem;
+  border-radius: 1rem 0 1rem 1rem;
+
   &.reversed-bubble{
-    border-radius: 0 2rem 2rem 2rem;
+    border-radius: 0 1rem 1rem 1rem;
+  }
+
+  &.circle-bubble{
+    border-radius: 1rem;
   }
 
   &.bubble-right{
     padding-left : 0.25rem;
-    border-radius: 0 0 2rem 0;
+    border-radius: 0 0 1rem 0;
     &.reversed-bubble{
-      border-radius: 0 2rem 0 0;
+      border-radius: 0 1rem 0 0;
     }
   }
 
   &.bubble-left{
-    border-radius: 2rem 0 0 2rem;
+    border-radius: 1rem 0 0 1rem;
     border-right: 0;
   }
   &.bubble-up{
-    border-radius: 2rem 0 0 0;
+    border-radius: 1rem 0 0 0;
     &.reversed-bubble{
-      border-radius: 0 2rem 0 0;
+      border-radius: 0 1rem 0 0;
     }
   }
   &.bubble-down{
-    border-radius: 0 0 2rem 2rem;
+    border-radius: 0 0 1rem 1rem;
   }
 }
 
@@ -94,6 +99,10 @@ div.card {
   border-image: initial;
 }
 
+.un-bordered{
+  border-width: 0;
+}
+
 .hover-bordered{
   transition: all;
   transition-duration: 350ms;
@@ -113,10 +122,12 @@ div.card {
 }
 
 .colored{
+  font-weight: bold;
   background-color: styles.$color-colored-gris;
 }
 
 .colored-red{
+  font-weight: bold;
   background-color: styles.$color-error;
 }
 
@@ -129,7 +140,7 @@ div.card {
 }
 
 .hover-0:hover, input{
-  background-color: styles.$color-blanc-gris-0;
+  background-color: styles.$color-blanc-gris-0 !important;
 }
 
 .hover-w:hover, input:hover{
@@ -158,6 +169,18 @@ mainTitle{
   text-align: center;
 }
 
-.clickable{
+.text-hover{
+  color: styles.$color-colored-gris;
+
+  &:hover{
+    color: black;
+  }
+}
+
+.clickable, .text-hover{
   cursor: pointer;
+}
+
+h1,h2,h3,h4,h5{
+  text-align: center;
 }

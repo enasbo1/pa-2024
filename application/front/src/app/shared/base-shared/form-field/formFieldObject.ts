@@ -10,7 +10,7 @@ export interface FormFieldObject{
   instruction? : string;
   reg_error?: {regex:string; message:string}[];
   choices? : string[];
-  _value?:string|Date;
+  _value?:FormFieldValue
   _values?:Date[];
   max?:Date;
   min?:Date;
@@ -20,3 +20,5 @@ export interface FormFieldObject{
     max?:number
   };
 }
+
+export type FormFieldValue=string|Date|number|undefined

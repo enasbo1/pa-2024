@@ -1,7 +1,6 @@
 id-|-!int
-date_modif-|-:d,DMY
-date_debut-|-:d,DMY
-lieu-|-r :M,60
+date_modif-|-:d,MDY
+date_debut-|-r :d,MDY
 id_RESERVATION-|-r !int
 id_SERVICE_ENTREPRISE-|-r !int
 id_UTILISATEUR-|-r !int

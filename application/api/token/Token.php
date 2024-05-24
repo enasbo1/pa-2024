@@ -48,7 +48,7 @@ class Token
         return $jwt;        
     }
 
-    static function decodeToken(string $token):array|null{
+    static function decodeToken(string $token):array{
         $jwt  = explode(".",$token);
         if ($jwt && (count($jwt)==3)){
             $header = json_decode(base64_decode(str_replace(['_','-'], ['/','+'],$jwt[0])));
@@ -60,12 +60,10 @@ class Token
                     'payload' => $payload
                 ];
             }else{
-                echo('invalid tocken');
-                throw new Exception('invalid tocken', 401);
+                throw new Exception(json_encode(['message'=>'invalid tocken'], 401));
             }
         }else{
-            echo('invalid tocken');
-            throw new Exception('invalid tocken', 401);
+            throw new Exception(json_encode(['message'=>'invalid tocken'], 401));
         }
     }
 }

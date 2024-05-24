@@ -1,6 +1,6 @@
 export interface EnterpriseObject{
-  id : bigint
+  id : number
   nom: string
-  description:string
+  description?:string
   logo?:string
 }
