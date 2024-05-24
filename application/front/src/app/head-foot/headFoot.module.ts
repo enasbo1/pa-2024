@@ -4,13 +4,15 @@ import {AdminHeaderComponent} from "./admin-header/admin-header.component";
 import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from "../shared/shared.module";
+import { VoyageurHeaderComponent } from './voyageur-header/voyageur-header.component';
 
 
 
 @NgModule({
   declarations: [
     AdminHeaderComponent,
-    HeaderComponent
+    HeaderComponent,
+    VoyageurHeaderComponent
   ],
     imports: [
         CommonModule,
@@ -19,6 +21,7 @@ import { SharedModule } from "../shared/shared.module";
         RouterLink,
     ],
   exports:[
+    VoyageurHeaderComponent,
     AdminHeaderComponent,
     HeaderComponent
   ]

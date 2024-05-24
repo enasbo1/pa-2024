@@ -8,7 +8,6 @@ require_once 'Service_usedService.php';
 
 class Service_usedRepository extends Repository {
     public Service_usedService $service;
-
     private string $getQuery = 
 "SELECT
     su.id as id,
@@ -71,7 +70,7 @@ from service_utilisee su
     public function findById(int $id): array
     {
         $service_used = [];
-        $result = $this->query($this->getQuery."where su.id=$1", ["id" => $id], "service_used not found");
+        $result = $this->query($this->getQuery."where su.id_utilisateur=$1", ["id" => $id], "no services for this user");
         foreach($result as $row) {
             $service_used[] = $this->service->prepareGet($row);
         }
@@ -96,6 +95,17 @@ from service_utilisee su
         foreach($result as $row) {
             $service_used[] = $this->service->prepareGet($row);
         }
+
+        return $service_used;
+    }
+
+    public function findByUser(int $id): array{
+        $service_used = [];
+        $result = $this->query($this->getQuery."where r.id_utilisateur=$1", ["id" => $id],"service_used not found");
+        foreach($result as $row) {
+            $service_used[] = $this->service->prepareGet($row);
+        }
+
 
         return $service_used;
     }

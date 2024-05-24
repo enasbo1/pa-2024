@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
     'partie-admin': '/admin',
     'partie-prestataire': '/prestate',
     'partie-bailleur': '/bail',
-    'partie-voyageur': '/voyageur'
+    'partie-voyageur': '/'+WpPath.voyageur.root
   }
 
   keys : string[]=[

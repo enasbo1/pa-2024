@@ -85,4 +85,6 @@ export class RequestService{
   get_one(url:string, number:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
     return this.get(url + '/'+ number, errorCatch);
   }
+
+
 }
