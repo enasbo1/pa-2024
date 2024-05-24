@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FilterObject } from "../../../../shared/foundation/list/filterObject";
 import { ListObject } from "../../../../shared/foundation/list/listObject";
-import { ReservationService } from "../../../../http/shared/reservation-service.service";
-import { ApartmentService } from "../../../../http/shared/apartment-service.service";
+import { ReservationModelService } from "../../../../http/model/reservation-model/reservation-model.service";
+import {ApartmentModelService} from "../../../../http/model/apartment-model/apartment-model.service";
 import {GlobalService} from "../../../../shared/global.service";
 
 @Component({
@@ -26,8 +26,7 @@ export class GestionLocationComponent implements OnInit {
   private detailPage: string = "/admin/location";
 
   constructor(
-    private reservationService: ReservationService,
-    private apartmentService: ApartmentService
+    private reservationService: ReservationModelService,
   ) { }
 
   ngOnInit(): void {
@@ -43,14 +42,5 @@ export class GestionLocationComponent implements OnInit {
 
   private setReservations(reservations: ListObject[]): void {
     this.reservations = reservations;
-  }
-
-  getApartmentName(id: number): string {
-    // Assuming synchronous retrieval for simplicity; may need adjustment for async.
-    let apartmentName = 'Unknown';
-    this.apartmentService.findById(id).subscribe(apartment => {
-      apartmentName = apartment.ville;
-    });
-    return apartmentName;
   }
 }

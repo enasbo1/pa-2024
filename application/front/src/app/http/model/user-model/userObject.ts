@@ -8,7 +8,7 @@ export interface UserObject{
   pays: string,
   ville: string,
   code_postal: number,
-  numero: number,
+  numero: string,
   role: string,
   id_entreprise?:number,
 }

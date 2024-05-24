@@ -1,18 +1,16 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ListObject } from "../../shared/foundation/list/listObject";
+import { ListObject } from "../../../shared/foundation/list/listObject";
+import {RequestService} from "../../shared/request.service";
+import {DateService} from "../../shared/date.service";
 
 @Injectable({
   providedIn: 'root'
 })
-export class ReservationService {
-  private apiUrl = 'http://ton-domaine.com/api/reservations';  // URL de l'API PHP
-
-  constructor(private http: HttpClient) { }
+export class ReservationModelService extends RequestService{
 
   get_reservations(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
+    return this.get('reservation') as Observable<any[]>;
   }
 
   reservation_to_list(reservation: any, detailPage: string): ListObject {
@@ -26,8 +24,8 @@ export class ReservationService {
       ],
       mid: [
         { text: `Date début: ${reservation.date_debut}` },
-        { text: `Date fin: ${reservation.date_fin}` },
-        { text: `Appartement ID: ${reservation.id_appartement}` }
+        { text: `Date fin: ${DateService.to_front(reservation.date_fin)}` },
+        { text: `Appartement ID: ${DateService.to_front(reservation.id_appartement)}` }
       ],
       left: [
         null,

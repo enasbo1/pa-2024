@@ -83,75 +83,10 @@ export class DetailServiceComponent implements OnInit {
 
   public openEditModal():void{
     if (this.service_object){
-      ModaleService.createFormModal({
-        title:'modifier le service',
-        content:[
-          {
-            title : 'details',
-            content:[
-              {
-                name:'type',
-                type:'text',
-                title:'type : ' + this.service_object.type,
-                placeholder:this.service_object.type,
-                default:this.service_object.type,
-              },
-              {
-                name:'description',
-                type:'longtext',
-                title:'description',
-                placeholder:this.service_object.description,
-                default:this.service_object.description,
-              },
-            ]
-          },
-          {
-            title:'dates',
-            content:[
-              {
-                name :'date',
-                type :'period',
-              },
-            ]
-          },
-          {
-            title:'divers',
-            content:[
-              {
-                title: 'note : '+ this.service_object.note,
-                name :'note',
-                type :'num',
-                step:0.1,
-                number_limit:{
-                  max:5,
-                  min:0
-                },
-                default: this.service_object.note,
-                placeholder: this.service_object.note
-              },
-              {
-                title: 'coef : '+ this.service_object.coef,
-                name :'coef',
-                type :'num',
-                step:0.1,
-                number_limit:{
-                  min:0.01
-                },
-                default: this.service_object.coef,
-                placeholder: this.service_object.coef
-              },
-              {
-                title: 'fiche : '+ this.service_object.fiche,
-                name :'fiche',
-                type :'file',
-                default: this.service_object.fiche,
-                placeholder: this.service_object.fiche
-              },
-            ]
-          }
-        ]
-      }).subscribe(
-        (editValues:FormFieldObject[])=>{
+      ModaleService.createFormModal(
+        ServiceMapperService.model_to_form_step(this.service_object))
+        .subscribe(
+        (editValues:FormFieldObject[]):void=>{
           this.to_edit(editValues);
         }
       )
@@ -176,18 +111,7 @@ export class DetailServiceComponent implements OnInit {
 
   private edit(values:FormFieldObject[]):void{
     if (this.service_object){
-      let dates = this.getDate(values.find((x)=>x.name==="date")?._values)
-      let service:ServiceObject = {
-        id:this.service_object.id as number,
-        type:FormService.get_value(values, 'type', this.service_object.type) as string,
-        description:FormService.get_value(values, 'description', this.service_object.description) as string,
-        tarif:FormService.get_value(values, 'tarif', this.service_object.tarif) as number,
-        date_debut:dates.start,
-        date_fin:dates.end,
-        note:FormService.get_value(values, 'note', this.service_object.note) as  number,
-        fiche:FormService.get_value(values, 'fiche', this.service_object.fiche) as string,
-        coef:FormService.get_value(values, 'coef', this.service_object.coef) as number
-      }
+      let service:ServiceObject = ServiceMapperService.form_to_model(values,this.service_object)
       let error:EventEmitter<HttpErrorResponse>=new EventEmitter<HttpErrorResponse>();
       error.subscribe(
         ()=>
@@ -199,20 +123,6 @@ export class DetailServiceComponent implements OnInit {
           this.ngOnInit()
         }
       );
-    }
-  }
-
-  private getDate(dates?:Date[]):{start:string, end:string}{
-    if (dates){
-      return {
-        start:DateService.to_api(dates[0]),
-        end :DateService.to_api(dates[1])
-      }
-    }else{
-      return {
-        start:DateService.to_api(),
-        end :DateService.to_api()
-      }
     }
   }
 

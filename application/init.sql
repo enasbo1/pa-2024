@@ -36,7 +36,7 @@ create table utilisateur
     pays              varchar(50),
     ville             varchar(50),
     code_postal       integer,
-    numero            integer,
+    numero            varchar(10),
     date_inscription  timestamp,
     date_modification timestamp,
     role              integer,

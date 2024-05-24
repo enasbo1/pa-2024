@@ -82,7 +82,7 @@ export class GenFormComponent implements OnInit {
           {
             name : "regex",
             type : "regex",
-            regex:".*i",
+            regex:new RegExp(".*i"),
             placeholder:"regex",
             default:"di",
           },
@@ -103,7 +103,7 @@ export class GenFormComponent implements OnInit {
             {
               name : "url2",
               type : "url",
-              regex:".*i",
+              regex:new RegExp(".*i"),
               placeholder:"url",
               default:"di",
             },

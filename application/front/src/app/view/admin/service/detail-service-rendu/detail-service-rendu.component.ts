@@ -1,21 +1,13 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {ServiceModelService} from "../../../../http/model/service-model/service-model.service";
 import {RubricElement, RubricObject} from "../../../../shared/base-shared/rubric/rubricObject";
 import {ActivatedRoute, Params, Router} from "@angular/router";
-import {ServiceObject} from "../../../../http/model/service-model/serviceObject";
-import {EnterpriseModelService} from "../../../../http/model/enterprise-model/enterprise-model.service";
 import {EnterpriseObject} from "../../../../http/model/enterprise-model/enterpriseObject";
 import {ModaleService} from "../../../../shared/foundation/modale/modale.service";
-import {FormFieldObject} from "../../../../shared/base-shared/form-field/formFieldObject";
 import {DateService} from "../../../../http/shared/date.service";
-import {FormService} from "../../../../shared/foundation/form/form.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ServiceUsedModelService} from "../../../../http/model/service-used-model/service-used-model.service";
 import {ServiceUsedObject} from "../../../../http/model/service-used-model/serviceUsedObject";
-import {UserModelService} from "../../../../http/model/user-model/user-model.service";
 import {WpPath} from "../../../../shared/routes";
-import {UserMapperService} from "../../../../mapper/user-mapper.service";
-import {ServiceMapperService} from "../../../../mapper/service-mapper.service";
 import {PrestaMapperService} from "../../../../mapper/presta-mapper.service";
 import {GlobalService} from "../../../../shared/global.service";
 

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {TranslatorService} from "../translator.service";
+import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'pm-dropdown',
@@ -15,7 +14,7 @@ export class DropdownComponent implements OnInit {
   @Input() styles:string = "";
   @Input() choices:string[] = [];
   @Output() value_up:EventEmitter<string> = new EventEmitter<string>();
-  constructor() { }
+  constructor(private eRef: ElementRef) { }
   @Input()
   set set_value(val:string|undefined) {
     this.value = val?val:"all";
@@ -33,6 +32,7 @@ export class DropdownComponent implements OnInit {
     }
   }
 
+
   toggle():void{
     this.open = !this.open;
   }
@@ -41,5 +41,11 @@ export class DropdownComponent implements OnInit {
     this.open = false;
     this.value = value;
     this.value_up.emit(value);
+  }
+  @HostListener('document:click', ['$event'])
+  clickout(event: { target: any; }) {
+    if(!this.eRef.nativeElement.contains(event.target)) {
+      this.open = false;
+    }
   }
 }

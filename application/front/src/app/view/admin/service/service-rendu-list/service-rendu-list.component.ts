@@ -29,7 +29,6 @@ export class ServiceRenduListComponent implements OnInit {
     'appartement'
   ];
 
-  private detailPage:string = "/admin/service_rendu"
 
   constructor(
     private route :ActivatedRoute,
@@ -41,15 +40,15 @@ export class ServiceRenduListComponent implements OnInit {
     this.route.queryParams.subscribe((query:Params)=>{
       this.filters[0].default = query["fromService"];
       this.serviceUsedModelService.get_serviceUsed()
-      .subscribe(
-        (serviceUsed:ServiceUsedObject[])=>
-        this.setService(
-          serviceUsed.map(
-            (sObject:ServiceUsedObject)=>
-              PrestaMapperService.model_to_list(sObject,this.detailPage)
+        .subscribe(
+          (serviceUsed:ServiceUsedObject[])=>
+          this.setService(
+            serviceUsed.map(
+              (sObject:ServiceUsedObject)=>
+                PrestaMapperService.model_to_list(sObject)
+            )
           )
         )
-      )
       }
     )
   }

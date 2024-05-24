@@ -31,19 +31,36 @@ export class FormComponent implements OnInit {
   }
 
   public next_step():EventEmitter<boolean>|void{
-    if (this.get_current()?.validator){
-      // @ts-ignore
-      const verified:boolean|EventEmitter<boolean> = this.get_current()?.validator(
-        // @ts-ignore
-        this.get_current(),
+    const current = this.get_current()
+    let error:boolean = current?.content.find((rubric:FormRubricObject):boolean=>
+      rubric.content.find(
+        (field:FormFieldObject):boolean=>{
+          const val = field._value?.toString();
+          return field.reg_error?.find(
+            (regtest):boolean=>{
+              if (!regtest.regex.test(val?val:'')){
+                current.errorEvent?.emit(regtest.message)
+                return true;
+              }
+              return false;
+            }
+          )!==undefined;
+        }
+      )!==undefined
+    )!==undefined
+    if (error){
+      return
+    }
+    if (current?.validator){
+      const verified:boolean|EventEmitter<boolean> = current.validator(
+        current,
       );
       if (verified === true){
-        console.log("verified = true");
         this._next_step()
+        return;
       } else if (verified === false){
-        console.log("verified = false")
+        return;
       } else{
-        console.log("verified = Event")
         verified.subscribe(
           (val:boolean):void  =>
             val?this._next_step():undefined

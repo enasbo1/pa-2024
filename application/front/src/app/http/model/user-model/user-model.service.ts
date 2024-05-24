@@ -21,4 +21,8 @@ export class UserModelService extends RequestService{
     return (this.get_one('users',number) as Observable<UserObject[]>);
 
   }
+
+  update_user(content:UserObject):Observable<object>{
+    return (this.edit(content, 'users'))
+  }
 }

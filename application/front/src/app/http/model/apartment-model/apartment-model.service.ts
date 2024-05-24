@@ -1,23 +1,17 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { ListObject } from "../../shared/foundation/list/listObject";
+import { ListObject } from "../../../shared/foundation/list/listObject";
+import {RequestService} from "../../shared/request.service";
 
 
 @Injectable({
   providedIn: 'root'
 })
-export class ApartmentService {
-  private apiUrl = 'http://ton-domaine.com/api/apartments';  // URL de l'API PHP
+export class ApartmentModelService extends RequestService{
 
-  constructor(private http: HttpClient) { }
-
-  get_apartments(): Observable<any[]> {
-    return this.http.get<any[]>(this.apiUrl);
-  }
-
-  findById(id: number): Observable<any> {
-    return this.http.get<any>(`${this.apiUrl}/${id}`);
+  get_apartments(): Observable<object> {
+    return this.get('apartments');
   }
 
   apartment_to_list(apartment: any): ListObject {

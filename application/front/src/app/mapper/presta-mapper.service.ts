@@ -42,10 +42,10 @@ export class PrestaMapperService {
       }
   }
 
-  static model_to_list(serviceUsed:ServiceUsedObject, detailPage:string):ListObject{
+  static model_to_list(serviceUsed:ServiceUsedObject, detailPage?:string):ListObject{
     return {
       title:"Service Rendu",
-      link:detailPage+"/"+serviceUsed.id,
+      link:(detailPage?detailPage+"/":'')+serviceUsed.id,
       right:[
         {text : "prestataire : "+ serviceUsed.entreprise.nom},
         {text : "bénéficiaire : "+ UserMapperService.get_U_Name(serviceUsed.utilisateur)},

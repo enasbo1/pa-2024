@@ -38,7 +38,7 @@ from service_utilisee su
     inner join reservation r on su.id_reservation = r.id
     inner join appartement a on a.id = r.id_appartement
     inner join entreprise e on se.id_entreprise = e.id
-    inner join public.utilisateur u on u.id = r.id_utilisateur
+    inner join utilisateur u on u.id = r.id_utilisateur
 ";
 
 
@@ -70,7 +70,7 @@ from service_utilisee su
     public function findById(int $id): array
     {
         $service_used = [];
-        $result = $this->query($this->getQuery."where su.id_utilisateur=$1", ["id" => $id], "no services for this user");
+        $result = $this->query($this->getQuery."where su.id=$1", ["id" => $id], "no services for this user");
         foreach($result as $row) {
             $service_used[] = $this->service->prepareGet($row);
         }
@@ -101,7 +101,7 @@ from service_utilisee su
 
     public function findByUser(int $id): array{
         $service_used = [];
-        $result = $this->query($this->getQuery."where r.id_utilisateur=$1", ["id" => $id],"service_used not found");
+        $result = $this->query($this->getQuery."where u.id=$1", ["id" => $id],"service_used not found");
         foreach($result as $row) {
             $service_used[] = $this->service->prepareGet($row);
         }

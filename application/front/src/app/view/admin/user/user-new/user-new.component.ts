@@ -9,8 +9,8 @@ import {TranslatorService} from "../../../../shared/base-shared/translator.servi
 
 @Component({
   selector: 'pm-user-new',
-  templateUrl: './user-new.component.html',
-  styleUrls: ['./user-new.component.scss']
+  templateUrl: './../user-edit/user-edit.component.html',
+  styleUrls: ['./../user-edit/user-edit.component.scss']
 })
 export class UserNewComponent implements OnInit {
   user_form:FormStepObject[] = UserMapperService.model_to_form();
@@ -31,8 +31,6 @@ export class UserNewComponent implements OnInit {
 
   submit(values:FormFieldObject[]):void{
     let user:UserObject = UserMapperService.form_to_model(values);
-    console.log(user);
-    this.userModelService.post_user(user);
+    this.userModelService.post_user(user).subscribe();
   }
-
 }

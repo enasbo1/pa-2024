@@ -5,8 +5,8 @@
     </div>
     <br>
     <div class="flex">
-      <button class="bubble {{user?'colored hover-0':'disabled'}}"><b>Modifier</b></button>
-      <button class="bubble {{user?'colored-red hover-0':'disabled'}}"><b>Suprimer</b></button>
+      <button class="bubble {{user?'colored hover-0':'disabled'}}" (click)="edit()"><b>Modifier</b></button>
+      <button class="bubble {{user?'colored-red hover-0':'disabled'}}" (click)="delete()"><b>Suprimer</b></button>
     </div>
     <br>
   </div>
