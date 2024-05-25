@@ -4,9 +4,13 @@
       <pm-rubric [content]="user_rubric"></pm-rubric>
     </div>
     <br>
-    <div class="flex">
+    <div class="flex spaced">
       <button class="bubble {{user?'colored hover-0':'disabled'}}" (click)="edit()"><b>Modifier</b></button>
       <button class="bubble {{user?'colored-red hover-0':'disabled'}}" (click)="delete()"><b>Suprimer</b></button>
+    </div>
+
+    <div class="flex spaced">
+      <button class="bubble {{user?'hover-0':'disabled'}}" (click)="sanction()"><b>Sanctionner</b></button>
     </div>
     <br>
   </div>

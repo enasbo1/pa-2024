@@ -1,4 +1,4 @@
-<ng-container *ngIf="field" [ngSwitch]="field.type">
+<div *ngIf="field" [ngSwitch]="field.type" [class]="is_invalid()?'reg-error':''">
   <h6 *ngIf="field.title">{{translator.echo(field.title)}}</h6>
   <ng-container *ngSwitchCase="'dropdown'" >
     <pm-dropdown
@@ -114,14 +114,4 @@
       >
     </div>
  </ng-container>
-
-  <ng-container *ngSwitchCase="'regex'">
-    <input type="text" class="bubble hover-w w-100 {{field.sclass}}"
-           [pattern]="field.regex?field.regex:'.*'"
-           [value]="field.default"
-           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
-           [placeholder]="translator.echo(field.placeholder)"
-           [(ngModel)]="field._value"
-    >
-  </ng-container>
-</ng-container>
+</div>

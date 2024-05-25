@@ -4,3 +4,11 @@
 h6{
   margin-bottom: 0.1rem;
 }
+
+.reg-error input{
+  border-width: 2px;
+  border-style: inset;
+  border-color: styles.$color-error styles.$color-error;
+  border-image: initial;
+  color: styles.$color-error;
+}

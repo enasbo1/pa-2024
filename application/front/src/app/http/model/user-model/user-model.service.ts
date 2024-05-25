@@ -1,16 +1,16 @@
-import {Injectable} from '@angular/core';
+import {EventEmitter, Injectable} from '@angular/core';
 import {RequestService} from "../../shared/request.service";
 import { Observable} from "rxjs";
 import {UserObject} from "./userObject";
-import {ListObject} from "../../../shared/foundation/list/listObject";
+import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserModelService extends RequestService{
 
-  post_user(content:UserObject):Observable<object>{
-    return (this.post(content, 'users'));
+  post_user(content:UserObject, errorEvent?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    return (this.post(content, 'users', errorEvent));
   }
 
   get_user():Observable<UserObject[]>{
@@ -24,5 +24,9 @@ export class UserModelService extends RequestService{
 
   update_user(content:UserObject):Observable<object>{
     return (this.edit(content, 'users'))
+  }
+
+  delete_user(id:bigint):Observable<object>{
+    return (this.delete('users',id))
   }
 }

@@ -33,24 +33,29 @@ export class UserEditComponent implements OnInit {
           (users:UserObject[])=> {
             this.user = users[0];
             this.user_form = UserMapperService.model_to_form(users[0]);
+            this.user_form.forEach((step)=>
+              step.errorEvent?.subscribe(
+                (error)=> this.error = error
+              )
+            )
           }
         )
       }
     )
   }
 
-  submit(values:FormFieldObject[]):void{
-    ModaleService.createValidationModal('voulez-vous vraiment modifier cet utilisateur ?').subscribe(
-        (value)=>{
-          if (value==="Oui"){
-            let user:UserObject = UserMapperService.form_to_model(values);
-            user.id = <bigint> this.user?.id
+  submit(values:FormFieldObject[]):void {
+    ModaleService.createValidationModal('voulez-vous vraiment modifier cet utilisateur ?')
+      .subscribe(
+        (value) => {
+          if (value === "Oui") {
+            let user: UserObject = UserMapperService.form_to_model(values);
+            user.id = <bigint>this.user?.id
 
             this.userModelService.update_user(user).subscribe();
             this.router.navigateByUrl(WpPath.admin.users.detail.replace(':id', user.id?.toString())).then()
           }
         }
       );
-
   }
 }

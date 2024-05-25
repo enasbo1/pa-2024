@@ -11,6 +11,7 @@ import {FormFieldObject} from "../../base-shared/form-field/formFieldObject";
 export class FormComponent implements OnInit {
   @Input() items?: FormStepObject[];
   @Input() justify:"center"|"right"|"" = "";
+  @Input() endpage?:boolean = true;
   @Output() submit:EventEmitter<FormFieldObject[]> = new EventEmitter<FormFieldObject[]>();
   public step:number = 0;
   constructor(public translator:TranslatorService) { }
@@ -30,7 +31,7 @@ export class FormComponent implements OnInit {
     --this.step;
   }
 
-  public next_step():EventEmitter<boolean>|void{
+  public next_step():EventEmitter<boolean>|false|void{
     const current = this.get_current()
     let error:boolean = current?.content.find((rubric:FormRubricObject):boolean=>
       rubric.content.find(
@@ -49,7 +50,7 @@ export class FormComponent implements OnInit {
       )!==undefined
     )!==undefined
     if (error){
-      return
+      return false
     }
     if (current?.validator){
       const verified:boolean|EventEmitter<boolean> = current.validator(
@@ -59,7 +60,7 @@ export class FormComponent implements OnInit {
         this._next_step()
         return;
       } else if (verified === false){
-        return;
+        return false;
       } else{
         verified.subscribe(
           (val:boolean):void  =>
@@ -73,23 +74,27 @@ export class FormComponent implements OnInit {
     }
   }
 
-  private _next_step(){
+  private _next_step():void{
+    this.get_current()?.errorEvent?.emit('')
     ++this.step
   }
 
   public onSumbit(){
-    let verif:void|EventEmitter<boolean>= this.next_step();
+    let verif:void|false|EventEmitter<boolean>= this.next_step();
     if (verif){
       verif.subscribe(
         (val:boolean):void=>
           val?this._submit():undefined
       )
-    }else{
-      this._submit()
+    }else if(verif!==false){
+      this._submit();
     }
   }
 
   private _submit():void{
+    if (!this.endpage){
+      this.previus_step();
+    }
     if (this.items){
       const value:FormFieldObject[] = [];
       this.items.forEach(

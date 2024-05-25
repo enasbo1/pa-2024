@@ -89,7 +89,7 @@ export class UserMapperService {
         title:title,
         errorEvent:new EventEmitter<string>(),
         validator:(step:FormStepObject):EventEmitter<boolean>|boolean=>{
-         const n = FormService.require_values(step.content[0].content, ["prenom", "nom", "mail"])
+         const n = FormService.require_values(step.content[0].content, ["prenom", "nom"])
           if (n){
             step.errorEvent?.emit("le champ "+n+" doit être remplis");
             return false;
@@ -128,15 +128,6 @@ export class UserMapperService {
       },
       {
         errorEvent:new EventEmitter<string>(),
-        validator:(step:FormStepObject):EventEmitter<boolean>|boolean=>{
-          const n = FormService.require_values(step.content[0].content, ["adresse", "code_postal", "ville", "pays"])
-          if (n){
-            step.errorEvent?.emit("le champ "+n+" doit être remplis");
-            return false;
-          }
-          step.errorEvent?.emit("");
-          return true;
-        },
         content:[
           {
             title:"Adresse",
@@ -147,11 +138,14 @@ export class UserMapperService {
                 type : "text",
                 placeholder:"2 allée de la nuit blance",
                 default:user?.adresse,
+                reg_error:[
+                  {regex:RegexBase.required, message: "l'adresse doit être renseignée"}
+                ]
               },
               {
                 name:"code_postal",
                 title:"Code Postal *",
-                type : "num",
+                type : "text",
                 placeholder:"01015",
                 reg_error:[
                   {regex:RegexBase.code_postal, message: "le code postal doit faire 5 chiffres"}
@@ -163,6 +157,10 @@ export class UserMapperService {
                 title: "Ville *",
                 type: "text",
                 placeholder: "Utopia",
+                reg_error:[
+                  {regex:RegexBase.norm, message: "un nom de ville ne contient pas le caractères spéciaux"},
+                  {regex:RegexBase.nonum, message: "un nom de ville ne contient pas de chiffres"}
+                ],
                 default: user?.ville
               },
               {
@@ -171,6 +169,10 @@ export class UserMapperService {
                 type : "text",
                 placeholder:"FRANCE",
                 default:user?.pays,
+                reg_error:[
+                  {regex:RegexBase.norm, message: "un nom de ville ne contient pas le caractères spéciaux"},
+                  {regex:RegexBase.nonum, message: "un nom de ville ne contient pas de chiffres"}
+                ],
               }
             ]
           },
@@ -179,12 +181,7 @@ export class UserMapperService {
       {
         errorEvent:new EventEmitter<string>(),
         validator:(step:FormStepObject):EventEmitter<boolean>|boolean=>{
-          let n = FormService.require_values(step.content[1].content, ["mdp"])
-          if (n){
-            step.errorEvent?.emit("le champ "+n+" doit être rempli");
-            return false;
-          }
-          n = FormService.require_values(step.content[2].content, ["role"])
+          const n = FormService.require_values(step.content[2].content, ["role"])
           if (n){
             step.errorEvent?.emit("le champ "+n+" doit être rempli");
             return false;
@@ -199,10 +196,9 @@ export class UserMapperService {
               {
                 name:"numero",
                 title:"telephone",
-                type: "regex",
+                type: "text",
                 default: user?.numero,
                 placeholder: "0786791542",
-                regex: RegexBase.tel,
                 reg_error:[
                   {regex: RegexBase.tel, message:'le numéro doit être un numéro de telephone valide'}
                 ]
@@ -236,15 +232,16 @@ export class UserMapperService {
   }
 
   static form_to_model(values:FormFieldObject[]):UserObject{
+    const mdp = FormService.get_value(values, "mdp")
     return {
       prenom: (FormService.get_value(values, "prenom") as string).toUpperCase(),
       nom: (FormService.get_value(values, "nom") as string).toUpperCase(),
       mail: (FormService.get_value(values, "mail") as string).toLowerCase(),
-      mdp: FormService.get_value(values, "mdp") as string,
+      mdp: mdp?mdp as string:undefined,
       adresse: FormService.get_value(values, 'adresse') as string,
       pays: (FormService.get_value(values, "pays") as string).toUpperCase(),
       ville: (FormService.get_value(values, "ville") as string).toUpperCase(),
-      code_postal: FormService.get_value(values, "code_postal") as number,
+      code_postal: FormService.get_value(values, "code_postal") as string,
       numero: FormService.get_value(values, "numero") as string,
       role: (UserMapperService.rolesList.indexOf(FormService.get_value(values, "role") as string)+1).toString().toLowerCase(),
     }

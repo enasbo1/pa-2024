@@ -4,4 +4,4 @@ description-|-r :M,1048576
 date_debut-|-r :d,MDY
 date_fin-|-r :d,MDY
 specification-|-r :M,200
-id_UTILISATEUR-|-r !int
+id_utilisateur-|-r !int

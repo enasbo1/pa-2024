@@ -57,8 +57,8 @@ export class RequestService{
       );
   }
 
-  delete(url:string, number:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
-    return this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ number,
+  delete(url:string, id:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    return this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ id,
       {
         headers:{
           "token":GlobalService.token?GlobalService.token:""

@@ -71,6 +71,16 @@ export class FormFieldComponent implements OnInit {
     this.submit.emit(value);
   }
 
+  is_invalid():boolean{
+    const value = this.field?._value?.toString()
+    if (this.field?.reg_error){
+      return this.field?.reg_error?.find((reg_error):boolean=>
+        reg_error.regex.test(value?value:'')
+      )==undefined
+    }
+    return false
+
+  }
   number_limit_pipe(value:number|undefined):number|null{
     return (value!=undefined)?value:null
   }
