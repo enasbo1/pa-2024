@@ -34,11 +34,12 @@ class ServiceService implements ModelType {
 			"type" => "r :M,150",
 			"description" => "r :M,255",
 			"tarif" => "r !int",
-			"date_debut" => "r",
-			"date_fin" => "r",
+			"date_debut" => "r :d,MDY",
+			"date_fin" => "r :d,MDY",
 			"note" => "r !int",
 			"fiche" => "r :M,65535",
-			"coef" => "r !int"
+			"coef" => "r !int",
+			"actif" => ""
         ]);
         if (
             $valid != "validated"

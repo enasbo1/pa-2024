@@ -7,3 +7,4 @@ date_fin-|-r :d,MDY
 note-|-r !int
 fiche-|-r :M,65535
 coef-|-r !int
+actif-|--|-true
