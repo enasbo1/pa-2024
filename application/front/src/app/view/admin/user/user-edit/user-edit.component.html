@@ -1,11 +1,10 @@
 <h5 class="mainTitle error" *ngIf="error">{{translator.echo(error)}}</h5>
-  <section  class = "flex" style="padding-top: 5vh">
+<section  class = "flex" style="padding-top: 5vh">
   <div>
     <pm-form
       [items]="user_form"
       [endpage]="false"
       (submit)="submit($event)"
-    >
-    </pm-form>
-    </div>
-  </section>
+    ></pm-form>
+  </div>
+</section>

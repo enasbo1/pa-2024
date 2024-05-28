@@ -2,13 +2,12 @@ export interface FormFieldObject{
   name : string;
   title?:string;
   sclass? : string;
-  type : "num"|"longtext"|"dropdown"|"text"|"email"|"password"|"place"|"date"|"period"|"url"|"file"|"regex";
+  type : "num"|"longtext"|"dropdown"|"text"|"email"|"password"|"place"|"date"|"period"|"url"|"file";
   placeholder? : string|number;
   time?:boolean;
-  regex? : string;
   default? : string|number;
   instruction? : string;
-  reg_error?: {regex:string; message:string}[];
+  reg_error?: {regex:RegExp; message:string}[];
   choices? : string[];
   _value?:FormFieldValue
   _values?:Date[];

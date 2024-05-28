@@ -4,6 +4,7 @@ export interface ListObject {
   link ?: string;
   title?: string;
   image?: string;
+  style?: string;
   right?: [
     TextStyle|null,
     TextStyle|null,

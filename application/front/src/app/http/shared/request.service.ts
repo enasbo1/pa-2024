@@ -16,7 +16,9 @@ export class RequestService{
   ) { }
 
   handelError(errorMessage: HttpErrorResponse){
-    console.error(errorMessage);
+    if (errorMessage.status>399){
+      console.error(errorMessage);
+    }
     return throwError(()=>errorMessage)
   }
 
@@ -40,6 +42,7 @@ export class RequestService{
   }
 
   edit(content:object, url:string, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    console.log(JSON.stringify(content))
     return this.httpClient.patch(ConstancesService.api_url + "/" +url,
       JSON.stringify(content),{
       headers:{
@@ -54,8 +57,8 @@ export class RequestService{
       );
   }
 
-  delete(url:string, number:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
-    return this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ number,
+  delete(url:string, id:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    return this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ id,
       {
         headers:{
           "token":GlobalService.token?GlobalService.token:""

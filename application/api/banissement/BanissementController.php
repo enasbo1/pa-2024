@@ -1,9 +1,9 @@
 <?php
-namespace users;
+namespace banissement;
 use Exception;
-require_once 'UsersRepository.php';
+require_once 'BanissementRepository.php';
 
-class UsersController {
+class BanissementController {
 
     /**
      * @throws Exception
@@ -12,54 +12,51 @@ class UsersController {
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
-                $request = new UsersRepository();
+                $request = new BanissementRepository();
                 if ($id == null) {
-                    $users = $request->getAll();
-                    echo json_encode($users);
+                    $banissement = $request->getAll();
+                    echo json_encode($banissement);
                 } else {
                     try {
-                        $users = $request->findById($id);
-                        echo json_encode($users);
+                        $banissement = $request->findById($id);
+                        echo json_encode($banissement);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
-                        echo json_encode(["error" => $e->getMessage()]);
+                        echo $e->getMessage();
                     }
                 }
                 break;
             case "POST":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new UsersRepository();
+                $request = new BanissementRepository();
 
                 try {
                     $request->save($params);
                     http_response_code(201);
-                    echo('{"message":"users créé avec succès"}');
+                    echo("banissement créé avec succès");
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
-                    echo json_encode(["error" => $e->getMessage()]);
+                    echo $e->getMessage();
                 }
                 break;
             case "PATCH":
                 $body = file_get_contents("php://input");
                 $params = json_decode($body);
-                $request = new UsersRepository();
+                $request = new BanissementRepository();
 
                 try {
                     $request->update($params);
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
-                    echo json_encode(["error" => $e->getMessage()]);
+                    echo $e->getMessage();
                 }
                 break;
             case "DELETE":
-                $request = new UsersRepository();
-                try{
-                    $request->delete($id);
-                } catch (Exception $e) {
-                    http_response_code($e->getCode());
-                    echo json_encode(["error" => $e->getMessage()]);
-                }
+                $request = new BanissementRepository();
+                $request->delete($id);
+                break;
+            case "OPTIONS":
                 break;
             default:
                 http_response_code(404);

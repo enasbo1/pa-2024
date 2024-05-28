@@ -19,16 +19,15 @@ export class GlobalService {
   }
 
   private static set cookie(cookie:cookiesType){
-    document.cookie = JSON.stringify(cookie)
+    document.cookie = JSON.stringify(cookie);
   }
 
   public static get token():string|undefined{
-    return GlobalService.cookie.token
+    const token:string|null = sessionStorage.getItem('token');
+    return token?token:undefined;
   }
   public static set token(token:string|undefined){
-    let n = GlobalService.cookie
-    n.token = token;
-    GlobalService.cookie = n;
+    sessionStorage.setItem('token', token?token:'');
   }
 
   public static get modalCurrent():ModalObject|undefined{

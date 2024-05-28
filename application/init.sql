@@ -18,6 +18,19 @@ create table entreprise
 
 create table utilisateur
 (
+    id                serial
+        primary key,
+    prenom            varchar(30),
+    nom               varchar(100),
+    mail              varchar(100)
+        unique,
+    mdp               varchar(255),
+    adresse           varchar(255),
+    pays              varchar(50),
+    ville             varchar(50),
+    code_postal       varchar(5),
+    numero            varchar(10),
+    date_inscription  timestamp,
     id serial primary key,
     prenom varchar(30),
     nom varchar(100),

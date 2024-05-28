@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use apartment\ApartmentController;
+use banissement\BanissementController;
 use connection\ConnectionController;
 use document\DocumentController;
 use entreprise\EntrepriseController;
@@ -32,13 +33,14 @@ require_once 'message/MessageController.php';
 require_once 'entreprise/EntrepriseController.php';
 require_once 'document/DocumentController.php';
 require_once 'connection/ConnectionController.php';
+require_once 'banissement/BanissementController.php';
 
 require_once 'token/token.php';
 
 header('Access-Control-Allow-Methods: GET, POST,  PATCH, PUT, DELETE, OPTIONS');
 header("Content-Type: application/json; charset=utf8");
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: token");
+header("Access-Control-Allow-Headers: TOKEN");
 
 $uri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $uri = explode( '/', $uri );
@@ -166,7 +168,15 @@ else
             }
             $controller->routes($id, isset($uri[4])?$uri[4]:null);
             break;
-        
+        case 'banissement':
+            $controller = new BanissementController();
+            $id = null;
+            if (isset($uri[3])) {
+                $id = $uri[3];
+            }
+            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            break;
+
         default:
             // Page non trouvée
             http_response_code(404);

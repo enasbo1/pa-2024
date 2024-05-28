@@ -1,4 +1,4 @@
-<ng-container *ngIf="field" [ngSwitch]="field.type">
+<div *ngIf="field" [ngSwitch]="field.type" [class]="is_invalid()?'reg-error':''">
   <h6 *ngIf="field.title">{{translator.echo(field.title)}}</h6>
   <ng-container *ngSwitchCase="'dropdown'" >
     <pm-dropdown
@@ -12,20 +12,23 @@
 
   <ng-container *ngSwitchCase="'text'">
     <input type="text" class="bubble hover-w w-100 {{field.sclass}}"
-           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
-           [placeholder]="translator.echo(field.placeholder)"
-           [(ngModel)]="field._value"
+       [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+       [placeholder]="translator.echo(field.placeholder)"
+       [(ngModel)]="field._value"
     >
   </ng-container>
   <ng-container *ngSwitchCase="'longtext'">
     <textarea type="text" class="bubble hover-w w-100 {{field.sclass}}"
-           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
-           [placeholder]="translator.echo(field.placeholder)"
-           [(ngModel)]="field._value"
+          [value]="field.default"
+          [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+          [placeholder]="translator.echo(field.placeholder)"
+          [(ngModel)]="field._value"
     >{{field.default}}</textarea>
   </ng-container>
   <ng-container *ngSwitchCase="'num'">
     <input type="number" class="bubble hover-w w-100 {{field.sclass}}"
+           [value]="field.default"
+
            [step]="field.step"
            [max]="number_limit_pipe(field.number_limit?.max)"
            [min]="number_limit_pipe(field.number_limit?.min)"
@@ -37,6 +40,8 @@
 
   <ng-container *ngSwitchCase="'email'">
     <input type="email" class="bubble hover-w w-100 {{field.sclass}}"
+           [value]="field.default"
+
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [(ngModel)]="field._value"
@@ -45,6 +50,8 @@
 
   <ng-container *ngSwitchCase="'password'">
     <input type="password" class="bubble hover-w w-100 {{field.sclass}}"
+           [value]="field.default"
+
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [(ngModel)]="field._value"
@@ -57,6 +64,7 @@
 
   <ng-container *ngSwitchCase="'date'">
     <input [type]="date" class="bubble hover-w w-100 {{field.sclass}}"
+           [value]="field.default"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [min]="field.min | dateForHtml : field.time"
@@ -76,6 +84,7 @@
       >
 
       <input [type]="date" class="bubble bubble-right hover-w col-6 {{field.sclass}}"
+             [value]="field.default"
              [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
              [placeholder]="translator.echo(field.placeholder)"
              [min]="field._values[0] | dateForHtml : field.time"
@@ -88,6 +97,7 @@
 
   <ng-container *ngSwitchCase="'url'">
     <input type="url" class="bubble hover-w w-100 {{field.sclass}}"
+           [value]="field.default"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [(ngModel)]="field._value"
@@ -97,18 +107,11 @@
   <ng-container *ngSwitchCase="'file'">
     <div  class="bubble hover-w w-100 bordered">
       <input type="file" class = "w-100 hover-w {{field.sclass}}"
+             [value]="field.default"
              [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
              [placeholder]="translator.echo(field.placeholder)"
              [(ngModel)]="field._value"
       >
     </div>
  </ng-container>
-
-  <ng-container *ngSwitchCase="'regex'">
-    <input type="text" class="bubble hover-w w-100 {{field.sclass}}"
-           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
-           [placeholder]="translator.echo(field.placeholder)"
-           [(ngModel)]="field._value"
-    >
-  </ng-container>
-</ng-container>
+</div>
