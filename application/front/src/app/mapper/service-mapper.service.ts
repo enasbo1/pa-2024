@@ -6,15 +6,18 @@ import {DateService} from "../http/shared/date.service";
 import {FormStepObject} from "../shared/base-shared/form-step/formStepObject";
 import {FormFieldObject} from "../shared/base-shared/form-field/formFieldObject";
 import {FormService} from "../shared/foundation/form/form.service";
+import moment from "moment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ServiceMapperService {
   static model_to_list(service?:ServiceObject):ListObject{
+    const date_status:string = DateService.checkDateStatus(service?.date_debut, service?.date_fin)
     return {
       title:service?.type,
       link:service?.id.toString(),
+      style: date_status.replace('é','e'),
       right:[
         {text : "note : "+ service?.note},
         {text : "tarif : "+ service?.tarif + '€'},
@@ -22,11 +25,14 @@ export class ServiceMapperService {
       ],
       mid:[
         {text : "description : "+ service?.description},
-        {text : "date debut : "+ service?.date_debut + " date fin : "+ service?.date_fin},
+        {text : "date debut : "+ DateService.to_front(service?.date_debut) + " | date fin : "+ DateService.to_front(service?.date_fin)},
         null,
       ],
       propriete:[
         {name : 'note' , value: service?.note},
+        {name : 'etat_date',value:
+            date_status
+        },
         {name : 'date_debut' , value: service?.date_debut},
         {name : 'date_fin' , value: service?.date_fin},
         {name : 'type', value: service?.type},
@@ -48,6 +54,11 @@ export class ServiceMapperService {
           {name : 'id', type:'text', text:service?.id.toString()},
           {name : 'type', type:'text', text:service?.type},
           {name : 'description', type:'text', text:service?.description},
+          {name : 'etat_date', type: 'text', text:
+              DateService.checkDateStatus(
+                service?.date_debut,
+                service?.date_fin)
+          },
           {name : 'date_debut', type:'text', text:DateService.to_front(service?.date_debut)},
           {name : 'date_fin', type:'text', text:DateService.to_front(service?.date_fin)},
           {name : 'fiche', type:'text', text:service?.fiche},
