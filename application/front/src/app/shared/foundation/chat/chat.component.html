@@ -1,16 +1,37 @@
-<div class="message-container" #messageContainer>
-  <div *ngFor="let message of sortedMessages" class="flex {{message.user === 'receiver' ? 'justify-end' : 'justify-start'}}">
-    <div *ngIf="message.user === 'sender'" class="avatar-circle">
-      {{ getInitials(message.user) }}
-      <div class="date">{{ message.date | date: 'dd/MM' }}</div>
-    </div>
-    <div class="message-wrapper">
-      <div *ngIf="message.user === 'sender'" class="bubble reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
-      <div *ngIf="message.user === 'receiver'" class="bubble message-right message">{{ translator.echo(message.content) }}</div>
-    </div>
-    <div *ngIf="message.user === 'receiver'" class="avatar-circle">
-      {{ getInitials(message.user) }}
-      <div class="date">{{ message.date | date: 'dd/MM' }}</div>
-    </div>
+<div class="message-container bubble">
+    <div class = "message-formatter">
+      <div *ngIf="sending_message" class="flex {{sending_message.user === currentUser?.nom ? 'justify-end' : 'justify-start'}}">
+        <div class="message-wrapper">
+          <div class="bubble message message-right sending">{{ translator.echo(sending_message.content) }}</div>
+        </div>
+        <div class="avatar-circle">
+          {{ getInitials(sending_message.user) }}
+          <div class="date">{{ sending_message.date | date: 'dd/MM' }}</div>
+        </div>
+      </div>
+
+      <div *ngFor="let message of sortedMessages" class="flex {{message.user === currentUser?.nom ? 'justify-end' : 'justify-start'}}">
+        <div *ngIf="message.user !== currentUser?.nom" class="avatar-circle">
+          {{ getInitials(message.user) }}
+          <div class="date">{{ message.date | date: 'dd/MM' }}</div>
+        </div>
+        <div class="message-wrapper">
+          <div *ngIf="message.user !== currentUser?.nom" class="bubble hover-1 reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
+          <div *ngIf="message.user === currentUser?.nom" class="bubble hover-1 message-right message">{{ translator.echo(message.content) }}</div>
+        </div>
+        <div *ngIf="message.user === currentUser?.nom" class="avatar-circle">
+          {{ getInitials(message.user) }}
+          <div class="date">{{ message.date | date: 'dd/MM' }}</div>
+        </div>
+      </div>
+
+  </div>
+  <div class="flex input-bar bubble">
+    <textarea
+           class="bubble col-9 {{can_submit()?'':'disabled'}}"
+           (keydown.enter)="submit_message()"
+           [disabled] = !can_submit()
+           [(ngModel)]="new_message"
+    ></textarea>
   </div>
 </div>

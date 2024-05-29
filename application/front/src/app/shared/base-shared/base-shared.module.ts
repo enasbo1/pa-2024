@@ -5,7 +5,6 @@ import {StarComponent} from "./star/star.component";
 import {ImageComponent} from "./image/image.component";
 import { DropdownComponent } from './dropdown/dropdown.component';
 import { RubricComponent } from './rubric/rubric.component';
-import { ChatBubbleComponent } from './chat-bubble/chat-bubble.component';
 import { FormStepComponent } from './form-step/form-step.component';
 import { FormFieldComponent } from './form-field/form-field.component';
 import {FormsModule} from "@angular/forms";
@@ -21,7 +20,6 @@ import { LineComponent } from './line/line.component';
     ImageComponent,
     DropdownComponent,
     RubricComponent,
-    ChatBubbleComponent,
     FormStepComponent,
     FormFieldComponent,
     DateForHtmlPipe,

@@ -21,6 +21,7 @@ use token\Token;
 require_once 'shared/ModelType.php';
 require_once 'shared/Repository.php';
 include_once 'shared/Verif.php';
+include_once 'shared/Formater.php';
 require_once 'apartment/ApartmentController.php';
 require_once 'reservation/ReservationController.php';
 require_once 'users/UsersController.php';
@@ -130,7 +131,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id);
+            $controller->routes($id, isset($uri[4])?$uri[4]:null);
             break;
 
         case 'ticket':

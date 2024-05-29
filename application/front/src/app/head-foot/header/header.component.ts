@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     'partie-voyageur'
   ]
 
-  logoUrl:string = "assets/images/hammer.png";
+  logoUrl:string = "assets/images/logo.png";
   constructor(
     protected readonly translator:TranslatorService,
     private router:Router

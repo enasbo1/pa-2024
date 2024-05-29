@@ -60,3 +60,19 @@ insert into service_utilisee (date_modif, date_debut, id_reservation, id_utilisa
 values ('12/24/2024', '12/25/2024', 1, 1, 1);
 insert into service_utilisee (date_modif, date_debut, id_reservation, id_utilisateur, id_service_entreprise)
 values ('12/22/2024', '12/21/2024', 1, 1, 4);
+
+insert into message(date_envoie, texte, id_service_utilisee, id_utilisateur)
+values ('12/22/2024', 'contenu du message', 2,1);
+
+select m.id,
+       date_envoie,
+       texte,
+       id_service_utilisee,
+       id_reservation,
+       id_ticket,
+       id_utilisateur as utilisateur__id,
+       u.nom as utilisateur__nom,
+       u.prenom as utilisateur__prenom
+from message m
+inner join public.utilisateur u on u.id = m.id_utilisateur
+;
