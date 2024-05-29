@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { ChatObject } from "./chatObject";
 import { TranslatorService } from "../../base-shared/translator.service";
+import {GlobalService} from "../../global.service";
+import {UserObject, UserRecap} from "../../../http/model/user-model/userObject";
 
 @Component({
   selector: 'pm-chat',
@@ -8,19 +10,17 @@ import { TranslatorService } from "../../base-shared/translator.service";
   styleUrls: ['./chat.component.scss']
 })
 export class ChatComponent implements OnInit {
-  @Input() items: ChatObject[] = [];
+  @Input() set items(items:ChatObject[]){
+    this.sortedMessages = items.sort((a, b) => {
+      return a.date.getTime() - b.date.getTime();
+    });
+  };
+  currentUser?:UserRecap = GlobalService.currentUser;
   sortedMessages: ChatObject[] = [];
 
   constructor(public translator: TranslatorService) {}
 
   ngOnInit(): void {
-    this.sortMessages(); // Fonction de tri utilisée
-  }
-
-  sortMessages(): void {
-    this.sortedMessages = this.items.sort((a, b) => {
-      return new Date(a.date).getTime() - new Date(b.date).getTime();
-    });
   }
 
   getInitials(userName: string): string {

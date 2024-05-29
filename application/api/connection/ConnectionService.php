@@ -15,22 +15,27 @@ class ConnectionService implements ModelType {
     /**
      * @throws Exception
      */
-    public function connect(object $params) : string {
+    public function connect(object $params) : array {
         $params = $this->isValidType($params);
         $user = new UsersRepository();
         $values = $user->connect($params["mail"], UsersService::hash_password($params["password"]));
         if (count($values) != 0){
             $value = $values[0];
-            return Token::createToken(
-                $value["id"],
-                $value["prenom"],
-                $value["nom"],
-                $value["role"]
-            );
+            return [
+                "token" =>Token::createToken(
+                    $value["id"],
+                    $value["prenom"],
+                    $value["nom"],
+                    $value["role"]),
+                "user" => $value
+            ];
         }
         throw new Exception("bad identifiants", 401);
     }
 
+    /**
+     * @throws Exception
+     */
     public function get_connection(object $params, bool $required = false) : array{
         if (isset($params->token)){
             return Token::decodeToken($params->token);

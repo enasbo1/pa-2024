@@ -20,9 +20,9 @@ class ConnectionController {
                 $service = new ConnectionService();
 
                 try {
-                    $token = $service->connect($params);
+                    $token_array = $service->connect($params);
                     http_response_code(200);
-                    echo(json_encode(['token'=>$token]));
+                    echo(json_encode($token_array));
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();

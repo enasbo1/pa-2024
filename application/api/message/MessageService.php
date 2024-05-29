@@ -11,14 +11,14 @@ class MessageService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -31,8 +31,8 @@ class MessageService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
-			"date_envoie" => "!int",
-			"texte" => "r !int",
+			"date_envoie" => ":d,MDY",
+			"texte" => "r",
 			"id_SERVICE_UTILISEE" => "!int",
 			"id_RESERVATION" => "!int",
 			"id_TICKET" => "!int",
@@ -41,7 +41,7 @@ class MessageService implements ModelType {
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
         return $arr_params;

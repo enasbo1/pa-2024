@@ -1,14 +1,14 @@
-<div class="message-container" #messageContainer>
-  <div *ngFor="let message of sortedMessages" class="flex {{message.user === 'receiver' ? 'justify-end' : 'justify-start'}}">
-    <div *ngIf="message.user === 'sender'" class="avatar-circle">
+<div class="message-container">
+  <div *ngFor="let message of sortedMessages" class="flex {{message.user === currentUser?.nom ? 'justify-end' : 'justify-start'}}">
+    <div *ngIf="message.user !== currentUser?.nom" class="avatar-circle">
       {{ getInitials(message.user) }}
       <div class="date">{{ message.date | date: 'dd/MM' }}</div>
     </div>
     <div class="message-wrapper">
-      <div *ngIf="message.user === 'sender'" class="bubble reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
-      <div *ngIf="message.user === 'receiver'" class="bubble message-right message">{{ translator.echo(message.content) }}</div>
+      <div *ngIf="message.user !== currentUser?.nom" class="bubble reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
+      <div *ngIf="message.user === currentUser?.nom" class="bubble message-right message">{{ translator.echo(message.content) }}</div>
     </div>
-    <div *ngIf="message.user === 'receiver'" class="avatar-circle">
+    <div *ngIf="message.user === currentUser?.nom" class="avatar-circle">
       {{ getInitials(message.user) }}
       <div class="date">{{ message.date | date: 'dd/MM' }}</div>
     </div>

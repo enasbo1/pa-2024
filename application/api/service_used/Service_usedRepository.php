@@ -2,12 +2,12 @@
 namespace service_used;
 
 use Exception;
+use shared\Formater;
 use shared\Repository;
 
 require_once 'Service_usedService.php';
 
 class Service_usedRepository extends Repository {
-    public Service_usedService $service;
     private string $getQuery = 
 "SELECT
     su.id as id,
@@ -45,8 +45,7 @@ from service_utilisee su
 
     public function __construct()
     {
-        $this->service = new Service_usedService();
-        parent::__construct("SERVICE_UTILISEE", $this->service);
+        parent::__construct("SERVICE_UTILISEE", new Service_usedService());
     }
 
     /**
@@ -58,7 +57,7 @@ from service_utilisee su
         $result = $this->query($this->getQuery, [], "no service_used found");
 
         foreach($result as $row) {
-            $service_used[] = $this->service->prepareGet($row);
+            $service_used[] =Formater::prepareGet($row);
         }
 
         return $service_used;
@@ -72,7 +71,7 @@ from service_utilisee su
         $service_used = [];
         $result = $this->query($this->getQuery."where su.id=$1", ["id" => $id], "no services for this user");
         foreach($result as $row) {
-            $service_used[] = $this->service->prepareGet($row);
+            $service_used[] = Formater::prepareGet($row);
         }
 
         return $service_used;
@@ -83,7 +82,7 @@ from service_utilisee su
         $service_used = [];
         $result = $this->query($this->getQuery."where s.id=$1", ["id" => $id], "service_used not found");
         foreach($result as $row) {
-            $service_used[] = $this->service->prepareGet($row);
+            $service_used[] = Formater::prepareGet($row);
         }
 
         return $service_used;
@@ -93,7 +92,7 @@ from service_utilisee su
         $service_used = [];
         $result = $this->query($this->getQuery."where a.id=$1", ["id" => $id], "service_used not found");
         foreach($result as $row) {
-            $service_used[] = $this->service->prepareGet($row);
+            $service_used[] = Formater::prepareGet($row);
         }
 
         return $service_used;
@@ -103,7 +102,7 @@ from service_utilisee su
         $service_used = [];
         $result = $this->query($this->getQuery."where u.id=$1", ["id" => $id],"service_used not found");
         foreach($result as $row) {
-            $service_used[] = $this->service->prepareGet($row);
+            $service_used[] = Formater::prepareGet($row);
         }
 
 

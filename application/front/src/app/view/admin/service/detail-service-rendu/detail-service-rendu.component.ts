@@ -10,6 +10,9 @@ import {ServiceUsedObject} from "../../../../http/model/service-used-model/servi
 import {WpPath} from "../../../../shared/routes";
 import {PrestaMapperService} from "../../../../mapper/presta-mapper.service";
 import {GlobalService} from "../../../../shared/global.service";
+import {ChatObject} from "../../../../shared/foundation/chat/chatObject";
+import {MessageModelService} from "../../../../http/model/message-model/message-model.service";
+import {MessageMapperService} from "../../../../mapper/message-mapper.service";
 
 
 @Component({
@@ -19,6 +22,8 @@ import {GlobalService} from "../../../../shared/global.service";
 export class DetailServiceRenduComponent implements OnInit {
   service_rendu:string  = '/admin/service_rendu';
   query_params?:Params;
+
+  chat:ChatObject[] = [];
 
   private enterprise:RubricElement =
     {name:'entreprise', text:'none', type:'text'};
@@ -31,6 +36,7 @@ export class DetailServiceRenduComponent implements OnInit {
   }
 
   constructor(private serviceUsedModelService : ServiceUsedModelService,
+              private messageModelService : MessageModelService,
               private route: ActivatedRoute,
               private router:Router
   ) { }
@@ -42,6 +48,17 @@ export class DetailServiceRenduComponent implements OnInit {
         (service:ServiceUsedObject[])=>
           this.set_services(service[0]?service[0]:undefined)
       );
+      this.messageModelService.get_messages_from_prestation(params['id']).subscribe(
+        (messages)=>{
+          console.log(messages.map(
+            (m)=>
+              MessageMapperService.model_to_chat(m)));
+          this.chat = messages.map(
+            (m)=>
+              MessageMapperService.model_to_chat(m)
+          );
+        }
+      )
     });
   }
 

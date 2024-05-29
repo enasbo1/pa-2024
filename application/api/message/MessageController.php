@@ -8,8 +8,9 @@ class MessageController {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2 = null): void
     {
+        global $_TOKEN;
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
                 $request = new MessageRepository();
@@ -18,8 +19,18 @@ class MessageController {
                     echo json_encode($message);
                 } else {
                     try {
+                        if ($id =="service_used"){
+                            $message = $request->findByService_used($id2);
+                            echo json_encode($message);
+                        }else if($id =="reservation"){
+                            $message = $request->findByReservation($id2);
+                            echo json_encode($message);
+                        }else if($id =="tiket"){
+                            $message = $request->findByTiket($id2);
+                            echo json_encode($message);
                         $message = $request->findById($id);
                         echo json_encode($message);
+                    }
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();

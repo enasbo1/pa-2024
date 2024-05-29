@@ -1,12 +1,17 @@
 <section class = 'flex'>
-  <div>
-    <div *ngIf="service" class="rubric-container">
-      <pm-rubric [content]="service"></pm-rubric>
+  <div class="flex spaced align-center">
+    <div>
+      <div *ngIf="service" class="rubric-container">
+        <pm-rubric [content]="service"></pm-rubric>
+      </div>
+      <br>
+      <div class="flex spaced">
+        <button class="bubble {{service_object?'colored-red hover-0':'disabled'}}" (click)="openDeleteModal()"><b>Suprimer</b></button>
+      </div>
+      <br>
     </div>
-    <br>
-    <div class="flex spaced">
-      <button class="bubble {{service_object?'colored-red hover-0':'disabled'}}" (click)="openDeleteModal()"><b>Suprimer</b></button>
+    <div class="chat-col">
+      <pm-chat [items]="chat"></pm-chat>
     </div>
-    <br>
   </div>
 </section>

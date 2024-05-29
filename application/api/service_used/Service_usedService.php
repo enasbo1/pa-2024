@@ -11,22 +11,6 @@ class Service_usedService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareGet(array $values):array{
-        $val = [];
-        foreach($values as $col=>$value){
-            $i = explode("__",$col);
-            if(count($i)==1){
-                $val[$i[0]] = $value;
-            }else{
-                $val[$i[0]][$i[1]] = $value;
-            }
-        }
-        return $val;
-    }
-
-    /**
-     * @throws Exception
-     */
     public function isValidType(object $params): array
     {
         $arr_params = $this->toArray($params);
