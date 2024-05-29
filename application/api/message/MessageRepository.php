@@ -63,7 +63,7 @@ inner join public.utilisateur u on u.id = m.id_utilisateur ";
     }
 
 
-    public function findByTiket(int $id): array
+    public function findByTicket(int $id): array
     {
         $service_used = [];
         $result = $this->query($this->getQuery."where id_tiket=$1", ["id" => $id], "messages not found");

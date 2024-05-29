@@ -13,6 +13,7 @@ import {GlobalService} from "../../../../shared/global.service";
 import {ChatObject} from "../../../../shared/foundation/chat/chatObject";
 import {MessageModelService} from "../../../../http/model/message-model/message-model.service";
 import {MessageMapperService} from "../../../../mapper/message-mapper.service";
+import {ChatTarget} from "../../../../shared/foundation/chat/chat.component";
 
 
 @Component({
@@ -24,6 +25,7 @@ export class DetailServiceRenduComponent implements OnInit {
   query_params?:Params;
 
   chat:ChatObject[] = [];
+  target ?: ChatTarget;
 
   private enterprise:RubricElement =
     {name:'entreprise', text:'none', type:'text'};
@@ -45,8 +47,10 @@ export class DetailServiceRenduComponent implements OnInit {
     GlobalService.pageName = "Prestation";
     this.route.params.subscribe((params:Params) => {
       this.serviceUsedModelService.get_one_serviceUsed(params['id']).subscribe(
-        (service:ServiceUsedObject[])=>
-          this.set_services(service[0]?service[0]:undefined)
+        (service:ServiceUsedObject[])=>{
+          this.set_services(service[0]?service[0]:undefined);
+          this.target = {subject: 'prestation', id : params['id']}
+        }
       );
       this.messageModelService.get_messages_from_prestation(params['id']).subscribe(
         (messages)=>{

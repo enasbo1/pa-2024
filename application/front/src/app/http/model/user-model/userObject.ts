@@ -21,6 +21,6 @@ export interface UserRecap{
   ville?: string,
   code_postal?: string,
   numero?: string,
-  role: string,
+  role?: string,
   id_entreprise?:number,
 }

@@ -8,7 +8,7 @@ class MessageController {
     /**
      * @throws Exception
      */
-    public function routes($id = null, $id2 = null): void
+    public function routes($id = null, $id2= null): void
     {
         global $_TOKEN;
         switch ($_SERVER['REQUEST_METHOD']) {
@@ -25,12 +25,13 @@ class MessageController {
                         }else if($id =="reservation"){
                             $message = $request->findByReservation($id2);
                             echo json_encode($message);
-                        }else if($id =="tiket"){
-                            $message = $request->findByTiket($id2);
+                        }else if($id =="ticket"){
+                            $message = $request->findByTicket($id2);
                             echo json_encode($message);
-                        $message = $request->findById($id);
-                        echo json_encode($message);
-                    }
+                        }else{
+                            $message = $request->findById($id);
+                            echo json_encode($message);
+                        }
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();
@@ -45,7 +46,7 @@ class MessageController {
                 try {
                     $request->save($params);
                     http_response_code(201);
-                    echo("message créé avec succès");
+                    echo('{"message" : "message créé avec succès"}');
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();

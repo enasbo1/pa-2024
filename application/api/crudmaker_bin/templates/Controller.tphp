@@ -8,8 +8,9 @@ class {|{Name}|}Controller {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2= null): void
     {
+        global $_TOKEN;
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
                 $request = new {|{Name}|}Repository();
@@ -34,7 +35,7 @@ class {|{Name}|}Controller {
                 try {
                     $request->save($params);
                     http_response_code(201);
-                    echo("{|{name}|} créé avec succès");
+                    echo('{"message" : "{|{name}|} créé avec succès"}');
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();

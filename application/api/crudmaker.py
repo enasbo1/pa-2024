@@ -79,7 +79,7 @@ def main():
         n = i.split(".")[-1] == 'tfphp'
         v = (not os.path.isfile(f'{name}/{filename}.php'))
         if v | n:
-            if (not v & n):
+            if ((not v) & n):
                 g = (input(f'file {name}/{filename}.php already exist, do you want to overwrite it ? (y/n, default "y"): ') or "y")=="y"
             else:
                 g = True
