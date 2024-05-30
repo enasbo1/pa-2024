@@ -11,7 +11,7 @@ export class MessageMapperService {
     return {
       content:message.texte,
       date: moment(message.date_envoie).toDate(),
-      user: message.utilisateur.nom
+      user: message.utilisateur
     }
   }
 }

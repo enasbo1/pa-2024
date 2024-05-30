@@ -17,5 +17,4 @@ export interface MessagePostObject{
   id_SERVICE_UTILISEE?:number|bigint,
   id_RESERVATION?:number|bigint,
   id_TICKET?:number|bigint,
-  id_UTILISATEUR:number|bigint
 }

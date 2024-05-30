@@ -1,5 +1,7 @@
+import {UserRecap} from "../../../http/model/user-model/userObject";
+
 export interface ChatObject{
-  user:string;
+  user ?: UserRecap;
   content:string;
   date: Date
 }
