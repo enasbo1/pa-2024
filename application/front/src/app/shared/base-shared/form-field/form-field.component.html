@@ -12,6 +12,7 @@
 
   <ng-container *ngSwitchCase="'text'">
     <input type="text" class="bubble hover-w w-100 {{field.sclass}}"
+       [name] ="field.name"
        [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
        [placeholder]="translator.echo(field.placeholder)"
        [(ngModel)]="field._value"
@@ -19,6 +20,7 @@
   </ng-container>
   <ng-container *ngSwitchCase="'longtext'">
     <textarea type="text" class="bubble hover-w w-100 {{field.sclass}}"
+          [name] ="field.name"
           [value]="field.default"
           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
           [placeholder]="translator.echo(field.placeholder)"
@@ -28,7 +30,7 @@
   <ng-container *ngSwitchCase="'num'">
     <input type="number" class="bubble hover-w w-100 {{field.sclass}}"
            [value]="field.default"
-
+           [name] ="field.name"
            [step]="field.step"
            [max]="number_limit_pipe(field.number_limit?.max)"
            [min]="number_limit_pipe(field.number_limit?.min)"
@@ -41,7 +43,7 @@
   <ng-container *ngSwitchCase="'email'">
     <input type="email" class="bubble hover-w w-100 {{field.sclass}}"
            [value]="field.default"
-
+           [name] ="field.name"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [(ngModel)]="field._value"
@@ -51,7 +53,7 @@
   <ng-container *ngSwitchCase="'password'">
     <input type="password" class="bubble hover-w w-100 {{field.sclass}}"
            [value]="field.default"
-
+           [name] ="field.name"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [(ngModel)]="field._value"
@@ -65,6 +67,7 @@
   <ng-container *ngSwitchCase="'date'">
     <input [type]="date" class="bubble hover-w w-100 {{field.sclass}}"
            [value]="field.default"
+           [name] ="field.name"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [min]="field.min | dateForHtml : field.time"
@@ -76,6 +79,7 @@
   <ng-container *ngSwitchCase="'period'" >
     <div class = "flex" *ngIf="field._values">
       <input [type]="date" class="bubble bubble-left hover-w col-6 {{field.sclass}}"
+             [name] ="field.name + '-start'"
              [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
              [placeholder]="translator.echo(field.placeholder)"
              [min]="field.min | dateForHtml : field.time"
@@ -85,6 +89,7 @@
 
       <input [type]="date" class="bubble bubble-right hover-w col-6 {{field.sclass}}"
              [value]="field.default"
+             [name] ="field.name + '-end'"
              [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
              [placeholder]="translator.echo(field.placeholder)"
              [min]="field._values[0] | dateForHtml : field.time"
@@ -98,6 +103,7 @@
   <ng-container *ngSwitchCase="'url'">
     <input type="url" class="bubble hover-w w-100 {{field.sclass}}"
            [value]="field.default"
+           [name] ="field.name"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
            [(ngModel)]="field._value"

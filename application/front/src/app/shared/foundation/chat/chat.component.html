@@ -1,6 +1,6 @@
 <div class="message-container bubble">
     <div class = "message-formatter">
-      <div *ngIf="sending_message" class="flex {{sending_message.user === currentUser?.nom ? 'justify-end' : 'justify-start'}}">
+      <div *ngIf="sending_message" class="flex justify-end">
         <div class="message-wrapper">
           <div class="bubble message message-right sending">{{ translator.echo(sending_message.content) }}</div>
         </div>
@@ -10,18 +10,18 @@
         </div>
       </div>
 
-      <div *ngFor="let message of sortedMessages" class="flex {{message.user === currentUser?.nom ? 'justify-end' : 'justify-start'}}">
-        <div *ngIf="message.user !== currentUser?.nom" class="avatar-circle">
+      <div *ngFor="let message of sortedMessages" class="flex {{is_current(message.user) ? 'justify-end' : 'justify-start'}}">
+        <div *ngIf="!is_current(message.user)" class="avatar-circle" [title]="UserMapperService.get_U_Name(message.user)">
           {{ getInitials(message.user) }}
-          <div class="date">{{ message.date | date: 'dd/MM' }}</div>
+          <div class="date" [title]="message.date | date : 'HH:mm \ndd/MM/YYYY'">{{ message.date | date: 'dd/MM' }}</div>
         </div>
         <div class="message-wrapper">
-          <div *ngIf="message.user !== currentUser?.nom" class="bubble hover-1 reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
-          <div *ngIf="message.user === currentUser?.nom" class="bubble hover-1 message-right message">{{ translator.echo(message.content) }}</div>
+          <div *ngIf="!is_current(message.user)" class="bubble hover-1 reversed-bubble message-left message">{{ translator.echo(message.content) }}</div>
+          <div *ngIf="is_current(message.user)" class="bubble hover-1 message-right message">{{ translator.echo(message.content) }}</div>
         </div>
-        <div *ngIf="message.user === currentUser?.nom" class="avatar-circle">
+        <div *ngIf="is_current(message.user)" class="avatar-circle">
           {{ getInitials(message.user) }}
-          <div class="date">{{ message.date | date: 'dd/MM' }}</div>
+          <div class="date" [title]="message.date | date : 'HH:mm \ndd/MM/YYYY'">{{ message.date | date: 'dd/MM' }}</div>
         </div>
       </div>
 

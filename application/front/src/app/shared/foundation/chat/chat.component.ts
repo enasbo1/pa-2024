@@ -1,14 +1,17 @@
-import {Component, EventEmitter, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, OnInit} from '@angular/core';
 import { ChatObject } from "./chatObject";
 import { TranslatorService } from "../../base-shared/translator.service";
 import {GlobalService} from "../../global.service";
 import { UserRecap } from "../../../http/model/user-model/userObject";
 import {MessageModelService} from "../../../http/model/message-model/message-model.service";
 import {DateService} from "../../../http/shared/date.service";
-import {MessageObject, MessagePostObject} from "../../../http/model/message-model/messageObject";
+import {MessagePostObject} from "../../../http/model/message-model/messageObject";
 import moment from "moment";
 import {MessageMapperService} from "../../../mapper/message-mapper.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {interval, Subscription} from "rxjs";
+import {error} from "@angular/compiler-cli/src/transformers/util";
+import {UserMapperService} from "../../../mapper/user-mapper.service";
 
 export type ChatTarget = {subject:'prestation'|'reservation'|'ticket', id:number|bigint}
 
@@ -17,7 +20,7 @@ export type ChatTarget = {subject:'prestation'|'reservation'|'ticket', id:number
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent implements OnInit {
+export class ChatComponent implements OnInit, OnDestroy {
   @Input() set items(items:ChatObject[]){
     this.sortedMessages = items.sort((a, b) => {
       return b.date.getTime() - a.date.getTime();
@@ -30,6 +33,7 @@ export class ChatComponent implements OnInit {
   currentUser?:UserRecap = GlobalService.currentUser;
   sortedMessages: ChatObject[] = [];
   new_message:string = "";
+  periodic?:Subscription;
 
   constructor(
     public translator: TranslatorService,
@@ -37,11 +41,17 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.reload();
+    if (this.free){
+      this.periodic  = interval(4000).subscribe(() => this.reload())
+
+    }
   }
 
-  getInitials(userName: string): string {
-    return userName.charAt(0).toUpperCase();
+  ngOnDestroy(): void {
+    this.periodic?.unsubscribe()
+  }
+  getInitials(user?: UserRecap): string {
+    return user?.nom?.charAt(0).toUpperCase()?? ' ';
   }
 
   can_submit():boolean{
@@ -52,7 +62,6 @@ export class ChatComponent implements OnInit {
     if (this.currentUser?.id && this.target && this.free) {
       const message: MessagePostObject = {
         texte: this.new_message,
-        id_UTILISATEUR: this.currentUser.id,
         date_envoie: DateService.to_api()
       }
       switch (this.target.subject) {
@@ -70,7 +79,7 @@ export class ChatComponent implements OnInit {
       this.sending_message = {
           content: message.texte,
           date: moment().toDate(),
-          user: this.currentUser?.nom?? ''
+          user: this.currentUser
       }
 
       const error:EventEmitter<HttpErrorResponse> = new EventEmitter<HttpErrorResponse>();
@@ -121,4 +130,10 @@ export class ChatComponent implements OnInit {
       }
     }
   }
+
+  is_current(user ?: UserRecap):boolean{
+    return user?.id === this.currentUser?.id
+  }
+
+  protected readonly UserMapperService = UserMapperService;
 }
