@@ -1,7 +1,12 @@
 services:
-
+  front:
+    build: front/
+    ports:
+      - 4200:80
   api:
-    build: .
+    build: api/
+    depends_on:
+      - database
     ports:
       - 8081:80
     volumes:
