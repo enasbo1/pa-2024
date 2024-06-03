@@ -36,7 +36,7 @@ export class AdminHeaderComponent extends HeaderComponent{
     },
     {
       name : "Tickets",
-      link : WpPath.admin.tickets
+      link : WpPath.admin.tickets.root
     },
 
   ];
