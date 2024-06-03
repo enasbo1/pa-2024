@@ -1,0 +1,10 @@
+<div class="flex">
+  <div class="flex col-9">
+    <button class="bubble hover-1"
+            *ngFor="let a of ['todo','wip','done']"
+            [routerLink]="'/'+WpPath.admin.tickets.list"
+            [queryParams]="{state:a}"
+    >tickets {{ a }}
+    </button>
+</div>
+</div>
