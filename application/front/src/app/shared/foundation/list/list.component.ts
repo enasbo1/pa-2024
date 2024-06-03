@@ -214,5 +214,8 @@ export class ListComponent implements OnInit {
     }
   }
 
-  protected readonly events = events;
+  get filtered():_FilterObject[]|undefined{
+    return this._filters?.filter((x)=>x.type!=='hided')
+  }
+
 }
