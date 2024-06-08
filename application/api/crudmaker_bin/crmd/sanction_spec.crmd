@@ -1,0 +1,6 @@
+id-|-!int
+raison-|-r :M,50
+id_raison-|-!int
+type-|-r :M,100
+restriction-|-r !int
+domaine-|-r :M,50

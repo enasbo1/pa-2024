@@ -31,6 +31,8 @@ class Service_entrepriseService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
+			"tarif" => "r !int",
+			"coef" => "!int",
 			"id_SERVICE" => "r !int",
 			"id_ENTREPRISE" => "r !int"
         ]);
@@ -50,6 +52,8 @@ class Service_entrepriseService implements ModelType {
     {
         return array_filter([
 			"id" => isset($params->id)?$params->id:null,
+			"tarif" => isset($params->tarif)?$params->tarif:null,
+			"coef" => isset($params->coef)?$params->coef:null,
 			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
 			"id_ENTREPRISE" => isset($params->id_ENTREPRISE)?$params->id_ENTREPRISE:null
         ]);
