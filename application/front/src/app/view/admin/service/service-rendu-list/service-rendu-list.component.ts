@@ -17,7 +17,7 @@ export class ServiceRenduListComponent implements OnInit {
   services:ListObject[] = [];
   filters:FilterObject[] = [
     {name : 'service.id' , type:'hided', choices:[], set:true},
-    {name : 'date_debut' , type:'auto'},
+    {name : 'etat_date' , type:'auto'},
     {name : 'ville' , type:'auto'},
     {name : 'service', type:'auto'},
     {name : 'tarif', type:'auto'},
