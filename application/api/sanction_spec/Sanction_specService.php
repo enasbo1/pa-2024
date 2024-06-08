@@ -1,12 +1,12 @@
 <?php
-namespace banissement;
+namespace sanction_spec;
 
 use Exception;
 use shared\ModelType;
 use shared\Verif;
 
 
-class BanissementService implements ModelType {
+class Sanction_specService implements ModelType {
 
     /**
      * @throws Exception
@@ -31,12 +31,11 @@ class BanissementService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
-			"sujet" => "r :M,80",
-			"description" => "r :M,1048576",
-			"date_debut" => "r :d,MDY",
-			"date_fin" => "r :d,MDY",
-			"id_sanction_spec" => "r !int",
-			"id_utilisateur" => "r !int"
+			"raison" => "r :M,50",
+			"id_raison" => "!int",
+			"type" => "r :M,100",
+			"restriction" => "r !int",
+			"domaine" => "r :M,50"
         ]);
         if (
             $valid != "validated"
@@ -54,12 +53,11 @@ class BanissementService implements ModelType {
     {
         return array_filter([
 			"id" => isset($params->id)?$params->id:null,
-			"sujet" => isset($params->sujet)?$params->sujet:null,
-			"description" => isset($params->description)?$params->description:null,
-			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
-			"date_fin" => isset($params->date_fin)?$params->date_fin:null,
-			"id_sanction_spec" => isset($params->id_sanction_spec)?$params->id_sanction_spec:null,
-			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
+			"raison" => isset($params->raison)?$params->raison:null,
+			"id_raison" => isset($params->id_raison)?$params->id_raison:null,
+			"type" => isset($params->type)?$params->type:null,
+			"restriction" => isset($params->restriction)?$params->restriction:null,
+			"domaine" => isset($params->domaine)?$params->domaine:null
         ]);
     }
 }

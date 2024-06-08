@@ -43,9 +43,11 @@ export class PrestaMapperService {
   }
 
   static model_to_list(serviceUsed:ServiceUsedObject, detailPage?:string):ListObject{
+    const date_status:string = DateService.checkDateStatus(serviceUsed?.date_debut, serviceUsed?.date_fin)
     return {
       title:"Service Rendu",
       link:(detailPage?detailPage+"/":'')+serviceUsed.id,
+      style: date_status.replace('é','e'),
       right:[
         {text : "prestataire : "+ serviceUsed.entreprise.nom},
         {text : "bénéficiaire : "+ UserMapperService.get_U_Name(serviceUsed.utilisateur)},
@@ -54,10 +56,11 @@ export class PrestaMapperService {
       mid:[
         {text : "service : "+ serviceUsed.service?.type},
         {text : "id appartement : "+ serviceUsed.reservation.id_appartement},
-        {text : "date debut : "+ serviceUsed.date_debut},
+        {text : "date debut : "+ DateService.to_front(serviceUsed?.date_debut) + " | date fin : "+ DateService.to_front(serviceUsed?.date_fin)},
       ],
       propriete:[
         {name : 'id' , value: serviceUsed.id},
+        {name : 'etat_date',value: date_status},
         {name : 'date_modif' , value: serviceUsed.date_debut},
         {name : 'date_debut' , value: serviceUsed.date_debut},
         {name : 'appartement', value: serviceUsed.reservation.id_appartement},
@@ -73,12 +76,12 @@ export class PrestaMapperService {
         {name : 'service.id', value: serviceUsed.service?.id},
         {name : 'service', value: serviceUsed.service?.type},
         {name : 'service.description', value: serviceUsed.service?.description},
-        {name : 'service.tarif', value: serviceUsed.service?.tarif},
-        {name : 'service.date_debut', value: serviceUsed.service?.date_debut},
-        {name : 'service.date_fin', value: serviceUsed.service?.date_fin},
+        {name : 'tarif', value: serviceUsed?.tarif},
+        {name : 'date_debut', value: serviceUsed.date_debut},
+        {name : 'date_fin', value: serviceUsed.date_fin},
         {name : 'service.note', value: serviceUsed.service?.note},
-        {name : 'service.fiche', value: serviceUsed.service?.fiche},
-        {name : 'service.coef', value: serviceUsed.service?.coef},
+        {name : 'fiche', value: serviceUsed.fiche},
+        {name : 'coef', value: serviceUsed.coef},
       ]
     }
   }

@@ -23,7 +23,7 @@ export class TicketMapperService {
         {name : 'description' , value: ticket?.description},
         {name : 'date_creation', value: ticket?.date_creation},
         {name : 'date_modif', value: ticket?.date_modif},
-        {name : 'workflow', value: ticket?.id_traitant?'en cours':'à traiter'},
+        {name : 'workflow', value: ticket?.id_traitant?'wip':'todo'},
         {name : 'target', value: ticket?.id_MESSAGE?'message':ticket?.id_RESERVATION?'reservation':ticket?.id_SERVICE?'service':'none'},
         {name : 'number', value: ticket?.id},
       ]
