@@ -58,6 +58,11 @@ export class PrestaMapperService {
         {text : "id appartement : "+ serviceUsed.reservation.id_appartement},
         {text : "date debut : "+ DateService.to_front(serviceUsed?.date_debut) + " | date fin : "+ DateService.to_front(serviceUsed?.date_fin)},
       ],
+      left:[
+        null,
+        {text: "tarif "+serviceUsed?.tarif},
+        null,
+      ],
       propriete:[
         {name : 'id' , value: serviceUsed.id},
         {name : 'etat_date',value: date_status},

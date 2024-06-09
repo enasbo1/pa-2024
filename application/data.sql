@@ -55,3 +55,21 @@ insert into banissement (sujet, description, date_debut, date_fin, id_sanction_s
 values ('Violation des règles', 'Utilisateur a violé les règles de la plateforme', '2024-01-01', '2024-12-31', 1, 1),
        ('Comportement inapproprié', 'Utilisateur a montré un comportement inapproprié', '2024-02-01', '2024-12-31', 2, 2);
 
+insert into ticket (sujet, description, date_creation, date_modif, id_traitant, id_reservation, id_utilisateur)
+values ('problèmes', 'de sel', '2024-05-05', '2024-05-05', 1, 1, 1)
+
+select
+    t.id,
+    sujet,
+    description,
+    date_creation,
+    date_modif,
+    id_traitant,
+    id_reservation,
+    id_service,
+    id_message,
+    u.id as utilisateur__id,
+    u.nom as utilisateur__nom,
+    u.prenom as utilisateur__prenom
+from ticket t
+inner join public.utilisateur u on u.id = t.id_utilisateur;

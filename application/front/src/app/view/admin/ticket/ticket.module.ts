@@ -6,12 +6,14 @@ import {ToBeImplementedComponent} from "../../../shared/foundation/to-be-impleme
 import { TicketDashboardComponent } from './ticket-dashboard/ticket-dashboard.component';
 import {TicketListComponent} from "./ticket-list/ticket-list.component";
 import {SharedModule} from "../../../shared/shared.module";
+import { TicketDetailComponent } from './ticket-detail/ticket-detail.component';
 
 
 @NgModule({
   declarations: [
     TicketDashboardComponent,
-    TicketListComponent
+    TicketListComponent,
+    TicketDetailComponent
   ],
   imports: [
     CommonModule,
@@ -19,7 +21,7 @@ import {SharedModule} from "../../../shared/shared.module";
         {path: WpPath.admin.tickets.list, component: TicketListComponent},
         {path: WpPath.admin.tickets.dashboard, component: TicketDashboardComponent},
         {path: WpPath.admin.tickets.root, component: TicketDashboardComponent},
-        {path: WpPath.admin.tickets.detail, component: ToBeImplementedComponent},
+        {path: WpPath.admin.tickets.detail, component: TicketDetailComponent},
       ]
     ),
     SharedModule

@@ -7,8 +7,8 @@ export interface TicketObject{
   date_creation:string
   date_modif:string
   id_traitant?:number
-  id_RESERVATION?:number
-  id_SERVICE?:number
-  id_MESSAGE?:number
+  id_reservation?:number
+  id_service?:number
+  id_message?:number
   utilisateur:UserRecap
 }

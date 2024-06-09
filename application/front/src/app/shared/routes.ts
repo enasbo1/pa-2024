@@ -6,9 +6,9 @@ export const  WpPath={
     home:'admin/home',
     tickets:{
       detail    : 'admin/tickets/:id',
-      list      : 'admin/tickets/list',
+      list      : 'admin/tickets',
       dashboard : 'admin/tickets/dashboard',
-      root      : 'admin/tickets'
+      root      : 'admin/tickets/root'
     },
     users :{
       new       : 'admin/users/new',
