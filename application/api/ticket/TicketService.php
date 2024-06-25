@@ -39,7 +39,7 @@ class TicketService implements ModelType {
 			"id_RESERVATION" => "!int",
 			"id_SERVICE" => "!int",
 			"id_MESSAGE" => "!int",
-			"id_UTILISATEUR" => "r !int"
+			"id_utilisateur" => "r !int"
         ]);
         if (
             $valid != "validated"
@@ -65,7 +65,7 @@ class TicketService implements ModelType {
 			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
 			"id_SERVICE" => isset($params->id_SERVICE)?$params->id_SERVICE:null,
 			"id_MESSAGE" => isset($params->id_MESSAGE)?$params->id_MESSAGE:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
         ]);
     }
 }

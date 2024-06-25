@@ -8,6 +8,7 @@ import {AdminModule} from "./admin/admin.module";
 import {VoyageurModule} from "./voyageur/voyageur.module";
 import {WpPath} from "../shared/routes";
 import {ErrorModule} from "./error/error.module";
+import {BailleurModule} from "./bailleur/bailleur.module";
 
 
 
@@ -20,8 +21,9 @@ import {ErrorModule} from "./error/error.module";
     CommonModule,
     SharedModule,
     AdminModule,
-    ErrorModule,
+    BailleurModule,
     VoyageurModule,
+    ErrorModule,
     RouterModule.forChild([
       { path: WpPath.login, component: ConnectionComponent},
       { path: WpPath.logout, component: DiconnectionComponent},

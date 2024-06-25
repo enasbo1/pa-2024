@@ -32,7 +32,7 @@ class Service_apartmentService implements ModelType {
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
 			"id_SERVICE_ENTREPRISE" => "r !int",
-			"id_APPARTEMENT" => "r !int"
+			"id_appartement" => "r !int"
         ]);
         if (
             $valid != "validated"
@@ -51,7 +51,7 @@ class Service_apartmentService implements ModelType {
         return array_filter([
 			"id" => isset($params->id)?$params->id:null,
 			"id_SERVICE_ENTREPRISE" => isset($params->id_SERVICE_ENTREPRISE)?$params->id_SERVICE_ENTREPRISE:null,
-			"id_APPARTEMENT" => isset($params->id_APPARTEMENT)?$params->id_APPARTEMENT:null
+			"id_appartement" => isset($params->id_appartement)?$params->id_appartement:null
         ]);
     }
 }

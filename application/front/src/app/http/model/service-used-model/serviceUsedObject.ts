@@ -11,9 +11,9 @@ export interface ServiceUsedObject{
   tarif : number
 
   reservation : {
-    id_reservation : number
-    id_appartement : number
-    ville:string
+    id ?: number
+    id_appartement ?: number
+    ville ?:string
   }
   entreprise : EnterpriseObject
 

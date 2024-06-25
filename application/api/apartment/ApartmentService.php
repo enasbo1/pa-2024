@@ -42,7 +42,7 @@ class ApartmentService implements ModelType {
 			"nb_occupant_max" => "r !int",
 			"surface" => "r !int",
 			"horaire_contact" => "r !int",
-			"id_UTILISATEUR" => "r !int"
+			"id_utilisateur" => "r !int"
         ]);
         if (
             $valid != "validated"
@@ -71,7 +71,7 @@ class ApartmentService implements ModelType {
 			"nb_occupant_max" => isset($params->nb_occupant_max)?$params->nb_occupant_max:null,
 			"surface" => isset($params->surface)?$params->surface:null,
 			"horaire_contact" => isset($params->horaire_contact)?$params->horaire_contact:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
         ]);
     }
 }

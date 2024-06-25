@@ -1,6 +1,8 @@
 <?php
 namespace service_used;
 use Exception;
+use token\Token;
+
 require_once 'Service_usedRepository.php';
 
 class Service_usedController {
@@ -18,19 +20,27 @@ class Service_usedController {
                     $service_used = $request->getAll();
                     echo json_encode($service_used);
                 } else {
-                    try {                    
-                        if ($id =="service"){
-                            $entreprise = $request->findByService($id2);
-                            echo json_encode($entreprise);
-                        }else if($id =="location"){
-                            $service = $request->findByLocation($id2);
-                            echo json_encode($service);
-                        }else if($id =="currentUser"){
-                            $service_used = $request->findByUser($_TOKEN->user_id);
-                            echo json_encode($service_used);
-                        }else{
-                            $service_used = $request->findById($id);
-                            echo json_encode($service_used);
+                    try {
+                        switch ($id){
+                            case "service":
+                                $entreprise = $request->findByService($id2);
+                                echo json_encode($entreprise);
+                                break;
+                            case "location":
+                                $service = $request->findByLocation($id2);
+                                echo json_encode($service);
+                                break;
+                            case "currentUser":
+                                $service_used = $request->findByUser($_TOKEN->user_id);
+                                echo json_encode($service_used);
+                                break;
+                            case "bailleur":
+                                $service = $request->findByBailleur($id2?? $_TOKEN->user_id);
+                                echo json_encode($service);
+                                break;
+                            default:
+                                $service_used = $request->findById($id);
+                                echo json_encode($service_used);
                         }
 
                     } catch (Exception $e) {

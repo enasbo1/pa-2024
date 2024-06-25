@@ -4,4 +4,4 @@ texte-|-r
 id_SERVICE_UTILISEE-|-!int
 id_RESERVATION-|-!int
 id_TICKET-|-!int
-id_UTILISATEUR-|-r !int
+id_utilisateur-|-r !int

@@ -13,12 +13,21 @@ class Formater
         $val = [];
         foreach($values as $col=>$value){
             $i = explode("__",$col);
-            if(count($i)==1){
-                $val[$i[0]] = $value;
-            }else{
-                $val[$i[0]][$i[1]] = $value;
-            }
+            self::unref($value, $val, $i);
         }
         return $val;
+    }
+
+    private static function unref(&$value, array &$val, array &$ref, int $index = 0): void
+    {
+        if ($index==(count($ref)-1)){
+            $val[$ref[$index]] = $value;
+        }else{
+            if (!isset($val[$ref[$index]])){
+                $val[$ref[$index]] = [];
+            }
+            self::unref($value, $val[$ref[$index]], $ref, $index+1);
+        }
+
     }
 }

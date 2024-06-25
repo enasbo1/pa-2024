@@ -5,4 +5,4 @@ date_fin-|-r :d,MDY
 fiche-|-
 id_RESERVATION-|-r !int
 id_SERVICE_ENTREPRISE-|-r !int
-id_UTILISATEUR-|-r !int
+id_utilisateur-|-r !int

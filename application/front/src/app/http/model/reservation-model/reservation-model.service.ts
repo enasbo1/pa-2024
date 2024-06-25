@@ -25,7 +25,7 @@ export class ReservationModelService extends RequestService{
       mid: [
         { text: `Date début: ${reservation.date_debut}` },
         { text: `Date fin: ${DateService.to_front(reservation.date_fin)}` },
-        { text: `Appartement ID: ${DateService.to_front(reservation.id_appartement)}` }
+        { text: `Appartement ID: ${reservation.id_appartement?? ''}` }
       ],
       left: [
         null,

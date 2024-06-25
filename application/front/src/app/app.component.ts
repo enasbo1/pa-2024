@@ -1,5 +1,6 @@
 import {Component, EventEmitter, OnChanges, OnInit, SimpleChanges} from "@angular/core";
 import {GlobalService} from "./shared/global.service";
+import {WpPath} from "./shared/routes";
 
 @Component({
   selector:"pm-root",
@@ -27,4 +28,5 @@ export class AppComponent implements OnInit, OnChanges{
   }
 
   protected readonly GlobalService = GlobalService;
+  protected readonly WpPath = WpPath;
 }

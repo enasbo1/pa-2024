@@ -41,7 +41,13 @@ export const  WpPath={
     home      : 'voyageurs/home',
     myservices: 'voyageurs/myservices',
     root      :'voyageurs'
-  }
+  },
 
+  bailleur:{
+    home: 'bail/home',
+    prestation : 'bail/prestation/:id',
+    prestations : 'bail/prestation',
+    root: 'bail',
+  }
 }
 

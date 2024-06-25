@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ListObject } from "../../../shared/foundation/list/listObject";
 import {RequestService} from "../../shared/request.service";
+import {ApartmentObject} from "./ApartmentObject";
 
 
 @Injectable({
@@ -10,8 +11,8 @@ import {RequestService} from "../../shared/request.service";
 })
 export class ApartmentModelService extends RequestService{
 
-  get_apartments(): Observable<object> {
-    return this.get('apartments');
+  get_apartments(): Observable<ApartmentObject[]> {
+    return this.get('apartments') as Observable<ApartmentObject[]>;
   }
 
   apartment_to_list(apartment: any): ListObject {

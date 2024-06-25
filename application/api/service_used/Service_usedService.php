@@ -37,7 +37,7 @@ class Service_usedService implements ModelType {
 			"fiche" => "",
 			"id_RESERVATION" => "r !int",
 			"id_SERVICE_ENTREPRISE" => "r !int",
-			"id_UTILISATEUR" => "r !int"
+			"id_utilisateur" => "r !int"
         ]);
         if (
             $valid != "validated"
@@ -61,7 +61,7 @@ class Service_usedService implements ModelType {
 			"fiche" => isset($params->fiche)?$params->fiche:null,
 			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
 			"id_SERVICE_ENTREPRISE" => isset($params->id_SERVICE_ENTREPRISE)?$params->id_SERVICE_ENTREPRISE:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
         ]);
     }
 }

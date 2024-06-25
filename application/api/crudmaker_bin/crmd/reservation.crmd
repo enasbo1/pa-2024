@@ -4,5 +4,5 @@ total_abonnement-|-!int
 date_fin-|-r :d,MDY
 date_debut-|-r :d,MDY
 total_frais-|-!int
-id_APPARTEMENT-|-r !int
-id_UTILISATEUR-|-r !int
+id_appartement-|-r !int
+id_utilisateur-|-r !int

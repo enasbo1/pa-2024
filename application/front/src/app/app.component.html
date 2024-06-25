@@ -14,8 +14,9 @@
   </main>
 
   <header [ngSwitch]="status">
-    <pm-admin-header *ngSwitchCase="'admin'" [pageTitle]="pageTitle"></pm-admin-header>
-    <pm-voyageur-header *ngSwitchCase="'voyageurs'" [pageTitle]="pageTitle"></pm-voyageur-header>
+    <pm-admin-header *ngSwitchCase="WpPath.admin.root" [pageTitle]="pageTitle"></pm-admin-header>
+    <pm-voyageur-header *ngSwitchCase="WpPath.voyageur.root" [pageTitle]="pageTitle"></pm-voyageur-header>
+    <pm-bailleur-header *ngSwitchCase="WpPath.bailleur.root" [pageTitle]="pageTitle"></pm-bailleur-header>
     <pm-header *ngSwitchDefault [pageTitle]="pageTitle"></pm-header>
   </header>
 </div>

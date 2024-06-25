@@ -44,7 +44,7 @@ class MessageController {
                 $request = new MessageRepository();
 
                 try {
-                    $params->id_UTILISATEUR = $_TOKEN->user_id;
+                    $params->id_utilisateur = $_TOKEN->user_id;
                     $request->save($params);
                     http_response_code(201);
                     echo('{"message" : "message créé avec succès"}');

@@ -1,0 +1,13 @@
+<section class = 'flex'>
+  <div class="flex spaced align-center">
+    <div>
+      <div *ngIf="service" class="rubric-container">
+        <pm-rubric [content]="service"></pm-rubric>
+      </div>
+      <br>
+    </div>
+    <div class="chat-col">
+      <pm-chat [items]="chat" [target]="target"></pm-chat>
+    </div>
+  </div>
+</section>

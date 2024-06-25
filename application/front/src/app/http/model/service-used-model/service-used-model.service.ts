@@ -4,6 +4,7 @@ import {Observable} from "rxjs";
 import {ServiceUsedObject} from "./serviceUsedObject";
 import {RequestService} from "../../shared/request.service";
 import {ServiceObject} from "../service-model/serviceObject";
+import {ServiceUsedFromBailleur} from "./ServiceUsedFromBailleur";
 
 @Injectable({
   providedIn: 'root'
@@ -32,5 +33,9 @@ export class ServiceUsedModelService extends RequestService{
 
   get_service_from_user():Observable<ServiceUsedObject[]>{
     return this.get('service_used/currentUser') as Observable<ServiceUsedObject[]>;
+  }
+
+  get_from_bailleur():Observable<ServiceUsedFromBailleur[]>{
+    return this.get('service_used/bailleur') as Observable<ServiceUsedFromBailleur[]>;
   }
 }

@@ -5,6 +5,7 @@ import {RouterLink, RouterLinkWithHref} from "@angular/router";
 import { HeaderComponent } from './header/header.component';
 import { SharedModule } from "../shared/shared.module";
 import { VoyageurHeaderComponent } from './voyageur-header/voyageur-header.component';
+import { BailleurHeaderComponent } from './bailleur-header/bailleur-header.component';
 
 
 
@@ -12,7 +13,8 @@ import { VoyageurHeaderComponent } from './voyageur-header/voyageur-header.compo
   declarations: [
     AdminHeaderComponent,
     HeaderComponent,
-    VoyageurHeaderComponent
+    VoyageurHeaderComponent,
+    BailleurHeaderComponent
   ],
     imports: [
         CommonModule,
@@ -20,10 +22,11 @@ import { VoyageurHeaderComponent } from './voyageur-header/voyageur-header.compo
         SharedModule,
         RouterLink,
     ],
-  exports:[
-    VoyageurHeaderComponent,
-    AdminHeaderComponent,
-    HeaderComponent
-  ]
+    exports: [
+        VoyageurHeaderComponent,
+        AdminHeaderComponent,
+        HeaderComponent,
+        BailleurHeaderComponent
+    ]
 })
 export class HeadFootModule { }
