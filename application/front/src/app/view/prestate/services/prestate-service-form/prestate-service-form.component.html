@@ -1,0 +1,70 @@
+<div class="flex justify-spaced">
+  <div></div>
+  <div class="flex">
+    <div>
+      <ng-container *ngIf="currentStep">
+        <h3 *ngIf="currentStep.title" [class]="currentStep">{{translator.echo(currentStep.title)}}</h3>
+        <ng-container *ngFor="let rubric of currentStep?.content">
+          <pm-line [short]="true"></pm-line>
+          <div
+            class="clickable {{is_current_rubric(rubric)?'font-colored':''}}"
+            (click)="is_current_rubric(rubric)?edit_rubric(rubric):set_rubric(rubric)">
+            <h4 *ngIf="rubric.title">{{translator.echo(rubric.title)}}</h4>
+            <h4 *ngIf="!rubric.title"> add rubric-title</h4>
+          </div>
+          <div *ngFor="let item of rubric.content" class="form-element">
+            <pm-form-field [field]="item"></pm-form-field>
+          </div>
+          <div class="clickable" style="color:darkred"
+               (click)="drop_rubric(rubric)"
+          >
+            drop rubric
+          </div>
+        </ng-container>
+        <button class="bubble colored w-100"
+                (click)="newRubric()"
+                style="padding: 0.5rem"
+        >
+          new rubric
+        </button>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="flex justify-spaced">
+    <div>
+      <button class="bubble colored w-100"
+              style="margin-bottom: 1.5rem"
+      >
+        save
+      </button>
+      <ul>
+        <li *ngFor="let i of steps">
+          <button class = "bubble w-100 {{isCurrent(i)?'colored':''}}"
+                  (click)="isCurrent(i)?edit_step(i):currentStep = i"
+          >step {{translator.echo(i.title)}}</button>
+          <span *ngIf="isCurrent(i)" class="clickable" style="color:darkred"
+                (click)="drop_step(i)"
+          >
+            drop step
+          </span>
+        </li>
+        <li>
+          <button class = "bubble w-100"
+                  (click)="newStep()"
+          >new_step</button>
+        </li>
+
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li *ngFor="let type of FormFieldTypeList">
+          <button class = "bubble w-100"
+                  (click)="addField(type)"
+          >{{translator.echo(type)}}</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

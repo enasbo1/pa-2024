@@ -90,6 +90,11 @@ div.card {
     padding-left: 10%;
     padding-right: 10%;
   }
+
+  &.justify-spaced{
+    justify-content: space-between;
+
+  }
 }
 
 .bordered, .hover-bordered:hover {
@@ -119,6 +124,12 @@ div.card {
 
 .italic{
   font-style: italic;
+}
+
+.font-colored{
+  font-weight: bold;
+  color: styles.$color-colored-gris;
+
 }
 
 .colored{

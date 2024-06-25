@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { SharedModule } from "../shared/shared.module";
 import { VoyageurHeaderComponent } from './voyageur-header/voyageur-header.component';
 import { BailleurHeaderComponent } from './bailleur-header/bailleur-header.component';
+import { PrestaHeaderComponent } from './presta-header/presta-header.component';
 
 
 
@@ -14,7 +15,8 @@ import { BailleurHeaderComponent } from './bailleur-header/bailleur-header.compo
     AdminHeaderComponent,
     HeaderComponent,
     VoyageurHeaderComponent,
-    BailleurHeaderComponent
+    BailleurHeaderComponent,
+    PrestaHeaderComponent
   ],
     imports: [
         CommonModule,
@@ -22,11 +24,12 @@ import { BailleurHeaderComponent } from './bailleur-header/bailleur-header.compo
         SharedModule,
         RouterLink,
     ],
-    exports: [
-        VoyageurHeaderComponent,
-        AdminHeaderComponent,
-        HeaderComponent,
-        BailleurHeaderComponent
-    ]
+  exports: [
+    VoyageurHeaderComponent,
+    AdminHeaderComponent,
+    HeaderComponent,
+    BailleurHeaderComponent,
+    PrestaHeaderComponent
+  ]
 })
 export class HeadFootModule { }

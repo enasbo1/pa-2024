@@ -1,0 +1,13 @@
+<div class = "flex">
+  <button class = "bubble bordered hover-w" id="new-user" [routerLink]="'new'">
+    <h4 style = "text-align: center"> ajouter un service </h4>
+  </button>
+</div>
+
+
+<pm-list
+  [items]="services"
+  [filters]="filters"
+  [critera]="critera"
+  [line_size]="1"
+></pm-list>

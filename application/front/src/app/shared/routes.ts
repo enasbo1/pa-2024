@@ -48,6 +48,15 @@ export const  WpPath={
     prestation : 'bail/prestation/:id',
     prestations : 'bail/prestation',
     root: 'bail',
+  },
+
+  prestate:{
+    home: 'prestate/home',
+    services: 'prestate/services',
+    edit_service : 'prestate/services/:id',
+    new_service : 'prestate/services/new',
+    form : 'prestate/services/:id/form',
+    root:'prestate'
   }
 }
 

@@ -9,6 +9,7 @@ import {VoyageurModule} from "./voyageur/voyageur.module";
 import {WpPath} from "../shared/routes";
 import {ErrorModule} from "./error/error.module";
 import {BailleurModule} from "./bailleur/bailleur.module";
+import {PrestateModule} from "./prestate/prestate.module";
 
 
 
@@ -22,6 +23,7 @@ import {BailleurModule} from "./bailleur/bailleur.module";
     SharedModule,
     AdminModule,
     BailleurModule,
+    PrestateModule,
     VoyageurModule,
     ErrorModule,
     RouterModule.forChild([

@@ -30,8 +30,8 @@ export class HeaderComponent implements OnInit {
   ];
 
   parts : Record<string, string> = {
-    'partie-admin': '/admin',
-    'partie-prestataire': '/prestate',
+    'partie-admin': '/'+WpPath.admin.root,
+    'partie-prestataire': '/'+WpPath.prestate.root,
     'partie-bailleur': '/'+WpPath.bailleur.root,
     'partie-voyageur': '/'+WpPath.voyageur.root
   }

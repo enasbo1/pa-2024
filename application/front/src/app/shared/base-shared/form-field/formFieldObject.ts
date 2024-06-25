@@ -2,7 +2,7 @@ export interface FormFieldObject{
   name : string;
   title?:string;
   sclass? : string;
-  type : "num"|"longtext"|"dropdown"|"text"|"email"|"password"|"place"|"date"|"period"|"url"|"file";
+  type : FormFieldType;
   placeholder? : string|number;
   time?:boolean;
   default? : string|number;
@@ -21,3 +21,7 @@ export interface FormFieldObject{
 }
 
 export type FormFieldValue=string|Date|number|undefined
+
+export const FormFieldTypeList = ["num","longtext","dropdown","text","email","password","place","date","period","url","file"] as const;
+
+export type FormFieldType = typeof FormFieldTypeList[number]
