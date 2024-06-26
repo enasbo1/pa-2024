@@ -10,61 +10,6 @@ create table service
 );
 
 
-create table form_field (
-    id serial primary key,
-    name varchar(150) not null,
-    title varchar(150),
-    sclass varchar(150),
-    type varchar(50) not null,
-    placeholder varchar(255),
-    time boolean,
-    default_value varchar(255),
-    instruction text,
-    reg_error text, -- JSON format
-    choices text, -- JSON format
-    _value varchar(255),
-    _values text, -- JSON format
-    max date,
-    min date,
-    step integer,
-    number_limit_min integer,
-    number_limit_max integer
-);
-
-
-create table form_rubric (
-    id serial primary key,
-    title varchar(150)
-);
-
--- Table de jonction entre form_rubric et form_field
-create table form_rubric_fields (
-    rubric_id integer references form_rubric(id) on delete cascade,
-    field_id integer references form_field(id) on delete cascade,
-    primary key (rubric_id, field_id)
-);
-
-
-create table form_step (
-    id serial primary key,
-    title varchar(150)
-);
-
--- Table de jonction entre form_step et form_rubric
-create table form_step_rubrics (
-    step_id integer references form_step(id) on delete cascade,
-    rubric_id integer references form_rubric(id) on delete cascade,
-    primary key (step_id, rubric_id)
-);
-
--- Table de jonction entre service et form_step
-create table service_form_steps (
-    service_id integer references service(id) on delete cascade,
-    step_id integer references form_step(id) on delete cascade,
-    primary key (service_id, step_id)
-);
-
-
 create table entreprise
 (
     id serial primary key,
