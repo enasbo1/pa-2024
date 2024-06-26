@@ -2,11 +2,25 @@
 namespace message;
 
 use Exception;
+use shared\Formater;
 use shared\Repository;
 
 require_once 'MessageService.php';
 
 class MessageRepository extends Repository {
+    private string $getQuery =
+"SELECT m.id,
+date_envoie,
+texte,
+id_service_utilisee,
+id_reservation,
+id_ticket,
+id_utilisateur as utilisateur__id,
+u.nom as utilisateur__nom,
+u.prenom as utilisateur__prenom
+from message m
+inner join public.utilisateur u on u.id = m.id_utilisateur ";
+
     public function __construct()
     {
         parent::__construct("MESSAGE", new MessageService());
@@ -17,16 +31,49 @@ class MessageRepository extends Repository {
      */
     public function getAll(): array
     {
-        $message = [];
-        $result = $this->readAll("unable to find any message");
-
+        $service_used = [];
+        $result = $this->query($this->getQuery, [], "messages not found");
         foreach($result as $row) {
-            $message[] = $row;
+            $service_used[] = Formater::prepareGet($row);
         }
 
-        return $message;
+        return $service_used;
     }
 
+    public function findByService_used(int $id): array
+    {
+        $service_used = [];
+        $result = $this->query($this->getQuery."where id_service_utilisee=$1", ["id" => $id], "messages not found");
+        foreach($result as $row) {
+            $service_used[] = Formater::prepareGet($row);
+        }
+
+        return $service_used;
+    }
+
+    public function findByReservation(int $id): array
+    {
+        $service_used = [];
+        $result = $this->query($this->getQuery."where id_reservation=$1", ["id" => $id], "messages not found");
+        foreach($result as $row) {
+            $service_used[] = Formater::prepareGet($row);
+        }
+
+        return $service_used;
+    }
+
+
+    public function findByTicket(int $id): array
+    {
+        $service_used = [];
+        $result = $this->query($this->getQuery."where id_tiket=$1", ["id" => $id], "messages not found");
+        foreach($result as $row) {
+            $service_used[] = Formater::prepareGet($row);
+        }
+
+        return $service_used;
+    }
+    
     /**
      * @throws Exception
      */

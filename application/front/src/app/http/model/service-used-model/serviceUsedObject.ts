@@ -5,11 +5,15 @@ export interface ServiceUsedObject{
   id : number
   date_modif ?: string
   date_debut : string
+  date_fin : string
+  fiche ?: string
+  coef ?: number
+  tarif : number
 
   reservation : {
-    id_reservation : number
-    id_appartement : number
-    ville:string
+    id ?: number
+    id_appartement ?: number
+    ville ?:string
   }
   entreprise : EnterpriseObject
 

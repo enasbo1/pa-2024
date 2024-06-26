@@ -11,14 +11,14 @@ class MessageService implements ModelType {
     /**
      * @throws Exception
      */
-    public function prepareSave(object $params): object {
+    public function prepareSave(object $params): array {
         return $this->isValidType($params);
     }
 
     /**
      * @throws Exception
      */
-    public function prepareUpdate(object $params):object {
+    public function prepareUpdate(object $params): array {
         return $this->isValidType($params);
 
     }
@@ -31,17 +31,17 @@ class MessageService implements ModelType {
         $arr_params = $this->toArray($params);
         $valid = Verif::verification($arr_params,[
 			"id" => "!int",
-			"date_envoie" => "!int",
-			"texte" => "r !int",
+			"date_envoie" => ":d,MDY",
+			"texte" => "r",
 			"id_SERVICE_UTILISEE" => "!int",
 			"id_RESERVATION" => "!int",
 			"id_TICKET" => "!int",
-			"id_UTILISATEUR" => "r !int"
+			"id_utilisateur" => "r !int"
         ]);
         if (
             $valid != "validated"
         ) {
-            throw new Exception("Bad Request : ". $valid["message"], 400);
+            throw new Exception(json_encode($valid),400);
         }
 
         return $arr_params;
@@ -59,7 +59,7 @@ class MessageService implements ModelType {
 			"id_SERVICE_UTILISEE" => isset($params->id_SERVICE_UTILISEE)?$params->id_SERVICE_UTILISEE:null,
 			"id_RESERVATION" => isset($params->id_RESERVATION)?$params->id_RESERVATION:null,
 			"id_TICKET" => isset($params->id_TICKET)?$params->id_TICKET:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
         ]);
     }
 }

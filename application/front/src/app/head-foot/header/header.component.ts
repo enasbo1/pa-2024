@@ -32,7 +32,7 @@ export class HeaderComponent implements OnInit {
   parts : Record<string, string> = {
     'partie-admin': '/admin',
     'partie-prestataire': '/prestate',
-    'partie-bailleur': '/bail',
+    'partie-bailleur': '/'+WpPath.bailleur.root,
     'partie-voyageur': '/'+WpPath.voyageur.root
   }
 
@@ -43,7 +43,7 @@ export class HeaderComponent implements OnInit {
     'partie-voyageur'
   ]
 
-  logoUrl:string = "assets/images/hammer.png";
+  logoUrl:string = "assets/images/logo.png";
   constructor(
     protected readonly translator:TranslatorService,
     private router:Router

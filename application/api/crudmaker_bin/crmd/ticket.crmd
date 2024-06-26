@@ -7,4 +7,4 @@ id_traitant-|-!int
 id_RESERVATION-|-!int
 id_SERVICE-|-!int
 id_MESSAGE-|-!int
-id_UTILISATEUR-|-r !int
+id_utilisateur-|-r !int

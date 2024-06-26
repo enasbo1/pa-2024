@@ -43,6 +43,7 @@ section{
         .img-pannel{
           width: 0;
         }
+
       }
 
       .list-element{
@@ -55,6 +56,24 @@ section{
         align-items: stretch;
         padding: 0;
 
+        &.passe{
+          border-color: styles.$color-gris;
+          h6{
+            color : styles.$color-gris;
+          }
+        }
+        &.present{
+          border-color: styles.$color-colored-gris;
+          h6{
+            color: styles.$color-colored-gris;
+          }
+        }
+        &.futur{
+          border-color: styles.$color-noir;
+          h6{
+            color: styles.$color-noir;
+          }
+        }
         >.content {
           width: 100%;
 
@@ -109,3 +128,5 @@ a{
 .line{
   height : 3rem;
 }
+
+

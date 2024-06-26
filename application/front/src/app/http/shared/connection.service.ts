@@ -4,8 +4,9 @@ import {FormFieldObject, FormFieldValue} from "../../shared/base-shared/form-fie
 import {catchError, Observable} from "rxjs";
 import {GlobalService} from "../../shared/global.service";
 import {HttpErrorResponse} from "@angular/common/http";
+import {UserRecap} from "../model/user-model/userObject";
 
-type WPTokenRequestType = {token?:string, message?:string, id?:string}
+type WPTokenRequestType = {token?:string, user:UserRecap, message?:string, id?:string}
 
 @Injectable({
   providedIn: 'root'
@@ -29,13 +30,14 @@ export class ConnectionService extends RequestService{
     };
     this.post(connectionvalues, "connection", errorCatch)
       .subscribe(
-      (res:WPTokenRequestType)=>
-        this._success(res.token)
+      (res:object)=>
+        this._success(res as WPTokenRequestType)
     )
   }
 
-  private _success(token:string|undefined):void{
-    GlobalService.token = token;
+  private _success(token_value:WPTokenRequestType):void{
+    GlobalService.token = token_value.token;
+    GlobalService.currentUser = token_value.user;
     console.log(GlobalService.token);
     if (this.success){
       this.success(true);

@@ -16,8 +16,8 @@ export class ServiceRenduListComponent implements OnInit {
 
   services:ListObject[] = [];
   filters:FilterObject[] = [
-    {name : 'service.id' , type:'choice', choices:[], set:true},
-    {name : 'date_debut' , type:'auto'},
+    {name : 'service.id' , type:'hided', choices:[], set:true},
+    {name : 'etat_date' , type:'auto'},
     {name : 'ville' , type:'auto'},
     {name : 'service', type:'auto'},
     {name : 'tarif', type:'auto'},
@@ -38,7 +38,10 @@ export class ServiceRenduListComponent implements OnInit {
   ngOnInit(): void {
     GlobalService.pageName = "Prestation";
     this.route.queryParams.subscribe((query:Params)=>{
-      this.filters[0].default = query["fromService"];
+      if (query["fromService"]){
+        this.filters[0].default = query["fromService"];
+        this.filters[0].type = 'choice';
+      }
       this.serviceUsedModelService.get_serviceUsed()
         .subscribe(
           (serviceUsed:ServiceUsedObject[])=>

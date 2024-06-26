@@ -34,7 +34,7 @@ class DocumentService implements ModelType {
 			"url_ci" => "r !url :M,255",
 			"url_habilitation" => "r !url :M,255",
 			"tarif" => "r !int",
-			"id_UTILISATEUR" => "r :!int"
+			"id_utilisateur" => "r :!int"
         ]);
         if (
             $valid != "validated"
@@ -55,7 +55,7 @@ class DocumentService implements ModelType {
 			"url_ci" => isset($params->url_ci)?$params->url_ci:null,
 			"url_habilitation" => isset($params->url_habilitation)?$params->url_habilitation:null,
 			"tarif" => isset($params->tarif)?$params->tarif:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
         ]);
     }
 }

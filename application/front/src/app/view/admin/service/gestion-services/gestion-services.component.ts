@@ -17,8 +17,7 @@ export class GestionServicesComponent implements OnInit {
 
   filters:FilterObject[] = [
     {name : 'note' , type:'auto'},
-    {name : 'date_debut' , type:'auto'},
-    {name : 'date_fin' , type:'auto'},
+    {name : 'etat_date',type:'auto'},
     {name : 'type', type:'auto'},
     {name : 'tarif', type:'auto'},
   ]

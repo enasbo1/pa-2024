@@ -33,12 +33,8 @@ class ServiceService implements ModelType {
 			"id" => "!int",
 			"type" => "r :M,150",
 			"description" => "r :M,255",
-			"tarif" => "r !int",
-			"date_debut" => "r",
-			"date_fin" => "r",
 			"note" => "r !int",
-			"fiche" => "r :M,65535",
-			"coef" => "r !int"
+			"actif" => ""
         ]);
         if (
             $valid != "validated"
@@ -58,13 +54,8 @@ class ServiceService implements ModelType {
 			"id" => isset($params->id)?$params->id:null,
 			"type" => isset($params->type)?$params->type:null,
 			"description" => isset($params->description)?$params->description:null,
-			"tarif" => isset($params->tarif)?$params->tarif:null,
-			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
-			"date_fin" => isset($params->date_fin)?$params->date_fin:null,
 			"note" => isset($params->note)?$params->note:null,
-			"fiche" => isset($params->fiche)?$params->fiche:null,
-			"coef" => isset($params->coef)?$params->coef:null,
-            "actif" => isset($params->actif)?$params->actif:true
+			"actif" => isset($params->actif)?$params->actif:true
         ]);
     }
 }

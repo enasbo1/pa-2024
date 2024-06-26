@@ -8,7 +8,7 @@ class BanissementController {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2 = null): void
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":

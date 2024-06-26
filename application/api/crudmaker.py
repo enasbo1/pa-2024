@@ -4,7 +4,11 @@ def to_array_string(col:list)->str:
     ret = "";
     for i,j in enumerate(col):
         t = '$params->'+j[0];
-        ret += '\t\t\t"'+j[0]+f'" => isset({t})?{t}:null'
+        if (len(j)>2):
+            default = j[2]
+        else:
+            default = 'null'
+        ret += '\t\t\t"'+j[0]+f'" => isset({t})?{t}:{default}'
         if (i+1)<len(col):
                 ret+= ',\n'
     return ret;
@@ -52,7 +56,10 @@ def main():
         "list_colomn_verif":to_verif_string(col),
     }
     templates = os.listdir("crudmaker_bin/templates")
-    os.makedirs(name)
+    
+    if not os.path.isdir(f'{name}'):
+        os.makedirs(name)
+        
     created_file:list = []
     for i in templates:
         print(i)
@@ -68,10 +75,20 @@ def main():
             else:
                 print('error, syntax {|{ or }|} used separately')
                 
-        tplt = "".join("".join(i) for i in _file_content)  
-        with open(f'{name}/{filename}.php', 'a',encoding='UTF-8') as file:
-            file.write(tplt)
-        created_file.append(f'{name}/{filename}.php')
+        tplt = "".join("".join(i) for i in _file_content)
+        n = i.split(".")[-1] == 'tfphp'
+        v = (not os.path.isfile(f'{name}/{filename}.php'))
+        if v | n:
+            if ((not v) & n):
+                g = (input(f'file {name}/{filename}.php already exist, do you want to overwrite it ? (y/n, default "y"): ') or "y")=="y"
+            else:
+                g = True
+            if g:
+                with open(f'{name}/{filename}.php', 'w',encoding='UTF-8') as file:
+                    file.write(tplt)
+                created_file.append(f'{name}/{filename}.php')
+        else:
+            print(f'already existing file : {name}/{filename}.php')
     
     print(f'\n\n|= = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = = =|')
     print(f' the CRUD of Model "{name}" for table "{table}" was well generated:\n')

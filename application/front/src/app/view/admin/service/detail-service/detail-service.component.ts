@@ -7,8 +7,6 @@ import {EnterpriseModelService} from "../../../../http/model/enterprise-model/en
 import {EnterpriseObject} from "../../../../http/model/enterprise-model/enterpriseObject";
 import {ModaleService} from "../../../../shared/foundation/modale/modale.service";
 import {FormFieldObject} from "../../../../shared/base-shared/form-field/formFieldObject";
-import {DateService} from "../../../../http/shared/date.service";
-import {FormService} from "../../../../shared/foundation/form/form.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {ServiceMapperService} from "../../../../mapper/service-mapper.service";
 import {GlobalService} from "../../../../shared/global.service";
@@ -136,7 +134,7 @@ export class DetailServiceComponent implements OnInit {
       this.serviceModelService.delete_service(BigInt(this.service_object.id), error).subscribe(
         ()=>{
           ModaleService.createTextModal("service supprimé avec succès");
-          this.router.navigateByUrl("/admin/services")
+          this.router.navigateByUrl("/admin/services").then()
         }
       )
     }

@@ -1,7 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 @use "./app/shared/palette.scss" as styles;
 @import 'bootstrap/dist/css/bootstrap.min.css';
-@import 'font-awesome/css/font-awesome.min.css';
+// @import 'font-awesome/css/font-awesome.min.css';
 
 
 *{
@@ -185,6 +185,11 @@ h1,h2,h3,h4,h5{
   text-align: center;
 }
 
-.spaced>button{
+.spaced>button, .spaced>div{
   margin: 0.5rem;
+}
+
+.chat-col{
+  width: 60vw;
+  max-width: 50rem;
 }

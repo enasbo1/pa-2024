@@ -35,8 +35,8 @@ class BanissementService implements ModelType {
 			"description" => "r :M,1048576",
 			"date_debut" => "r :d,MDY",
 			"date_fin" => "r :d,MDY",
-			"specification" => "r :M,200",
-			"id_UTILISATEUR" => "r !int"
+			"id_sanction_spec" => "r !int",
+			"id_utilisateur" => "r !int"
         ]);
         if (
             $valid != "validated"
@@ -58,8 +58,8 @@ class BanissementService implements ModelType {
 			"description" => isset($params->description)?$params->description:null,
 			"date_debut" => isset($params->date_debut)?$params->date_debut:null,
 			"date_fin" => isset($params->date_fin)?$params->date_fin:null,
-			"specification" => isset($params->specification)?$params->specification:null,
-			"id_UTILISATEUR" => isset($params->id_UTILISATEUR)?$params->id_UTILISATEUR:null
+			"id_sanction_spec" => isset($params->id_sanction_spec)?$params->id_sanction_spec:null,
+			"id_utilisateur" => isset($params->id_utilisateur)?$params->id_utilisateur:null
         ]);
     }
 }

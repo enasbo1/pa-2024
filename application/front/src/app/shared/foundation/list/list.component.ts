@@ -2,7 +2,6 @@ import {Component, Input, OnInit} from '@angular/core';
 import {TranslatorService} from "../../base-shared/translator.service";
 import {ListObject, ListObjectPropriety} from "./listObject";
 import {TextStyle} from "../../base-shared/textStyle";
-import * as events from "events";
 import {_FilterObject, FilterObject} from "./filterObject";
 
 @Component({
@@ -214,5 +213,8 @@ export class ListComponent implements OnInit {
     }
   }
 
-  protected readonly events = events;
+  get filtered():_FilterObject[]|undefined{
+    return this._filters?.filter((x)=>x.type!=='hided')
+  }
+
 }

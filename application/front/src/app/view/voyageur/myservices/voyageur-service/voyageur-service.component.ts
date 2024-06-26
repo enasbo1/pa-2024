@@ -16,6 +16,7 @@ export class VoyageurServiceComponent implements OnInit {
   services:ListObject[] = []
   filters:FilterObject[] = [
     {name : 'note' , type:'auto'},
+    {name : 'etat_date' , type:'auto'},
     {name : 'date_debut' , type:'auto'},
     {name : 'date_fin' , type:'auto'},
     {name : 'type', type:'auto'},
