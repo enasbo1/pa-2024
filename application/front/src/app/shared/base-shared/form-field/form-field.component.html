@@ -21,7 +21,6 @@
   <ng-container *ngSwitchCase="'longtext'">
     <textarea type="text" class="bubble hover-w w-100 {{field.sclass}}"
           [name] ="field.name"
-          [value]="field.default"
           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
           [placeholder]="translator.echo(field.placeholder)"
           [(ngModel)]="field._value"
@@ -42,7 +41,6 @@
 
   <ng-container *ngSwitchCase="'email'">
     <input type="email" class="bubble hover-w w-100 {{field.sclass}}"
-           [value]="field.default"
            [name] ="field.name"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
@@ -52,7 +50,6 @@
 
   <ng-container *ngSwitchCase="'password'">
     <input type="password" class="bubble hover-w w-100 {{field.sclass}}"
-           [value]="field.default"
            [name] ="field.name"
            [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
            [placeholder]="translator.echo(field.placeholder)"
@@ -113,10 +110,10 @@
   <ng-container *ngSwitchCase="'file'">
     <div  class="bubble hover-w w-100 bordered">
       <input type="file" class = "w-100 hover-w {{field.sclass}}"
-             [value]="field.default"
-             [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
-             [placeholder]="translator.echo(field.placeholder)"
-             [(ngModel)]="field._value"
+           [name] ="field.name"
+           [title]="translator.echo(field.instruction?field.instruction:field.placeholder)"
+           [placeholder]="translator.echo(field.placeholder)"
+           [(ngModel)]="field._value"
       >
     </div>
  </ng-container>

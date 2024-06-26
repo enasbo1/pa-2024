@@ -16,6 +16,7 @@ export class FormFieldComponent implements OnInit {
   date:string = "date";
   start_date?:Date;
   end_date?:Date;
+  in: any;
   constructor(public translator:TranslatorService) { }
 
   ngOnInit(): void {

@@ -117,6 +117,9 @@ from service_utilisee su
         return $service_used;
     }
 
+    /**
+     * @throws Exception
+     */
     public function findByService(int $id): array
     {
         $service_used = [];
@@ -128,6 +131,9 @@ from service_utilisee su
         return $service_used;
     }
 
+    /**
+     * @throws Exception
+     */
     public function findByLocation(int $id): array{
         $service_used = [];
         $result = $this->query($this->getQuery."where a.id=$1", ["id" => $id], "service_used not found");

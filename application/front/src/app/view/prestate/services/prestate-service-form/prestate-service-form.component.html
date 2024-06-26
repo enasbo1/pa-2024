@@ -12,8 +12,14 @@
             <h4 *ngIf="rubric.title">{{translator.echo(rubric.title)}}</h4>
             <h4 *ngIf="!rubric.title"> add rubric-title</h4>
           </div>
-          <div *ngFor="let item of rubric.content" class="form-element">
-            <pm-form-field [field]="item"></pm-form-field>
+          <div *ngFor="let item of rubric.content" class="form-element"
+          >
+            <div class="flex align-end">
+              <pm-form-field [field]="item" (click)="edit_field(item)"></pm-form-field>
+              <div class="icon font-red clickable"
+                   (click)="drop_field(item, rubric)"
+              >🗑</div>
+            </div>
           </div>
           <div class="clickable" style="color:darkred"
                (click)="drop_rubric(rubric)"
@@ -33,8 +39,9 @@
 
   <div class="flex justify-spaced">
     <div>
-      <button class="bubble colored w-100"
+      <button class="bubble {{onDate?'colored':''}} w-100"
               style="margin-bottom: 1.5rem"
+              (click)="save()"
       >
         save
       </button>

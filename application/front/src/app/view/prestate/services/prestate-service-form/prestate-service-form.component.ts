@@ -1,5 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {FormFieldType, FormFieldTypeList} from "../../../../shared/base-shared/form-field/formFieldObject";
+import {
+  FormFieldObject,
+  FormFieldType,
+  FormFieldTypeList
+} from "../../../../shared/base-shared/form-field/formFieldObject";
 import {TranslatorService} from "../../../../shared/base-shared/translator.service";
 import {FormRubricObject, FormStepObject} from "../../../../shared/base-shared/form-step/formStepObject";
 import {ModaleService} from "../../../../shared/foundation/modale/modale.service";
@@ -16,9 +20,15 @@ import {ServiceModelService} from "../../../../http/model/service-model/service-
 })
 export class PrestateServiceFormComponent implements OnInit {
   steps:FormStepObject[] = [];
+  private on_date:boolean=true;
 
   private current?:FormStepObject;
   private cur_rubric?:FormRubricObject;
+  private service?:ServiceObject;
+
+  public get onDate():boolean{
+    return this.on_date
+  }
 
   constructor(
     protected translator : TranslatorService,
@@ -29,8 +39,14 @@ export class PrestateServiceFormComponent implements OnInit {
     GlobalService.pageName = "Formulaire service ???"
     this.route.params.subscribe((params:Params) => {
       this.serviceModelService.get_one_service(params['id']).subscribe(
-        (service:ServiceObject[])=>
-            GlobalService.pageName = "Formulaire service " + service[0]?.type?? "???"
+        (service:ServiceObject[])=>{
+          GlobalService.pageName = "Formulaire service " + service[0]?.type?? "???";
+          this.service = service[0]??undefined
+          this.steps = JSON.parse(this.service?.form??'[]') as FormStepObject[];
+          if (this.steps.length==0){
+            this.newStep()
+          }
+        }
       );
       if (this.steps.length==0){
         this.newStep()
@@ -52,6 +68,7 @@ export class PrestateServiceFormComponent implements OnInit {
   }
 
   edit_step(step:FormStepObject):void{
+    this.on_date=false
     ModaleService.createFormModal(
       {
         content:[
@@ -75,6 +92,7 @@ export class PrestateServiceFormComponent implements OnInit {
   }
 
   drop_step(step:FormStepObject):void{
+    this.on_date=false
     ModaleService.createValidationModal('do you want to destroy step "'+step.title+'"')
       .subscribe(
         (yes)=>{
@@ -87,6 +105,7 @@ export class PrestateServiceFormComponent implements OnInit {
 
   }
   newStep():void{
+    this.on_date=false
     this.cur_rubric = {
       content:[]
     }
@@ -104,6 +123,7 @@ export class PrestateServiceFormComponent implements OnInit {
   }
 
   addField(type:FormFieldType):void{
+    this.on_date=false
     this.cur_rubric?.content.push(
       {
         type:type,
@@ -113,6 +133,7 @@ export class PrestateServiceFormComponent implements OnInit {
     )
   }
   drop_rubric(rubric:FormRubricObject):void{
+    this.on_date=false
     ModaleService.createValidationModal('do you want to destroy rubric "'+rubric.title+'"')
       .subscribe(
         (yes)=>{
@@ -126,6 +147,7 @@ export class PrestateServiceFormComponent implements OnInit {
   }
 
   newRubric():void{
+    this.on_date=false
     this.cur_rubric={
       content:[]
     }
@@ -143,6 +165,7 @@ export class PrestateServiceFormComponent implements OnInit {
   }
 
   edit_rubric(rubric:FormRubricObject):void{
+    this.on_date=false
     ModaleService.createFormModal(
       {
         content:[
@@ -165,5 +188,31 @@ export class PrestateServiceFormComponent implements OnInit {
     )
   }
 
+  edit_field(field:FormFieldObject):void{
+    this.on_date=false
+    FormService.edit_field(field)
+  }
+
+  drop_field(field:FormFieldObject, rubric:FormRubricObject):void{
+    this.on_date=false
+    ModaleService.createValidationModal(
+      "do you realy want to delete field  \"" + (field.title?? field.name) + '"'
+    ).subscribe(
+      (yes)=>{
+        if (yes==="Oui") {
+          rubric.content = rubric.content.filter(val=>val!==field)
+        }
+      }
+    )
+  }
+
+  save():void{
+    if (this.service){
+      this.service.form = JSON.stringify(this.steps)
+      this.serviceModelService.edit_service(this.service).subscribe(
+        _=>this.on_date = true
+      )
+    }
+  }
   protected readonly FormFieldTypeList = FormFieldTypeList;
 }

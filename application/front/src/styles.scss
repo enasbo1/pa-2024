@@ -204,3 +204,14 @@ h1,h2,h3,h4,h5{
   width: 60vw;
   max-width: 50rem;
 }
+
+
+.icon{
+  padding: 0.5rem;
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.font-red{
+  color: styles.$color-error;
+}
