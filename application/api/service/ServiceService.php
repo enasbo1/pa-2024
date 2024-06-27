@@ -35,7 +35,7 @@ class ServiceService implements ModelType {
 			"description" => "r :M,255",
 			"note" => "r !int",
 			"actif" => "",
-			"form_text" => "r :M"
+			"form" => ""
         ]);
         if (
             $valid != "validated"
@@ -57,7 +57,7 @@ class ServiceService implements ModelType {
 			"description" => isset($params->description)?$params->description:null,
 			"note" => isset($params->note)?$params->note:null,
 			"actif" => isset($params->actif)?$params->actif:true,
-			"form_text" => isset($params->form_text)?$params->form_text:null
+			"form" => isset($params->form)?$params->form:null
         ]);
     }
 }

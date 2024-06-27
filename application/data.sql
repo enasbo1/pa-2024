@@ -26,10 +26,10 @@ values('sommeil', 'dans un bon lit');
 
 insert into service (type, description, note, actif)
 values ('menage', 'c est tout propre maintenant', 4, true),
-       ('repos', 'ça va mieux', 5, true),
+       ('boire', 'dionisos', 5, true),
        ('menage', 'c est tout propre maintenant', 4, true),
-       ('menage', 'c est tout propre maintenant', 4, true),
-       ('menage', 'c est tout propre maintenant', 4, true);
+       ('coucou', 'couscous', 4, true),
+       ('dodo', 'morphé', 4, true);
 
 insert into service_entreprise (id_service, id_entreprise)
 values (1, 1),

@@ -3,4 +3,4 @@ type-|-r :M,150
 description-|-r :M,255
 note-|-r !int
 actif-|--|-true
-form_text-|-r :M
+form-|-

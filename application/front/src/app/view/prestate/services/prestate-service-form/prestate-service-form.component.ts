@@ -45,6 +45,8 @@ export class PrestateServiceFormComponent implements OnInit {
           this.steps = JSON.parse(this.service?.form??'[]') as FormStepObject[];
           if (this.steps.length==0){
             this.newStep()
+          }else{
+            this.current = this.steps[0]
           }
         }
       );

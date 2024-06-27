@@ -4,7 +4,6 @@ create table service
     type varchar(150),
     description varchar(255),
     note integer,
-    url_json_formulaire varchar(255),
     actif boolean,
     form TEXT
 );
