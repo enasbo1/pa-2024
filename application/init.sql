@@ -5,8 +5,10 @@ create table service
     description varchar(255),
     note integer,
     url_json_formulaire varchar(255),
-    actif boolean
+    actif boolean,
+    form TEXT
 );
+
 
 create table entreprise
 (
@@ -118,6 +120,7 @@ create table service_utilisee
     date_debut timestamp,
     date_fin timestamp,
     fiche text,
+    form TEXT,
     id_reservation integer not null references reservation,
     id_utilisateur integer not null references utilisateur,
     id_service_entreprise integer default 1 not null references service_entreprise

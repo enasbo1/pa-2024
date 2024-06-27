@@ -6,3 +6,4 @@ fiche-|-
 id_RESERVATION-|-r !int
 id_SERVICE_ENTREPRISE-|-r !int
 id_utilisateur-|-r !int
+form_text-|-r :M
