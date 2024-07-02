@@ -26,7 +26,9 @@ class ConnectionService implements ModelType {
                     $value["id"],
                     $value["prenom"],
                     $value["nom"],
-                    $value["role"]),
+                    $value["role"],
+                    $value["id_entreprise"]?? 0,
+                ),
                 "user" => $value
             ];
         }
@@ -49,7 +51,8 @@ class ConnectionService implements ModelType {
                         'user_id' => null,
                         'user_firstname' => null,
                         'user_lastname' => null,
-                        'user_role' => 0
+                        'user_role' => 0,
+                        'user_enterprise' => 0
                     ]
                 ];
             }

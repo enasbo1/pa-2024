@@ -22,10 +22,10 @@ import { PrestateServiceFormComponent } from './prestate-service-form/prestate-s
     CommonModule,
     FoundationModule,
     RouterModule.forChild([
-      {path: WpPath.prestate.services, component: PrestateServicesComponent},
-      {path: WpPath.prestate.new_service, component: NewPrestateServiceComponent},
-      {path: WpPath.prestate.form, component: PrestateServiceFormComponent},
-      {path: WpPath.prestate.edit_service, component: PrestateServiceDetailComponent}
+      {path: WpPath.prestate.services.root, component: PrestateServicesComponent},
+      {path: WpPath.prestate.services.new, component: NewPrestateServiceComponent},
+      {path: WpPath.prestate.services.form, component: PrestateServiceFormComponent},
+      {path: WpPath.prestate.services.edit, component: PrestateServiceDetailComponent}
     ]),
     BaseSharedModule
   ]

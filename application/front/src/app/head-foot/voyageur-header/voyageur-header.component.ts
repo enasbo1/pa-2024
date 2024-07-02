@@ -19,9 +19,12 @@ export class VoyageurHeaderComponent extends HeaderComponent{
       link : WpPath.voyageur.home
     },
     {
-      name : "My Services",
-      link : WpPath.voyageur.myservices
+      name : "My Reservations",
+      link : WpPath.voyageur.myReservation
     },
-
+    {
+      name : "My Services",
+      link : WpPath.voyageur.myServices
+    },
   ];
 }

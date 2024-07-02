@@ -27,7 +27,7 @@ export class VoyageurServiceComponent implements OnInit {
     'number'
   ];
 
-  private detailPage:string = WpPath.voyageur.myservices;
+  private detailPage:string = WpPath.voyageur.myServices;
 
   constructor(private serviceUsedModelService : ServiceUsedModelService) { }
 

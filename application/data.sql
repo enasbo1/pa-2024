@@ -24,6 +24,11 @@ values('lambda', 'aleatoire');
 insert into entreprise(nom, description)
 values('sommeil', 'dans un bon lit');
 
+insert into utilisateur (prenom, nom, mail, mdp, adresse, pays, ville, code_postal, numero, role, id_entreprise)
+values('prestate','user','prestate@mail.com',
+       '5d2217b2d33df736cdc3258b1d3b7120958504f7da6437d18cd12c321376df28',
+       '123 Main Street','France','Paris',75001,'0123456789', 3,1);
+
 insert into service (type, description, note, actif)
 values ('menage', 'c est tout propre maintenant', 4, true),
        ('boire', 'dionisos', 5, true),
@@ -56,20 +61,4 @@ values ('Violation des règles', 'Utilisateur a violé les règles de la platefo
        ('Comportement inapproprié', 'Utilisateur a montré un comportement inapproprié', '2024-02-01', '2024-12-31', 2, 2);
 
 insert into ticket (sujet, description, date_creation, date_modif, id_traitant, id_reservation, id_utilisateur)
-values ('problèmes', 'de sel', '2024-05-05', '2024-05-05', 1, 1, 1)
-
-select
-    t.id,
-    sujet,
-    description,
-    date_creation,
-    date_modif,
-    id_traitant,
-    id_reservation,
-    id_service,
-    id_message,
-    u.id as utilisateur__id,
-    u.nom as utilisateur__nom,
-    u.prenom as utilisateur__prenom
-from ticket t
-inner join public.utilisateur u on u.id = t.id_utilisateur;
+values ('problèmes', 'de sel', '2024-05-05', '2024-05-05', 1, 1, 1);

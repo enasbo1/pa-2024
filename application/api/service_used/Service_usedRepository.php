@@ -165,6 +165,17 @@ from service_utilisee su
         return $service_used;
     }
 
+    public function findByEnterprise(int $id): array{
+        $service_used = [];
+        $result = $this->query($this->getQuery."where e.id=$1", ["id" => $id],"service_used not found");
+        foreach($result as $row) {
+            $service_used[] = Formater::prepareGet($row);
+        }
+
+
+        return $service_used;
+    }
+
     /**
      * @throws Exception
      */

@@ -39,7 +39,8 @@ export const  WpPath={
 
   voyageur:{
     home      : 'voyageurs/home',
-    myservices: 'voyageurs/myservices',
+    myServices: 'voyageurs/myservices',
+    myReservation: 'voyageurs/myreservation',
     root      :'voyageurs'
   },
 
@@ -52,10 +53,16 @@ export const  WpPath={
 
   prestate:{
     home: 'prestate/home',
-    services: 'prestate/services',
-    edit_service : 'prestate/services/:id',
-    new_service : 'prestate/services/new',
-    form : 'prestate/services/:id/form',
+    services: {
+      root: 'prestate/services',
+      edit: 'prestate/services/:id',
+      new: 'prestate/services/new',
+      form : 'prestate/services/:id/form',
+    },
+    presta : {
+      root: 'prestate/presta',
+      detail: 'prestate/presta/:id'
+    },
     root:'prestate'
   }
 }

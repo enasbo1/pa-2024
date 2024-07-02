@@ -1,6 +1,7 @@
 <?php
 namespace service_used;
 use Exception;
+use token\Privilege;
 use token\Token;
 
 require_once 'Service_usedRepository.php';
@@ -17,25 +18,35 @@ class Service_usedController {
             case "GET":
                 $request = new Service_usedRepository();
                 if ($id == null) {
+                    Privilege::admin();
                     $service_used = $request->getAll();
                     echo json_encode($service_used);
                 } else {
                     try {
                         switch ($id){
                             case "service":
-                                $entreprise = $request->findByService($id2);
-                                echo json_encode($entreprise);
+                                Privilege::admin();
+                                $service = $request->findByService($id2);
+                                echo json_encode($service);
                                 break;
                             case "location":
+                                Privilege::admin();
                                 $service = $request->findByLocation($id2);
                                 echo json_encode($service);
                                 break;
                             case "currentUser":
+                                Privilege::allowed();
                                 $service_used = $request->findByUser($_TOKEN->user_id);
                                 echo json_encode($service_used);
                                 break;
                             case "bailleur":
-                                $service = $request->findByBailleur($id2?? $_TOKEN->user_id);
+                                Privilege::allowed();
+                                $service = $request->findByBailleur($_TOKEN->user_id);
+                                echo json_encode($service);
+                                break;
+                            case "prestate":
+                                Privilege::prestate($id2);
+                                $service = $request->findByEnterprise($id2?? $_TOKEN->user_enterprise);
                                 echo json_encode($service);
                                 break;
                             default:

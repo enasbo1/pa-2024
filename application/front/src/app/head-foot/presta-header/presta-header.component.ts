@@ -20,7 +20,11 @@ export class PrestaHeaderComponent extends HeaderComponent {
     },
     {
       name: "Services",
-      link: WpPath.prestate.services
+      link: WpPath.prestate.services.root
+    },
+    {
+      name: "Prestation",
+      link: WpPath.prestate.presta.root
     },
   ];
 }
