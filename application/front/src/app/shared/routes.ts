@@ -17,6 +17,10 @@ export const  WpPath={
       detail    : 'admin/users/:id',
       root      : 'admin/users'
     },
+    apartment:{
+      detail    :'admin/apartments/:id',
+      root      :'admin/apartments'
+    },
     location:{
       detail    : 'admin/location/:id',
       root      :'admin/location'
@@ -27,14 +31,14 @@ export const  WpPath={
       detail    : 'admin/services/:id',
       root      : 'admin/services',
     },
-    chatbot   : 'admin/chatbot',
+    chatbot     : 'admin/chatbot',
 
-    enterprise : {
-      root    : 'admin/enterprise',
+    enterprise  : {
+      root      : 'admin/enterprise',
     },
 
-    root      : 'admin',
-    root2     : 'admin/',
+    root        : 'admin',
+    root2       : 'admin/',
   },
 
   voyageur:{

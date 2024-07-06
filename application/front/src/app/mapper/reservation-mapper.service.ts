@@ -4,6 +4,7 @@ import {DateService} from "../http/shared/date.service";
 import {ReservationObject} from "../http/model/reservation-model/ReservationObject";
 import {RubricObject} from "../shared/base-shared/rubric/rubricObject";
 import {UserMapperService} from "./user-mapper.service";
+import {WpPath} from "../shared/routes";
 
 @Injectable({
   providedIn: 'root'
@@ -40,7 +41,11 @@ export class ReservationMapperService {
     };
   }
 
-  static model_to_rubric(reservation?:ReservationObject, title?:string):RubricObject {
+  static model_to_rubric(
+    reservation?:ReservationObject, title?:string,
+    apartment_path:string = WpPath.admin.apartment.detail,
+    user_path:string = WpPath.admin.users.detail
+  ):RubricObject {
     return {
       title: (title ??'') + 'Reservation ',
       content: [
@@ -50,8 +55,12 @@ export class ReservationMapperService {
         {name: 'date_debut', type: 'text', text: reservation?.date_debut},
         {name: 'date_fin', type: 'text', text: reservation?.date_fin},
         {name: 'total_frais', type: 'text', text: reservation?.total_frais?.toString()},
-        {name: 'appartement', type: 'link', text: reservation?.appartement?.id?.toString(), value:'/admin/apartment/'+reservation?.appartement?.id?.toString()},
-        {name: 'prorietaire', type: 'link', text: UserMapperService.get_U_Name(reservation?.appartement?.utilisateur), value: '/admin/users/'+reservation?.appartement?.utilisateur?.id},
+        {name: 'appartement', type: 'link', text: reservation?.appartement?.id?.toString(),
+          value:apartment_path.replace(':id', reservation?.appartement?.id?.toString()?? '')
+        },
+        {name: 'prorietaire', type: 'link', text: UserMapperService.get_U_Name(reservation?.appartement?.utilisateur),
+          value: user_path.replace(':id', reservation?.appartement?.utilisateur?.id?.toString()?? '')
+        },
         {name: 'service_used', type: 'link', text: "", value: '/admin/service_rendu?fromLocation='+reservation?.id},
       ]
     };

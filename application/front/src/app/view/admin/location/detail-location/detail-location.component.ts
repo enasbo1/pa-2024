@@ -83,20 +83,6 @@ export class DetailLocationComponent implements OnInit {
     }
   }
 
-  private getDate(dates?:Date[]):{start:string, end:string}{
-    if (dates){
-      return {
-        start:DateService.to_api(dates[0]),
-        end :DateService.to_api(dates[1])
-      }
-    }else{
-      return {
-        start:DateService.to_api(),
-        end :DateService.to_api()
-      }
-    }
-  }
-
   private delete():void{
     if (this.location_object){
       let error:EventEmitter<HttpErrorResponse>=new EventEmitter<HttpErrorResponse>();
