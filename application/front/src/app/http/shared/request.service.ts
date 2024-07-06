@@ -57,7 +57,7 @@ export class RequestService{
       );
   }
 
-  delete(url:string, id:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+  delete(url:string, id:bigint|number, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
     return this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ id,
       {
         headers:{
@@ -85,7 +85,7 @@ export class RequestService{
     );
   }
 
-  get_one(url:string, number:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+  get_one(url:string, number:bigint|number, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
     return this.get(url + '/'+ number, errorCatch);
   }
 

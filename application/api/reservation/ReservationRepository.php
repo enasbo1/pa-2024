@@ -2,11 +2,36 @@
 namespace reservation;
 
 use Exception;
+use shared\Formater;
 use shared\Repository;
 
 require_once 'ReservationService.php';
 
 class ReservationRepository extends Repository {
+    private string $getQuery =
+        "SELECT
+    a.id,
+    total_location,
+    total_abonnement,
+    total_frais,
+    date_debut,
+    date_fin,
+    a.id as appartement__id,
+    a.ville as appartement__ville,
+    a.code_postal as appartement__code_postal,
+    u.id as utilisateur__id,
+    u.prenom as utilisateur__prenom,
+    u.nom as utilisateur__nom,
+    u.mail as utilisateur__mail,
+    propr.id as appartement__utilisateur__id,
+    propr.prenom as appartement__utilisateur__prenom,
+    propr.nom as appartement__utilisateur__nom,
+    propr.mail as appartement__utilisateur__mail
+from reservation r
+inner join appartement a on a.id = r.id_appartement
+inner join utilisateur propr on propr.id = a.id_utilisateur
+inner join utilisateur u on u.id = r.id_utilisateur 
+";
     public function __construct()
     {
         parent::__construct("RESERVATION", new ReservationService());
@@ -18,11 +43,11 @@ class ReservationRepository extends Repository {
     public function getAll(): array
     {
         $reservation = [];
-        $result = $this->readAll("unable to find any reservation");
-
+        $result = $this->query($this->getQuery, [], "no reservation found");
         foreach($result as $row) {
-            $reservation[] = $row;
+            $reservation[] = Formater::prepareGet($row);
         }
+
 
         return $reservation;
     }
@@ -32,7 +57,13 @@ class ReservationRepository extends Repository {
      */
     public function findById(int $id): array
     {
-        return $this->read($id, "reservation not found");
+        $reservation = [];
+        $result = $this->query($this->getQuery.'where r.id = $1', ['id' => $id], "no reservation found");
+        foreach($result as $row) {
+            $reservation[] = Formater::prepareGet($row);
+        }
+
+        return $reservation;
     }
 
     /**
