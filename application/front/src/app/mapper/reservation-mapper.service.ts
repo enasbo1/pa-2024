@@ -12,10 +12,10 @@ import {WpPath} from "../shared/routes";
 export class ReservationMapperService {
 
 
-  static model_to_list(reservation: ReservationObject, detailPage: string): ListObject {
+  static model_to_list(reservation: ReservationObject, detailPage?: string): ListObject {
     return {
       title: `Reservation ${reservation.id}`,
-      link: `${detailPage}/${reservation.id}`,
+      link: (detailPage?`${detailPage}/`:'') + reservation.id,
       right: [
         { text: `Total: ${reservation.total_location}€` },
         null,
@@ -47,7 +47,7 @@ export class ReservationMapperService {
     user_path:string = WpPath.admin.users.detail
   ):RubricObject {
     return {
-      title: (title ??'') + 'Reservation ',
+      title: (title ??'') + 'Reservation - ' + reservation?.id,
       content: [
         {name: 'id', type: 'text', text: reservation?.id?.toString()},
         {name: 'total_location', type: 'text', text: reservation?.total_location.toString()},

@@ -1,6 +1,8 @@
 <?php
 namespace reservation;
 use Exception;
+use token\Privilege;
+
 require_once 'ReservationRepository.php';
 
 class ReservationController {
@@ -8,8 +10,9 @@ class ReservationController {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2=null): void
     {
+        global $_TOKEN;
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
                 $request = new ReservationRepository();
@@ -18,8 +21,20 @@ class ReservationController {
                     echo json_encode($reservation);
                 } else {
                     try {
-                        $reservation = $request->findById($id);
-                        echo json_encode($reservation);
+                        if ($id == 'voy'){
+                            Privilege::allowed();
+
+                            if ($id2==null){
+                                $reservation = $request->findFromVoyageur($_TOKEN->user_id);
+                            }else{
+                                $reservation = $request->findByIdFromVoy($_TOKEN->user_id, $id);
+                            }
+                            echo json_encode($reservation);
+                        }else{
+                            Privilege::admin();
+                            $reservation = $request->findById($id);
+                            echo json_encode($reservation);
+                        }
                     } catch (Exception $e) {
                         http_response_code($e->getCode());
                         echo $e->getMessage();

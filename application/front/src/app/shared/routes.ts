@@ -44,7 +44,10 @@ export const  WpPath={
   voyageur:{
     home      : 'voyageurs/home',
     myServices: 'voyageurs/myservices',
-    myReservation: 'voyageurs/myreservation',
+    myReservation:{
+      detail : 'voyageurs/myreservation/:id',
+      root: 'voyageurs/myreservation'
+    },
     root      :'voyageurs'
   },
 

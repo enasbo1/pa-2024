@@ -20,7 +20,7 @@ export class VoyageurHeaderComponent extends HeaderComponent{
     },
     {
       name : "My Reservations",
-      link : WpPath.voyageur.myReservation
+      link : WpPath.voyageur.myReservation.root
     },
     {
       name : "My Services",

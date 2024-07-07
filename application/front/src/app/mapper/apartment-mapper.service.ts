@@ -40,7 +40,6 @@ export class ApartmentMapperService {
   }
 
   static model_to_rubric(apartment?: ApartmentRecap, title?:string, user_link:string =  WpPath.admin.users.detail): RubricObject {
-    console.log(apartment)
     return {
       title : title ?? "Appartement - " + apartment?.id,
       content:[

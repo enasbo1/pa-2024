@@ -22,4 +22,12 @@ export class ReservationModelService extends RequestService{
   delete_reservation(id:number|bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<any>{
     return this.delete('reservation', id, errorCatch);
   }
+
+  get_reservations_from_voyageur(): Observable<ReservationObject[]> {
+    return this.get('reservation/voy') as Observable<ReservationObject[]>;
+  }
+
+  get_one_reservation_from_voy(id: number|bigint) : Observable<ReservationObject[]> {
+    return this.get_one('reservation/voy', id) as Observable<ReservationObject[]>;
+  }
 }

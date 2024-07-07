@@ -66,6 +66,35 @@ inner join utilisateur u on u.id = r.id_utilisateur
         return $reservation;
     }
 
+
+    /**
+     * @throws Exception
+     */
+    public function findFromVoyageur(int $id): array
+    {
+        $reservation = [];
+        $result = $this->query($this->getQuery.'where u.id = $1', ['id' => $id], "no reservation found");
+        foreach($result as $row) {
+            $reservation[] = Formater::prepareGet($row);
+        }
+
+        return $reservation;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findByIdFromVoy(int $id_voy, int $id_res): array
+    {
+        $reservation = [];
+        $result = $this->query($this->getQuery.'where u.id = $1 and r.id = $2', ['id_voy' => $id_voy, 'id_res'=> $id_res], "no reservation found");
+        foreach($result as $row) {
+            $reservation[] = Formater::prepareGet($row);
+        }
+
+        return $reservation;
+    }
+
     /**
      * @throws Exception
      */

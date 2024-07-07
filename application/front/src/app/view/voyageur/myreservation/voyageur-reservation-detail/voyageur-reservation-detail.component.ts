@@ -1,29 +1,24 @@
 import {Component, EventEmitter, OnInit} from '@angular/core';
-import {ActivatedRoute, Params, Router} from "@angular/router";
 import {ChatObject} from "../../../../shared/foundation/chat/chatObject";
 import {ChatTarget} from "../../../../shared/foundation/chat/chat.component";
 import {RubricElement, RubricObject} from "../../../../shared/base-shared/rubric/rubricObject";
-import {ServiceUsedObject} from "../../../../http/model/service-used-model/serviceUsedObject";
-import {ServiceUsedModelService} from "../../../../http/model/service-used-model/service-used-model.service";
+import {ReservationObject} from "../../../../http/model/reservation-model/ReservationObject";
+import {ReservationModelService} from "../../../../http/model/reservation-model/reservation-model.service";
 import {MessageModelService} from "../../../../http/model/message-model/message-model.service";
+import {ActivatedRoute, Params, Router} from "@angular/router";
 import {GlobalService} from "../../../../shared/global.service";
 import {MessageMapperService} from "../../../../mapper/message-mapper.service";
-import {PrestaMapperService} from "../../../../mapper/presta-mapper.service";
-import {EnterpriseObject} from "../../../../http/model/enterprise-model/enterpriseObject";
+import {ReservationMapperService} from "../../../../mapper/reservation-mapper.service";
 import {ModaleService} from "../../../../shared/foundation/modale/modale.service";
-import {DateService} from "../../../../http/shared/date.service";
 import {HttpErrorResponse} from "@angular/common/http";
 import {WpPath} from "../../../../shared/routes";
-import {ReservationModelService} from "../../../../http/model/reservation-model/reservation-model.service";
-import {ReservationObject} from "../../../../http/model/reservation-model/ReservationObject";
-import {ReservationMapperService} from "../../../../mapper/reservation-mapper.service";
 
 @Component({
-  selector: 'pm-detail-location',
-  templateUrl: './detail-location.component.html',
-  styleUrls: ['./detail-location.component.scss']
+  selector: 'pm-voyageur-reservation-detail',
+  templateUrl: './voyageur-reservation-detail.component.html',
+  styleUrls: ['./voyageur-reservation-detail.component.scss']
 })
-export class DetailLocationComponent implements OnInit {
+export class VoyageurReservationDetailComponent implements OnInit {
   chat:ChatObject[] = [];
   target ?: ChatTarget;
 
@@ -46,7 +41,7 @@ export class DetailLocationComponent implements OnInit {
   ngOnInit(): void {
     GlobalService.pageName = "Reservation";
     this.route.params.subscribe((params:Params) => {
-      this.reservationModelService.get_one_reservation(params['id']).subscribe(
+      this.reservationModelService.get_one_reservation_from_voy(params['id']).subscribe(
         (res:ReservationObject[])=>{
           this.set_reservation(res[0]?res[0]:undefined);
           this.target = {subject: 'reservation', id : params['id']}
@@ -54,9 +49,6 @@ export class DetailLocationComponent implements OnInit {
       );
       this.messageModelService.get_messages_from_reservation(params['id']).subscribe(
         (messages)=>{
-          console.log(messages.map(
-            (m)=>
-              MessageMapperService.model_to_chat(m)));
           this.chat = messages.map(
             (m)=>
               MessageMapperService.model_to_chat(m)
@@ -90,7 +82,7 @@ export class DetailLocationComponent implements OnInit {
       this.reservationModelService.delete_reservation(BigInt(this.location_object.id?? 0), error).subscribe(
         ()=>{
           ModaleService.createTextModal("reservation supprimé avec succès");
-          this.router.navigateByUrl(WpPath.admin.services.presta)
+          this.router.navigateByUrl(WpPath.admin.services.presta).then()
         }
       )
     }
