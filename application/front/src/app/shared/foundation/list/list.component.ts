@@ -3,6 +3,12 @@ import {TranslatorService} from "../../base-shared/translator.service";
 import {ListObject, ListObjectPropriety} from "./listObject";
 import {TextStyle} from "../../base-shared/textStyle";
 import {_FilterObject, FilterObject} from "./filterObject";
+import {FilterService} from "./filter.service";
+import {ModaleService} from "../modale/modale.service";
+import moment from "moment/moment";
+import {FormFieldObject} from "../../base-shared/form-field/formFieldObject";
+import {FormService} from "../form/form.service";
+import {DateService} from "../../../http/shared/date.service";
 
 @Component({
   selector: 'pm-list',
@@ -72,13 +78,14 @@ export class ListComponent implements OnInit {
   filter_item():ListObject[]{
     let filtered_list:ListObject[] = this.items;
 
-    for(let filter of this._filters?this._filters:[]){
-      if (filter.value && (filter.value!='all')){
+    for(let filter of this._filters?? []){
+      if (filter.value!==undefined && (filter.value!='all')){
         filtered_list = filtered_list.filter(
-          item =>
-            this.findFlilter(item, filter.name)
-              // @ts-ignore
-              ?.value?.toString().toLowerCase().includes(filter.value.toString().toLowerCase())
+          (item:ListObject) =>
+            FilterService.isConforme(
+              filter,
+              this.findFlilter(item, filter.name)
+            )
         );
       }
     }
@@ -217,4 +224,28 @@ export class ListComponent implements OnInit {
     return this._filters?.filter((x)=>x.type!=='hided')
   }
 
+  setPeriod(filter:_FilterObject):void{
+    const period = filter.value?.toString().split(" - ").map(x=> moment(x));
+    ModaleService.createFormModal({
+      title:filter.name,
+      content:[
+        {
+          content:[
+            {
+              name:"period",
+              title:"",
+              type:"period",
+              _values: period?.map(x =>  x.toDate())
+            },
+          ]
+        }
+      ]
+    }).subscribe(
+      (values:FormFieldObject[]):void=>{
+        const n = FormService.get_period(values, 'period');
+        filter.value = DateService.to_front(moment(n.start, DateService.FORMAT_API).toDate()) + " - " + DateService.to_front(moment(n.end, DateService.FORMAT_API).toDate());
+        this.refresh_filter()
+      }
+    )
+  }
 }

@@ -25,7 +25,7 @@ export class FormService {
   }
 
   static get_period(formFields:FormFieldObject[],name:string, defaut?:Date[]):{start:string, end:string}{
-    let dates:Date[]|undefined = formFields.find((form:FormFieldObject):boolean=>form.name===name)?._values;
+    let dates:Date[]|undefined = formFields.find((form:FormFieldObject):boolean=>form.name===name)?._values?.map(x=> x?? new Date());
     dates = dates?dates:defaut;
     if (dates){
       return {

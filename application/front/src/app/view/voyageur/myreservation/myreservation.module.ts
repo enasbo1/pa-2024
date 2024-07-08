@@ -6,18 +6,21 @@ import {WelcomeComponent} from "../../exemple/home/welcome.component";
 import { VoyageurReservationComponent } from './voyageur-reservation/voyageur-reservation.component';
 import {SharedModule} from "../../../shared/shared.module";
 import { VoyageurReservationDetailComponent } from './voyageur-reservation-detail/voyageur-reservation-detail.component';
+import { VoyageurLocationSearchComponent } from './voyageur-location-search/voyageur-location-search.component';
 
 
 
 @NgModule({
   declarations: [
     VoyageurReservationComponent,
-    VoyageurReservationDetailComponent
+    VoyageurReservationDetailComponent,
+    VoyageurLocationSearchComponent
   ],
   imports: [
     CommonModule,
     RouterModule.forChild([
       {path: WpPath.voyageur.myReservation.detail, component: VoyageurReservationDetailComponent},
+      {path: WpPath.voyageur.searchLocation.root, component: VoyageurLocationSearchComponent},
       {path: WpPath.voyageur.myReservation.root, component: VoyageurReservationComponent},
     ]),
     SharedModule

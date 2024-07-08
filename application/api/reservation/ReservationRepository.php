@@ -95,6 +95,14 @@ inner join utilisateur u on u.id = r.id_utilisateur
         return $reservation;
     }
 
+
+    /**
+     * @throws Exception
+     */
+    public function findFromApartment(int $id): array
+    {
+        return $this->get($this->modelName,["date_debut", "date_fin"], ['id_appartement'=>$id]);
+    }
     /**
      * @throws Exception
      */

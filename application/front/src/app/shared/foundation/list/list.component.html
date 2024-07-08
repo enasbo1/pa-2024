@@ -13,15 +13,32 @@
   </div>
   <div class="flex short-line">
     <div *ngFor="let filt of filtered" class = 'line flex w-100'>
-      <pm-dropdown
-        [set_value]="filt.set_value"
-        [choices]="filt.choices"
-        [default]="filt.default?filt.default:'all'"
-        [set]="filt.set"
-        [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
-        (click)="refresh_filter()"
-        (value_up)="filter_update(filt, $event)"
-      ></pm-dropdown>
+      <ng-container [ngSwitch]="filt.type">
+        <div *ngSwitchCase="'period'">
+          <button class="bubble col-12 {{(filt.value==='all'?'hover-w':'hover-1')}}"
+                  (click)="setPeriod(filt)"
+          >
+            {{filt.value==='all'?filt.name:filt.value?? filt.name}}
+          </button>
+        </div>
+        <div *ngSwitchCase="'free'">
+          <button class="bubble col-12 {{(filt.value==='all'?'hover-w':'hover-1')}}"
+                  (click)="setPeriod(filt)"
+          >
+            {{filt.value==='all'?filt.name:filt.value?? filt.name}}
+          </button>
+        </div>
+        <pm-dropdown *ngSwitchDefault
+          [set_value]="filt.set_value"
+          [choices]="filt.choices"
+          [default]="filt.default?filt.default:'all'"
+          [set]="filt.set"
+          [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
+          (click)="refresh_filter()"
+          (value_up)="filter_update(filt, $event)"
+        ></pm-dropdown>
+      </ng-container>
+
     </div>
   </div>
   <pm-line [short]="true"></pm-line>

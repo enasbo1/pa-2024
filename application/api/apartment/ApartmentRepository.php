@@ -2,6 +2,7 @@
 namespace apartment;
 
 use Exception;
+use reservation\ReservationRepository;
 use shared\Formater;
 use shared\Repository;
 
@@ -59,7 +60,25 @@ inner join utilisateur u on u.id = a.id_utilisateur
             $apartment[] = Formater::prepareGet($row);
         }
 
-        return $apartment;    }
+        return $apartment;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findLouable(): array
+    {
+        $reservationRepository = new ReservationRepository();
+        $apartment = [];
+        $result = $this->query($this->getQuery . 'where a.louable',[], "no apartments for this user");
+        foreach($result as $row) {
+            $formated_row = Formater::prepareGet($row);
+            $formated_row["occupee"] = $reservationRepository->findFromApartment($row['id']);
+            $apartment[] = $formated_row;
+        }
+
+        return $apartment;
+    }
 
     /**
      * @throws Exception

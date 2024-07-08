@@ -25,5 +25,5 @@ export interface ListObject {
 
 export interface ListObjectPropriety {
   name:string;
-  value:string|number|bigint|boolean|undefined;
+  value:string[]|string|number|bigint|boolean|undefined;
 }

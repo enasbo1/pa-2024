@@ -60,6 +60,7 @@ create table appartement
     nb_occupant_max integer,
     surface integer,
     horaire_contact integer,
+    louable boolean default true,
     id_utilisateur integer not null references utilisateur
 );
 

@@ -1,19 +1,19 @@
 import { Injectable } from '@angular/core';
-import {ServiceUsedObject} from "../http/model/service-used-model/serviceUsedObject";
 import {RubricObject} from "../shared/base-shared/rubric/rubricObject";
-import {ApartmentObject, ApartmentRecap} from "../http/model/apartment-model/ApartmentObject";
+import {ApartmentObject, ApartmentOccupedObject, ApartmentRecap} from "../http/model/apartment-model/ApartmentObject";
 import {ListObject} from "../shared/foundation/list/listObject";
 import {UserMapperService} from "./user-mapper.service";
 import {WpPath} from "../shared/routes";
+import {DateService} from "../http/shared/date.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ApartmentMapperService {
-  apartment_to_list(apartment: ApartmentObject): ListObject {
+  static model_to_list(apartment: ApartmentObject, detailLink:string = '/'+WpPath.admin.apartment.detail): ListObject {
     return {
       title: apartment.ville,
-      link: `/admin/apartments/${apartment.id}`,
+      link: detailLink.replace(':id', apartment.id?.toString()?? ''),
       right: [
         null,
         null,
@@ -35,6 +35,7 @@ export class ApartmentMapperService {
         { name: 'type_de_bien', value: apartment.type_de_bien },
         { name: 'prix_fixe_nuit', value: apartment.prix_fixe_nuit },
         { name: 'id', value: apartment.id },
+        { name: 'periode',value: ((apartment as ApartmentOccupedObject)?.occupee?? []).map(per => DateService.to_front(per.date_debut) + ' - ' + DateService.to_front(per.date_fin))}
       ]
     };
   }
