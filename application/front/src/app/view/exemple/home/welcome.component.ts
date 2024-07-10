@@ -11,7 +11,7 @@ export class WelcomeComponent implements OnInit {
   constructor(protected translator: TranslatorService) { }
 
   ngOnInit() {
-    GlobalService.pageName = "Home";  // Définir le nom de la page
-    this.pageTitle = GlobalService.pageName;  // Utiliser le nom de la page comme titre
+    GlobalService.pageName = "Home";  
+    this.pageTitle = GlobalService.pageName;  
   }
 }
