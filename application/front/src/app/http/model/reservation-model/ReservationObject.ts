@@ -15,3 +15,10 @@ export interface ReservationObject extends ReservationPeriod {
   appartement:ApartmentRecap
   utilisateur:UserRecap
 }
+
+export interface ReservationRentObject extends ReservationPeriod {
+  total_location?:number
+  total_abonnement?:number
+  total_frais?:number
+  id_appartement:number|bigint
+}

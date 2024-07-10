@@ -47,9 +47,17 @@ class ReservationController {
                 $request = new ReservationRepository();
 
                 try {
-                    $request->save($params);
-                    http_response_code(201);
-                    echo("reservation créé avec succès");
+                    if ($id == null){
+                        Privilege::admin();
+                        $request->save($params);
+                        http_response_code(201);
+                        echo('{"message":"reservation créé avec succès"}');
+                    }else{
+                        Privilege::allowed();
+                        $request->rent($params, $_TOKEN->user_id);
+                        http_response_code(201);
+                        echo('{"message":"reservation créé avec succès"}');
+                    }
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
                     echo $e->getMessage();

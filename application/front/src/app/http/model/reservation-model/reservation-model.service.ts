@@ -1,9 +1,7 @@
 import {EventEmitter, Injectable} from '@angular/core';
 import { Observable } from 'rxjs';
-import { ListObject } from "../../../shared/foundation/list/listObject";
 import {RequestService} from "../../shared/request.service";
-import {DateService} from "../../shared/date.service";
-import {ReservationObject} from "./ReservationObject";
+import {ReservationObject, ReservationRentObject} from "./ReservationObject";
 import {HttpErrorResponse} from "@angular/common/http";
 
 @Injectable({
@@ -29,5 +27,9 @@ export class ReservationModelService extends RequestService{
 
   get_one_reservation_from_voy(id: number|bigint) : Observable<ReservationObject[]> {
     return this.get_one('reservation/voy', id) as Observable<ReservationObject[]>;
+  }
+
+  post_rent(reservation:ReservationRentObject):Observable<any>{
+    return this.post(reservation, 'reservation/rent')
   }
 }

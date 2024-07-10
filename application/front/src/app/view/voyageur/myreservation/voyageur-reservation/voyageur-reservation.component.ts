@@ -4,7 +4,6 @@ import {FilterObject} from "../../../../shared/foundation/list/filterObject";
 import {ReservationModelService} from "../../../../http/model/reservation-model/reservation-model.service";
 import {GlobalService} from "../../../../shared/global.service";
 import {ReservationMapperService} from "../../../../mapper/reservation-mapper.service";
-import {WpPath} from "../../../../shared/routes";
 
 @Component({
   selector: 'pm-voyageur-reservation',

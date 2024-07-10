@@ -25,4 +25,9 @@ export class ApartmentModelService extends RequestService{
   delete_apartment(id: number|bigint, error: EventEmitter<HttpErrorResponse>): Observable<object>{
     return this.delete('apartment', id)
   }
+
+  get_one_louable(id:number|bigint): Observable<ApartmentOccupedObject[]> {
+    return this.get_one('apartment/louable', id) as Observable<ApartmentOccupedObject[]>;
+
+  }
 }

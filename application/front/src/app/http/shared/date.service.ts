@@ -25,11 +25,21 @@ export class DateService {
   }
 
   static isCommonPeriod(dates:Period, period: Period):boolean{
-    return (dates.start.isBetween(period.start, period.end) || period.start.isBetween(dates.start, dates.end));
+    return (dates.start.isBetween(period.start, period.end, undefined, '[]') ||
+      period.start.isBetween(dates.start, dates.end, undefined, '[]')
+    );
   }
 
   static isInPeriod(dates:Period, period: Period):boolean{
     return !(dates.start.isAfter(period.start) && dates.end.isBefore(period.end));
+  }
+
+  static front_period_to_period(period:string):Period{
+    const n  = period.split(" - ").map(x=> moment(x, DateService.FORMAT_FRONT));
+    return {
+      start:n[0],
+      end:n[1]
+    }
   }
 
   static checkDateStatus(startDate: string | undefined, endDate: string | undefined, date: moment.Moment = moment()): string {

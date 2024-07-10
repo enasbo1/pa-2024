@@ -1,5 +1,5 @@
 import {UserRecap} from "../user-model/userObject";
-import {ReservationObject, ReservationPeriod} from "../reservation-model/ReservationObject";
+import {ReservationPeriod} from "../reservation-model/ReservationObject";
 
 export interface ApartmentRecap{
   id ?: number

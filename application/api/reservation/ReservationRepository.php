@@ -103,6 +103,16 @@ inner join utilisateur u on u.id = r.id_utilisateur
     {
         return $this->get($this->modelName,["date_debut", "date_fin"], ['id_appartement'=>$id]);
     }
+
+    /**
+     * @throws Exception
+     */
+    public function rent($params, $id_user): void
+    {
+        $params->id_utilisateur = $id_user;
+        $this->save($params);
+    }
+
     /**
      * @throws Exception
      */

@@ -79,7 +79,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $apartmentController->routes($id);
+            $apartmentController->routes($id, $uri[4] ?? null);
             break;
 
         case 'reservation':
@@ -132,7 +132,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            $controller->routes($id, $uri[4] ?? null);
             break;
 
         case 'ticket':
@@ -168,7 +168,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            $controller->routes($id, $uri[4] ?? null);
             break;
         case 'banissement':
             $controller = new BanissementController();
@@ -176,7 +176,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            $controller->routes($id, $uri[4] ?? null);
             break;
 
         default:

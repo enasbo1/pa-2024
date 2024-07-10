@@ -26,7 +26,9 @@ export class RequestService{
     errorCatch.emit(errorMessage);
     return throwError(()=>errorMessage)
   }
+
   post(content:object, url:string, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    console.log('hi');
     return this.httpClient.post(ConstancesService.api_url + "/" +url,
       JSON.stringify(content),
       {

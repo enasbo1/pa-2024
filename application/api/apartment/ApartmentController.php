@@ -10,7 +10,7 @@ class ApartmentController {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2=null): void
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
@@ -22,7 +22,11 @@ class ApartmentController {
                     try {
                         Privilege::allowed();
                         if ($id = 'louable'){
-                            $apartment = $request->findLouable();
+                            if ($id2==null){
+                                $apartment = $request->findLouable();
+                            }else{
+                                $apartment = $request->findLouableById($id2);
+                            }
                         }else{
                             $apartment = $request->findById($id);
                         }

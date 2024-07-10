@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import {ListObject} from "../shared/foundation/list/listObject";
 import {DateService} from "../http/shared/date.service";
-import {ReservationObject} from "../http/model/reservation-model/ReservationObject";
+import {ReservationObject, ReservationRentObject} from "../http/model/reservation-model/ReservationObject";
 import {RubricObject} from "../shared/base-shared/rubric/rubricObject";
 import {UserMapperService} from "./user-mapper.service";
 import {WpPath} from "../shared/routes";
+import {FormFieldObject} from "../shared/base-shared/form-field/formFieldObject";
+import {FormService} from "../shared/foundation/form/form.service";
+import {FormStepObject} from "../shared/base-shared/form-step/formStepObject";
 
 @Injectable({
   providedIn: 'root'
@@ -63,6 +66,63 @@ export class ReservationMapperService {
         },
         {name: 'service_used', type: 'link', text: "", value: '/admin/service_rendu?fromLocation='+reservation?.id},
       ]
+    };
+  }
+
+  static model_to_form_step(reservation?: ReservationObject): FormStepObject {
+    return {
+      title: 'Modifier la réservation',
+      content: [
+        {
+          title: 'Détails',
+          content: [
+            {
+              name: 'total_location',
+              type: 'num',
+              title: 'Total Location : ' + reservation?.total_location,
+              placeholder: reservation?.total_location,
+              default: reservation?.total_location,
+            },
+            {
+              name: 'total_abonnement',
+              type: 'num',
+              title: 'Total Abonnement : ' + reservation?.total_abonnement,
+              placeholder: reservation?.total_abonnement,
+              default: reservation?.total_abonnement,
+            },
+            {
+              name: 'total_frais',
+              type: 'num',
+              title: 'Total Frais : ' + reservation?.total_frais,
+              placeholder: reservation?.total_frais,
+              default: reservation?.total_frais,
+            },
+          ],
+        },
+        {
+          title: 'Dates',
+          content: [
+            {
+              name: 'date',
+              type: 'period',
+              title: 'Période',
+              placeholder: reservation?.date_debut + " - " + reservation?.date_fin,
+            },
+          ],
+        }
+      ],
+    };
+  }
+
+  static form_to_model(values: FormFieldObject[], defalt?: ReservationRentObject): ReservationRentObject {
+    let dates = FormService.get_period(values, "date");
+    return {
+      total_location: FormService.get_value(values, 'total_location', defalt?.total_location) as number,
+      total_abonnement: FormService.get_value(values, 'total_abonnement', defalt?.total_abonnement) as number,
+      total_frais: FormService.get_value(values, 'total_frais', defalt?.total_frais) as number,
+      date_debut: (dates?.start as string)?? defalt?.date_debut,
+      date_fin: (dates?.end as string)?? defalt?.date_fin,
+      id_appartement : defalt?.id_appartement?? 0,
     };
   }
 }

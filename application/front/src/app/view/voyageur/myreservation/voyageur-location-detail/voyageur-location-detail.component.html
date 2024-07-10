@@ -1,0 +1,14 @@
+<section class = 'flex'>
+  <div class="flex spaced align-center">
+    <div>
+      <div *ngIf="apartment" class="rubric-container">
+        <pm-rubric [content]="apartment"></pm-rubric>
+      </div>
+      <br>
+      <div class="flex spaced">
+        <button class="bubble {{apartment_object?'colored hover-0':'disabled'}}" (click)="rent()"><b>Louer</b></button>
+      </div>
+      <br>
+    </div>
+  </div>
+</section>

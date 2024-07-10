@@ -83,6 +83,23 @@ inner join utilisateur u on u.id = a.id_utilisateur
     /**
      * @throws Exception
      */
+    public function findLouableById(int $id): array
+    {
+        $reservationRepository = new ReservationRepository();
+        $apartment = [];
+        $result = $this->query($this->getQuery . 'where a.louable and a.id=$1',['id'=> $id], "no apartments for this user");
+        foreach($result as $row) {
+            $formated_row = Formater::prepareGet($row);
+            $formated_row["occupee"] = $reservationRepository->findFromApartment($row['id']);
+            $apartment[] = $formated_row;
+        }
+
+        return $apartment;
+    }
+
+    /**
+     * @throws Exception
+     */
     public function save($params): void
     {
         $this->create($params, "unable to create apartment");
