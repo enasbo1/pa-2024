@@ -4,9 +4,7 @@ import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { WelcomeComponent } from './view/exemple/home/welcome.component';
 import { RouterModule } from '@angular/router';
-import { ProductModule } from './view/exemple/products/product.module';
 import {HeadFootModule} from "./head-foot/headFoot.module";
-import {GenericModule} from "./generic/generic.module";
 import {SharedModule} from "./shared/shared.module";
 import {ViewModule} from "./view/view.module";
 import {WpPath} from "./shared/routes";
@@ -20,7 +18,6 @@ import {Error404Component} from "./view/error/error404/error404.component";
   imports: [ // witch others modules you need
     BrowserModule,
     HttpClientModule,
-    GenericModule,
     SharedModule,
     ViewModule,
     HeadFootModule,
@@ -29,7 +26,6 @@ import {Error404Component} from "./view/error/error404/error404.component";
       { path: '', redirectTo: 'home', pathMatch: 'full'},
       { path: '**', component: Error404Component}
     ]),
-    ProductModule
   ],
   bootstrap: [ // the starters components (or mains components)
     AppComponent

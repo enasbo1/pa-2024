@@ -3,8 +3,8 @@
     <pm-image class = "logo" [title]="'logo'" [imageUrl]="logoUrl" [routerLink]="''"></pm-image>
     <div id="nav-parts" style="height: 0; margin-top:1rem">
       <pm-dropdown
-        *ngIf="true || GlobalService.token"
-        [default]="'dev-enviro'"
+        *ngIf="GlobalService.token"
+        [default]="'partie-voyageur'"
         [styles]="'col-6 circle-bubble transition bg-light hover-0 un-bordered'"
         [choices]="keys"
         (value_up)="change_part($event)"

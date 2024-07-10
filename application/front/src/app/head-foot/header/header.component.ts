@@ -17,15 +17,7 @@ export class HeaderComponent implements OnInit {
     {
       name : "Home",
       link : WpPath.home
-    },
-    {
-      name : "Product",
-      link : "products"
-    },
-    {
-      name : "Generic",
-      link : "generic"
-    },
+    }
 
   ];
 
