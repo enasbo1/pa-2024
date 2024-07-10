@@ -59,6 +59,10 @@ export const  WpPath={
     home: 'bail/home',
     prestation : 'bail/prestation/:id',
     prestations : 'bail/prestation',
+    reservation:{
+      root: 'bail/reservation',
+      detail : 'bail/reservation/:id',
+    },
     root: 'bail',
   },
 

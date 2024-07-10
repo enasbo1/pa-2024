@@ -21,19 +21,35 @@ class ReservationController {
                     echo json_encode($reservation);
                 } else {
                     try {
-                        if ($id == 'voy'){
-                            Privilege::allowed();
-
-                            if ($id2==null){
-                                $reservation = $request->findFromVoyageur($_TOKEN->user_id);
-                            }else{
-                                $reservation = $request->findByIdFromVoy($_TOKEN->user_id, $id);
-                            }
-                            echo json_encode($reservation);
-                        }else{
-                            Privilege::admin();
-                            $reservation = $request->findById($id);
-                            echo json_encode($reservation);
+                        switch ($id){
+                            case 'voy':
+                                Privilege::allowed();
+                                if ($id2==null){
+                                    $reservation = $request->findFromVoyageur($_TOKEN->user_id);
+                                }else{
+                                    $reservation = $request->findByIdFromVoy($_TOKEN->user_id, $id2);
+                                }
+                                echo json_encode($reservation);
+                                break;
+                            case 'bail':
+                                Privilege::allowed();
+                                if ($id2==null){
+                                    $reservation = $request->findFromBailleur($_TOKEN->user_id);
+                                }else{
+                                    $reservation = $request->findByIdFromBailleur($_TOKEN->user_id, $id2);
+                                }
+                                echo json_encode($reservation);
+                                break;
+                            case 'valid':
+                                Privilege::allowed();
+                                $request->validateReservation($_TOKEN->user_id, $id2);
+                                echo '{}';
+                                break;
+                            default:
+                                Privilege::admin();
+                                $reservation = $request->findById($id);
+                                echo json_encode($reservation);
+                                break;
                         }
                     } catch (Exception $e) {
                         http_response_code($e->getCode());

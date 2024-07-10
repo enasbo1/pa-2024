@@ -55,8 +55,9 @@ export class ReservationMapperService {
         {name: 'id', type: 'text', text: reservation?.id?.toString()},
         {name: 'total_location', type: 'text', text: reservation?.total_location.toString()},
         {name: 'total_abonnement', type: 'text', text: reservation?.total_abonnement?.toString()},
-        {name: 'date_debut', type: 'text', text: reservation?.date_debut},
-        {name: 'date_fin', type: 'text', text: reservation?.date_fin},
+        {name: 'date_debut', type: 'text', text: DateService.to_front(reservation?.date_debut)},
+        {name: 'date_fin', type: 'text', text: DateService.to_front(reservation?.date_fin)},
+        {name: 'validée', type: 'text', text: reservation?.valide?'Oui':'Non'},
         {name: 'total_frais', type: 'text', text: reservation?.total_frais?.toString()},
         {name: 'appartement', type: 'link', text: reservation?.appartement?.id?.toString(),
           value:apartment_path.replace(':id', reservation?.appartement?.id?.toString()?? '')

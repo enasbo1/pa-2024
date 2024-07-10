@@ -35,7 +35,7 @@ require_once 'document/DocumentController.php';
 require_once 'connection/ConnectionController.php';
 require_once 'banissement/BanissementController.php';
 
-require_once 'token/token.php';
+require_once 'token/Token.php';
 require_once 'token/Privilege.php';
 
 header('Access-Control-Allow-Methods: GET, POST,  PATCH, PUT, DELETE, OPTIONS');
@@ -88,7 +88,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $reservationController->routes($id);
+            $reservationController->routes($id, $uri[4] ?? null);
             break;
         case 'users':
             $userController = new UsersController();

@@ -9,6 +9,7 @@ export interface ReservationPeriod {
 
 export interface ReservationObject extends ReservationPeriod {
   id?:number
+  valide:boolean
   total_location:number
   total_abonnement?:number
   total_frais?:number

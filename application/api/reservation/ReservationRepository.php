@@ -10,9 +10,10 @@ require_once 'ReservationService.php';
 class ReservationRepository extends Repository {
     private string $getQuery =
         "SELECT
-    a.id,
+    r.id,
     total_location,
     total_abonnement,
+    valide,
     total_frais,
     date_debut,
     date_fin,
@@ -95,7 +96,54 @@ inner join utilisateur u on u.id = r.id_utilisateur
         return $reservation;
     }
 
+    /**
+     * @throws Exception
+     */
+    public function findFromBailleur(int $id_prop): array
+    {
+        $reservation = [];
+        $result = $this->query($this->getQuery.'where propr.id = $1', ['id_prop' => $id_prop], "no reservation found");
+        foreach($result as $row) {
+            $reservation[] = Formater::prepareGet($row);
+        }
 
+        return $reservation;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findByIdFromBailleur(int $id_prop, int $id_res): array
+    {
+        $reservation = [];
+        $result = $this->query($this->getQuery.'where propr.id = $1 AND r.id = $2',
+            ['id_prop' => $id_prop, 'id_res' =>$id_res],
+            "no reservation found");
+        foreach($result as $row) {
+            $reservation[] = Formater::prepareGet($row);
+        }
+
+        return $reservation;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function validateReservation(int $id_prop, int $id_res):void
+    {
+        if (count($this->query(
+"SELECT r.id FROM reservation r 
+inner join appartement a on a.id = r.id_appartement 
+where a.id_utilisateur=$1 
+and r.id=$2",
+            ['id_prop'=>$id_prop, 'id_res'=>$id_res]
+        ))>0)
+        {
+            $this->update_abs($this->modelName, ['valide'=>true], ['id'=>$id_res], "no reservation found");
+        } else {
+            throw new Exception('{"error"="action not allowed"}', 403);
+        }
+    }
     /**
      * @throws Exception
      */

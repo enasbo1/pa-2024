@@ -29,7 +29,20 @@ export class ReservationModelService extends RequestService{
     return this.get_one('reservation/voy', id) as Observable<ReservationObject[]>;
   }
 
+  get_reservations_from_bailleur() {
+    return this.get('reservation/bail') as Observable<ReservationObject[]>;
+  }
+
+  get__one_reservations_from_bailleur(id:number|bigint): Observable<ReservationObject[]> {
+    return this.get_one('reservation/bail', id) as Observable<ReservationObject[]>;
+  }
+
   post_rent(reservation:ReservationRentObject):Observable<any>{
     return this.post(reservation, 'reservation/rent')
+  }
+
+
+  valid_reservation(id: bigint|number, error?: EventEmitter<HttpErrorResponse>):Observable<any> {
+    return this.get_one('reservation/valid', id, error)
   }
 }

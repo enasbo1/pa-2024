@@ -131,7 +131,7 @@ class Repository
                 } else {
                     $q .= " AND ";
                 }
-                $q .= $key . ' = $' . $j;
+                $q .= $key . ' = $' . $i;
                 $i+=1;
                 $j+=1;
             }

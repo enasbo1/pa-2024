@@ -19,6 +19,10 @@ export class BailleurHeaderComponent extends HeaderComponent{
       link : WpPath.bailleur.home
     },
     {
+      name : "Reservation",
+      link : WpPath.bailleur.reservation.root
+    },
+    {
       name : "Prestation",
       link : WpPath.bailleur.prestations
     },
