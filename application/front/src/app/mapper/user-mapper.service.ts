@@ -1,5 +1,5 @@
 import {EventEmitter, Injectable} from '@angular/core';
-import {UserObject} from "../http/model/user-model/userObject";
+import {UserObject, UserRecap} from "../http/model/user-model/userObject";
 import {ListObject} from "../shared/foundation/list/listObject";
 import {RubricObject} from "../shared/base-shared/rubric/rubricObject";
 import {FormStepObject} from "../shared/base-shared/form-step/formStepObject";

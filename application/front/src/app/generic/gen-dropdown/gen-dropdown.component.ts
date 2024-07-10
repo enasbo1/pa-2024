@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {DateService} from "../../http/shared/date.service";
+import moment from "moment";
 
 @Component({
   templateUrl: './gen-dropdown.component.html',

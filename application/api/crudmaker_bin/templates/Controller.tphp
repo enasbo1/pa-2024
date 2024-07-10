@@ -1,7 +1,10 @@
 <?php
 namespace {|{name}|};
 use Exception;
+use token\Privilege;
+
 require_once '{|{Name}|}Repository.php';
+
 
 class {|{Name}|}Controller {
 
@@ -15,10 +18,12 @@ class {|{Name}|}Controller {
             case "GET":
                 $request = new {|{Name}|}Repository();
                 if ($id == null) {
+                    Privilege::admin();
                     ${|{name}|} = $request->getAll();
                     echo json_encode(${|{name}|});
                 } else {
                     try {
+                        Privilege::admin();
                         ${|{name}|} = $request->findById($id);
                         echo json_encode(${|{name}|});
                     } catch (Exception $e) {
@@ -33,6 +38,7 @@ class {|{Name}|}Controller {
                 $request = new {|{Name}|}Repository();
 
                 try {
+                    Privilege::admin();
                     $request->save($params);
                     http_response_code(201);
                     echo('{"message" : "{|{name}|} créé avec succès"}');
@@ -47,6 +53,7 @@ class {|{Name}|}Controller {
                 $request = new {|{Name}|}Repository();
 
                 try {
+                    Privilege::admin();
                     $request->update($params);
                 } catch (Exception $e) {
                     http_response_code($e->getCode());
@@ -54,6 +61,7 @@ class {|{Name}|}Controller {
                 }
                 break;
             case "DELETE":
+                Privilege::admin();
                 $request = new {|{Name}|}Repository();
                 $request->delete($id);
                 break;

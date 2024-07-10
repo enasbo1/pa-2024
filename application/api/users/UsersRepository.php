@@ -32,7 +32,7 @@ class UsersRepository extends Repository {
      */
     public function connect(string $email, string $password): array
     {
-        return $this->get($this->modelName, ["id", "prenom", "nom", "role"], ["mail" => $email, "mdp"=>$password], "users not found");
+        return $this->get($this->modelName, ["id", "prenom", "nom", "role", "id_entreprise"], ["mail" => $email, "mdp"=>$password], "users not found");
     }
 
     /**

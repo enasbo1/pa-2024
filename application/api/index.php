@@ -15,7 +15,6 @@ use service_entreprise\Service_entrepriseController;
 use service_used\Service_usedController;
 use ticket\TicketController;
 use users\UsersController;
-use shared\Verif;
 use token\Token;
 
 require_once 'shared/ModelType.php';
@@ -36,7 +35,8 @@ require_once 'document/DocumentController.php';
 require_once 'connection/ConnectionController.php';
 require_once 'banissement/BanissementController.php';
 
-require_once 'token/token.php';
+require_once 'token/Token.php';
+require_once 'token/Privilege.php';
 
 header('Access-Control-Allow-Methods: GET, POST,  PATCH, PUT, DELETE, OPTIONS');
 header("Content-Type: application/json; charset=utf8");
@@ -59,7 +59,8 @@ if (isset($_SERVER["HTTP_TOKEN"]) && (strlen($_SERVER["HTTP_TOKEN"])>20)){
         'user_id' => 0,
         'user_firstname' => '',
         'user_lastname' => '',
-        'user_role' => 0
+        'user_role' => 0,
+        'user_enterprise' => 0
     ]));
 };
 if ($_SERVER['REQUEST_METHOD']=="OPTIONS"){
@@ -78,7 +79,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $apartmentController->routes($id);
+            $apartmentController->routes($id, $uri[4] ?? null);
             break;
 
         case 'reservation':
@@ -87,7 +88,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $reservationController->routes($id);
+            $reservationController->routes($id, $uri[4] ?? null);
             break;
         case 'users':
             $userController = new UsersController();
@@ -131,7 +132,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            $controller->routes($id, $uri[4] ?? null);
             break;
 
         case 'ticket':
@@ -167,7 +168,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            $controller->routes($id, $uri[4] ?? null);
             break;
         case 'banissement':
             $controller = new BanissementController();
@@ -175,7 +176,7 @@ else
             if (isset($uri[3])) {
                 $id = $uri[3];
             }
-            $controller->routes($id, isset($uri[4])?$uri[4]:null);
+            $controller->routes($id, $uri[4] ?? null);
             break;
 
         default:

@@ -10,7 +10,7 @@ export interface FormFieldObject{
   reg_error?: {regex:RegExp; message:string}[];
   choices? : string[];
   _value?:FormFieldValue
-  _values?:Date[];
+  _values?:(Date|undefined)[];
   max?:Date;
   min?:Date;
   step?:number;

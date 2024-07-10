@@ -38,4 +38,8 @@ export class ServiceUsedModelService extends RequestService{
   get_from_bailleur():Observable<ServiceUsedFromBailleur[]>{
     return this.get('service_used/bailleur') as Observable<ServiceUsedFromBailleur[]>;
   }
+
+  get_from_prestate():Observable<ServiceUsedObject[]>{
+    return this.get('service_used/prestate') as Observable<ServiceUsedObject[]>;
+  }
 }

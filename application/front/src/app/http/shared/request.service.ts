@@ -26,7 +26,9 @@ export class RequestService{
     errorCatch.emit(errorMessage);
     return throwError(()=>errorMessage)
   }
+
   post(content:object, url:string, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+    console.log('hi');
     return this.httpClient.post(ConstancesService.api_url + "/" +url,
       JSON.stringify(content),
       {
@@ -57,7 +59,7 @@ export class RequestService{
       );
   }
 
-  delete(url:string, id:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+  delete(url:string, id:bigint|number, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
     return this.httpClient.delete(ConstancesService.api_url + "/" +url + '/'+ id,
       {
         headers:{
@@ -85,7 +87,7 @@ export class RequestService{
     );
   }
 
-  get_one(url:string, number:bigint, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
+  get_one(url:string, number:bigint|number, errorCatch?:EventEmitter<HttpErrorResponse>):Observable<object>{
     return this.get(url + '/'+ number, errorCatch);
   }
 

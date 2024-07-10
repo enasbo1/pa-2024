@@ -17,6 +17,10 @@ export const  WpPath={
       detail    : 'admin/users/:id',
       root      : 'admin/users'
     },
+    apartment:{
+      detail    :'admin/apartments/:id',
+      root      :'admin/apartments'
+    },
     location:{
       detail    : 'admin/location/:id',
       root      :'admin/location'
@@ -27,19 +31,27 @@ export const  WpPath={
       detail    : 'admin/services/:id',
       root      : 'admin/services',
     },
-    chatbot   : 'admin/chatbot',
+    chatbot     : 'admin/chatbot',
 
-    enterprise : {
-      root    : 'admin/enterprise',
+    enterprise  : {
+      root      : 'admin/enterprise',
     },
 
-    root      : 'admin',
-    root2     : 'admin/',
+    root        : 'admin',
+    root2       : 'admin/',
   },
 
   voyageur:{
     home      : 'voyageurs/home',
-    myservices: 'voyageurs/myservices',
+    myServices: 'voyageurs/myservices',
+    myReservation:{
+      detail : 'voyageurs/myreservation/:id',
+      root: 'voyageurs/myreservation'
+    },
+    searchLocation:{
+      detail : 'voyageurs/searchLocation/:id',
+      root: 'voyageurs/searchLocation'
+    },
     root      :'voyageurs'
   },
 
@@ -47,15 +59,25 @@ export const  WpPath={
     home: 'bail/home',
     prestation : 'bail/prestation/:id',
     prestations : 'bail/prestation',
+    reservation:{
+      root: 'bail/reservation',
+      detail : 'bail/reservation/:id',
+    },
     root: 'bail',
   },
 
   prestate:{
     home: 'prestate/home',
-    services: 'prestate/services',
-    edit_service : 'prestate/services/:id',
-    new_service : 'prestate/services/new',
-    form : 'prestate/services/:id/form',
+    services: {
+      root: 'prestate/services',
+      edit: 'prestate/services/:id',
+      new: 'prestate/services/new',
+      form : 'prestate/services/:id/form',
+    },
+    presta : {
+      root: 'prestate/presta',
+      detail: 'prestate/presta/:id'
+    },
     root:'prestate'
   }
 }

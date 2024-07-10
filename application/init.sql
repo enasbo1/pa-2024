@@ -60,6 +60,7 @@ create table appartement
     nb_occupant_max integer,
     surface integer,
     horaire_contact integer,
+    louable boolean default true,
     id_utilisateur integer not null references utilisateur
 );
 
@@ -106,6 +107,7 @@ create table reservation
     total_location integer,
     total_abonnement integer,
     total_frais integer,
+    valide boolean default false,
     id_appartement integer not null references appartement,
     id_utilisateur integer not null references utilisateur,
     date_debut timestamp not null,

@@ -13,25 +13,47 @@
   </div>
   <div class="flex short-line">
     <div *ngFor="let filt of filtered" class = 'line flex w-100'>
-      <pm-dropdown
-        [set_value]="filt.set_value"
-        [choices]="filt.choices"
-        [default]="filt.default?filt.default:'all'"
-        [set]="filt.set"
-        [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
-        (click)="refresh_filter()"
-        (value_up)="filter_update(filt, $event)"
-      ></pm-dropdown>
+      <ng-container [ngSwitch]="filt.type">
+        <div *ngSwitchCase="'period'">
+          <button class="bubble col-12 {{(filt.value==='all'?'hover-w':'hover-1')}}"
+                  (click)="set_period(filt)"
+          >
+            {{filt.value==='all'?filt.name:filt.value?? filt.name}}
+          </button>
+        </div>
+        <div *ngSwitchCase="'free'">
+          <button class="bubble col-12 {{(!filt.value || filt.value==='all' )?'hover-w':'hover-1'}}"
+                  (click)="set_period(filt)"
+          >
+            {{filt.value==='all'?filt.name:filt.value?? filt.name}}
+          </button>
+        </div>
+        <pm-dropdown *ngSwitchDefault
+          [set_value]="filt.set_value"
+          [choices]="filt.choices"
+          [default]="filt.default?filt.default:'all'"
+          [set]="filt.set"
+          [prefix]="(filt.type === 'search')?'':filt.name + ' | '"
+          (click)="refresh_filter()"
+          (value_up)="filter_update(filt, $event)"
+        ></pm-dropdown>
+      </ng-container>
+
     </div>
   </div>
   <pm-line [short]="true"></pm-line>
   <div class="flex">
     <ul class="container">
       <h4 class="empty-list" *ngIf="(filter_item().length==0)">
-        aucune donnée à afficher <b class="text-hover" (click)="reset_filter()">vider les filtres</b>
+        <ng-container *ngIf="act">
+          {{act.text}} <b class="text-hover" (click)="act.play()"> {{act.clickable_text}} </b>
+        </ng-container>
+        <ng-container *ngIf="!act">
+          aucune donnée à afficher <b class="text-hover" (click)="reset_filter()">vider les filtres</b>
+        </ng-container>
       </h4>
       <li *ngFor="let item of filter_item()" class="{{elements_size()}} col-12">
-        <button class="list-element bubble {{item.link?'linked':''}} {{item.style}}" [routerLink]=item.link>
+        <button class="list-element bubble {{item.link?'linked':''}} {{item.style}}" [routerLink]=item.link [queryParams]="query">
           <div class="content bubble_padding">
             <h6>{{translatorService.echo(item?.title)}}</h6>
             <div class="container">

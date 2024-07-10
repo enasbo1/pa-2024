@@ -4,8 +4,6 @@ import { VoyageurServiceComponent } from './voyageur-service/voyageur-service.co
 import {FoundationModule} from "../../../shared/foundation/foundation.module";
 import {RouterModule} from "@angular/router";
 import {WpPath} from "../../../shared/routes";
-import {WelcomeComponent} from "../../exemple/home/welcome.component";
-import {VoyageurModule} from "../voyageur.module";
 
 
 
@@ -17,9 +15,9 @@ import {VoyageurModule} from "../voyageur.module";
     CommonModule,
     FoundationModule,
     RouterModule.forChild([
-      { path: WpPath.voyageur.myservices, component: VoyageurServiceComponent}
+      { path: WpPath.voyageur.myServices, component: VoyageurServiceComponent}
     ])
   ]
 
 })
-export class MyservicesModule { }
+export class MyServicesModule { }

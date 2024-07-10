@@ -1,6 +1,8 @@
 <?php
 namespace apartment;
 use Exception;
+use token\Privilege;
+
 require_once 'ApartmentRepository.php';
 
 class ApartmentController {
@@ -8,7 +10,7 @@ class ApartmentController {
     /**
      * @throws Exception
      */
-    public function routes($id = null): void
+    public function routes($id = null, $id2=null): void
     {
         switch ($_SERVER['REQUEST_METHOD']) {
             case "GET":
@@ -18,7 +20,16 @@ class ApartmentController {
                     echo json_encode($apartment);
                 } else {
                     try {
-                        $apartment = $request->findById($id);
+                        Privilege::allowed();
+                        if ($id = 'louable'){
+                            if ($id2==null){
+                                $apartment = $request->findLouable();
+                            }else{
+                                $apartment = $request->findLouableById($id2);
+                            }
+                        }else{
+                            $apartment = $request->findById($id);
+                        }
                         echo json_encode($apartment);
                     } catch (Exception $e) {
                         http_response_code($e->getCode());

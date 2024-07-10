@@ -2,11 +2,34 @@
 namespace apartment;
 
 use Exception;
+use reservation\ReservationRepository;
+use shared\Formater;
 use shared\Repository;
 
 require_once 'ApartmentService.php';
 
 class ApartmentRepository extends Repository {
+    private string $getQuery =
+"SELECT
+    a.id as id,
+    a.ville as ville,
+    a.code_postal,
+    prix_fixe_nuit,
+    type_gestion,
+    duree,
+    type_de_bien,
+    logement_entier,
+    nb_chambre,
+    nb_occupant_max,
+    surface,
+    horaire_contact,
+    u.id as utilisateur__id,
+    prenom as utilisateur__prenom,
+    nom as utilisateur__nom,
+    mail as utilisateur__mail
+from appartement a
+inner join utilisateur u on u.id = a.id_utilisateur 
+";
     public function __construct()
     {
         parent::__construct("APPARTEMENT", new ApartmentService());
@@ -18,10 +41,9 @@ class ApartmentRepository extends Repository {
     public function getAll(): array
     {
         $apartment = [];
-        $result = $this->readAll("unable to find any apartment");
-
+        $result = $this->query($this->getQuery, [], "no apartments for this user");
         foreach($result as $row) {
-            $apartment[] = $row;
+            $apartment[] = Formater::prepareGet($row);
         }
 
         return $apartment;
@@ -32,7 +54,47 @@ class ApartmentRepository extends Repository {
      */
     public function findById(int $id): array
     {
-        return $this->read($id, "apartment not found");
+        $apartment = [];
+        $result = $this->query($this->getQuery . 'where a.id=$1', ["id" => $id], "no apartments for this user");
+        foreach($result as $row) {
+            $apartment[] = Formater::prepareGet($row);
+        }
+
+        return $apartment;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findLouable(): array
+    {
+        $reservationRepository = new ReservationRepository();
+        $apartment = [];
+        $result = $this->query($this->getQuery . 'where a.louable',[], "no apartments for this user");
+        foreach($result as $row) {
+            $formated_row = Formater::prepareGet($row);
+            $formated_row["occupee"] = $reservationRepository->findFromApartment($row['id']);
+            $apartment[] = $formated_row;
+        }
+
+        return $apartment;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function findLouableById(int $id): array
+    {
+        $reservationRepository = new ReservationRepository();
+        $apartment = [];
+        $result = $this->query($this->getQuery . 'where a.louable and a.id=$1',['id'=> $id], "no apartments for this user");
+        foreach($result as $row) {
+            $formated_row = Formater::prepareGet($row);
+            $formated_row["occupee"] = $reservationRepository->findFromApartment($row['id']);
+            $apartment[] = $formated_row;
+        }
+
+        return $apartment;
     }
 
     /**

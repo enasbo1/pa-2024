@@ -16,13 +16,11 @@ export class FormFieldComponent implements OnInit {
   date:string = "date";
   start_date?:Date;
   end_date?:Date;
-  in: any;
   constructor(public translator:TranslatorService) { }
 
   ngOnInit(): void {
     if (this.field?.min)
       this.start_date = new Date(this.field?.min);
-    moment(this.field?.min).toString()
 
     if (this.field?.default){
       this.field._value = this.field.default
@@ -33,8 +31,8 @@ export class FormFieldComponent implements OnInit {
 
     if (this.field?.type=="period")
       this.field._values = [
-        this.start_date?this.start_date:new Date(),
-        this.end_date?this.end_date:new Date()
+        this.start_date?this.start_date:this.field?._values?this.field?._values[0]:undefined,
+        this.end_date?this.end_date:this.field?._values?this.field?._values[1]:undefined
       ]
     if(this.field?.type=='email'){
       const regex = {regex:RegexBase.email, message:'le champ '+this.field.name+' doit être un email'}
@@ -53,11 +51,11 @@ export class FormFieldComponent implements OnInit {
     }
   }
 
-  onChange(){
+  onChange():void{
     switch (this.field?.type){
       case "period":
         if (this.start_date && this.end_date)
-          this.submit.emit(this.field._values);
+          this.submit.emit(this.field._values?.map(s=> s?? new Date()) as Date[]);
         break;
       default:
         if (this.field?._value)

@@ -1,0 +1,19 @@
+<section class = 'flex'>
+  <div class="flex spaced align-center">
+    <div>
+      <div *ngIf="location" class="rubric-container">
+        <pm-rubric [content]="location"></pm-rubric>
+      </div>
+      <br>
+      <div class="flex spaced">
+        <button class="bubble {{location_object?'colored-red hover-0':'disabled'}}" (click)="openDeleteModal()"><b>Suprimer</b></button>
+      </div>
+      <br>
+    </div>
+    <div class="chat-col">
+      <pm-chat [items]="chat" [target]="target"></pm-chat>
+    </div>
+  </div>
+</section>
+
+

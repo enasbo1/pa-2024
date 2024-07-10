@@ -4,6 +4,7 @@ import { ListObject } from "../../../../shared/foundation/list/listObject";
 import { ReservationModelService } from "../../../../http/model/reservation-model/reservation-model.service";
 import {ApartmentModelService} from "../../../../http/model/apartment-model/apartment-model.service";
 import {GlobalService} from "../../../../shared/global.service";
+import {ReservationMapperService} from "../../../../mapper/reservation-mapper.service";
 
 @Component({
   selector: 'pm-gestion-location',
@@ -35,7 +36,7 @@ export class GestionLocationComponent implements OnInit {
     this.reservationService.get_reservations().subscribe((reservations) =>
       this.setReservations(
         reservations.map((reservation) =>
-          this.reservationService.reservation_to_list(reservation, this.detailPage))
+          ReservationMapperService.model_to_list(reservation, this.detailPage))
       )
     );
   }
